@@ -432,6 +432,117 @@ footer {
   *, *::before, *::after { animation-duration: 0.001s !important; transition-duration: 0.001s !important; }
 }
 
+/* Demo section */
+.demo-section { padding: 100px 32px; }
+.demo-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 28px;
+  margin-top: 48px;
+}
+@media (max-width: 880px) { .demo-grid { grid-template-columns: 1fr; } }
+.demo-input {
+  background: var(--bg-card);
+  border: 1px solid var(--line-2);
+  border-radius: 14px;
+  padding: 28px;
+}
+.demo-input h3 { font-size: 15px; font-weight: 600; margin-bottom: 8px; letter-spacing: -0.005em; }
+.demo-input .hint { font-size: 13.5px; color: var(--text-3); margin-bottom: 18px; line-height: 1.5; }
+.demo-samples { display: flex; flex-direction: column; gap: 8px; }
+.demo-samples button {
+  text-align: left;
+  padding: 12px 16px;
+  background: rgba(255,255,255,0.025);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: 13.5px;
+  color: var(--text-2);
+  cursor: pointer;
+  transition: all .15s;
+  line-height: 1.45;
+}
+.demo-samples button:hover {
+  border-color: var(--signal);
+  background: rgba(99,102,241,0.06);
+  color: var(--text);
+}
+.demo-samples button.active {
+  border-color: var(--signal);
+  background: rgba(99,102,241,0.1);
+  color: var(--text);
+}
+.demo-samples button .agent-tag {
+  display: inline-block;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  color: var(--signal-2);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-right: 8px;
+  padding: 2px 8px;
+  background: rgba(99,102,241,0.12);
+  border-radius: 4px;
+  vertical-align: middle;
+}
+.demo-output {
+  background: linear-gradient(180deg, rgba(255,255,255,0.025), rgba(255,255,255,0.005));
+  border: 1px solid var(--line-2);
+  border-radius: 14px;
+  padding: 24px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12.5px;
+  line-height: 1.65;
+  color: var(--text-2);
+  min-height: 280px;
+  overflow: auto;
+  position: relative;
+}
+.demo-output .placeholder {
+  color: var(--text-3);
+  font-style: italic;
+  text-align: center;
+  padding: 80px 16px;
+}
+.demo-output .thinking { color: var(--signal-2); margin-bottom: 14px; }
+.demo-output .thinking .dot { display: inline-block; animation: blink 1.2s infinite; }
+.demo-output .thinking .dot:nth-child(2) { animation-delay: 0.2s; }
+.demo-output .thinking .dot:nth-child(3) { animation-delay: 0.4s; }
+@keyframes blink { 0%,80%,100% { opacity: 0.2; } 40% { opacity: 1; } }
+.demo-output pre {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12.5px;
+  white-space: pre-wrap;
+  margin: 0;
+  color: var(--text-2);
+}
+.demo-output .label { color: var(--text-3); }
+.demo-output .value { color: var(--text); }
+.demo-output .ok { color: var(--ok); }
+.demo-output .accent { color: var(--signal-2); }
+.demo-output .receipt {
+  margin-top: 16px;
+  padding-top: 14px;
+  border-top: 1px solid var(--line);
+  font-size: 11.5px;
+  color: var(--text-3);
+}
+.demo-cta {
+  margin-top: 32px;
+  padding: 22px 28px;
+  background: linear-gradient(135deg, rgba(99,102,241,0.08), rgba(255,107,107,0.04));
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+.demo-cta p { font-size: 14.5px; color: var(--text-2); margin: 0; max-width: 480px; line-height: 1.5; }
+.demo-cta a { font-size: 14px; }
+
 /* Early-access form */
 .ea-form {
   display: grid;
@@ -519,7 +630,7 @@ footer {
   <div class="links">
     <a href="#dashboard">Platform</a>
     <a href="#how">How it works</a>
-    <a href="#voices">Operators</a>
+    <a href="#try">Try it</a>
   </div>
   <a href="#access" class="nav-cta">Early access</a>
 </nav>
@@ -760,6 +871,36 @@ footer {
         <div class="cap-title">Strategic outreach</div>
         <div class="cap-body">Agent-curated reply pipelines on social surfaces, with quality gates, sanitizers, and visual generation. Engagement is observed, not optimized blindly.</div>
       </div>
+    </div>
+  </div>
+</section>
+
+<section id="try" class="demo-section">
+  <div class="container">
+    <div class="reveal" style="max-width:760px;">
+      <div class="eyebrow">// TRY IT</div>
+      <h2 class="section-title">Pick a job.<br/>Watch the <span class="em">fleet</span> work.</h2>
+      <p class="section-lede">Sample outputs from agent classes that are already running in production. Click one to see what GridFleet returns.</p>
+    </div>
+
+    <div class="demo-grid reveal">
+      <div class="demo-input">
+        <h3>Sample jobs</h3>
+        <p class="hint">Pre-recorded responses from real agent runs. Live demos available on early access &mdash; submit your own input and the actual fleet processes it.</p>
+        <div class="demo-samples" id="demo-samples">
+          <button data-demo="forecast"><span class="agent-tag">forecast</span>Will SPY close above 580 on May 16?</button>
+          <button data-demo="review"><span class="agent-tag">review</span>Review pull request #142: refactor billing webhook handler</button>
+          <button data-demo="audit"><span class="agent-tag">audit</span>Scan our infrastructure for committed secrets and policy drift</button>
+        </div>
+      </div>
+      <div class="demo-output" id="demo-output">
+        <div class="placeholder">&larr; pick a job</div>
+      </div>
+    </div>
+
+    <div class="demo-cta reveal">
+      <p>These are pre-recorded examples. Want the fleet on your data, your repos, your markets?</p>
+      <a href="#access" class="btn btn-primary">Request early access <span class="arrow">&rarr;</span></a>
     </div>
   </div>
 </section>
@@ -1217,6 +1358,125 @@ document.querySelectorAll('.cap').forEach(c => {
       btn.disabled = false;
       btn.innerHTML = originalLabel;
     }
+  });
+})();
+
+// Demo: sample agent outputs with animated thinking reveal
+(function() {
+  const samples = document.getElementById('demo-samples');
+  const output = document.getElementById('demo-output');
+  if (!samples || !output) return;
+
+  const demos = {
+    forecast: {
+      thinking: [
+        "dispatching to forecast agent...",
+        "fetching market context (Kalshi YES/NO, options chain, term structure)...",
+        "running ensemble: 3 base models + 1 calibrator...",
+        "scoring against baseline + 30d skill record...",
+      ],
+      result: `<pre><span class="label">job_id</span>      <span class="accent">f-7c4a-2b0e</span>
+<span class="label">agent</span>       forecast
+<span class="label">question</span>    Will SPY close above 580 on May 16?
+<span class="label">window</span>      11 trading days
+<span class="label">ensemble</span>    3 models + 1 calibrator
+<span class="label">drivers</span>     low IV regime (-1.4&sigma;), sector breadth firm,
+            5d return +1.8%, no major catalyst on calendar
+
+<span class="value">probability</span>  <span class="accent">0.43</span>  <span class="ok">(calibrated)</span>
+<span class="value">interval</span>     0.38 - 0.49  (90% credible)
+<span class="value">edge vs implied</span> +6 bps  (Kalshi YES at 0.37)
+<span class="value">score</span>        0.71  (vs 30d agent skill 0.68)
+
+<span class="ok">recommend</span>    YES at \u2264 0.40, hold off above 0.45</pre>
+<div class="receipt">receipt #fcst-2026-05-05-7c4a &middot; cost $0.034 &middot; written to ledger &middot; reviewable for 90 days</div>`,
+    },
+    review: {
+      thinking: [
+        "checking out branch...",
+        "running grid:sanity:full + lint + typecheck...",
+        "TRON reading diff...",
+        "cross-referencing related test coverage...",
+      ],
+      result: `<pre><span class="label">job_id</span>      <span class="accent">r-3f1d-9a82</span>
+<span class="label">agent</span>       review (TRON)
+<span class="label">target</span>      pull request #142
+<span class="label">change</span>      refactor billing webhook handler
+
+<span class="value">verdict</span>     <span class="accent">APPROVE WITH CONCERNS</span>  (2 raised)
+
+<span class="value">checks</span>      sanity  <span class="ok">pass</span>
+            lint    <span class="ok">pass</span>
+            types   <span class="ok">pass</span>
+            tests   <span class="ok">14/14</span>
+
+<span class="value">concerns</span>
+  1. line 47   nullable handling on stripe.event.data.object
+              suggested guard: \`if (!evt?.data?.object) return early\`
+  2. line 89   no test covers the duplicate-delivery path
+              webhook idempotency relies on event.id; recommend
+              regression test before merge
+
+<span class="value">scope</span>       safe to merge after concern #1; concern #2 can ship as follow-up</pre>
+<div class="receipt">receipt #rvw-2026-05-05-3f1d &middot; cost $0.011 &middot; PR comment posted &middot; not auto-merged</div>`,
+    },
+    audit: {
+      thinking: [
+        "enumerating repos + cron scripts + secrets vault...",
+        "running secret-pattern scan + policy drift check...",
+        "cross-checking against known-leaked tokens (HaveIBeenPwned)...",
+        "compiling report...",
+      ],
+      result: `<pre><span class="label">job_id</span>      <span class="accent">a-9b2e-4c11</span>
+<span class="label">agent</span>       audit (DUMONT)
+<span class="label">scope</span>       42 repos &middot; 87 cron scripts &middot; 1 secrets vault
+
+<span class="value">scan complete</span>  <span class="ok">pass</span>  (3.4s)
+
+<span class="label">findings</span>
+  &middot; <span class="ok">0 critical</span>  no high-risk credentials in tracked code
+  &middot; <span class="accent">2 advisory</span>  stale .env file in archived repo (last commit
+                  214d ago, no live secrets); redacted PAT
+                  marker in workflow comment (cosmetic)
+  &middot; <span class="ok">0 policy drift</span>  config-integrity-guard rules all green
+  &middot; <span class="ok">vault rotated</span>  28 days ago (next due 2026-06-02)
+
+<span class="label">checks run</span>
+  pattern scan      <span class="ok">pass</span>  (47 patterns: AWS, GH, Stripe, etc.)
+  HIBP cross-ref   <span class="ok">pass</span>  (no token in known leaks)
+  policy diff       <span class="ok">pass</span>  (vs blessed baseline)
+  vault age         <span class="ok">pass</span>  (28d &lt; 90d threshold)</pre>
+<div class="receipt">receipt #audit-2026-05-05-9b2e &middot; cost $0.022 &middot; full report archived &middot; alert if findings change</div>`,
+    },
+  };
+
+  function pickDemo(key) {
+    const d = demos[key];
+    if (!d) return;
+    samples.querySelectorAll("button").forEach(b => b.classList.toggle("active", b.dataset.demo === key));
+    output.innerHTML = '<div class="thinking">running...<span class="dot">.</span><span class="dot">.</span><span class="dot">.</span></div>';
+    let stepIdx = 0;
+    const stepEl = document.createElement("pre");
+    stepEl.style.color = "var(--text-3)";
+    stepEl.style.fontSize = "12px";
+    stepEl.style.marginTop = "8px";
+    output.appendChild(stepEl);
+
+    function nextStep() {
+      if (stepIdx >= d.thinking.length) {
+        // reveal result
+        output.innerHTML = d.result;
+        return;
+      }
+      stepEl.textContent += "\u00b7 " + d.thinking[stepIdx] + "\n";
+      stepIdx++;
+      setTimeout(nextStep, 600 + Math.random() * 400);
+    }
+    setTimeout(nextStep, 350);
+  }
+
+  samples.querySelectorAll("button").forEach(b => {
+    b.addEventListener("click", () => pickDemo(b.dataset.demo));
   });
 })();
 
