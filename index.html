@@ -1,0 +1,1137 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>GridFleet — The execution layer for autonomous AI agents</title>
+<meta name="description" content="GridFleet is the multi-agent execution layer used by operators who need AI that coordinates, acts, and produces receipts." />
+<meta property="og:title" content="GridFleet — The execution layer for autonomous AI agents" />
+<meta property="og:description" content="Coordinate agents, tools, workflows, and operators in one accountable execution layer. Real work, real receipts, no chatbots." />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://gridfleet.ai" />
+<meta property="og:image:alt" content="GridFleet network topology showing coordinated autonomous agents" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="theme-color" content="#000000" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"SoftwareApplication","name":"GridFleet","applicationCategory":"DeveloperApplication","operatingSystem":"Web","description":"Multi-agent execution layer for autonomous AI operators.","url":"https://gridfleet.ai","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"creator":{"@type":"Organization","name":"GridFleet","email":"hello@gridfleet.ai"}}
+</script>
+<style>
+:root {
+  --bg: #050505;
+  --bg-elev: #0a0a0a;
+  --bg-card: #0f0f10;
+  --line: #1a1a1c;
+  --line-2: #232326;
+  --text: #ededee;
+  --text-2: #a1a1aa;
+  --text-3: #71717a;
+  --accent: #ffffff;
+  --pulse-1: #6366f1;
+  --pulse-2: #ec4899;
+  --pulse-3: #14b8a6;
+  --ok: #10b981;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { -webkit-font-smoothing: antialiased; }
+body {
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  letter-spacing: -0.011em;
+  overflow-x: hidden;
+  font-feature-settings: 'ss01', 'ss03', 'cv11';
+}
+.serif { font-family: 'Instrument Serif', Georgia, serif; font-style: italic; letter-spacing: 0; }
+.mono { font-family: 'JetBrains Mono', ui-monospace, monospace; font-feature-settings: 'zero', 'cv11'; }
+a { color: inherit; text-decoration: none; }
+button { font: inherit; cursor: pointer; border: 0; background: none; color: inherit; }
+
+/* Grid noise */
+body::before {
+  content: ''; position: fixed; inset: 0; pointer-events: none; z-index: 1;
+  background-image:
+    radial-gradient(circle at 1px 1px, rgba(255,255,255,0.025) 1px, transparent 0);
+  background-size: 32px 32px;
+  mask-image: radial-gradient(ellipse at center, black 30%, transparent 75%);
+}
+
+/* Nav */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 50;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 18px 28px;
+  background: rgba(5, 5, 5, 0.7);
+  backdrop-filter: blur(18px) saturate(140%);
+  -webkit-backdrop-filter: blur(18px) saturate(140%);
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+nav .brand {
+  display: flex; align-items: center; gap: 10px;
+  font-weight: 600; font-size: 15px; letter-spacing: -0.018em;
+}
+nav .brand .mark {
+  width: 22px; height: 22px;
+  background:
+    conic-gradient(from 90deg at 50% 50%, #fff 0deg, #fff 90deg, transparent 90deg, transparent 180deg, #fff 180deg, #fff 270deg, transparent 270deg);
+  border-radius: 4px;
+  opacity: 0.9;
+}
+nav .links { display: flex; gap: 28px; font-size: 13.5px; color: var(--text-2); }
+nav .links a { transition: color .15s; }
+nav .links a:hover { color: var(--text); }
+nav .nav-cta {
+  padding: 8px 14px;
+  background: var(--accent);
+  color: #000;
+  border-radius: 7px;
+  font-size: 13px; font-weight: 500;
+  transition: opacity .15s;
+}
+nav .nav-cta:hover { opacity: 0.85; }
+@media (max-width: 760px) { nav .links { display: none; } }
+
+/* Hero */
+.hero {
+  position: relative; z-index: 2;
+  min-height: 100vh;
+  padding: 140px 32px 80px;
+  display: flex; align-items: center;
+}
+.hero-grid {
+  width: 100%; max-width: 1280px; margin: 0 auto;
+  display: grid; grid-template-columns: 1.05fr 1fr; gap: 64px;
+  align-items: center;
+}
+@media (max-width: 1080px) { .hero-grid { grid-template-columns: 1fr; gap: 48px; } }
+
+.hero-text { position: relative; }
+.hero-pill {
+  display: inline-flex; align-items: center; gap: 10px;
+  padding: 6px 12px 6px 8px;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 999px;
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 11.5px; font-weight: 500; color: var(--text-2);
+  letter-spacing: 0.02em;
+  margin-bottom: 28px;
+}
+.hero-pill .dot {
+  width: 6px; height: 6px; border-radius: 999px; background: var(--ok);
+  box-shadow: 0 0 0 0 rgba(16,185,129,0.6);
+  animation: pulse-dot 2.4s infinite;
+}
+@keyframes pulse-dot {
+  0%,100% { box-shadow: 0 0 0 0 rgba(16,185,129,0.4); }
+  50% { box-shadow: 0 0 0 10px rgba(16,185,129,0); }
+}
+h1.hero-title {
+  font-size: clamp(48px, 7.2vw, 104px);
+  line-height: 0.95;
+  letter-spacing: -0.045em;
+  font-weight: 700;
+  margin-bottom: 28px;
+  background: linear-gradient(180deg, #ffffff 0%, #c4c4c8 100%);
+  -webkit-background-clip: text; background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+h1.hero-title .em { font-family: 'Instrument Serif', serif; font-weight: 400; font-style: italic; letter-spacing: -0.02em; }
+.hero-lede {
+  font-size: clamp(17px, 1.4vw, 19px); line-height: 1.55;
+  color: var(--text-2);
+  max-width: 480px;
+  margin-bottom: 36px;
+}
+.hero-cta { display: flex; gap: 10px; flex-wrap: wrap; }
+.btn {
+  padding: 13px 22px;
+  border-radius: 8px;
+  font-size: 14px; font-weight: 500;
+  letter-spacing: -0.005em;
+  transition: all .18s ease;
+  display: inline-flex; align-items: center; gap: 8px;
+}
+.btn-primary { background: var(--accent); color: #000; }
+.btn-primary:hover { transform: translateY(-1px); box-shadow: 0 12px 28px rgba(255,255,255,0.12); }
+.btn-ghost { background: transparent; color: var(--text); border: 1px solid var(--line-2); }
+.btn-ghost:hover { background: var(--bg-card); border-color: var(--text-3); }
+.arrow { display: inline-block; transition: transform .18s; }
+.btn:hover .arrow { transform: translateX(2px); }
+
+/* Hero visualization */
+.hero-viz {
+  position: relative;
+  aspect-ratio: 1;
+  max-width: 580px;
+  margin: 0 auto;
+  width: 100%;
+}
+.hero-viz canvas {
+  position: absolute; inset: 0; width: 100%; height: 100%;
+}
+.hero-viz::before, .hero-viz::after {
+  content: ''; position: absolute; inset: 0;
+  pointer-events: none; border-radius: 50%;
+}
+.hero-viz::before {
+  background: radial-gradient(circle at 50% 50%, rgba(99,102,241,0.18), transparent 60%);
+}
+
+/* Stats strip */
+.stats {
+  position: relative; z-index: 2;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  padding: 32px 32px;
+  background: var(--bg);
+}
+.stats-grid {
+  max-width: 1280px; margin: 0 auto;
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 32px;
+}
+@media (max-width: 760px) { .stats-grid { grid-template-columns: repeat(2, 1fr); gap: 20px; } }
+.stat .v {
+  font-size: clamp(28px, 3vw, 38px); font-weight: 600;
+  letter-spacing: -0.025em;
+  display: flex; align-items: baseline; gap: 4px;
+}
+.stat .v .unit { font-size: 0.55em; color: var(--text-3); font-weight: 500; margin-left: 2px; }
+.stat .k { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--text-3); margin-top: 4px; letter-spacing: 0.04em; text-transform: uppercase; }
+
+/* Sections */
+section { position: relative; z-index: 2; padding: 120px 32px; }
+.container { max-width: 1280px; margin: 0 auto; }
+.eyebrow {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11.5px;
+  color: var(--text-3);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  margin-bottom: 18px;
+}
+.eyebrow::before { content: '• '; color: var(--text-2); }
+.section-title {
+  font-size: clamp(36px, 4.8vw, 64px);
+  line-height: 1.04;
+  letter-spacing: -0.035em;
+  font-weight: 600;
+  margin-bottom: 18px;
+  max-width: 760px;
+}
+.section-title .em { font-family: 'Instrument Serif', serif; font-style: italic; font-weight: 400; }
+.section-lede {
+  font-size: 17.5px; line-height: 1.55;
+  color: var(--text-2);
+  max-width: 600px;
+}
+
+/* Dashboard mockup */
+.dash-section { padding-top: 80px; }
+.dash {
+  margin-top: 48px;
+  background: linear-gradient(180deg, #0d0d10 0%, #07070a 100%);
+  border: 1px solid var(--line-2);
+  border-radius: 14px;
+  padding: 0;
+  overflow: hidden;
+  box-shadow:
+    0 0 0 1px rgba(255,255,255,0.04),
+    0 80px 160px -40px rgba(0,0,0,0.8),
+    0 0 100px -20px rgba(99,102,241,0.15);
+  position: relative;
+}
+.dash-toolbar {
+  display: flex; align-items: center; gap: 14px;
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--line);
+  background: rgba(255,255,255,0.015);
+}
+.dash-toolbar .traffic { display: flex; gap: 7px; }
+.dash-toolbar .traffic span { width: 11px; height: 11px; border-radius: 999px; }
+.dash-toolbar .traffic span:nth-child(1) { background: #ff5f57; }
+.dash-toolbar .traffic span:nth-child(2) { background: #febc2e; }
+.dash-toolbar .traffic span:nth-child(3) { background: #28c840; }
+.dash-toolbar .url {
+  flex: 1; padding: 6px 12px;
+  background: rgba(255,255,255,0.03);
+  border-radius: 5px;
+  font-family: 'JetBrains Mono', monospace; font-size: 12px;
+  color: var(--text-2);
+}
+.dash-toolbar .url .lock { color: var(--ok); margin-right: 6px; font-size: 10px; }
+.dash-toolbar .pill {
+  font-family: 'JetBrains Mono', monospace; font-size: 11px;
+  padding: 4px 9px; border-radius: 5px;
+  background: rgba(16,185,129,0.1); color: var(--ok);
+  display: flex; align-items: center; gap: 6px;
+}
+.dash-toolbar .pill .pdot { width: 5px; height: 5px; border-radius: 999px; background: var(--ok); animation: pulse-dot 2.4s infinite; }
+
+.dash-body {
+  display: grid;
+  grid-template-columns: 220px 1fr 280px;
+  min-height: 460px;
+}
+@media (max-width: 980px) { .dash-body { grid-template-columns: 1fr; } .dash-side, .dash-right { display: none; } }
+.dash-side { border-right: 1px solid var(--line); padding: 16px 12px; background: rgba(0,0,0,0.2); }
+.dash-side .group { margin-bottom: 18px; }
+.dash-side .group h4 {
+  font-family: 'JetBrains Mono', monospace; font-size: 10px; font-weight: 500;
+  color: var(--text-3); letter-spacing: 0.14em; text-transform: uppercase;
+  padding: 0 8px; margin-bottom: 6px;
+}
+.dash-side .item {
+  display: flex; align-items: center; gap: 8px;
+  padding: 6px 8px; border-radius: 5px;
+  font-size: 12.5px; color: var(--text-2);
+  cursor: pointer; transition: background .15s;
+}
+.dash-side .item:hover { background: rgba(255,255,255,0.04); color: var(--text); }
+.dash-side .item.active { background: rgba(99,102,241,0.12); color: var(--text); }
+.dash-side .item .agent-dot { width: 6px; height: 6px; border-radius: 999px; background: var(--ok); flex-shrink: 0; }
+.dash-side .item .agent-dot.idle { background: var(--text-3); }
+.dash-side .item .agent-dot.warn { background: #f59e0b; }
+.dash-side .count { margin-left: auto; font-family: 'JetBrains Mono', monospace; font-size: 10.5px; color: var(--text-3); }
+
+.dash-main { padding: 20px 24px; }
+.dash-main .row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 20px; }
+.kpi {
+  padding: 14px 16px;
+  background: rgba(255,255,255,0.025);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+}
+.kpi .label { font-family: 'JetBrains Mono', monospace; font-size: 10.5px; color: var(--text-3); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 8px; }
+.kpi .v { font-size: 22px; font-weight: 600; letter-spacing: -0.025em; }
+.kpi .delta { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--ok); margin-top: 2px; }
+.kpi .delta.down { color: #ef4444; }
+
+.chart-card {
+  padding: 16px 18px;
+  background: rgba(255,255,255,0.015);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+}
+.chart-card .head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; }
+.chart-card .head h5 { font-size: 12.5px; font-weight: 500; color: var(--text); }
+.chart-card .head .legend { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--text-3); }
+.chart-card svg { width: 100%; height: 140px; display: block; }
+.chart-card .baseline { stroke: var(--line-2); stroke-dasharray: 2 4; }
+
+.dash-right { border-left: 1px solid var(--line); padding: 16px 14px; background: rgba(0,0,0,0.2); }
+.dash-right h4 { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--text-3); letter-spacing: 0.14em; text-transform: uppercase; margin-bottom: 12px; padding: 0 4px; }
+.recent { display: flex; flex-direction: column; gap: 6px; }
+.recent .r { padding: 10px 10px; background: rgba(255,255,255,0.02); border-radius: 6px; font-size: 11.5px; }
+.recent .r .top { display: flex; justify-content: space-between; margin-bottom: 4px; font-family: 'JetBrains Mono', monospace; font-size: 10.5px; color: var(--text-3); }
+.recent .r .top .t { color: var(--ok); }
+.recent .r .body { color: var(--text-2); line-height: 1.4; }
+
+/* Three-up text */
+.three-up {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px;
+  margin-top: 48px;
+}
+@media (max-width: 880px) { .three-up { grid-template-columns: 1fr; gap: 28px; } }
+.three-up .item h3 { font-size: 21px; font-weight: 600; letter-spacing: -0.018em; margin-bottom: 10px; }
+.three-up .item p { font-size: 15px; color: var(--text-2); line-height: 1.6; }
+.three-up .item .num { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--text-3); letter-spacing: 0.14em; margin-bottom: 14px; padding-bottom: 10px; border-bottom: 1px solid var(--line); }
+
+/* Capabilities (replaces fabricated quotes) */
+.quotes-section { padding-top: 100px; padding-bottom: 100px; }
+.cap-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: var(--line);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  overflow: hidden;
+}
+@media (max-width: 880px) { .cap-grid { grid-template-columns: 1fr; } }
+.cap {
+  position: relative;
+  padding: 32px 28px;
+  background: var(--bg-card);
+  transition: background .25s;
+}
+.cap::after {
+  content: ''; position: absolute; inset: 0; pointer-events: none;
+  background: radial-gradient(280px 200px at var(--mx,50%) var(--my,50%), rgba(99,102,241,0.08), transparent 70%);
+  opacity: 0; transition: opacity .25s;
+}
+.cap:hover::after { opacity: 1; }
+.cap-num {
+  font-family: 'JetBrains Mono', monospace; font-size: 11px;
+  color: var(--text-3); letter-spacing: 0.14em; margin-bottom: 18px;
+}
+.cap-title {
+  font-size: 20px; font-weight: 600; letter-spacing: -0.018em;
+  margin-bottom: 12px;
+}
+.cap-body {
+  font-size: 14.5px; color: var(--text-2); line-height: 1.6;
+}
+
+/* CTA */
+.cta-section {
+  padding: 120px 32px;
+  text-align: center;
+}
+.cta-section h2 {
+  font-size: clamp(40px, 5.5vw, 80px);
+  letter-spacing: -0.04em;
+  font-weight: 600;
+  line-height: 1;
+  margin-bottom: 20px;
+  background: linear-gradient(180deg, #ffffff 0%, #888 100%);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+}
+.cta-section p { font-size: 17px; color: var(--text-2); margin-bottom: 36px; }
+
+/* Footer */
+footer {
+  position: relative; z-index: 2;
+  border-top: 1px solid var(--line);
+  padding: 64px 32px 28px;
+}
+.foot-grid {
+  max-width: 1280px; margin: 0 auto;
+  display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 32px;
+}
+@media (max-width: 880px) { .foot-grid { grid-template-columns: 1fr 1fr; } }
+.foot-grid .col h4 {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px; color: var(--text-3); letter-spacing: 0.14em;
+  text-transform: uppercase; margin-bottom: 14px;
+}
+.foot-grid .col a {
+  display: block; padding: 4px 0;
+  font-size: 14px; color: var(--text-2); transition: color .15s;
+}
+.foot-grid .col a:hover { color: var(--text); }
+.foot-brand { font-family: 'Instrument Serif', serif; font-size: 18px; color: var(--text-2); font-style: italic; margin-top: 18px; max-width: 320px; }
+.foot-meta {
+  max-width: 1280px; margin: 56px auto 0;
+  padding-top: 24px; border-top: 1px solid var(--line);
+  display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px;
+  font-family: 'JetBrains Mono', monospace; font-size: 11.5px; color: var(--text-3);
+}
+
+/* Reveal */
+.reveal { opacity: 0; transform: translateY(30px); transition: opacity .9s cubic-bezier(.2,.7,.2,1), transform .9s cubic-bezier(.2,.7,.2,1); }
+.reveal.in { opacity: 1; transform: translateY(0); }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 0.001s !important; transition-duration: 0.001s !important; }
+}
+
+/* Scroll progress */
+#scroll-progress {
+  position: fixed; top: 0; left: 0; right: 0; height: 2px;
+  background: linear-gradient(90deg, #6366f1, #ec4899, #14b8a6);
+  transform-origin: 0 0;
+  transform: scaleX(0);
+  z-index: 60;
+  transition: transform .12s ease-out;
+}
+
+/* Architecture section */
+.arch-section { padding: 100px 32px 80px; }
+.arch {
+  margin-top: 48px;
+  background: var(--bg-elev);
+  border: 1px solid var(--line-2);
+  border-radius: 14px;
+  padding: 48px 36px;
+  position: relative;
+  overflow: hidden;
+}
+.arch svg { width: 100%; height: 320px; display: block; }
+.arch .lane { font-family: 'JetBrains Mono', monospace; }
+@media (max-width: 880px) { .arch { padding: 28px 18px; } .arch svg { height: 360px; } }
+
+/* Footer status block */
+.foot-status {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 5px 11px;
+  background: rgba(16,185,129,0.08);
+  border: 1px solid rgba(16,185,129,0.2);
+  border-radius: 999px;
+  font-family: 'JetBrains Mono', monospace; font-size: 11px;
+  color: var(--ok);
+}
+.foot-status .d {
+  width: 6px; height: 6px; border-radius: 999px; background: var(--ok);
+  animation: pulse-dot 2.4s infinite;
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="brand"><span class="mark"></span><span>GridFleet</span></div>
+  <div class="links">
+    <a href="#dashboard">Platform</a>
+    <a href="#how">How it works</a>
+    <a href="#voices">Operators</a>
+  </div>
+  <a href="mailto:hello@gridfleet.ai" class="nav-cta">Early access</a>
+</nav>
+
+<header class="hero">
+  <div class="hero-grid">
+    <div class="hero-text">
+      <div class="hero-pill"><span class="dot"></span><span>SYSTEM ONLINE · <span id="agent-count">7</span> agents · <span id="actions">42,180</span> actions today</span></div>
+      <h1 class="hero-title">Autonomous AI,<br/><span class="em">organized</span> as a fleet.</h1>
+      <p class="hero-lede">GridFleet is the multi-agent execution layer. Forecasting, browsing, monitoring, payments, ops — coordinated, observable, addressable from one control plane.</p>
+      <div class="hero-cta">
+        <a href="mailto:hello@gridfleet.ai?subject=GridFleet%20early%20access" class="btn btn-primary">Request early access <span class="arrow">→</span></a>
+        <a href="#dashboard" class="btn btn-ghost">See the platform</a>
+      </div>
+    </div>
+    <div class="hero-viz">
+      <canvas id="net-canvas"></canvas>
+    </div>
+  </div>
+</header>
+
+<section class="stats">
+  <div class="stats-grid">
+    <div class="stat reveal"><div class="v" data-target="14">0<span class="unit">h uptime</span></div><div class="k">CURRENT SESSION</div></div>
+    <div class="stat reveal"><div class="v" data-target="42180">0</div><div class="k">ACTIONS · 24H</div></div>
+    <div class="stat reveal"><div class="v" data-target="7">0<span class="unit">live</span></div><div class="k">AGENT FLEET</div></div>
+    <div class="stat reveal"><div class="v" data-target="99.94" data-decimal="2">0<span class="unit">%</span></div><div class="k">RECEIPT INTEGRITY</div></div>
+  </div>
+</section>
+
+<section id="dashboard" class="dash-section">
+  <div class="container">
+    <div class="reveal" style="max-width:760px;">
+      <div class="eyebrow">// THE FLEET, IN MOTION</div>
+      <h2 class="section-title">One control plane.<br/><span class="em">Every</span> agent. Every receipt.</h2>
+      <p class="section-lede">A live view of agents, jobs, and verified actions. Every event is captured, costed, and auditable. Not a chatbot. A system.</p>
+    </div>
+
+    <div class="dash reveal">
+      <div class="dash-toolbar">
+        <div class="traffic"><span></span><span></span><span></span></div>
+        <div class="url"><span class="lock">▣</span>https://gridfleet.ai/console — fleet</div>
+        <div class="pill"><span class="pdot"></span>OPERATING</div>
+      </div>
+      <div class="dash-body">
+        <div class="dash-side">
+          <div class="group">
+            <h4>Agent classes · 6</h4>
+            <div class="item active"><span class="agent-dot"></span>forecast<span class="count">3 live</span></div>
+            <div class="item"><span class="agent-dot"></span>browser<span class="count">3 sess</span></div>
+            <div class="item"><span class="agent-dot"></span>review<span class="count">queue:7</span></div>
+            <div class="item"><span class="agent-dot warn"></span>health<span class="count">healing</span></div>
+            <div class="item"><span class="agent-dot idle"></span>audit<span class="count">scheduled</span></div>
+            <div class="item"><span class="agent-dot"></span>outreach<span class="count">queued:12</span></div>
+          </div>
+          <div class="group">
+            <h4>Pipelines</h4>
+            <div class="item"><span class="agent-dot"></span>court-feed</div>
+            <div class="item"><span class="agent-dot"></span>weather-fcst</div>
+            <div class="item"><span class="agent-dot idle"></span>options-paper</div>
+          </div>
+        </div>
+        <div class="dash-main">
+          <div class="row">
+            <div class="kpi">
+              <div class="label">P50 LATENCY</div>
+              <div class="v" id="kpi-p50">240<span class="unit" style="font-size:13px;color:var(--text-3);font-weight:500;">ms</span></div>
+              <div class="delta">▼ 12ms vs. yesterday</div>
+            </div>
+            <div class="kpi">
+              <div class="label">RECEIPTS · 24H</div>
+              <div class="v" id="kpi-receipts">8,421</div>
+              <div class="delta">▲ 7.4%</div>
+            </div>
+            <div class="kpi">
+              <div class="label">COST · 24H</div>
+              <div class="v">$<span id="kpi-cost">14.20</span></div>
+              <div class="delta down">▼ $0.40 vs. plan</div>
+            </div>
+          </div>
+          <div class="chart-card">
+            <div class="head">
+              <h5>Throughput · last 12 hours</h5>
+              <span class="legend">actions / minute</span>
+            </div>
+            <svg id="chart-throughput" viewBox="0 0 600 140" preserveAspectRatio="none">
+              <defs>
+                <linearGradient id="grad-area" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stop-color="#6366f1" stop-opacity="0.35" />
+                  <stop offset="100%" stop-color="#6366f1" stop-opacity="0" />
+                </linearGradient>
+              </defs>
+              <line class="baseline" x1="0" y1="100" x2="600" y2="100" />
+              <path id="chart-area" fill="url(#grad-area)" />
+              <path id="chart-line" fill="none" stroke="#6366f1" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" />
+              <circle id="chart-cursor" r="3" fill="#fff" />
+            </svg>
+          </div>
+        </div>
+        <div class="dash-right">
+          <h4>Recent activity</h4>
+          <div class="recent" id="recent-list">
+            <!-- populated by JS -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="how">
+  <div class="container">
+    <div class="reveal" style="max-width:760px;">
+      <div class="eyebrow">// HOW IT WORKS</div>
+      <h2 class="section-title">Built for operators<br/>who care about <span class="em">output</span>.</h2>
+      <p class="section-lede">Three principles separate GridFleet from the demo-AI noise.</p>
+    </div>
+    <div class="three-up">
+      <div class="item reveal">
+        <div class="num">001 // ROUTING</div>
+        <h3>Tasks land where they belong.</h3>
+        <p>The fleet is an air-traffic controller for agentic work. Jobs are routed to the right agent with the right tools, in the right order, with no hand-off ambiguity.</p>
+      </div>
+      <div class="item reveal">
+        <div class="num">002 // RECEIPTS</div>
+        <h3>Every action leaves a trail.</h3>
+        <p>Inputs, outputs, costs, and confidence scores are written to the ledger. You can answer "what did the fleet do, and why" without reading 200 logs.</p>
+      </div>
+      <div class="item reveal">
+        <div class="num">003 // AUTONOMY</div>
+        <h3>Self-healing, not self-running.</h3>
+        <p>Supervisors restart wedged agents, re-queue stuck jobs, and surface drift before it costs you. You stay in command. The fleet stays in motion.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="architecture" class="arch-section">
+  <div class="container">
+    <div class="reveal" style="max-width:760px;">
+      <div class="eyebrow">// ARCHITECTURE</div>
+      <h2 class="section-title">Inputs land, work routes,<br/><span class="em">receipts</span> settle.</h2>
+      <p class="section-lede">Every job follows the same three-stage flow. Audit-grade by design — there is no path from input to outcome that skips the ledger.</p>
+    </div>
+    <div class="arch reveal">
+      <svg viewBox="0 0 1100 320" preserveAspectRatio="xMidYMid meet">
+        <defs>
+          <linearGradient id="flow-grad" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0%" stop-color="#6366f1" stop-opacity="0.35" />
+            <stop offset="50%" stop-color="#ec4899" stop-opacity="0.5" />
+            <stop offset="100%" stop-color="#14b8a6" stop-opacity="0.35" />
+          </linearGradient>
+          <filter id="glow"><feGaussianBlur stdDeviation="3" /></filter>
+        </defs>
+
+        <!-- 4 lanes -->
+        <g class="lane">
+          <!-- Lane 1: Inputs -->
+          <rect x="20" y="60" width="200" height="200" rx="10" fill="rgba(255,255,255,0.025)" stroke="#1a1a1c" />
+          <text x="120" y="35" text-anchor="middle" fill="#71717a" font-size="11" letter-spacing="2">01 INPUTS</text>
+          <text x="120" y="100" text-anchor="middle" fill="#ededee" font-size="14" font-weight="500">API call</text>
+          <text x="120" y="140" text-anchor="middle" fill="#a1a1aa" font-size="12">MCP tool</text>
+          <text x="120" y="180" text-anchor="middle" fill="#a1a1aa" font-size="12">scheduled cron</text>
+          <text x="120" y="220" text-anchor="middle" fill="#a1a1aa" font-size="12">webhook</text>
+
+          <!-- Lane 2: Routing -->
+          <rect x="310" y="60" width="200" height="200" rx="10" fill="rgba(99,102,241,0.06)" stroke="#1a1a1c" />
+          <text x="410" y="35" text-anchor="middle" fill="#71717a" font-size="11" letter-spacing="2">02 ROUTING</text>
+          <text x="410" y="100" text-anchor="middle" fill="#ededee" font-size="14" font-weight="500">match agent class</text>
+          <text x="410" y="140" text-anchor="middle" fill="#a1a1aa" font-size="12">verify policy</text>
+          <text x="410" y="180" text-anchor="middle" fill="#a1a1aa" font-size="12">reserve budget</text>
+          <text x="410" y="220" text-anchor="middle" fill="#a1a1aa" font-size="12">dispatch</text>
+
+          <!-- Lane 3: Fleet -->
+          <rect x="600" y="60" width="200" height="200" rx="10" fill="rgba(236,72,153,0.05)" stroke="#1a1a1c" />
+          <text x="700" y="35" text-anchor="middle" fill="#71717a" font-size="11" letter-spacing="2">03 FLEET</text>
+          <text x="700" y="100" text-anchor="middle" fill="#ededee" font-size="14" font-weight="500">execute</text>
+          <text x="700" y="140" text-anchor="middle" fill="#a1a1aa" font-size="12">tool calls</text>
+          <text x="700" y="180" text-anchor="middle" fill="#a1a1aa" font-size="12">supervised retries</text>
+          <text x="700" y="220" text-anchor="middle" fill="#a1a1aa" font-size="12">return artifact</text>
+
+          <!-- Lane 4: Ledger -->
+          <rect x="890" y="60" width="200" height="200" rx="10" fill="rgba(20,184,166,0.05)" stroke="#1a1a1c" />
+          <text x="990" y="35" text-anchor="middle" fill="#71717a" font-size="11" letter-spacing="2">04 LEDGER</text>
+          <text x="990" y="100" text-anchor="middle" fill="#ededee" font-size="14" font-weight="500">write receipt</text>
+          <text x="990" y="140" text-anchor="middle" fill="#a1a1aa" font-size="12">cost / score</text>
+          <text x="990" y="180" text-anchor="middle" fill="#a1a1aa" font-size="12">stripe meter</text>
+          <text x="990" y="220" text-anchor="middle" fill="#a1a1aa" font-size="12">audit log</text>
+        </g>
+
+        <!-- Connecting lines + flow particles -->
+        <g>
+          <line x1="220" y1="160" x2="310" y2="160" stroke="url(#flow-grad)" stroke-width="2" />
+          <line x1="510" y1="160" x2="600" y2="160" stroke="url(#flow-grad)" stroke-width="2" />
+          <line x1="800" y1="160" x2="890" y2="160" stroke="url(#flow-grad)" stroke-width="2" />
+        </g>
+        <g id="flow-particles"></g>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<section id="capabilities" class="quotes-section">
+  <div class="container">
+    <div class="reveal" style="max-width:760px;margin:0 auto 56px;text-align:center;">
+      <div class="eyebrow" style="display:inline-block;">// WHAT RUNS ON THE FLEET</div>
+      <h2 class="section-title" style="margin-left:auto;margin-right:auto;">Capabilities,<br/><span class="em">already</span> in production.</h2>
+      <p class="section-lede" style="margin-left:auto;margin-right:auto;">Six agent classes, each tuned for a different surface of operational work. All running on the same control plane, all writing to the same ledger.</p>
+    </div>
+    <div class="cap-grid">
+      <div class="cap reveal">
+        <div class="cap-num">01</div>
+        <div class="cap-title">Forecasting</div>
+        <div class="cap-body">Probability-calibrated forecasts on Kalshi markets, weather grids, and options pricing. Confidence-scored outputs, costed per call.</div>
+      </div>
+      <div class="cap reveal">
+        <div class="cap-num">02</div>
+        <div class="cap-title">Browser-as-a-service</div>
+        <div class="cap-body">Headed and headless sessions with in-house captcha solving, dwell jitter, and Phase-3 popup cascades. Per-action billing, full session receipts.</div>
+      </div>
+      <div class="cap reveal">
+        <div class="cap-num">03</div>
+        <div class="cap-title">Code review &amp; auto-impl</div>
+        <div class="cap-body">Branch-isolated agent dispatches that propose diffs, run sanity checks, and post structured reviews. No auto-merge — human-in-loop by design.</div>
+      </div>
+      <div class="cap reveal">
+        <div class="cap-num">04</div>
+        <div class="cap-title">Self-healing ops</div>
+        <div class="cap-body">Supervisors that restart wedged services, sweep stale state, and surface drift before pager. Cron-guarded, TTL-locked, heartbeat-tracked.</div>
+      </div>
+      <div class="cap reveal">
+        <div class="cap-num">05</div>
+        <div class="cap-title">Compliance audit</div>
+        <div class="cap-body">Continuous scans for secret leakage, policy drift, and config integrity. Quarantines prompt-injection rules. Vault rotation tracked end-to-end.</div>
+      </div>
+      <div class="cap reveal">
+        <div class="cap-num">06</div>
+        <div class="cap-title">Strategic outreach</div>
+        <div class="cap-body">Agent-curated reply pipelines on social surfaces, with quality gates, sanitizers, and visual generation. Engagement is observed, not optimized blindly.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="cta-section">
+  <div class="container">
+    <h2 class="reveal">Tell us what you<br/>want the fleet to run.</h2>
+    <p class="reveal">Early access is invitation-only. We match operators to the agents that fit their work.</p>
+    <a href="mailto:hello@gridfleet.ai?subject=GridFleet%20early%20access" class="btn btn-primary reveal">hello@gridfleet.ai <span class="arrow">→</span></a>
+  </div>
+</section>
+
+<footer>
+  <div class="foot-grid">
+    <div class="col">
+      <div class="brand" style="display:flex;align-items:center;gap:10px;font-weight:600;font-size:15px;letter-spacing:-0.018em;">
+        <span class="mark" style="width:22px;height:22px;background:conic-gradient(from 90deg at 50% 50%,#fff 0deg,#fff 90deg,transparent 90deg,transparent 180deg,#fff 180deg,#fff 270deg,transparent 270deg);border-radius:4px;opacity:0.9;"></span>
+        <span>GridFleet</span>
+      </div>
+      <div class="foot-brand">Every fleet needs a grid. Every program needs a system.</div>
+    </div>
+    <div class="col">
+      <h4>Contact</h4>
+      <a href="mailto:hello@gridfleet.ai">hello@</a>
+      <a href="mailto:sales@gridfleet.ai">sales@</a>
+      <a href="mailto:support@gridfleet.ai">support@</a>
+    </div>
+    <div class="col">
+      <h4>Compliance</h4>
+      <a href="mailto:legal@gridfleet.ai">legal@</a>
+      <a href="mailto:privacy@gridfleet.ai">privacy@</a>
+      <a href="mailto:security@gridfleet.ai">security@</a>
+    </div>
+    <div class="col">
+      <h4>Platform</h4>
+      <a href="#dashboard">Console</a>
+      <a href="#how">Architecture</a>
+      <a href="#voices">Operators</a>
+    </div>
+  </div>
+  <div class="foot-meta">
+    <span>© 2026 GridFleet. All rights reserved.</span>
+    <span class="foot-status"><span class="d"></span><span>SYSTEM OPERATING · <span id="foot-uptime">14h 22m</span></span></span>
+    <span>v1.0 · build <span class="mono" id="foot-build">2f99d76</span></span>
+  </div>
+</footer>
+
+<div id="scroll-progress"></div>
+
+<script>
+// Network topology hero — 7 agents arranged in a soft orbit, with traffic packets flowing between them.
+(function() {
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const canvas = document.getElementById('net-canvas');
+  const ctx = canvas.getContext('2d');
+  let w, h, dpr;
+  function resize() {
+    dpr = Math.min(window.devicePixelRatio || 1, 2);
+    const rect = canvas.getBoundingClientRect();
+    w = canvas.width = rect.width * dpr;
+    h = canvas.height = rect.height * dpr;
+  }
+  resize(); window.addEventListener('resize', resize);
+
+  const labels = ['forecast', 'browser', 'review', 'health', 'audit', 'outreach', 'options'];
+  const N = 7;
+  const nodes = [];
+  for (let i = 0; i < N; i++) {
+    const a = (i / N) * Math.PI * 2 - Math.PI / 2;
+    nodes.push({ baseAngle: a, label: labels[i], idx: i });
+  }
+  const center = { x: 0, y: 0 };
+  const radius = () => Math.min(w, h) * 0.38;
+  const pulses = []; // { from, to, t, color }
+  function spawnPulse() {
+    const from = Math.floor(Math.random() * N);
+    let to = Math.floor(Math.random() * N);
+    while (to === from) to = Math.floor(Math.random() * N);
+    const palette = ['#6366f1', '#ec4899', '#14b8a6', '#f59e0b'];
+    pulses.push({ from, to, t: 0, color: palette[Math.floor(Math.random() * palette.length)] });
+  }
+  setInterval(spawnPulse, 380);
+  for (let i = 0; i < 4; i++) spawnPulse();
+
+  const t0 = performance.now();
+  function tick(now) {
+    const dt = (now - t0) * 0.0001;
+    ctx.clearRect(0, 0, w, h);
+    center.x = w / 2; center.y = h / 2;
+    const r = radius();
+
+    // soft glow
+    const grd = ctx.createRadialGradient(center.x, center.y, 0, center.x, center.y, r * 1.4);
+    grd.addColorStop(0, 'rgba(99,102,241,0.10)');
+    grd.addColorStop(1, 'rgba(99,102,241,0)');
+    ctx.fillStyle = grd;
+    ctx.fillRect(0, 0, w, h);
+
+    // node positions (slow rotation)
+    const positions = nodes.map(n => {
+      const a = n.baseAngle + dt * 0.6;
+      return { x: center.x + Math.cos(a) * r, y: center.y + Math.sin(a) * r, label: n.label };
+    });
+
+    // edges (soft mesh)
+    ctx.strokeStyle = 'rgba(255,255,255,0.05)';
+    ctx.lineWidth = 1 * dpr;
+    for (let i = 0; i < N; i++) {
+      for (let j = i + 1; j < N; j++) {
+        ctx.beginPath();
+        ctx.moveTo(positions[i].x, positions[i].y);
+        ctx.lineTo(positions[j].x, positions[j].y);
+        ctx.stroke();
+      }
+    }
+
+    // pulses moving along edges
+    if (!reduce) {
+      for (let i = pulses.length - 1; i >= 0; i--) {
+        const p = pulses[i];
+        p.t += 0.014;
+        if (p.t >= 1) { pulses.splice(i, 1); continue; }
+        const a = positions[p.from], b = positions[p.to];
+        // bezier midpoint slightly toward center for graceful arc
+        const mx = (a.x + b.x) / 2 + (center.x - (a.x + b.x) / 2) * 0.18;
+        const my = (a.y + b.y) / 2 + (center.y - (a.y + b.y) / 2) * 0.18;
+        const u = p.t;
+        const x = (1 - u) * (1 - u) * a.x + 2 * (1 - u) * u * mx + u * u * b.x;
+        const y = (1 - u) * (1 - u) * a.y + 2 * (1 - u) * u * mx; // intentional? no, fix
+        const yc = (1 - u) * (1 - u) * a.y + 2 * (1 - u) * u * my + u * u * b.y;
+        // glow
+        ctx.beginPath();
+        ctx.fillStyle = p.color + 'cc';
+        ctx.shadowBlur = 12 * dpr; ctx.shadowColor = p.color;
+        ctx.arc(x, yc, 2.6 * dpr, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.shadowBlur = 0;
+        // trailing line
+        ctx.strokeStyle = p.color + '66';
+        ctx.lineWidth = 1.4 * dpr;
+        ctx.beginPath();
+        ctx.moveTo(a.x, a.y);
+        ctx.lineTo(x, yc);
+        ctx.stroke();
+      }
+    }
+
+    // nodes (drawn last on top)
+    for (const p of positions) {
+      // outer ring
+      ctx.beginPath();
+      ctx.fillStyle = 'rgba(255,255,255,0.04)';
+      ctx.arc(p.x, p.y, 18 * dpr, 0, Math.PI * 2);
+      ctx.fill();
+      // dot
+      ctx.beginPath();
+      ctx.fillStyle = '#ffffff';
+      ctx.shadowBlur = 16 * dpr; ctx.shadowColor = 'rgba(255,255,255,0.4)';
+      ctx.arc(p.x, p.y, 5 * dpr, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.shadowBlur = 0;
+      // label
+      ctx.fillStyle = 'rgba(161,161,170,0.85)';
+      ctx.font = `${10 * dpr}px 'JetBrains Mono', monospace`;
+      ctx.textAlign = 'center';
+      ctx.fillText(p.label, p.x, p.y + 32 * dpr);
+    }
+
+    // center hub
+    ctx.beginPath();
+    ctx.fillStyle = 'rgba(99,102,241,0.9)';
+    ctx.shadowBlur = 28 * dpr; ctx.shadowColor = 'rgba(99,102,241,0.7)';
+    ctx.arc(center.x, center.y, 6 * dpr, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.shadowBlur = 0;
+    ctx.beginPath();
+    ctx.strokeStyle = 'rgba(99,102,241,0.3)';
+    ctx.lineWidth = 1 * dpr;
+    ctx.arc(center.x, center.y, 14 * dpr, 0, Math.PI * 2);
+    ctx.stroke();
+
+    requestAnimationFrame(tick);
+  }
+  requestAnimationFrame(tick);
+})();
+
+// Smooth-scroll lite (lerp wheel deltas) — subtle momentum, no library
+(function() {
+  if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  let target = window.scrollY;
+  let current = window.scrollY;
+  let raf = 0;
+  function loop() {
+    current += (target - current) * 0.12;
+    if (Math.abs(target - current) < 0.5) {
+      window.scrollTo(0, target);
+      raf = 0; return;
+    }
+    window.scrollTo(0, current);
+    raf = requestAnimationFrame(loop);
+  }
+  window.addEventListener('wheel', (e) => {
+    if (e.ctrlKey) return;
+    e.preventDefault();
+    target += e.deltaY;
+    target = Math.max(0, Math.min(target, document.body.scrollHeight - window.innerHeight));
+    if (!raf) raf = requestAnimationFrame(loop);
+  }, { passive: false });
+  // restore scroll on page load
+  window.addEventListener('scroll', () => {
+    if (!raf) { current = window.scrollY; target = window.scrollY; }
+  }, { passive: true });
+})();
+
+// Throughput chart — a calm sine-wave of synthetic actions per minute, NOT jittery
+(function() {
+  const line = document.getElementById('chart-line');
+  const area = document.getElementById('chart-area');
+  const cursor = document.getElementById('chart-cursor');
+  if (!line) return;
+  const W = 600, H = 140;
+  const N = 80;
+  // base curve: smooth low-freq sine + small noise; updates SLOWLY
+  const data = new Array(N).fill(0).map((_, i) => 70 + Math.sin(i * 0.18) * 24 + Math.cos(i * 0.06) * 14);
+
+  function build() {
+    const pts = data.map((v, i) => `${(i / (N - 1)) * W},${H - v}`);
+    line.setAttribute('d', 'M' + pts.join(' L'));
+    area.setAttribute('d', 'M0,' + H + ' L' + pts.join(' L') + ` L${W},${H} Z`);
+    const last = data[N - 1];
+    cursor.setAttribute('cx', W);
+    cursor.setAttribute('cy', H - last);
+  }
+  build();
+
+  // Update every 2.4s, smoothly: shift one element off, push smoothed new value
+  let t = N;
+  setInterval(() => {
+    t += 1;
+    const target = 70 + Math.sin(t * 0.18) * 24 + Math.cos(t * 0.06) * 14 + (Math.random() - 0.5) * 6;
+    // animate over 2 seconds: easing the last point toward target
+    const start = data[N - 1];
+    const t0 = performance.now();
+    function ease(now) {
+      const u = Math.min(1, (now - t0) / 1800);
+      const e = 1 - Math.pow(1 - u, 3);
+      data[N - 1] = start + (target - start) * e;
+      build();
+      if (u < 1) requestAnimationFrame(ease);
+      else {
+        // shift left
+        data.shift();
+        data.push(target);
+        build();
+      }
+    }
+    requestAnimationFrame(ease);
+  }, 2400);
+})();
+
+// Slow KPI tickers
+(function() {
+  const p50 = document.getElementById('kpi-p50');
+  const receipts = document.getElementById('kpi-receipts');
+  const cost = document.getElementById('kpi-cost');
+  const ac = document.getElementById('agent-count');
+  const actions = document.getElementById('actions');
+  function bumpReceipts() {
+    const r = parseInt(receipts.firstChild.textContent.replace(/,/g, '') || '8421', 10);
+    const nv = r + Math.floor(Math.random() * 3) + 1;
+    receipts.childNodes[0].nodeValue = nv.toLocaleString();
+  }
+  function bumpActions() {
+    const a = parseInt(actions.textContent.replace(/,/g, '') || '42180', 10);
+    const nv = a + Math.floor(Math.random() * 4) + 1;
+    actions.textContent = nv.toLocaleString();
+  }
+  function bumpP50() {
+    const choices = ['238', '240', '242', '244', '236', '241'];
+    const v = choices[Math.floor(Math.random() * choices.length)];
+    p50.childNodes[0].nodeValue = v;
+  }
+  setInterval(bumpReceipts, 3500);
+  setInterval(bumpActions, 4200);
+  setInterval(bumpP50, 5500);
+})();
+
+// Recent activity (slow, calm)
+(function() {
+  const list = document.getElementById('recent-list');
+  if (!list) return;
+  const items = [
+    { agent: 'forecast', body: 'weather kalshi-DEN-rain · conf 0.62', t: '2s' },
+    { agent: 'options', body: 'spread SPY-2026-05-09-540C · 0.04', t: '14s' },
+    { agent: 'review',  body: 'auto-impl/court-feed-43d2 · 6/7 ok', t: '38s' },
+    { agent: 'health',  body: 'gateway uptime · 14h22m · ok', t: '1m' },
+    { agent: 'outreach',body: 'strategic-reply queued · 2 tracked', t: '2m' },
+    { agent: 'browser', body: 'session 14 actions · capt 0 · $0.0085', t: '3m' },
+    { agent: 'audit',   body: 'secrets scan · 0 leaks · rotated 28d', t: '5m' },
+  ];
+  list.innerHTML = items.map(it => `
+    <div class="r">
+      <div class="top"><span>${it.agent}</span><span class="t">${it.t}</span></div>
+      <div class="body">${it.body}</div>
+    </div>
+  `).join('');
+})();
+
+// Counter animation for stats
+(function() {
+  function animateCount(el, target, decimals = 0, dur = 1600) {
+    const start = performance.now();
+    function step(now) {
+      const t = Math.min(1, (now - start) / dur);
+      const e = 1 - Math.pow(1 - t, 3);
+      const v = target * e;
+      el.childNodes[0].nodeValue = decimals ? v.toFixed(decimals) : Math.floor(v).toLocaleString();
+      if (t < 1) requestAnimationFrame(step);
+    }
+    requestAnimationFrame(step);
+  }
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (!e.isIntersecting || e.target.dataset.done) return;
+      e.target.dataset.done = '1';
+      const target = parseFloat(e.target.dataset.target);
+      const dec = parseInt(e.target.dataset.decimal || '0', 10);
+      animateCount(e.target, target, dec);
+    });
+  }, { threshold: 0.3 });
+  document.querySelectorAll('.stat .v').forEach(el => io.observe(el));
+})();
+
+// Reveal-on-scroll
+const io = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); });
+}, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+document.querySelectorAll('.reveal').forEach((el, i) => {
+  el.style.transitionDelay = (i % 3) * 80 + 'ms';
+  io.observe(el);
+});
+
+// Scroll progress bar
+(function() {
+  const bar = document.getElementById('scroll-progress');
+  if (!bar) return;
+  let raf = 0;
+  function update() {
+    const total = document.documentElement.scrollHeight - window.innerHeight;
+    const u = total > 0 ? Math.min(1, window.scrollY / total) : 0;
+    bar.style.transform = `scaleX(${u})`;
+    raf = 0;
+  }
+  window.addEventListener('scroll', () => { if (!raf) raf = requestAnimationFrame(update); }, { passive: true });
+  update();
+})();
+
+// Capability card mouse spotlight
+document.querySelectorAll('.cap').forEach(c => {
+  c.addEventListener('mousemove', (e) => {
+    const r = c.getBoundingClientRect();
+    c.style.setProperty('--mx', (e.clientX - r.left) + 'px');
+    c.style.setProperty('--my', (e.clientY - r.top) + 'px');
+  });
+});
+
+// Architecture flow particles - SVG-based, slow drift left-to-right
+(function() {
+  const layer = document.getElementById('flow-particles');
+  if (!layer) return;
+  const lanes = [
+    { x1: 220, x2: 310 },
+    { x1: 510, x2: 600 },
+    { x1: 800, x2: 890 },
+  ];
+  const palette = ['#6366f1', '#ec4899', '#14b8a6'];
+  function spawn() {
+    const lane = lanes[Math.floor(Math.random() * lanes.length)];
+    const color = palette[Math.floor(Math.random() * palette.length)];
+    const c = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+    c.setAttribute('cx', lane.x1);
+    c.setAttribute('cy', 160);
+    c.setAttribute('r', 3);
+    c.setAttribute('fill', color);
+    c.setAttribute('filter', 'url(#glow)');
+    c.style.opacity = '0.95';
+    layer.appendChild(c);
+    const t0 = performance.now();
+    const dur = 1400 + Math.random() * 600;
+    function step(now) {
+      const u = Math.min(1, (now - t0) / dur);
+      const e = u < 0.5 ? 2 * u * u : 1 - Math.pow(-2 * u + 2, 2) / 2;
+      c.setAttribute('cx', lane.x1 + (lane.x2 - lane.x1) * e);
+      c.style.opacity = (1 - Math.abs(u - 0.5) * 0.6).toFixed(2);
+      if (u < 1) requestAnimationFrame(step);
+      else c.remove();
+    }
+    requestAnimationFrame(step);
+  }
+  setInterval(spawn, 700);
+  for (let i = 0; i < 3; i++) setTimeout(spawn, i * 300);
+})();
+
+// Footer uptime ticker
+(function() {
+  const el = document.getElementById('foot-uptime');
+  if (!el) return;
+  let mins = 14 * 60 + 22;
+  setInterval(() => {
+    mins++;
+    const h = Math.floor(mins / 60);
+    const m = mins % 60;
+    el.textContent = h + 'h ' + (m < 10 ? '0' : '') + m + 'm';
+  }, 60000);
+})();
+</script>
+</body>
+</html>
