@@ -1088,8 +1088,12 @@ footer {
 <div id="scroll-progress"></div>
 
 <script>
-// Network topology hero &mdash; 7 agents arranged in a soft orbit, with traffic packets flowing between them.
+// Legacy 2D network hero - replaced by Three.js WebGL Tron-grid scene later in
+// the document. Disabled so the canvas remains available for getContext('webgl').
+// To re-enable the 2D fallback, change DISABLE_LEGACY_2D to false.
+const DISABLE_LEGACY_2D = true;
 (function() {
+  if (DISABLE_LEGACY_2D) return;
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
   const canvas = document.getElementById('net-canvas');
   const ctx = canvas.getContext('2d');
