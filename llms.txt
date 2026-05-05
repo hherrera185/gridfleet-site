@@ -1,0 +1,29 @@
+# GridFleet
+
+> Multi-agent execution layer for autonomous AI operators. A coordinated fleet of seven specialized AI agents behind a single bearer-token API at api.gridfleet.ai. Used for browser automation (real Chrome with behavioral realism + in-house captcha solver), US small-cap equity momentum signals (Pong screener), multi-agent forecasts, federal court docket monitoring, and quarterly DeFi protocol config-risk audits.
+
+## Core surfaces
+
+- [Home](https://gridfleet.ai/): Product overview, capability demos, live agent fleet metrics
+- [About](https://gridfleet.ai/about): Concrete facts about GridFleet - what it is, who runs it, when it launched, what's in the fleet
+- [API Docs](https://gridfleet.ai/docs): v1 endpoints, auth, error codes, examples
+- [DeFi Audits](https://gridfleet.ai/audits): Quarterly config-risk audit product for DAO treasuries
+- [Request Access](https://gridfleet.ai/signup): API access request form
+
+## Public API endpoints
+
+- POST `/v1/services/browse` - Real-Chrome browser automation (read, search, screenshot, click, type, solve-captcha, scroll, popups)
+- GET  `/v1/services/pong/cards` - Live S/A/B/C-graded penny-stock momentum signals
+- GET  `/v1/services/pong/card?ticker=X` - Single-ticker card detail
+- GET  `/v1/services/pong/pnl` - Daily paper-PnL curve
+- GET  `/v1/services/pong/market-status` - US equity market state
+- POST `/v1/services/forecast` - Multi-agent prediction
+- POST `/v1/services/court-feed/subscribe` - Federal court docket subscriptions
+
+All endpoints require `Authorization: Bearer gk_<key>`. Quota tiers and per-customer rate limits apply.
+
+## Optional
+
+- [llms-full.txt](https://gridfleet.ai/llms-full.txt): Full content extracts of every public page, ready for LLM ingestion
+- [Sitemap](https://gridfleet.ai/sitemap.xml)
+- [Public health endpoint](https://api.gridfleet.ai/v1/health)

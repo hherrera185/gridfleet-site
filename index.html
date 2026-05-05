@@ -19,8 +19,133 @@
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+<link rel="canonical" href="https://gridfleet.ai/" />
+<link rel="alternate" type="application/rss+xml" title="GridFleet" href="https://gridfleet.ai/rss.xml" />
+<meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large" />
+<meta name="author" content="GridFleet" />
+<meta name="keywords" content="multi-agent AI, AI agents API, browser automation API, AI agent fleet, MCP server, agent orchestration, autonomous AI execution layer, gridfleet" />
+<meta name="twitter:title" content="GridFleet - The execution layer for autonomous AI agents" />
+<meta name="twitter:description" content="Multi-agent execution layer. Browser automation, forecasts, screeners, monitoring - via API or MCP. Real work, real receipts." />
+<meta name="twitter:site" content="@CLU_AGENT" />
+
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"SoftwareApplication","name":"GridFleet","applicationCategory":"DeveloperApplication","operatingSystem":"Web","description":"Multi-agent execution layer for autonomous AI operators.","url":"https://gridfleet.ai","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"creator":{"@type":"Organization","name":"GridFleet","email":"hello@gridfleet.ai"}}
+[
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "@id": "https://gridfleet.ai/#org",
+    "name": "GridFleet",
+    "url": "https://gridfleet.ai",
+    "logo": "https://gridfleet.ai/og.png",
+    "email": "hello@gridfleet.ai",
+    "description": "GridFleet is the multi-agent execution layer used by operators who need AI that coordinates, acts, and produces receipts. The fleet exposes a managed browser pipeline, a Pong momentum screener for US small caps, a multi-agent forecasting service, and a DeFi config-risk audit product through a single bearer-token API at api.gridfleet.ai.",
+    "sameAs": [
+      "https://x.com/CLU_AGENT",
+      "https://github.com/logikclaw"
+    ],
+    "contactPoint": [
+      {"@type":"ContactPoint","contactType":"sales","email":"sales@gridfleet.ai","availableLanguage":"en"},
+      {"@type":"ContactPoint","contactType":"support","email":"support@gridfleet.ai","availableLanguage":"en"},
+      {"@type":"ContactPoint","contactType":"security","email":"security@gridfleet.ai","availableLanguage":"en"}
+    ]
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "@id": "https://gridfleet.ai/#website",
+    "url": "https://gridfleet.ai",
+    "name": "GridFleet",
+    "publisher": {"@id":"https://gridfleet.ai/#org"},
+    "inLanguage": "en-US"
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "@id": "https://gridfleet.ai/#app",
+    "name": "GridFleet API",
+    "applicationCategory": "DeveloperApplication",
+    "operatingSystem": "Web",
+    "description": "Bearer-token API exposing browser-as-a-service, Pong screener live data, multi-agent forecasts, and config-risk audit reports.",
+    "url": "https://api.gridfleet.ai/v1",
+    "creator": {"@id":"https://gridfleet.ai/#org"},
+    "offers": {"@type":"Offer","priceCurrency":"USD","priceSpecification":{"@type":"PriceSpecification","priceCurrency":"USD","description":"Per-customer pricing; request a quote via /signup."}}
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "@id": "https://gridfleet.ai/#browse-service",
+    "name": "GridFleet Browser-as-a-Service",
+    "serviceType": "Browser automation API",
+    "provider": {"@id":"https://gridfleet.ai/#org"},
+    "description": "Real-Chrome browser automation with Phase 2a-2d behavioral realism, Phase 3 multi-strategy popup dismissal, and Phase 4 in-house captcha solver. Actions: read, search, screenshot, click, type, solve-captcha, scroll, popups."
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "@id": "https://gridfleet.ai/#pong-service",
+    "name": "GridFleet Pong Screener",
+    "serviceType": "Equity momentum signals API",
+    "provider": {"@id":"https://gridfleet.ai/#org"},
+    "description": "Live S/A/B/C-graded penny-stock momentum cards with composite score, L2 fidelity, MFE/MAE. Daily PnL curve, market-status endpoint."
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "@id": "https://gridfleet.ai/#audits-service",
+    "name": "DeFi Config-Risk Audits",
+    "serviceType": "Quarterly DeFi protocol audit",
+    "provider": {"@id":"https://gridfleet.ai/#org"},
+    "description": "Quarterly audits scoring six on-chain risk surfaces: admin keys, oracle dependency, verifier centralization, timelock window, governance drift, audit recency. For DAO treasuries and institutional DeFi holders.",
+    "url": "https://gridfleet.ai/audits"
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "@id": "https://gridfleet.ai/#faq",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What is GridFleet?",
+        "acceptedAnswer": {"@type":"Answer","text":"GridFleet is a multi-agent execution layer. It runs a coordinated fleet of seven specialized AI agents - CLU (orchestration), TRON (security review), DUMONT (account operations), BECK (diagnostics), YORI (content), NEON DAVE (markets and trading), and a master orchestrator - all behind a single bearer-token API at api.gridfleet.ai. Customers use it for browser automation, equity momentum signals, multi-agent forecasts, and DeFi config-risk audits."}
+      },
+      {
+        "@type": "Question",
+        "name": "How is GridFleet different from a single LLM API?",
+        "acceptedAnswer": {"@type":"Answer","text":"Single-LLM APIs (OpenAI, Anthropic, etc.) give you one model answering one prompt. GridFleet exposes coordinated work across multiple specialized agents that hand off, verify, and audit each other - the answer is the result of a fleet, not a single completion. Calls return receipts (request_id, billing event, audit trail) so the operation is verifiable, not a black box."}
+      },
+      {
+        "@type": "Question",
+        "name": "What endpoints are available?",
+        "acceptedAnswer": {"@type":"Answer","text":"v1 endpoints at api.gridfleet.ai/v1: /services/browse (POST - browser automation: read, search, screenshot, click, type, solve-captcha), /services/pong/cards (GET - live momentum signals), /services/pong/card (GET - single ticker detail), /services/pong/pnl (GET - paper P&L curve), /services/pong/market-status (GET - market state), /services/forecast (POST - multi-agent prediction), /services/court-feed (federal court docket monitoring). Full docs at gridfleet.ai/docs."}
+      },
+      {
+        "@type": "Question",
+        "name": "How do I get an API key?",
+        "acceptedAnswer": {"@type":"Answer","text":"Request access at gridfleet.ai/signup with your use case and expected call volume, or email sales@gridfleet.ai. We respond within 24 hours. Keys are gk_-prefixed bearer tokens with monthly call and dollar quotas."}
+      },
+      {
+        "@type": "Question",
+        "name": "Can GridFleet be installed as an MCP server?",
+        "acceptedAnswer": {"@type":"Answer","text":"Yes. The Browser-as-a-Service and Pong Screener endpoints are wrapped as Model Context Protocol (MCP) servers - install via npm or claude mcp add and the tools surface in Claude Code, Cursor, Codex CLI, or any MCP-compatible client. Customer-side requires only an API key in MCP_GRID_API_KEY."}
+      },
+      {
+        "@type": "Question",
+        "name": "Where is GridFleet hosted?",
+        "acceptedAnswer": {"@type":"Answer","text":"The fleet runs on owner-operated infrastructure (no public-cloud lock-in). Public surface is fronted by Cloudflare Workers + Tailscale Funnel; the agent fleet itself runs on dedicated hardware. Status: api.gridfleet.ai/v1/health."}
+      },
+      {
+        "@type": "Question",
+        "name": "What does the Pong Screener cover?",
+        "acceptedAnswer": {"@type":"Answer","text":"US small-cap and penny-stock momentum signals during regular trading hours. Cards are S/A/B/C-graded based on a composite score combining Level 2 order-book fidelity, MFE (maximum favorable excursion), MAE (maximum adverse excursion), and additional micro-structure features. Updates intra-day; market-status endpoint surfaces MARKET_OPEN, MARKET_CLOSED, PRE_MARKET, AH_MARKET states."}
+      },
+      {
+        "@type": "Question",
+        "name": "What is the DeFi config-risk audit?",
+        "acceptedAnswer": {"@type":"Answer","text":"Quarterly audits for DAO treasuries and institutional DeFi holders covering six risk surfaces: admin keys and upgradeability, oracle dependency, verifier centralization, timelock window and bypass paths, governance drift, audit recency and coverage gap. Each finding is sourced - on-chain evidence with contract addresses and tx hashes - so the customer can verify every score independently."}
+      }
+    ]
+  }
+]
 </script>
 <style>
 :root {
@@ -1493,5 +1618,230 @@ document.querySelectorAll('.cap').forEach(c => {
   }, 60000);
 })();
 </script>
+
+<!-- ====================================================================
+     Three.js Tron-style hero scene. Renders into the existing #net-canvas.
+     Lazy-loaded as an ES module so it doesn't block first paint. Falls back
+     gracefully (canvas stays empty, no JS errors) if WebGL is unavailable
+     or the import fails.
+     ==================================================================== -->
+<script type="module">
+const canvas = document.getElementById('net-canvas');
+if (!canvas) { console.warn('[gridfleet-3d] no canvas, skipping'); }
+else {
+  // Skip on prefers-reduced-motion or no-webgl. Page already has a static
+  // gradient background, so an empty canvas is acceptable.
+  const reducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  let webglOk = false;
+  try {
+    const test = document.createElement('canvas');
+    webglOk = !!(test.getContext('webgl2') || test.getContext('webgl'));
+  } catch { webglOk = false; }
+
+  if (webglOk && !reducedMotion) {
+    try {
+      const THREE = await import('https://cdn.jsdelivr.net/npm/three@0.165.0/+esm');
+
+      const scene = new THREE.Scene();
+      scene.fog = new THREE.FogExp2(0x05060a, 0.018);
+
+      const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+      const sizeRect = () => {
+        const r = canvas.getBoundingClientRect();
+        renderer.setSize(r.width || 600, r.height || 480, false);
+        if (camera) {
+          camera.aspect = (r.width || 1) / (r.height || 1);
+          camera.updateProjectionMatrix();
+        }
+      };
+
+      const camera = new THREE.PerspectiveCamera(60, 1.25, 0.1, 200);
+      camera.position.set(0, 9, 18);
+      camera.lookAt(0, 0, 0);
+      sizeRect();
+
+      // ---- TRON-STYLE GRID FLOOR ----
+      // Custom GridHelper with cyan glow, fading at the edges via fog.
+      const gridSize = 80;
+      const gridDiv = 40;
+      const grid = new THREE.GridHelper(gridSize, gridDiv, 0x4dd9ff, 0x1a3744);
+      grid.material.transparent = true;
+      grid.material.opacity = 0.55;
+      grid.position.y = -0.001;
+      scene.add(grid);
+
+      // Subtle reflective base - dark plane just under the grid for depth.
+      const baseGeom = new THREE.PlaneGeometry(gridSize, gridSize);
+      const baseMat = new THREE.MeshBasicMaterial({ color: 0x05080d, transparent: true, opacity: 0.85 });
+      const base = new THREE.Mesh(baseGeom, baseMat);
+      base.rotation.x = -Math.PI / 2;
+      base.position.y = -0.01;
+      scene.add(base);
+
+      // ---- AGENT NODES ----
+      // 7 floating octahedrons in a rough loose cluster, slowly bobbing.
+      // Each one is a "glowing" agent in the fleet.
+      const NODE_COUNT = 7;
+      const nodeColors = [0x6366f1, 0xec4899, 0x14b8a6, 0xfbbf24, 0x4dd9ff, 0xa78bfa, 0x10b981];
+      const nodes = [];
+      for (let i = 0; i < NODE_COUNT; i++) {
+        const angle = (i / NODE_COUNT) * Math.PI * 2;
+        const radius = 5 + Math.random() * 3;
+        const wireMat = new THREE.MeshBasicMaterial({
+          color: nodeColors[i],
+          wireframe: true,
+          transparent: true,
+          opacity: 0.95,
+        });
+        const wireGeom = new THREE.OctahedronGeometry(0.55, 0);
+        const node = new THREE.Mesh(wireGeom, wireMat);
+        node.position.set(
+          Math.cos(angle) * radius,
+          1.5 + Math.random() * 2.5,
+          Math.sin(angle) * radius
+        );
+        node.userData = {
+          baseY: node.position.y,
+          phase: Math.random() * Math.PI * 2,
+          speed: 0.6 + Math.random() * 0.4,
+        };
+        scene.add(node);
+        nodes.push(node);
+
+        // Glow halo: a slightly larger, additive-blended sphere around each node.
+        const haloMat = new THREE.MeshBasicMaterial({
+          color: nodeColors[i],
+          transparent: true,
+          opacity: 0.18,
+          blending: THREE.AdditiveBlending,
+          depthWrite: false,
+        });
+        const halo = new THREE.Mesh(new THREE.SphereGeometry(1.05, 12, 12), haloMat);
+        node.add(halo);
+      }
+
+      // ---- INTER-NODE CONNECTIONS ----
+      // A few lines between nodes, fading in/out to suggest A2A messaging.
+      const connections = [];
+      for (let i = 0; i < 8; i++) {
+        const a = nodes[Math.floor(Math.random() * NODE_COUNT)];
+        const b = nodes[Math.floor(Math.random() * NODE_COUNT)];
+        if (a === b) continue;
+        const lineMat = new THREE.LineBasicMaterial({ color: 0x4dd9ff, transparent: true, opacity: 0.0 });
+        const lineGeom = new THREE.BufferGeometry().setFromPoints([a.position, b.position]);
+        const line = new THREE.Line(lineGeom, lineMat);
+        line.userData = { a, b, phase: Math.random() * Math.PI * 2 };
+        scene.add(line);
+        connections.push(line);
+      }
+
+      // ---- LIGHT STREAKS ALONG GRID ----
+      // Long thin glowing lines that travel across the grid surface.
+      const STREAK_COUNT = 12;
+      const streaks = [];
+      for (let i = 0; i < STREAK_COUNT; i++) {
+        const streakColor = i % 3 === 0 ? 0xec4899 : (i % 3 === 1 ? 0x4dd9ff : 0x6366f1);
+        const mat = new THREE.MeshBasicMaterial({
+          color: streakColor,
+          transparent: true,
+          opacity: 0.85,
+          blending: THREE.AdditiveBlending,
+          depthWrite: false,
+        });
+        const geom = new THREE.PlaneGeometry(0.05, 4);
+        const m = new THREE.Mesh(geom, mat);
+        const axis = Math.random() > 0.5;
+        const offset = (Math.random() - 0.5) * gridSize;
+        m.rotation.x = -Math.PI / 2;
+        if (axis) {
+          m.position.set(offset, 0.005, -gridSize / 2 - Math.random() * 20);
+          m.rotation.z = 0;
+        } else {
+          m.position.set(-gridSize / 2 - Math.random() * 20, 0.005, offset);
+          m.rotation.z = Math.PI / 2;
+        }
+        m.userData = {
+          axis,
+          speed: 4 + Math.random() * 6,
+          startOffset: m.position.x + m.position.z,
+        };
+        scene.add(m);
+        streaks.push(m);
+      }
+
+      // ---- ANIMATION LOOP ----
+      let frame = 0;
+      let lastT = performance.now();
+      let animationId = null;
+      function animate(t) {
+        animationId = requestAnimationFrame(animate);
+        const dt = Math.min(0.05, (t - lastT) / 1000);
+        lastT = t;
+        frame++;
+
+        // Camera slow orbit
+        const orbitR = 18;
+        const orbitS = 0.06;
+        camera.position.x = Math.sin(t * 0.0001 * orbitS * 6.28) * orbitR;
+        camera.position.z = Math.cos(t * 0.0001 * orbitS * 6.28) * orbitR;
+        camera.lookAt(0, 1.5, 0);
+
+        // Bob nodes
+        for (const n of nodes) {
+          n.position.y = n.userData.baseY + Math.sin(t * 0.001 * n.userData.speed + n.userData.phase) * 0.4;
+          n.rotation.x += dt * 0.3;
+          n.rotation.y += dt * 0.5;
+        }
+
+        // Pulse connections
+        for (const c of connections) {
+          c.geometry.setFromPoints([c.userData.a.position, c.userData.b.position]);
+          c.material.opacity = 0.05 + 0.25 * (0.5 + 0.5 * Math.sin(t * 0.001 + c.userData.phase));
+        }
+
+        // Move streaks
+        for (const s of streaks) {
+          if (s.userData.axis) {
+            s.position.z += s.userData.speed * dt;
+            if (s.position.z > gridSize / 2 + 6) {
+              s.position.z = -gridSize / 2 - 6;
+              s.position.x = (Math.random() - 0.5) * gridSize;
+            }
+          } else {
+            s.position.x += s.userData.speed * dt;
+            if (s.position.x > gridSize / 2 + 6) {
+              s.position.x = -gridSize / 2 - 6;
+              s.position.z = (Math.random() - 0.5) * gridSize;
+            }
+          }
+        }
+
+        renderer.render(scene, camera);
+      }
+      requestAnimationFrame(animate);
+
+      // Resize
+      window.addEventListener('resize', sizeRect);
+
+      // Pause when canvas off-screen (perf)
+      const io = new IntersectionObserver((entries) => {
+        for (const e of entries) {
+          if (e.isIntersecting) {
+            if (!animationId) { lastT = performance.now(); requestAnimationFrame(animate); }
+          } else if (animationId) {
+            cancelAnimationFrame(animationId);
+            animationId = null;
+          }
+        }
+      });
+      io.observe(canvas);
+    } catch (e) {
+      console.warn('[gridfleet-3d] init failed, leaving canvas blank', e && e.message);
+    }
+  }
+}
+</script>
+
 </body>
 </html>
