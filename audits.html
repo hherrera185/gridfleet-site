@@ -1,0 +1,198 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>GridFleet | DeFi Config-Risk Audits</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="Quarterly DeFi protocol config-risk audits for DAO treasuries and institutional holders. Six risk surfaces. $499/mo.">
+<style>
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;background:#0b0d10;color:#e3e6e8;line-height:1.55;-webkit-font-smoothing:antialiased}
+  a{color:#7cc3ff;text-decoration:none}
+  a:hover{text-decoration:underline}
+  .nav{padding:18px 28px;border-bottom:1px solid #1a1f24;display:flex;justify-content:space-between;align-items:center;background:#0b0d10;position:sticky;top:0;z-index:5}
+  .nav-brand{font-weight:600;font-size:18px;letter-spacing:0.5px}
+  .nav a{margin-left:22px;color:#9ca7b0;font-size:14px}
+  .wrap{max-width:880px;margin:0 auto;padding:64px 28px 96px}
+  h1{font-size:42px;font-weight:700;line-height:1.15;letter-spacing:-0.5px;margin-bottom:20px}
+  h2{font-size:24px;font-weight:600;margin:48px 0 18px;letter-spacing:-0.2px}
+  h3{font-size:16px;font-weight:600;margin:0 0 6px;color:#cbd3da}
+  p{color:#9ca7b0;margin-bottom:14px}
+  .subtitle{font-size:18px;color:#cbd3da;margin-bottom:28px;max-width:680px}
+  .price-block{display:flex;gap:32px;align-items:baseline;padding:24px;border:1px solid #1f2630;border-radius:8px;background:#10141a;margin:32px 0 0}
+  .price{font-size:36px;font-weight:700;color:#fff}
+  .price-period{color:#9ca7b0;font-size:14px}
+  .price-meta{color:#6b7882;font-size:13px;margin-top:6px}
+  .surfaces{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:18px}
+  .surface{padding:18px;border:1px solid #1a1f24;border-radius:6px;background:#0e1216}
+  .surface-tag{display:inline-block;font-family:"SF Mono",Menlo,Consolas,monospace;font-size:11px;color:#7cc3ff;background:#0a1320;padding:2px 8px;border-radius:3px;margin-bottom:8px}
+  .surface p{font-size:13px;margin:0;color:#9ca7b0}
+  .who-list, .deliv-list{margin-left:18px;color:#9ca7b0}
+  .who-list li, .deliv-list li{margin-bottom:6px}
+  form{margin-top:24px;display:flex;flex-direction:column;gap:12px;max-width:420px}
+  input[type=email], input[type=text]{padding:12px 14px;background:#10141a;border:1px solid #2a323c;border-radius:6px;color:#e3e6e8;font-size:14px;font-family:inherit}
+  input:focus{outline:none;border-color:#7cc3ff}
+  button{padding:13px 18px;background:#7cc3ff;color:#0b0d10;border:0;border-radius:6px;font-weight:600;cursor:pointer;font-size:14px}
+  button:disabled{opacity:0.5;cursor:not-allowed}
+  button:hover:not(:disabled){background:#9bd2ff}
+  .form-msg{font-size:13px;color:#9ca7b0;min-height:18px}
+  .form-msg.ok{color:#7cffb4}
+  .form-msg.err{color:#ff8a8a}
+  .footer{padding:32px 28px;border-top:1px solid #1a1f24;color:#6b7882;font-size:13px;text-align:center;margin-top:48px}
+  @media(max-width:680px){
+    .surfaces{grid-template-columns:1fr}
+    h1{font-size:32px}
+  }
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <span class="nav-brand">GRIDFLEET</span>
+  <span>
+    <a href="/">Home</a>
+    <a href="/#capabilities">Fleet</a>
+    <a href="/audits">Audits</a>
+  </span>
+</nav>
+
+<main class="wrap">
+
+<h1>DeFi Config-Risk Audits</h1>
+<p class="subtitle">
+  Quarterly audits of the protocol-config surface that on-chain holdings actually depend on. Six risk surfaces, scored on the contracts your DAO or fund is exposed to. Built for treasury managers and institutional DeFi holders who can't read every Solidity diff but can't afford to skip them either.
+</p>
+
+<div class="price-block">
+  <div>
+    <div class="price">$499<span class="price-period"> /mo</span></div>
+    <div class="price-meta">Quarterly delivery &middot; up to 25 protocols per portfolio &middot; cancel anytime</div>
+  </div>
+</div>
+
+<h2>The six risk surfaces</h2>
+<p>Most "DeFi due diligence" stops at TVL and audit firm logos. We score the operational config that actually changes between audits and silently changes risk.</p>
+
+<div class="surfaces">
+
+  <div class="surface">
+    <span class="surface-tag">admin_keys</span>
+    <h3>Admin keys &amp; upgradeability</h3>
+    <p>Who holds proxy admin? Is upgrade gated by timelock or instant? How many sigs on the multisig and is it active? Single EOA proxy admins are the highest-impact finding we surface.</p>
+  </div>
+
+  <div class="surface">
+    <span class="surface-tag">oracle_dependency</span>
+    <h3>Oracle dependency</h3>
+    <p>Which oracles feed the contract, what's the fallback, what's the deviation tolerance, and has the oracle source list changed since the last audit. Stale oracle paths are routinely the post-mortem root cause.</p>
+  </div>
+
+  <div class="surface">
+    <span class="surface-tag">verifier_centralization</span>
+    <h3>Verifier centralization</h3>
+    <p>For ZK and rollup-adjacent protocols: who can submit/challenge proofs, how many verifiers are active, and what fraction of the verifier set is correlated (same operator, same hosting, same client).</p>
+  </div>
+
+  <div class="surface">
+    <span class="surface-tag">timelock_window</span>
+    <h3>Timelock window &amp; bypass</h3>
+    <p>Stated timelock vs. actual recent change cadence. Emergency-pause bypass paths. Whether the timelock contract itself can be replaced without going through the timelock.</p>
+  </div>
+
+  <div class="surface">
+    <span class="surface-tag">governance_drift</span>
+    <h3>Governance drift</h3>
+    <p>Voting power concentration, recent quorum trends, last proposal participation rates. Quiet drift toward a single voter is rarely surfaced by the protocol's own dashboards.</p>
+  </div>
+
+  <div class="surface">
+    <span class="surface-tag">audit_recency</span>
+    <h3>Audit recency &amp; coverage gap</h3>
+    <p>Date of last external audit, scope vs. current contract surface, count of contracts deployed after the audit cut-off. Most "audited" protocols have meaningful unaudited surface in production.</p>
+  </div>
+
+</div>
+
+<h2>Who this is for</h2>
+<ul class="who-list">
+  <li>DAO treasury managers running 8&ndash;9-figure portfolios across 5+ protocols</li>
+  <li>Institutional asset managers with DeFi exposure where due-diligence sign-off is a board-level requirement</li>
+  <li>Family offices &amp; multi-strat funds where protocol-config drift between quarterly board meetings is currently invisible</li>
+</ul>
+
+<h2>What you get</h2>
+<ul class="deliv-list">
+  <li>One PDF per quarter, per portfolio, scored on all six surfaces with concrete on-chain evidence (contract addresses, tx hashes, timelock event logs)</li>
+  <li>Delta page showing what changed vs. the previous quarter</li>
+  <li>"Why we flagged this" section for every score &gt;= 6/10, with the specific config or proposal that drove it</li>
+  <li>Sources cited per finding &mdash; you can verify every score yourself in 5 minutes per protocol</li>
+</ul>
+
+<h2>Get on the waitlist</h2>
+<p>We're starting with 8 design-partner customers in May 2026. Tell us what you hold and we'll send the first audit free for the design-partner cohort.</p>
+
+<form id="audit-form" novalidate>
+  <input type="email" name="email" placeholder="work email" required>
+  <input type="text" name="org" placeholder="org / fund / DAO (optional)">
+  <input type="text" name="protocols" placeholder="protocols you hold (e.g. Aave, Lido, Pendle)">
+  <button type="submit" id="audit-submit">Request first audit</button>
+  <div class="form-msg" id="audit-msg"></div>
+</form>
+
+</main>
+
+<footer class="footer">
+  &copy; 2026 GridFleet &middot; <a href="/">gridfleet.ai</a> &middot; <a href="mailto:audits@gridfleet.ai">audits@gridfleet.ai</a>
+</footer>
+
+<script>
+(function(){
+  var form = document.getElementById('audit-form');
+  var msg = document.getElementById('audit-msg');
+  var btn = document.getElementById('audit-submit');
+  if (!form) return;
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    var email = form.email.value.trim();
+    var org = form.org.value.trim();
+    var protocols = form.protocols.value.trim();
+    if (!email || !email.includes('@')) {
+      msg.textContent = 'enter a valid email';
+      msg.className = 'form-msg err';
+      return;
+    }
+    btn.disabled = true;
+    msg.textContent = 'sending...';
+    msg.className = 'form-msg';
+    var payload = {
+      email: email,
+      interest: 'defi-config-audit',
+      org: org,
+      protocols: protocols,
+      source: '/audits',
+      ts: new Date().toISOString()
+    };
+    fetch('/api/early-access', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify(payload)
+    }).then(function(r){ return r.json().catch(function(){ return {ok:false}; }); })
+      .then(function(j){
+        if (j && j.ok) {
+          msg.textContent = "thanks - we'll be in touch within 24 hours";
+          msg.className = 'form-msg ok';
+          form.reset();
+        } else {
+          msg.textContent = (j && j.error) || 'something went wrong - try again or email audits@gridfleet.ai';
+          msg.className = 'form-msg err';
+        }
+      }).catch(function(){
+        msg.textContent = 'network error - try again or email audits@gridfleet.ai';
+        msg.className = 'form-msg err';
+      }).finally(function(){ btn.disabled = false; });
+  });
+})();
+</script>
+
+</body>
+</html>
