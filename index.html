@@ -3,9 +3,9 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>GridFleet â�?��?� The execution layer for autonomous AI agents</title>
+<title>GridFleet &mdash; The execution layer for autonomous AI agents</title>
 <meta name="description" content="GridFleet is the multi-agent execution layer used by operators who need AI that coordinates, acts, and produces receipts." />
-<meta property="og:title" content="GridFleet â�?��?� The execution layer for autonomous AI agents" />
+<meta property="og:title" content="GridFleet &mdash; The execution layer for autonomous AI agents" />
 <meta property="og:description" content="Coordinate agents, tools, workflows, and operators in one accountable execution layer. Real work, real receipts, no chatbots." />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https://gridfleet.ai" />
@@ -216,7 +216,7 @@ section { position: relative; z-index: 2; padding: 120px 32px; }
   text-transform: uppercase;
   margin-bottom: 18px;
 }
-.eyebrow::before { content: 'â�?�¢ '; color: var(--text-2); }
+.eyebrow::before { content: '\2022  '; color: var(--text-2); }
 .section-title {
   font-size: clamp(36px, 4.8vw, 64px);
   line-height: 1.04;
@@ -432,6 +432,45 @@ footer {
   *, *::before, *::after { animation-duration: 0.001s !important; transition-duration: 0.001s !important; }
 }
 
+/* Early-access form */
+.ea-form {
+  display: grid;
+  gap: 12px;
+  max-width: 480px;
+  margin: 36px auto 0;
+  text-align: left;
+}
+.ea-form input,
+.ea-form textarea {
+  font: inherit;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid var(--line-2);
+  border-radius: 8px;
+  padding: 13px 16px;
+  color: var(--text);
+  font-size: 15px;
+  transition: border-color .2s, background .2s;
+  font-family: 'Inter', system-ui, sans-serif;
+}
+.ea-form input::placeholder,
+.ea-form textarea::placeholder { color: var(--text-3); }
+.ea-form input:focus,
+.ea-form textarea:focus {
+  outline: none;
+  border-color: var(--signal);
+  background: rgba(99,102,241,0.04);
+}
+.ea-form textarea { resize: vertical; min-height: 88px; line-height: 1.5; }
+.ea-form button[type=submit] {
+  margin-top: 4px;
+  cursor: pointer;
+  border: 0;
+  font-family: 'Inter', system-ui, sans-serif;
+}
+.ea-form button:disabled { opacity: 0.6; cursor: wait; }
+.ea-status { font-size: 13.5px; min-height: 22px; padding-top: 4px; text-align: center; }
+.ea-honey { position: absolute; left: -9999px; opacity: 0; pointer-events: none; }
+
 /* Scroll progress */
 #scroll-progress {
   position: fixed; top: 0; left: 0; right: 0; height: 2px;
@@ -482,17 +521,17 @@ footer {
     <a href="#how">How it works</a>
     <a href="#voices">Operators</a>
   </div>
-  <a href="mailto:hello@gridfleet.ai" class="nav-cta">Early access</a>
+  <a href="#access" class="nav-cta">Early access</a>
 </nav>
 
 <header class="hero">
   <div class="hero-grid">
     <div class="hero-text">
-      <div class="hero-pill"><span class="dot"></span><span>SYSTEM ONLINE �?· <span id="agent-count">7</span> agents �?· <span id="actions">42,180</span> actions today</span></div>
+      <div class="hero-pill"><span class="dot"></span><span>SYSTEM ONLINE &middot; <span id="agent-count">7</span> agents &middot; <span id="actions">42,180</span> actions today</span></div>
       <h1 class="hero-title">Autonomous AI,<br/><span class="em">organized</span> as a fleet.</h1>
-      <p class="hero-lede">GridFleet is the multi-agent execution layer. Forecasting, browsing, monitoring, payments, ops â�?��?� coordinated, observable, addressable from one control plane.</p>
+      <p class="hero-lede">GridFleet is the multi-agent execution layer. Forecasting, browsing, monitoring, payments, ops &mdash; coordinated, observable, addressable from one control plane.</p>
       <div class="hero-cta">
-        <a href="mailto:hello@gridfleet.ai?subject=GridFleet%20early%20access" class="btn btn-primary">Request early access <span class="arrow">â�?��??</span></a>
+        <a href="#access" class="btn btn-primary">Request early access <span class="arrow">&rarr;</span></a>
         <a href="#dashboard" class="btn btn-ghost">See the platform</a>
       </div>
     </div>
@@ -505,7 +544,7 @@ footer {
 <section class="stats">
   <div class="stats-grid">
     <div class="stat reveal"><div class="v" data-target="14">0<span class="unit">h uptime</span></div><div class="k">CURRENT SESSION</div></div>
-    <div class="stat reveal"><div class="v" data-target="42180">0</div><div class="k">ACTIONS �?· 24H</div></div>
+    <div class="stat reveal"><div class="v" data-target="42180">0</div><div class="k">ACTIONS &middot; 24H</div></div>
     <div class="stat reveal"><div class="v" data-target="7">0<span class="unit">live</span></div><div class="k">AGENT FLEET</div></div>
     <div class="stat reveal"><div class="v" data-target="99.94" data-decimal="2">0<span class="unit">%</span></div><div class="k">RECEIPT INTEGRITY</div></div>
   </div>
@@ -522,13 +561,13 @@ footer {
     <div class="dash reveal">
       <div class="dash-toolbar">
         <div class="traffic"><span></span><span></span><span></span></div>
-        <div class="url"><span class="lock">â�??£</span>https://gridfleet.ai/console â�?��?� fleet</div>
+        <div class="url"><span class="lock">&#x25A3;</span>https://gridfleet.ai/console &mdash; fleet</div>
         <div class="pill"><span class="pdot"></span>OPERATING</div>
       </div>
       <div class="dash-body">
         <div class="dash-side">
           <div class="group">
-            <h4>Agent classes �?· 6</h4>
+            <h4>Agent classes &middot; 6</h4>
             <div class="item active"><span class="agent-dot"></span>forecast<span class="count">3 live</span></div>
             <div class="item"><span class="agent-dot"></span>browser<span class="count">3 sess</span></div>
             <div class="item"><span class="agent-dot"></span>review<span class="count">queue:7</span></div>
@@ -548,22 +587,22 @@ footer {
             <div class="kpi">
               <div class="label">P50 LATENCY</div>
               <div class="v" id="kpi-p50">240<span class="unit" style="font-size:13px;color:var(--text-3);font-weight:500;">ms</span></div>
-              <div class="delta">â�??¼ 12ms vs. yesterday</div>
+              <div class="delta">&#x25BC; 12ms vs. yesterday</div>
             </div>
             <div class="kpi">
-              <div class="label">RECEIPTS �?· 24H</div>
+              <div class="label">RECEIPTS &middot; 24H</div>
               <div class="v" id="kpi-receipts">8,421</div>
-              <div class="delta">â�??² 7.4%</div>
+              <div class="delta">&#x25B2; 7.4%</div>
             </div>
             <div class="kpi">
-              <div class="label">COST �?· 24H</div>
+              <div class="label">COST &middot; 24H</div>
               <div class="v">$<span id="kpi-cost">14.20</span></div>
-              <div class="delta down">â�??¼ $0.40 vs. plan</div>
+              <div class="delta down">&#x25BC; $0.40 vs. plan</div>
             </div>
           </div>
           <div class="chart-card">
             <div class="head">
-              <h5>Throughput �?· last 12 hours</h5>
+              <h5>Throughput &middot; last 12 hours</h5>
               <span class="legend">actions / minute</span>
             </div>
             <svg id="chart-throughput" viewBox="0 0 600 140" preserveAspectRatio="none">
@@ -623,7 +662,7 @@ footer {
     <div class="reveal" style="max-width:760px;">
       <div class="eyebrow">// ARCHITECTURE</div>
       <h2 class="section-title">Inputs land, work routes,<br/><span class="em">receipts</span> settle.</h2>
-      <p class="section-lede">Every job follows the same three-stage flow. Audit-grade by design â�?��?� there is no path from input to outcome that skips the ledger.</p>
+      <p class="section-lede">Every job follows the same three-stage flow. Audit-grade by design &mdash; there is no path from input to outcome that skips the ledger.</p>
     </div>
     <div class="arch reveal">
       <svg viewBox="0 0 1100 320" preserveAspectRatio="xMidYMid meet">
@@ -704,7 +743,7 @@ footer {
       <div class="cap reveal">
         <div class="cap-num">03</div>
         <div class="cap-title">Code review &amp; auto-impl</div>
-        <div class="cap-body">Branch-isolated agent dispatches that propose diffs, run sanity checks, and post structured reviews. No auto-merge â�?��?� human-in-loop by design.</div>
+        <div class="cap-body">Branch-isolated agent dispatches that propose diffs, run sanity checks, and post structured reviews. No auto-merge &mdash; human-in-loop by design.</div>
       </div>
       <div class="cap reveal">
         <div class="cap-num">04</div>
@@ -725,11 +764,23 @@ footer {
   </div>
 </section>
 
-<section class="cta-section">
+<section id="access" class="cta-section">
   <div class="container">
     <h2 class="reveal">Tell us what you<br/>want the fleet to run.</h2>
     <p class="reveal">Early access is invitation-only. We match operators to the agents that fit their work.</p>
-    <a href="mailto:hello@gridfleet.ai?subject=GridFleet%20early%20access" class="btn btn-primary reveal">hello@gridfleet.ai <span class="arrow">â�?��??</span></a>
+
+    <form id="ea-form" class="ea-form reveal" novalidate>
+      <input type="email" name="email" placeholder="you@yourcompany.com" required autocomplete="email" />
+      <input type="text" name="name" placeholder="your name (optional)" autocomplete="name" maxlength="200" />
+      <textarea name="message" placeholder="what do you want the fleet to run? (optional)" rows="3" maxlength="2000"></textarea>
+      <input type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true" class="ea-honey" />
+      <button type="submit" class="btn btn-primary">Request early access <span class="arrow">&rarr;</span></button>
+      <div class="ea-status" aria-live="polite"></div>
+    </form>
+
+    <p class="reveal" style="margin-top:24px;font-size:13.5px;color:var(--text-3);">
+      Or email us directly: <a href="mailto:hello@gridfleet.ai" style="color:var(--text-2);text-decoration:underline;text-decoration-color:var(--line-2);">hello@gridfleet.ai</a>
+    </p>
   </div>
 </section>
 
@@ -762,16 +813,16 @@ footer {
     </div>
   </div>
   <div class="foot-meta">
-    <span>�?© 2026 GridFleet. All rights reserved.</span>
-    <span class="foot-status"><span class="d"></span><span>SYSTEM OPERATING �?· <span id="foot-uptime">14h 22m</span></span></span>
-    <span>v1.0 �?· build <span class="mono" id="foot-build">2f99d76</span></span>
+    <span>&copy; 2026 GridFleet. All rights reserved.</span>
+    <span class="foot-status"><span class="d"></span><span>SYSTEM OPERATING &middot; <span id="foot-uptime">14h 22m</span></span></span>
+    <span>v1.0 &middot; build <span class="mono" id="foot-build">2f99d76</span></span>
   </div>
 </footer>
 
 <div id="scroll-progress"></div>
 
 <script>
-// Network topology hero â�?��?� 7 agents arranged in a soft orbit, with traffic packets flowing between them.
+// Network topology hero &mdash; 7 agents arranged in a soft orbit, with traffic packets flowing between them.
 (function() {
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
   const canvas = document.getElementById('net-canvas');
@@ -907,7 +958,7 @@ footer {
   requestAnimationFrame(tick);
 })();
 
-// Smooth-scroll lite (lerp wheel deltas) â�?��?� subtle momentum, no library
+// Smooth-scroll lite (lerp wheel deltas) &mdash; subtle momentum, no library
 (function() {
   if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
   let target = window.scrollY;
@@ -935,7 +986,7 @@ footer {
   }, { passive: true });
 })();
 
-// Throughput chart â�?��?� a calm sine-wave of synthetic actions per minute, NOT jittery
+// Throughput chart &mdash; a calm sine-wave of synthetic actions per minute, NOT jittery
 (function() {
   const line = document.getElementById('chart-line');
   const area = document.getElementById('chart-area');
@@ -1013,13 +1064,13 @@ footer {
   const list = document.getElementById('recent-list');
   if (!list) return;
   const items = [
-    { agent: 'forecast', body: 'weather kalshi-DEN-rain �?· conf 0.62', t: '2s' },
-    { agent: 'options', body: 'spread SPY-2026-05-09-540C �?· 0.04', t: '14s' },
-    { agent: 'review',  body: 'auto-impl/court-feed-43d2 �?· 6/7 ok', t: '38s' },
-    { agent: 'health',  body: 'gateway uptime �?· 14h22m �?· ok', t: '1m' },
-    { agent: 'outreach',body: 'strategic-reply queued �?· 2 tracked', t: '2m' },
-    { agent: 'browser', body: 'session 14 actions �?· capt 0 �?· $0.0085', t: '3m' },
-    { agent: 'audit',   body: 'secrets scan �?· 0 leaks �?· rotated 28d', t: '5m' },
+    { agent: 'forecast', body: 'weather kalshi-DEN-rain &middot; conf 0.62', t: '2s' },
+    { agent: 'options', body: 'spread SPY-2026-05-09-540C &middot; 0.04', t: '14s' },
+    { agent: 'review',  body: 'auto-impl/court-feed-43d2 &middot; 6/7 ok', t: '38s' },
+    { agent: 'health',  body: 'gateway uptime &middot; 14h22m &middot; ok', t: '1m' },
+    { agent: 'outreach',body: 'strategic-reply queued &middot; 2 tracked', t: '2m' },
+    { agent: 'browser', body: 'session 14 actions &middot; capt 0 &middot; $0.0085', t: '3m' },
+    { agent: 'audit',   body: 'secrets scan &middot; 0 leaks &middot; rotated 28d', t: '5m' },
   ];
   list.innerHTML = items.map(it => `
     <div class="r">
@@ -1122,6 +1173,51 @@ document.querySelectorAll('.cap').forEach(c => {
   }
   setInterval(spawn, 700);
   for (let i = 0; i < 3; i++) setTimeout(spawn, i * 300);
+})();
+
+// Early-access form -> POST /api/early-access
+(function() {
+  const form = document.getElementById('ea-form');
+  if (!form) return;
+  const status = form.querySelector('.ea-status');
+  const btn = form.querySelector('button[type="submit"]');
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const data = Object.fromEntries(new FormData(form));
+    if (!data.email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email)) {
+      status.textContent = 'Please enter a valid email.';
+      status.style.color = '#f59e0b';
+      return;
+    }
+    btn.disabled = true;
+    const originalLabel = btn.innerHTML;
+    btn.innerHTML = 'Sending...';
+    status.textContent = '';
+    try {
+      const res = await fetch('/api/early-access', {
+        method: 'POST',
+        headers: { 'content-type': 'application/json' },
+        body: JSON.stringify(data),
+      });
+      const j = await res.json().catch(() => ({}));
+      if (res.ok && j.ok) {
+        status.textContent = 'Got it. We will be in touch.';
+        status.style.color = '#10b981';
+        form.reset();
+        btn.style.display = 'none';
+      } else {
+        status.textContent = (j.error || 'Something went wrong') + ' \u2014 try email instead.';
+        status.style.color = '#f59e0b';
+        btn.disabled = false;
+        btn.innerHTML = originalLabel;
+      }
+    } catch (err) {
+      status.textContent = 'Network error \u2014 email hello@gridfleet.ai';
+      status.style.color = '#f59e0b';
+      btn.disabled = false;
+      btn.innerHTML = originalLabel;
+    }
+  });
 })();
 
 // Footer uptime ticker
