@@ -1624,227 +1624,197 @@ document.querySelectorAll('.cap').forEach(c => {
 </script>
 
 <!-- ====================================================================
-     Three.js Tron-style hero scene. Renders into the existing #net-canvas.
-     Lazy-loaded as an ES module so it doesn't block first paint. Falls back
-     gracefully (canvas stays empty, no JS errors) if WebGL is unavailable
-     or the import fails.
+     GridFleet hero - Direction C ("Fleet of glass orbs in formation")
+     Per TRON design brief 2026-05-05. Replaces the v0 "Tron-grid + rainbow
+     octahedrons" hero that was actively hurting the brand. Single accent
+     color, soft single-source lighting, MeshPhysicalMaterial glass orbs.
+     Lazy-loaded ES module. Skips on prefers-reduced-motion or no-WebGL.
      ==================================================================== -->
 <script type="module">
 const canvas = document.getElementById('net-canvas');
-if (!canvas) { console.warn('[gridfleet-3d] no canvas, skipping'); }
-else {
-  // Skip on prefers-reduced-motion or no-webgl. Page already has a static
-  // gradient background, so an empty canvas is acceptable.
+if (canvas) (async () => {
   const reducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   let webglOk = false;
   try {
     const test = document.createElement('canvas');
     webglOk = !!(test.getContext('webgl2') || test.getContext('webgl'));
   } catch { webglOk = false; }
+  if (!webglOk || reducedMotion) return;
 
-  if (webglOk && !reducedMotion) {
-    try {
-      const THREE = await import('https://cdn.jsdelivr.net/npm/three@0.165.0/+esm');
-
-      const scene = new THREE.Scene();
-      scene.fog = new THREE.FogExp2(0x05060a, 0.018);
-
-      const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
-      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-      const sizeRect = () => {
-        const r = canvas.getBoundingClientRect();
-        renderer.setSize(r.width || 600, r.height || 480, false);
-        if (camera) {
-          camera.aspect = (r.width || 1) / (r.height || 1);
-          camera.updateProjectionMatrix();
-        }
-      };
-
-      const camera = new THREE.PerspectiveCamera(60, 1.25, 0.1, 200);
-      camera.position.set(0, 9, 18);
-      camera.lookAt(0, 0, 0);
-      sizeRect();
-
-      // ---- TRON-STYLE GRID FLOOR ----
-      // Custom GridHelper with cyan glow, fading at the edges via fog.
-      const gridSize = 80;
-      const gridDiv = 40;
-      const grid = new THREE.GridHelper(gridSize, gridDiv, 0x4dd9ff, 0x1a3744);
-      grid.material.transparent = true;
-      grid.material.opacity = 0.55;
-      grid.position.y = -0.001;
-      scene.add(grid);
-
-      // Subtle reflective base - dark plane just under the grid for depth.
-      const baseGeom = new THREE.PlaneGeometry(gridSize, gridSize);
-      const baseMat = new THREE.MeshBasicMaterial({ color: 0x05080d, transparent: true, opacity: 0.85 });
-      const base = new THREE.Mesh(baseGeom, baseMat);
-      base.rotation.x = -Math.PI / 2;
-      base.position.y = -0.01;
-      scene.add(base);
-
-      // ---- AGENT NODES ----
-      // 7 floating octahedrons in a rough loose cluster, slowly bobbing.
-      // Each one is a "glowing" agent in the fleet.
-      const NODE_COUNT = 7;
-      const nodeColors = [0x6366f1, 0xec4899, 0x14b8a6, 0xfbbf24, 0x4dd9ff, 0xa78bfa, 0x10b981];
-      const nodes = [];
-      for (let i = 0; i < NODE_COUNT; i++) {
-        const angle = (i / NODE_COUNT) * Math.PI * 2;
-        const radius = 5 + Math.random() * 3;
-        const wireMat = new THREE.MeshBasicMaterial({
-          color: nodeColors[i],
-          wireframe: true,
-          transparent: true,
-          opacity: 0.95,
-        });
-        const wireGeom = new THREE.OctahedronGeometry(0.55, 0);
-        const node = new THREE.Mesh(wireGeom, wireMat);
-        node.position.set(
-          Math.cos(angle) * radius,
-          1.5 + Math.random() * 2.5,
-          Math.sin(angle) * radius
-        );
-        node.userData = {
-          baseY: node.position.y,
-          phase: Math.random() * Math.PI * 2,
-          speed: 0.6 + Math.random() * 0.4,
-        };
-        scene.add(node);
-        nodes.push(node);
-
-        // Glow halo: a slightly larger, additive-blended sphere around each node.
-        const haloMat = new THREE.MeshBasicMaterial({
-          color: nodeColors[i],
-          transparent: true,
-          opacity: 0.18,
-          blending: THREE.AdditiveBlending,
-          depthWrite: false,
-        });
-        const halo = new THREE.Mesh(new THREE.SphereGeometry(1.05, 12, 12), haloMat);
-        node.add(halo);
-      }
-
-      // ---- INTER-NODE CONNECTIONS ----
-      // A few lines between nodes, fading in/out to suggest A2A messaging.
-      const connections = [];
-      for (let i = 0; i < 8; i++) {
-        const a = nodes[Math.floor(Math.random() * NODE_COUNT)];
-        const b = nodes[Math.floor(Math.random() * NODE_COUNT)];
-        if (a === b) continue;
-        const lineMat = new THREE.LineBasicMaterial({ color: 0x4dd9ff, transparent: true, opacity: 0.0 });
-        const lineGeom = new THREE.BufferGeometry().setFromPoints([a.position, b.position]);
-        const line = new THREE.Line(lineGeom, lineMat);
-        line.userData = { a, b, phase: Math.random() * Math.PI * 2 };
-        scene.add(line);
-        connections.push(line);
-      }
-
-      // ---- LIGHT STREAKS ALONG GRID ----
-      // Long thin glowing lines that travel across the grid surface.
-      const STREAK_COUNT = 12;
-      const streaks = [];
-      for (let i = 0; i < STREAK_COUNT; i++) {
-        const streakColor = i % 3 === 0 ? 0xec4899 : (i % 3 === 1 ? 0x4dd9ff : 0x6366f1);
-        const mat = new THREE.MeshBasicMaterial({
-          color: streakColor,
-          transparent: true,
-          opacity: 0.85,
-          blending: THREE.AdditiveBlending,
-          depthWrite: false,
-        });
-        const geom = new THREE.PlaneGeometry(0.05, 4);
-        const m = new THREE.Mesh(geom, mat);
-        const axis = Math.random() > 0.5;
-        const offset = (Math.random() - 0.5) * gridSize;
-        m.rotation.x = -Math.PI / 2;
-        if (axis) {
-          m.position.set(offset, 0.005, -gridSize / 2 - Math.random() * 20);
-          m.rotation.z = 0;
-        } else {
-          m.position.set(-gridSize / 2 - Math.random() * 20, 0.005, offset);
-          m.rotation.z = Math.PI / 2;
-        }
-        m.userData = {
-          axis,
-          speed: 4 + Math.random() * 6,
-          startOffset: m.position.x + m.position.z,
-        };
-        scene.add(m);
-        streaks.push(m);
-      }
-
-      // ---- ANIMATION LOOP ----
-      let frame = 0;
-      let lastT = performance.now();
-      let animationId = null;
-      function animate(t) {
-        animationId = requestAnimationFrame(animate);
-        const dt = Math.min(0.05, (t - lastT) / 1000);
-        lastT = t;
-        frame++;
-
-        // Camera slow orbit
-        const orbitR = 18;
-        const orbitS = 0.06;
-        camera.position.x = Math.sin(t * 0.0001 * orbitS * 6.28) * orbitR;
-        camera.position.z = Math.cos(t * 0.0001 * orbitS * 6.28) * orbitR;
-        camera.lookAt(0, 1.5, 0);
-
-        // Bob nodes
-        for (const n of nodes) {
-          n.position.y = n.userData.baseY + Math.sin(t * 0.001 * n.userData.speed + n.userData.phase) * 0.4;
-          n.rotation.x += dt * 0.3;
-          n.rotation.y += dt * 0.5;
-        }
-
-        // Pulse connections
-        for (const c of connections) {
-          c.geometry.setFromPoints([c.userData.a.position, c.userData.b.position]);
-          c.material.opacity = 0.05 + 0.25 * (0.5 + 0.5 * Math.sin(t * 0.001 + c.userData.phase));
-        }
-
-        // Move streaks
-        for (const s of streaks) {
-          if (s.userData.axis) {
-            s.position.z += s.userData.speed * dt;
-            if (s.position.z > gridSize / 2 + 6) {
-              s.position.z = -gridSize / 2 - 6;
-              s.position.x = (Math.random() - 0.5) * gridSize;
-            }
-          } else {
-            s.position.x += s.userData.speed * dt;
-            if (s.position.x > gridSize / 2 + 6) {
-              s.position.x = -gridSize / 2 - 6;
-              s.position.z = (Math.random() - 0.5) * gridSize;
-            }
-          }
-        }
-
-        renderer.render(scene, camera);
-      }
-      requestAnimationFrame(animate);
-
-      // Resize
-      window.addEventListener('resize', sizeRect);
-
-      // Pause when canvas off-screen (perf)
-      const io = new IntersectionObserver((entries) => {
-        for (const e of entries) {
-          if (e.isIntersecting) {
-            if (!animationId) { lastT = performance.now(); requestAnimationFrame(animate); }
-          } else if (animationId) {
-            cancelAnimationFrame(animationId);
-            animationId = null;
-          }
-        }
-      });
-      io.observe(canvas);
-    } catch (e) {
-      console.warn('[gridfleet-3d] init failed, leaving canvas blank', e && e.message);
-    }
+  let THREE, EffectComposer, RenderPass, UnrealBloomPass, OutputPass;
+  try {
+    THREE = await import('https://cdn.jsdelivr.net/npm/three@0.165.0/+esm');
+    ({ EffectComposer } = await import('https://cdn.jsdelivr.net/npm/three@0.165.0/examples/jsm/postprocessing/EffectComposer.js/+esm'));
+    ({ RenderPass } = await import('https://cdn.jsdelivr.net/npm/three@0.165.0/examples/jsm/postprocessing/RenderPass.js/+esm'));
+    ({ UnrealBloomPass } = await import('https://cdn.jsdelivr.net/npm/three@0.165.0/examples/jsm/postprocessing/UnrealBloomPass.js/+esm'));
+    ({ OutputPass } = await import('https://cdn.jsdelivr.net/npm/three@0.165.0/examples/jsm/postprocessing/OutputPass.js/+esm'));
+  } catch (e) {
+    console.warn('[gridfleet-hero] three.js import failed', e && e.message);
+    return;
   }
-}
+
+  // --- PALETTE -----------------------------------------------------------
+  const PALETTE = {
+    bg:      0x05060a,
+    glass:   0xcfd2e8,   // very subtle violet tint
+    accent:  0x6366f1,   // brand violet (matches existing CSS --pulse-1)
+    keyLight: 0xcad0ff,
+    rim:     0x4f46e5,
+  };
+  const ORB_COUNT_DESKTOP = 7;
+  const ORB_COUNT_MOBILE = 5;
+
+  const isMobile = window.matchMedia('(max-width: 768px)').matches;
+  const ORB_COUNT = isMobile ? ORB_COUNT_MOBILE : ORB_COUNT_DESKTOP;
+  const useBloom = !isMobile;
+
+  // --- RENDERER + SCENE --------------------------------------------------
+  const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, isMobile ? 1.5 : 2));
+  renderer.toneMapping = THREE.ACESFilmicToneMapping;
+  renderer.toneMappingExposure = 1.0;
+
+  const scene = new THREE.Scene();
+  scene.background = null;
+
+  const camera = new THREE.PerspectiveCamera(45, 1, 0.1, 100);
+  camera.position.set(0, 0.4, 8.5);
+  camera.lookAt(0, 0, 0);
+
+  function sizeRect() {
+    const r = canvas.getBoundingClientRect();
+    const w = r.width || 580, h = r.height || 580;
+    renderer.setSize(w, h, false);
+    camera.aspect = w / h;
+    camera.updateProjectionMatrix();
+    if (composer) composer.setSize(w, h);
+  }
+
+  // --- LIGHTING (soft single-key + ambient + accent rim) -----------------
+  scene.add(new THREE.AmbientLight(0x1a1d24, 0.5));
+
+  const keyLight = new THREE.DirectionalLight(PALETTE.keyLight, 1.6);
+  keyLight.position.set(3, 4, 5);
+  scene.add(keyLight);
+
+  const rimLight = new THREE.PointLight(PALETTE.accent, 1.2, 12, 1.5);
+  rimLight.position.set(0, 0, -2);
+  scene.add(rimLight);
+
+  // --- ORBS (translucent glass icosahedrons in formation) ----------------
+  // Formation: one slightly-larger central orb + N-1 satellites in a soft
+  // arc tilted forward. Reads as "fleet flying together," not "ring of dots."
+  const orbs = [];
+  function makeOrb(radius, color, emissive) {
+    const geom = new THREE.IcosahedronGeometry(radius, 3);
+    const mat = new THREE.MeshPhysicalMaterial({
+      color: color,
+      transmission: 0.85,
+      thickness: 0.6,
+      ior: 1.45,
+      roughness: 0.06,
+      metalness: 0.0,
+      transparent: true,
+      opacity: 0.95,
+      emissive: emissive,
+      emissiveIntensity: 0.18,
+      clearcoat: 0.5,
+      clearcoatRoughness: 0.1,
+    });
+    const m = new THREE.Mesh(geom, mat);
+    return m;
+  }
+
+  // Central orb (the orchestrator)
+  const center = makeOrb(0.55, PALETTE.glass, 0x1e1f3a);
+  center.position.set(0, 0, 0);
+  center.userData = { basePos: center.position.clone(), bobAmp: 0.04, bobPhase: 0, spin: 0.08 };
+  scene.add(center);
+  orbs.push(center);
+
+  // Satellite orbs in a tilted arc forward of camera, scattered Y heights
+  for (let i = 0; i < ORB_COUNT - 1; i++) {
+    const angle = -Math.PI * 0.32 + (i / (ORB_COUNT - 2)) * Math.PI * 0.64;
+    const r = 2.4 + (i % 2) * 0.3;
+    const x = Math.sin(angle) * r;
+    const y = (Math.cos(angle) - 0.4) * 0.6 + (i % 3 - 1) * 0.25;
+    const z = Math.cos(angle) * r * 0.4 - 0.4;
+    const orb = makeOrb(0.36 + (i % 3) * 0.04, PALETTE.glass, 0x1a1c33);
+    orb.position.set(x, y, z);
+    orb.userData = {
+      basePos: orb.position.clone(),
+      bobAmp: 0.06 + Math.random() * 0.05,
+      bobPhase: Math.random() * Math.PI * 2,
+      spin: 0.12 + Math.random() * 0.15,
+      pulsePhase: Math.random() * Math.PI * 2,
+    };
+    scene.add(orb);
+    orbs.push(orb);
+  }
+
+  // --- POST-PROCESSING (subtle bloom, desktop only) ----------------------
+  let composer = null;
+  if (useBloom) {
+    composer = new EffectComposer(renderer);
+    composer.addPass(new RenderPass(scene, camera));
+    const bloom = new UnrealBloomPass(new THREE.Vector2(1, 1), 0.32, 0.5, 0.86);
+    composer.addPass(bloom);
+    composer.addPass(new OutputPass());
+  }
+
+  sizeRect();
+  window.addEventListener('resize', sizeRect);
+
+  // --- ANIMATION ---------------------------------------------------------
+  // Whole formation slowly rotates around Y. Each orb has its own bob +
+  // self-rotation + emissive pulse. No camera motion; the formation moves.
+  const formation = new THREE.Group();
+  for (const o of orbs) formation.add(o);
+  scene.add(formation);
+
+  let lastT = performance.now();
+  let raf = null;
+  let visible = true;
+
+  function tick(t) {
+    raf = requestAnimationFrame(tick);
+    if (!visible) return;
+    const dt = Math.min(0.05, (t - lastT) / 1000);
+    lastT = t;
+
+    // formation rotation: ~one revolution every 36s
+    formation.rotation.y += dt * (Math.PI * 2 / 36);
+    formation.rotation.x = Math.sin(t * 0.00006) * 0.06;
+
+    for (const o of orbs) {
+      // gentle Y bob
+      const phase = (t * 0.0006) + o.userData.bobPhase;
+      o.position.y = o.userData.basePos.y + Math.sin(phase) * o.userData.bobAmp;
+      // self spin (tumbles slowly)
+      o.rotation.x += dt * o.userData.spin * 0.7;
+      o.rotation.y += dt * o.userData.spin;
+      // emissive pulse (subtle)
+      if (o.userData.pulsePhase !== undefined) {
+        const ep = (t * 0.00045) + o.userData.pulsePhase;
+        o.material.emissiveIntensity = 0.14 + Math.sin(ep) * 0.06;
+      }
+    }
+
+    if (composer) composer.render();
+    else renderer.render(scene, camera);
+  }
+  raf = requestAnimationFrame(tick);
+
+  // pause when hero is off-screen
+  const io = new IntersectionObserver((entries) => {
+    for (const e of entries) {
+      visible = e.isIntersecting;
+      if (visible && !raf) { lastT = performance.now(); raf = requestAnimationFrame(tick); }
+      else if (!visible && raf) { cancelAnimationFrame(raf); raf = null; }
+    }
+  }, { threshold: 0 });
+  io.observe(canvas);
+})();
 </script>
 
 </body>
