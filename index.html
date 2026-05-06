@@ -6,7 +6,7 @@
 <title>GridFleet | Autonomous AI execution fleet</title>
 <meta name="description" content="GridFleet is the multi-agent execution layer for operators who need AI systems that coordinate, act, verify, and return receipts through a single API." />
 <meta property="og:title" content="GridFleet | Autonomous AI execution fleet" />
-<meta property="og:description" content="A live fleet of specialized AI agents for browser automation, market signals, forecasts, and risk audits - built with receipts, governance, and operator control." />
+<meta property="og:description" content="A live fleet of specialized AI roles for browser automation, forecasting, workflow execution, monitoring, and risk audits - built with receipts, governance, and operator control." />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https://gridfleet.ai/" />
 <meta property="og:image" content="https://gridfleet.ai/og.png" />
@@ -28,10 +28,8 @@
     "url": "https://gridfleet.ai",
     "logo": "https://gridfleet.ai/og.png",
     "email": "hello@gridfleet.ai",
-    "description": "GridFleet is the multi-agent execution layer used by operators who need AI that coordinates, acts, and produces receipts. The fleet exposes a managed browser pipeline, a Pong momentum screener for US small caps, a multi-agent forecasting service, and a DeFi config-risk audit product through a single bearer-token API at api.gridfleet.ai.",
-    "sameAs": [
-      "https://x.com/CLU_AGENT",
-      "https://github.com/logikclaw"
+    "description": "GridFleet is the multi-agent execution layer used by operators who need AI that coordinates, acts, and produces receipts. The fleet exposes managed browser automation, multi-agent forecasting, court and regulatory monitoring, workflow execution, and DeFi config-risk audits through a single bearer-token API at api.gridfleet.ai.",
+    "sameAs": [      "https://github.com/logikclaw"
     ],
     "contactPoint": [
       {"@type":"ContactPoint","contactType":"sales","email":"sales@gridfleet.ai","availableLanguage":"en"},
@@ -55,7 +53,7 @@
     "name": "GridFleet API",
     "applicationCategory": "DeveloperApplication",
     "operatingSystem": "Web",
-    "description": "Bearer-token API exposing browser-as-a-service, Pong screener live data, multi-agent forecasts, and config-risk audit reports.",
+    "description": "Bearer-token API exposing browser-as-a-service, multi-agent forecasts, monitoring feeds, workflow execution, and config-risk audit reports.",
     "url": "https://api.gridfleet.ai/v1",
     "creator": {"@id":"https://gridfleet.ai/#org"},
     "offers": {"@type":"Offer","priceCurrency":"USD","priceSpecification":{"@type":"PriceSpecification","priceCurrency":"USD","description":"Per-customer pricing; request a quote via /signup."}}
@@ -72,11 +70,11 @@
   {
     "@context": "https://schema.org",
     "@type": "Service",
-    "@id": "https://gridfleet.ai/#pong-service",
-    "name": "GridFleet Pong Screener",
-    "serviceType": "Equity momentum signals API",
+    "@id": "https://gridfleet.ai/#forecast-service",
+    "name": "GridFleet Forecasting and Monitoring",
+    "serviceType": "Multi-agent forecasting and monitoring API",
     "provider": {"@id":"https://gridfleet.ai/#org"},
-    "description": "Live S/A/B/C-graded small-cap momentum cards with composite score, L2 fidelity, MFE/MAE, market-state checks, and PnL tracking."
+    "description": "Multi-agent forecasts, court and regulatory monitoring, event tracking, and receipt-backed analysis for operators who need timely signal without exposing internal workflows."
   },
   {
     "@context": "https://schema.org",
@@ -93,13 +91,13 @@
     "@type": "FAQPage",
     "@id": "https://gridfleet.ai/#faq",
     "mainEntity": [
-      {"@type":"Question","name":"What is GridFleet?","acceptedAnswer":{"@type":"Answer","text":"GridFleet is a multi-agent execution layer. It runs specialized AI agents that coordinate, verify, and produce receipts behind a single bearer-token API at api.gridfleet.ai."}},
-      {"@type":"Question","name":"How is GridFleet different from a single LLM API?","acceptedAnswer":{"@type":"Answer","text":"Single-LLM APIs return one model response. GridFleet coordinates multiple agents, records handoffs, runs checks, and returns verifiable receipts so operators can inspect what happened."}},
-      {"@type":"Question","name":"What endpoints are available?","acceptedAnswer":{"@type":"Answer","text":"v1 endpoints include browser automation, Pong market signals, single ticker detail, PnL curves, market status, forecasts, and court-feed monitoring. Full docs are available at gridfleet.ai/docs."}},
+      {"@type":"Question","name":"What is GridFleet?","acceptedAnswer":{"@type":"Answer","text":"GridFleet is a multi-agent execution layer. It runs specialized AI roles that coordinate, verify, and produce receipts behind a single bearer-token API at api.gridfleet.ai."}},
+      {"@type":"Question","name":"How is GridFleet different from a single LLM API?","acceptedAnswer":{"@type":"Answer","text":"Single-LLM APIs return one model response. GridFleet coordinates multiple specialized roles, records handoffs, runs checks, and returns verifiable receipts so operators can inspect what happened."}},
+      {"@type":"Question","name":"What endpoints are available?","acceptedAnswer":{"@type":"Answer","text":"v1 endpoints include browser automation, forecasts, court-feed monitoring, workflow execution, and audit surfaces. Full docs are available at gridfleet.ai/docs."}},
       {"@type":"Question","name":"How do I get an API key?","acceptedAnswer":{"@type":"Answer","text":"Request access at gridfleet.ai/signup with your use case and expected volume, or email sales@gridfleet.ai. Keys are gk_-prefixed bearer tokens with quotas."}},
-      {"@type":"Question","name":"Can GridFleet be installed as an MCP server?","acceptedAnswer":{"@type":"Answer","text":"Yes. Browser and market tools are designed to surface in MCP-compatible clients such as Claude Code, Cursor, Codex CLI, and other local agent workbenches."}},
+      {"@type":"Question","name":"Can GridFleet be installed as an MCP server?","acceptedAnswer":{"@type":"Answer","text":"Yes. Browser, forecast, monitoring, and audit tools are designed to surface in MCP-compatible clients such as Claude Code, Cursor, Codex CLI, and other local agent workbenches."}},
       {"@type":"Question","name":"Where is GridFleet hosted?","acceptedAnswer":{"@type":"Answer","text":"The fleet runs on owner-operated infrastructure with public access fronted by Cloudflare Workers and Tailscale. The public API surface is api.gridfleet.ai/v1."}},
-      {"@type":"Question","name":"What does the Pong Screener cover?","acceptedAnswer":{"@type":"Answer","text":"US small-cap and penny-stock momentum signals during regular trading hours, graded with composite score, L2 fidelity, maximum favorable excursion, and maximum adverse excursion."}},
+      {"@type":"Question","name":"What monitoring can GridFleet run?","acceptedAnswer":{"@type":"Answer","text":"GridFleet can monitor web sources, court and regulatory feeds, workflow state, and customer-defined events, then route findings through verification roles before returning a receipt-backed result."}},
       {"@type":"Question","name":"What is the DeFi config-risk audit?","acceptedAnswer":{"@type":"Answer","text":"A sourced audit for DAO treasuries and DeFi operators covering admin keys, upgradeability, oracle dependency, verifier centralization, timelocks, governance drift, and audit coverage."}}
     ]
   }
@@ -138,7 +136,7 @@ function boot(){canvas=document.getElementById('fleet-canvas');if(!canvas)return
       <p class="lede">GridFleet coordinates specialized agents that browse, forecast, audit, trade-scan, verify, and return receipts through one governed execution layer.</p>
       <div class="cta-row"><a class="cta primary" href="/signup">Request API access</a><a class="cta secondary" href="/docs">Read the docs</a></div>
       <div class="hero-strip" aria-label="GridFleet operational highlights">
-        <div class="metric"><b>7</b><span>specialized agents</span></div>
+        <div class="metric"><b>7</b><span>specialized roles</span></div>
         <div class="metric"><b>1</b><span>receipt-backed API</span></div>
         <div class="metric"><b>24/7</b><span>monitoring loops</span></div>
         <div class="metric"><b>v1</b><span>service surface</span></div>
@@ -154,13 +152,13 @@ function boot(){canvas=document.getElementById('fleet-canvas');if(!canvas)return
       <div class="showcase">
         <div class="panel agent-map" aria-label="Agent fleet map">
           <div class="orbit"></div><div class="orbit two"></div>
-          <div class="node core">GRID</div><div class="node n1">CLU</div><div class="node n2">TRON</div><div class="node n3">YORI</div><div class="node n4">DUMONT</div>
+          <div class="node core">GRID</div><div class="node n1">ORCH</div><div class="node n2">GUARD</div><div class="node n3">MEDIA</div><div class="node n4">OPS</div>
         </div>
         <div class="panel command">
           <div class="receipt">
             <div class="line">request.accepted / browser.search / receipt pending</div>
-            <div class="line">agent.handoff / CLU -> TRON / policy check</div>
-            <div class="line">service.pong / market status verified</div>
+            <div class="line">role.handoff / orchestrator -> guardrail / policy check</div>
+            <div class="line">service.monitor / source state verified</div>
             <div class="line">audit.append / evidence captured</div>
             <div class="line dim">customer.response / result + request_id</div>
           </div>
@@ -172,10 +170,10 @@ function boot(){canvas=document.getElementById('fleet-canvas');if(!canvas)return
     <div class="container">
       <div class="section-kicker">Service surface</div>
       <h2>One fleet. Multiple products. All with operator receipts.</h2>
-      <p class="section-copy">GridFleet exposes practical services for teams that need AI systems to use browsers, monitor markets, forecast events, and inspect risk without losing governance.</p>
+      <p class="section-copy">GridFleet exposes practical services for teams that need AI systems to use browsers, monitor external sources, forecast events, and inspect risk without losing governance.</p>
       <div class="cards">
         <article class="card"><h3>Browser automation</h3><p>Real Chrome actions for read, search, screenshot, click, type, scroll, and popup handling.</p></article>
-        <article class="card"><h3>Pong signals</h3><p>Small-cap momentum cards with market-state awareness, scoring, and PnL tracking.</p></article>
+        <article class="card"><h3>Forecasting and monitoring</h3><p>Event tracking, regulatory/court feeds, and multi-agent analysis with receipt-backed outputs.</p></article>
         <article class="card"><h3>Risk audits</h3><p>Evidence-backed config-risk reviews for DeFi and protocol operators.</p></article>
       </div>
     </div>
@@ -185,7 +183,7 @@ function boot(){canvas=document.getElementById('fleet-canvas');if(!canvas)return
       <div class="section-kicker">Receipts over vibes</div>
       <h2>Every useful action should leave a trail.</h2>
       <div class="timeline">
-        <div class="step"><h3>Coordinate</h3><p>Route work to the right agent lane instead of asking one model to improvise everything.</p></div>
+        <div class="step"><h3>Coordinate</h3><p>Route work to the right role lane instead of asking one model to improvise everything.</p></div>
         <div class="step"><h3>Verify</h3><p>Run live checks, policy gates, audits, or screenshots before calling a job complete.</p></div>
         <div class="step"><h3>Return evidence</h3><p>Give customers an answer they can inspect: request id, output, and the proof path behind it.</p></div>
       </div>
@@ -201,6 +199,7 @@ function boot(){canvas=document.getElementById('fleet-canvas');if(!canvas)return
   </section>
 </main>
 <footer class="footer"><div class="footer-inner"><span>GridFleet</span><span>api.gridfleet.ai/v1</span><span>hello@gridfleet.ai</span></div></footer>
-<div class="fallback-copy">GridFleet is a multi-agent execution layer for browser automation, market signals, forecasts, court monitoring, and DeFi config-risk audits. It coordinates specialized AI agents and returns receipt-backed results through api.gridfleet.ai/v1.</div>
+<div class="fallback-copy">GridFleet is a multi-agent execution layer for browser automation, forecasts, court monitoring, workflow execution, and DeFi config-risk audits. It coordinates specialized AI roles and returns receipt-backed results through api.gridfleet.ai/v1.</div>
 </body>
 </html>
+
