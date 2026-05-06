@@ -748,9 +748,189 @@ footer {
   width: 6px; height: 6px; border-radius: 999px; background: var(--ok);
   animation: pulse-dot 2.4s infinite;
 }
+
+/* ===== Cinematic Phase 2 hero - Receipt River split-panel ===== */
+.cinematic-hero {
+  position: relative; z-index: 2;
+  min-height: 100vh;
+  padding: 96px 0 48px;
+  overflow: hidden;
+}
+.cinematic-hero-grid {
+  display: grid;
+  grid-template-columns: 1.05fr 1fr;
+  align-items: center;
+  gap: 0;
+  max-width: 1280px;
+  margin: 0 auto;
+  min-height: calc(100vh - 144px);
+}
+.cinematic-hero::before {
+  content: ''; position: absolute; inset: 0; pointer-events: none; z-index: 0;
+  background: radial-gradient(ellipse 90% 80% at 22% 42%, rgba(20, 35, 100, 0.45) 0%, rgba(9, 9, 13, 0) 65%);
+}
+.cinematic-hero-text { padding: 0 48px 0 32px; position: relative; z-index: 2; }
+.cinematic-hero .hero-pill {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 6px 12px; margin-bottom: 28px;
+  font: 500 11px/1 var(--gf-font-display); letter-spacing: 0.1em; text-transform: uppercase;
+  border: 1px solid var(--gf-color-border);
+  border-radius: 999px;
+  background: rgba(255,255,255,0.025);
+  color: var(--gf-color-text-secondary);
+}
+.cinematic-hero .hero-pill .dot {
+  width: 6px; height: 6px; border-radius: 50%;
+  background: var(--gf-color-verified);
+  box-shadow: 0 0 8px rgba(34,197,94,0.6);
+  animation: gf-pill-pulse 2s ease-in-out infinite;
+}
+@keyframes gf-pill-pulse { 0%,100% { opacity: 0.7; } 50% { opacity: 1; } }
+.cinematic-hero h1 {
+  font: 700 clamp(40px, 5.5vw, 64px)/1.05 var(--gf-font-display);
+  letter-spacing: -0.025em;
+  color: var(--gf-color-text-primary);
+  margin: 0 0 22px;
+}
+.cinematic-hero h1 .accent {
+  background: linear-gradient(120deg, var(--gf-color-accent) 0%, var(--gf-color-accent-secondary) 100%);
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+}
+.cinematic-hero .hero-lede {
+  font: 400 clamp(16px, 1.4vw, 18px)/1.55 var(--gf-font-display);
+  color: var(--gf-color-text-secondary);
+  max-width: 52ch;
+  margin: 0 0 32px;
+}
+.cinematic-hero .hero-cta {
+  display: flex; gap: 12px; align-items: center; flex-wrap: wrap;
+  margin-bottom: 16px;
+}
+.cinematic-hero .hero-trust {
+  margin-top: 12px;
+  font: 400 13px/1.5 var(--gf-font-display);
+  color: var(--gf-color-text-tertiary);
+}
+
+/* Right panel - Receipt River */
+.receipt-panel {
+  position: relative;
+  height: calc(100vh - 144px);
+  min-height: 540px;
+  background: var(--gf-color-panel-right);
+  border-left: 1px solid var(--gf-color-border);
+  overflow: hidden;
+  z-index: 1;
+}
+.receipt-panel::before, .receipt-panel::after {
+  content: ''; position: absolute; left: 0; right: 0; height: 80px;
+  pointer-events: none; z-index: 3;
+}
+.receipt-panel::before {
+  top: 0;
+  background: linear-gradient(to bottom, var(--gf-color-panel-right) 0%, rgba(12,12,18,0) 100%);
+}
+.receipt-panel::after {
+  bottom: 0;
+  background: linear-gradient(to top, var(--gf-color-panel-right) 0%, rgba(12,12,18,0) 100%);
+}
+.receipt-stream-wrap {
+  position: absolute; inset: 0;
+  display: flex; flex-direction: column;
+  padding: 32px 36px;
+}
+.receipt-stream {
+  display: flex; flex-direction: column; gap: 14px;
+  will-change: transform;
+  animation: receipt-scroll 38s linear infinite;
+}
+@keyframes receipt-scroll {
+  0%   { transform: translateY(0); }
+  100% { transform: translateY(-50%); }
+}
+.receipt-card {
+  background: rgba(18, 19, 25, 0.95);
+  border: 1px solid var(--gf-color-border-verified);
+  border-left: 3px solid var(--gf-color-verified);
+  border-radius: 8px;
+  padding: 14px 16px;
+  font-family: var(--gf-font-mono);
+  flex-shrink: 0;
+  transition: border-left-color 0.2s ease-out, transform 0.2s ease-out;
+}
+.receipt-card:hover {
+  transform: translateY(-1px);
+  border-left-color: #4ade80;
+}
+.receipt-row {
+  display: flex; align-items: center; gap: 8px;
+  font-size: 12px; line-height: 1.4;
+}
+.receipt-label {
+  color: var(--gf-color-text-tertiary);
+  text-transform: uppercase; letter-spacing: 0.06em; font-size: 10px; font-weight: 500;
+}
+.receipt-value { color: var(--gf-color-text-mono); }
+.receipt-status {
+  margin-left: auto;
+  font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase;
+  color: var(--gf-color-text-tertiary);
+}
+.receipt-task {
+  margin: 6px 0 4px;
+  font-size: 13px; line-height: 1.4;
+  color: var(--gf-color-text-primary);
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.receipt-hash {
+  margin-left: auto;
+  font-size: 11px;
+  color: var(--gf-color-accent-secondary);
+}
+.receipt-footer {
+  display: flex; align-items: center; justify-content: space-between;
+  margin-top: 8px;
+  font-size: 11px;
+}
+.receipt-time { color: var(--gf-color-text-tertiary); font-family: var(--gf-font-display); }
+.verified-badge {
+  display: inline-flex; align-items: center; gap: 4px;
+  background: rgba(34, 197, 94, 0.10);
+  border: 1px solid var(--gf-color-border-verified);
+  color: var(--gf-color-text-verified);
+  border-radius: 4px;
+  padding: 2px 8px;
+  font: 600 10px/1 var(--gf-font-mono);
+  letter-spacing: 0.08em; text-transform: uppercase;
+}
+.verified-badge svg { width: 10px; height: 10px; flex-shrink: 0; }
+
+/* Mobile collapse */
+@media (max-width: 900px) {
+  .cinematic-hero { padding: 80px 24px 40px; min-height: auto; }
+  .cinematic-hero-grid { grid-template-columns: 1fr; gap: 32px; min-height: auto; }
+  .cinematic-hero-text { padding: 0; }
+  .receipt-panel {
+    height: auto; min-height: auto;
+    border-left: 0; border-top: 1px solid var(--gf-color-border);
+    background: transparent;
+    padding: 16px 0;
+  }
+  .receipt-panel::before, .receipt-panel::after { display: none; }
+  .receipt-stream-wrap { position: static; padding: 0; }
+  .receipt-stream { animation: none; transform: none; }
+  .receipt-stream > .receipt-card:nth-child(n+4) { display: none; }
+  /* Cut backdrop-filter on receipts on mobile per CLU perf rule */
+  .receipt-card { background: rgba(18, 19, 25, 1); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .receipt-stream { animation: none; transform: none; }
+  .cinematic-hero .hero-pill .dot { animation: none; }
+}
 </style>
 </head>
-<body>
+<body class="gf-atmosphere">
 
 <nav>
   <div class="brand"><span class="mark"></span><span>GridFleet</span></div>
@@ -762,24 +942,150 @@ footer {
   <a href="#access" class="nav-cta">Early access</a>
 </nav>
 
-<header class="hero">
-  <div class="hero-grid">
-    <div class="hero-text">
-      <div class="hero-pill"><span class="dot"></span><span>SYSTEM ONLINE &middot; <span id="agent-count">7</span> agents &middot; <span id="actions">42,180</span> actions today</span></div>
-      <h1 class="hero-title">Autonomous AI,<br/><span class="em">organized</span> as a fleet.</h1>
-      <p class="hero-lede">GridFleet is the multi-agent execution layer. Forecasting, browsing, monitoring, payments, ops &mdash; coordinated, observable, addressable from one control plane.</p>
+<header class="cinematic-hero" data-scene>
+  <div class="cinematic-hero-grid">
+    <div class="cinematic-hero-text">
+      <div class="hero-pill"><span class="dot"></span><span>FLEET ONLINE &middot; <span id="agent-count">7</span> agents &middot; <span id="actions">42,180</span> actions today</span></div>
+      <h1>Your agents.<br/>Their <span class="accent">receipts.</span><br/>Every run.</h1>
+      <p class="hero-lede">GridFleet orchestrates your AI agents and returns a verified receipt for every unit of work &mdash; no black boxes, no guessing.</p>
       <div class="hero-cta">
-        <a href="#access" class="btn btn-primary">Request early access <span class="arrow">&rarr;</span></a>
-        <a href="#dashboard" class="btn btn-ghost">See the platform</a>
+        <a href="/signup" class="gf-cta gf-cta-magnetic" data-magnetic>Start building</a>
+        <a href="/docs" class="gf-cta gf-cta--ghost">Read the docs</a>
       </div>
+      <div class="hero-trust">No credit card. No public pricing. Reach out to get started.</div>
     </div>
-    <div class="hero-viz">
-      <canvas id="net-canvas"></canvas>
-    </div>
+    <aside class="receipt-panel" aria-label="Live agent receipts">
+      <div class="receipt-stream-wrap">
+        <div class="receipt-stream">
+          <!-- Pass 1: visible to crawlers + screen readers -->
+          <article class="receipt-card" aria-label="Receipt: deploy-agent-01">
+            <div class="receipt-row"><span class="receipt-label">agent</span><span class="receipt-value">deploy-agent-01</span><span class="receipt-status">COMPLETE</span></div>
+            <div class="receipt-task">Staging push v2.4.1</div>
+            <div class="receipt-row"><span class="receipt-label">duration</span><span class="receipt-value">1m 08s</span><span class="receipt-hash">0xa3f7b2e4...</span></div>
+            <div class="receipt-footer"><span class="verified-badge"><svg viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M2 5l2 2 4-4"/></svg>VERIFIED</span><span class="receipt-time">4 min ago</span></div>
+          </article>
+          <article class="receipt-card" aria-label="Receipt: research-agent-03">
+            <div class="receipt-row"><span class="receipt-label">agent</span><span class="receipt-value">research-agent-03</span><span class="receipt-status">COMPLETE</span></div>
+            <div class="receipt-task">Competitor pricing analysis</div>
+            <div class="receipt-row"><span class="receipt-label">duration</span><span class="receipt-value">4m 12s</span><span class="receipt-hash">0x8c2f1d96...</span></div>
+            <div class="receipt-footer"><span class="verified-badge"><svg viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M2 5l2 2 4-4"/></svg>VERIFIED</span><span class="receipt-time">7 min ago</span></div>
+          </article>
+          <article class="receipt-card" aria-label="Receipt: audit-agent-07">
+            <div class="receipt-row"><span class="receipt-label">agent</span><span class="receipt-value">audit-agent-07</span><span class="receipt-status">COMPLETE</span></div>
+            <div class="receipt-task">SOC2 control evidence sweep</div>
+            <div class="receipt-row"><span class="receipt-label">duration</span><span class="receipt-value">9m 44s</span><span class="receipt-hash">0xd1e4b502...</span></div>
+            <div class="receipt-footer"><span class="verified-badge"><svg viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M2 5l2 2 4-4"/></svg>VERIFIED</span><span class="receipt-time">12 min ago</span></div>
+          </article>
+          <article class="receipt-card" aria-label="Receipt: write-agent-02">
+            <div class="receipt-row"><span class="receipt-label">agent</span><span class="receipt-value">write-agent-02</span><span class="receipt-status">COMPLETE</span></div>
+            <div class="receipt-task">Q2 board deck draft</div>
+            <div class="receipt-row"><span class="receipt-label">duration</span><span class="receipt-value">6m 33s</span><span class="receipt-hash">0x5a8e2c4f...</span></div>
+            <div class="receipt-footer"><span class="verified-badge"><svg viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M2 5l2 2 4-4"/></svg>VERIFIED</span><span class="receipt-time">19 min ago</span></div>
+          </article>
+          <article class="receipt-card" aria-label="Receipt: review-agent-04">
+            <div class="receipt-row"><span class="receipt-label">agent</span><span class="receipt-value">review-agent-04</span><span class="receipt-status">COMPLETE</span></div>
+            <div class="receipt-task">PR #441 code review</div>
+            <div class="receipt-row"><span class="receipt-label">duration</span><span class="receipt-value">2m 51s</span><span class="receipt-hash">0xb7d3a09c...</span></div>
+            <div class="receipt-footer"><span class="verified-badge"><svg viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M2 5l2 2 4-4"/></svg>VERIFIED</span><span class="receipt-time">23 min ago</span></div>
+          </article>
+          <article class="receipt-card" aria-label="Receipt: data-agent-09">
+            <div class="receipt-row"><span class="receipt-label">agent</span><span class="receipt-value">data-agent-09</span><span class="receipt-status">COMPLETE</span></div>
+            <div class="receipt-task">Revenue cohort report</div>
+            <div class="receipt-row"><span class="receipt-label">duration</span><span class="receipt-value">3m 18s</span><span class="receipt-hash">0xe9f1b427...</span></div>
+            <div class="receipt-footer"><span class="verified-badge"><svg viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M2 5l2 2 4-4"/></svg>VERIFIED</span><span class="receipt-time">28 min ago</span></div>
+          </article>
+          <article class="receipt-card" aria-label="Receipt: test-agent-05">
+            <div class="receipt-row"><span class="receipt-label">agent</span><span class="receipt-value">test-agent-05</span><span class="receipt-status">COMPLETE</span></div>
+            <div class="receipt-task">Integration suite run</div>
+            <div class="receipt-row"><span class="receipt-label">duration</span><span class="receipt-value">7m 02s</span><span class="receipt-hash">0x2c4a8f31...</span></div>
+            <div class="receipt-footer"><span class="verified-badge"><svg viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M2 5l2 2 4-4"/></svg>VERIFIED</span><span class="receipt-time">34 min ago</span></div>
+          </article>
+          <article class="receipt-card" aria-label="Receipt: scrape-agent-11">
+            <div class="receipt-row"><span class="receipt-label">agent</span><span class="receipt-value">scrape-agent-11</span><span class="receipt-status">COMPLETE</span></div>
+            <div class="receipt-task">Lead enrichment batch (200)</div>
+            <div class="receipt-row"><span class="receipt-label">duration</span><span class="receipt-value">5m 27s</span><span class="receipt-hash">0xa018c6e5...</span></div>
+            <div class="receipt-footer"><span class="verified-badge"><svg viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M2 5l2 2 4-4"/></svg>VERIFIED</span><span class="receipt-time">41 min ago</span></div>
+          </article>
+          <article class="receipt-card" aria-label="Receipt: monitor-agent-06">
+            <div class="receipt-row"><span class="receipt-label">agent</span><span class="receipt-value">monitor-agent-06</span><span class="receipt-status">COMPLETE</span></div>
+            <div class="receipt-task">Uptime alert resolution</div>
+            <div class="receipt-row"><span class="receipt-label">duration</span><span class="receipt-value">0m 44s</span><span class="receipt-hash">0xf5b2e108...</span></div>
+            <div class="receipt-footer"><span class="verified-badge"><svg viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M2 5l2 2 4-4"/></svg>VERIFIED</span><span class="receipt-time">52 min ago</span></div>
+          </article>
+          <article class="receipt-card" aria-label="Receipt: legal-agent-02">
+            <div class="receipt-row"><span class="receipt-label">agent</span><span class="receipt-value">legal-agent-02</span><span class="receipt-status">COMPLETE</span></div>
+            <div class="receipt-task">NDA review and flag</div>
+            <div class="receipt-row"><span class="receipt-label">duration</span><span class="receipt-value">11m 15s</span><span class="receipt-hash">0x7d3e9a2b...</span></div>
+            <div class="receipt-footer"><span class="verified-badge"><svg viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M2 5l2 2 4-4"/></svg>VERIFIED</span><span class="receipt-time">1h ago</span></div>
+          </article>
+          <!-- Pass 2: aria-hidden duplicate for seamless infinite loop -->
+          <article class="receipt-card" aria-hidden="true">
+            <div class="receipt-row"><span class="receipt-label">agent</span><span class="receipt-value">deploy-agent-01</span><span class="receipt-status">COMPLETE</span></div>
+            <div class="receipt-task">Staging push v2.4.1</div>
+            <div class="receipt-row"><span class="receipt-label">duration</span><span class="receipt-value">1m 08s</span><span class="receipt-hash">0xa3f7b2e4...</span></div>
+            <div class="receipt-footer"><span class="verified-badge"><svg viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M2 5l2 2 4-4"/></svg>VERIFIED</span><span class="receipt-time">4 min ago</span></div>
+          </article>
+          <article class="receipt-card" aria-hidden="true">
+            <div class="receipt-row"><span class="receipt-label">agent</span><span class="receipt-value">research-agent-03</span><span class="receipt-status">COMPLETE</span></div>
+            <div class="receipt-task">Competitor pricing analysis</div>
+            <div class="receipt-row"><span class="receipt-label">duration</span><span class="receipt-value">4m 12s</span><span class="receipt-hash">0x8c2f1d96...</span></div>
+            <div class="receipt-footer"><span class="verified-badge"><svg viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M2 5l2 2 4-4"/></svg>VERIFIED</span><span class="receipt-time">7 min ago</span></div>
+          </article>
+          <article class="receipt-card" aria-hidden="true">
+            <div class="receipt-row"><span class="receipt-label">agent</span><span class="receipt-value">audit-agent-07</span><span class="receipt-status">COMPLETE</span></div>
+            <div class="receipt-task">SOC2 control evidence sweep</div>
+            <div class="receipt-row"><span class="receipt-label">duration</span><span class="receipt-value">9m 44s</span><span class="receipt-hash">0xd1e4b502...</span></div>
+            <div class="receipt-footer"><span class="verified-badge"><svg viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M2 5l2 2 4-4"/></svg>VERIFIED</span><span class="receipt-time">12 min ago</span></div>
+          </article>
+          <article class="receipt-card" aria-hidden="true">
+            <div class="receipt-row"><span class="receipt-label">agent</span><span class="receipt-value">write-agent-02</span><span class="receipt-status">COMPLETE</span></div>
+            <div class="receipt-task">Q2 board deck draft</div>
+            <div class="receipt-row"><span class="receipt-label">duration</span><span class="receipt-value">6m 33s</span><span class="receipt-hash">0x5a8e2c4f...</span></div>
+            <div class="receipt-footer"><span class="verified-badge"><svg viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M2 5l2 2 4-4"/></svg>VERIFIED</span><span class="receipt-time">19 min ago</span></div>
+          </article>
+          <article class="receipt-card" aria-hidden="true">
+            <div class="receipt-row"><span class="receipt-label">agent</span><span class="receipt-value">review-agent-04</span><span class="receipt-status">COMPLETE</span></div>
+            <div class="receipt-task">PR #441 code review</div>
+            <div class="receipt-row"><span class="receipt-label">duration</span><span class="receipt-value">2m 51s</span><span class="receipt-hash">0xb7d3a09c...</span></div>
+            <div class="receipt-footer"><span class="verified-badge"><svg viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M2 5l2 2 4-4"/></svg>VERIFIED</span><span class="receipt-time">23 min ago</span></div>
+          </article>
+          <article class="receipt-card" aria-hidden="true">
+            <div class="receipt-row"><span class="receipt-label">agent</span><span class="receipt-value">data-agent-09</span><span class="receipt-status">COMPLETE</span></div>
+            <div class="receipt-task">Revenue cohort report</div>
+            <div class="receipt-row"><span class="receipt-label">duration</span><span class="receipt-value">3m 18s</span><span class="receipt-hash">0xe9f1b427...</span></div>
+            <div class="receipt-footer"><span class="verified-badge"><svg viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M2 5l2 2 4-4"/></svg>VERIFIED</span><span class="receipt-time">28 min ago</span></div>
+          </article>
+          <article class="receipt-card" aria-hidden="true">
+            <div class="receipt-row"><span class="receipt-label">agent</span><span class="receipt-value">test-agent-05</span><span class="receipt-status">COMPLETE</span></div>
+            <div class="receipt-task">Integration suite run</div>
+            <div class="receipt-row"><span class="receipt-label">duration</span><span class="receipt-value">7m 02s</span><span class="receipt-hash">0x2c4a8f31...</span></div>
+            <div class="receipt-footer"><span class="verified-badge"><svg viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M2 5l2 2 4-4"/></svg>VERIFIED</span><span class="receipt-time">34 min ago</span></div>
+          </article>
+          <article class="receipt-card" aria-hidden="true">
+            <div class="receipt-row"><span class="receipt-label">agent</span><span class="receipt-value">scrape-agent-11</span><span class="receipt-status">COMPLETE</span></div>
+            <div class="receipt-task">Lead enrichment batch (200)</div>
+            <div class="receipt-row"><span class="receipt-label">duration</span><span class="receipt-value">5m 27s</span><span class="receipt-hash">0xa018c6e5...</span></div>
+            <div class="receipt-footer"><span class="verified-badge"><svg viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M2 5l2 2 4-4"/></svg>VERIFIED</span><span class="receipt-time">41 min ago</span></div>
+          </article>
+          <article class="receipt-card" aria-hidden="true">
+            <div class="receipt-row"><span class="receipt-label">agent</span><span class="receipt-value">monitor-agent-06</span><span class="receipt-status">COMPLETE</span></div>
+            <div class="receipt-task">Uptime alert resolution</div>
+            <div class="receipt-row"><span class="receipt-label">duration</span><span class="receipt-value">0m 44s</span><span class="receipt-hash">0xf5b2e108...</span></div>
+            <div class="receipt-footer"><span class="verified-badge"><svg viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M2 5l2 2 4-4"/></svg>VERIFIED</span><span class="receipt-time">52 min ago</span></div>
+          </article>
+          <article class="receipt-card" aria-hidden="true">
+            <div class="receipt-row"><span class="receipt-label">agent</span><span class="receipt-value">legal-agent-02</span><span class="receipt-status">COMPLETE</span></div>
+            <div class="receipt-task">NDA review and flag</div>
+            <div class="receipt-row"><span class="receipt-label">duration</span><span class="receipt-value">11m 15s</span><span class="receipt-hash">0x7d3e9a2b...</span></div>
+            <div class="receipt-footer"><span class="verified-badge"><svg viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M2 5l2 2 4-4"/></svg>VERIFIED</span><span class="receipt-time">1h ago</span></div>
+          </article>
+        </div>
+      </div>
+    </aside>
   </div>
 </header>
 
-<section class="stats">
+<section class="stats" data-scene>
   <div class="stats-grid">
     <div class="stat reveal"><div class="v" data-target="14">0<span class="unit">h uptime</span></div><div class="k">CURRENT SESSION</div></div>
     <div class="stat reveal"><div class="v" data-target="42180">0</div><div class="k">ACTIONS &middot; 24H</div></div>
@@ -788,7 +1094,7 @@ footer {
   </div>
 </section>
 
-<section id="dashboard" class="dash-section">
+<section id="dashboard data-scene class="dash-section">
   <div class="container">
     <div class="reveal" style="max-width:760px;">
       <div class="eyebrow">// THE FLEET, IN MOTION</div>
@@ -868,7 +1174,7 @@ footer {
   </div>
 </section>
 
-<section id="how">
+<section id="how" data-scene>
   <div class="container">
     <div class="reveal" style="max-width:760px;">
       <div class="eyebrow">// HOW IT WORKS</div>
@@ -895,7 +1201,7 @@ footer {
   </div>
 </section>
 
-<section id="architecture" class="arch-section">
+<section id="architecture data-scene class="arch-section">
   <div class="container">
     <div class="reveal" style="max-width:760px;">
       <div class="eyebrow">// ARCHITECTURE</div>
@@ -960,7 +1266,7 @@ footer {
   </div>
 </section>
 
-<section id="capabilities" class="quotes-section">
+<section id="capabilities data-scene class="quotes-section">
   <div class="container">
     <div class="reveal" style="max-width:760px;margin:0 auto 56px;text-align:center;">
       <div class="eyebrow" style="display:inline-block;">// WHAT RUNS ON THE FLEET</div>
@@ -1002,7 +1308,7 @@ footer {
   </div>
 </section>
 
-<section id="try" class="demo-section">
+<section id="try data-scene class="demo-section">
   <div class="container">
     <div class="reveal" style="max-width:760px;">
       <div class="eyebrow">// TRY IT</div>
@@ -1032,7 +1338,7 @@ footer {
   </div>
 </section>
 
-<section id="access" class="cta-section">
+<section id="access data-scene class="cta-section">
   <div class="container">
     <h2 class="reveal">Tell us what you<br/>want the fleet to run.</h2>
     <p class="reveal">Early access is invitation-only. We match operators to the agents that fit their work.</p>
@@ -1089,540 +1395,7 @@ footer {
 
 <div id="scroll-progress"></div>
 
-<script>
-// Network topology hero - 7 agents in a soft orbit with traffic packets
-// flowing between them. Tells the product story (nodes + edges + packets =
-// "the fleet coordinating") in 2 seconds. Restored 2026-05-05 after two
-// failed 3D iterations missed this storytelling clarity.
-(function() {
-  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const canvas = document.getElementById('net-canvas');
-  const ctx = canvas.getContext('2d');
-  let w, h, dpr;
-  function resize() {
-    dpr = Math.min(window.devicePixelRatio || 1, 2);
-    const rect = canvas.getBoundingClientRect();
-    w = canvas.width = rect.width * dpr;
-    h = canvas.height = rect.height * dpr;
-  }
-  resize(); window.addEventListener('resize', resize);
 
-  const labels = ['forecast', 'browser', 'review', 'health', 'audit', 'outreach', 'options'];
-  const N = 7;
-  const nodes = [];
-  for (let i = 0; i < N; i++) {
-    const a = (i / N) * Math.PI * 2 - Math.PI / 2;
-    nodes.push({ baseAngle: a, label: labels[i], idx: i });
-  }
-  const center = { x: 0, y: 0 };
-  const radius = () => Math.min(w, h) * 0.38;
-  const pulses = []; // { from, to, t, color }
-  function spawnPulse() {
-    const from = Math.floor(Math.random() * N);
-    let to = Math.floor(Math.random() * N);
-    while (to === from) to = Math.floor(Math.random() * N);
-    const palette = ['#6366f1', '#ec4899', '#14b8a6', '#f59e0b'];
-    pulses.push({ from, to, t: 0, color: palette[Math.floor(Math.random() * palette.length)] });
-  }
-  setInterval(spawnPulse, 380);
-  for (let i = 0; i < 4; i++) spawnPulse();
-
-  const t0 = performance.now();
-  function tick(now) {
-    const dt = (now - t0) * 0.0001;
-    ctx.clearRect(0, 0, w, h);
-    center.x = w / 2; center.y = h / 2;
-    const r = radius();
-
-    // soft glow
-    const grd = ctx.createRadialGradient(center.x, center.y, 0, center.x, center.y, r * 1.4);
-    grd.addColorStop(0, 'rgba(99,102,241,0.10)');
-    grd.addColorStop(1, 'rgba(99,102,241,0)');
-    ctx.fillStyle = grd;
-    ctx.fillRect(0, 0, w, h);
-
-    // node positions (slow rotation)
-    const positions = nodes.map(n => {
-      const a = n.baseAngle + dt * 0.6;
-      return { x: center.x + Math.cos(a) * r, y: center.y + Math.sin(a) * r, label: n.label };
-    });
-
-    // edges (soft mesh)
-    ctx.strokeStyle = 'rgba(255,255,255,0.05)';
-    ctx.lineWidth = 1 * dpr;
-    for (let i = 0; i < N; i++) {
-      for (let j = i + 1; j < N; j++) {
-        ctx.beginPath();
-        ctx.moveTo(positions[i].x, positions[i].y);
-        ctx.lineTo(positions[j].x, positions[j].y);
-        ctx.stroke();
-      }
-    }
-
-    // pulses moving along edges
-    if (!reduce) {
-      for (let i = pulses.length - 1; i >= 0; i--) {
-        const p = pulses[i];
-        p.t += 0.014;
-        if (p.t >= 1) { pulses.splice(i, 1); continue; }
-        const a = positions[p.from], b = positions[p.to];
-        // bezier midpoint slightly toward center for graceful arc
-        const mx = (a.x + b.x) / 2 + (center.x - (a.x + b.x) / 2) * 0.18;
-        const my = (a.y + b.y) / 2 + (center.y - (a.y + b.y) / 2) * 0.18;
-        const u = p.t;
-        const x = (1 - u) * (1 - u) * a.x + 2 * (1 - u) * u * mx + u * u * b.x;
-        const y = (1 - u) * (1 - u) * a.y + 2 * (1 - u) * u * mx; // intentional? no, fix
-        const yc = (1 - u) * (1 - u) * a.y + 2 * (1 - u) * u * my + u * u * b.y;
-        // glow
-        ctx.beginPath();
-        ctx.fillStyle = p.color + 'cc';
-        ctx.shadowBlur = 12 * dpr; ctx.shadowColor = p.color;
-        ctx.arc(x, yc, 2.6 * dpr, 0, Math.PI * 2);
-        ctx.fill();
-        ctx.shadowBlur = 0;
-        // trailing line
-        ctx.strokeStyle = p.color + '66';
-        ctx.lineWidth = 1.4 * dpr;
-        ctx.beginPath();
-        ctx.moveTo(a.x, a.y);
-        ctx.lineTo(x, yc);
-        ctx.stroke();
-      }
-    }
-
-    // nodes (drawn last on top)
-    for (const p of positions) {
-      // outer ring
-      ctx.beginPath();
-      ctx.fillStyle = 'rgba(255,255,255,0.04)';
-      ctx.arc(p.x, p.y, 18 * dpr, 0, Math.PI * 2);
-      ctx.fill();
-      // dot
-      ctx.beginPath();
-      ctx.fillStyle = '#ffffff';
-      ctx.shadowBlur = 16 * dpr; ctx.shadowColor = 'rgba(255,255,255,0.4)';
-      ctx.arc(p.x, p.y, 5 * dpr, 0, Math.PI * 2);
-      ctx.fill();
-      ctx.shadowBlur = 0;
-      // label
-      ctx.fillStyle = 'rgba(161,161,170,0.85)';
-      ctx.font = `${10 * dpr}px 'JetBrains Mono', monospace`;
-      ctx.textAlign = 'center';
-      ctx.fillText(p.label, p.x, p.y + 32 * dpr);
-    }
-
-    // center hub
-    ctx.beginPath();
-    ctx.fillStyle = 'rgba(99,102,241,0.9)';
-    ctx.shadowBlur = 28 * dpr; ctx.shadowColor = 'rgba(99,102,241,0.7)';
-    ctx.arc(center.x, center.y, 6 * dpr, 0, Math.PI * 2);
-    ctx.fill();
-    ctx.shadowBlur = 0;
-    ctx.beginPath();
-    ctx.strokeStyle = 'rgba(99,102,241,0.3)';
-    ctx.lineWidth = 1 * dpr;
-    ctx.arc(center.x, center.y, 14 * dpr, 0, Math.PI * 2);
-    ctx.stroke();
-
-    requestAnimationFrame(tick);
-  }
-  requestAnimationFrame(tick);
-})();
-
-// Smooth-scroll lite (lerp wheel deltas) &mdash; subtle momentum, no library
-(function() {
-  if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-  let target = window.scrollY;
-  let current = window.scrollY;
-  let raf = 0;
-  function loop() {
-    current += (target - current) * 0.12;
-    if (Math.abs(target - current) < 0.5) {
-      window.scrollTo(0, target);
-      raf = 0; return;
-    }
-    window.scrollTo(0, current);
-    raf = requestAnimationFrame(loop);
-  }
-  window.addEventListener('wheel', (e) => {
-    if (e.ctrlKey) return;
-    e.preventDefault();
-    target += e.deltaY;
-    target = Math.max(0, Math.min(target, document.body.scrollHeight - window.innerHeight));
-    if (!raf) raf = requestAnimationFrame(loop);
-  }, { passive: false });
-  // restore scroll on page load
-  window.addEventListener('scroll', () => {
-    if (!raf) { current = window.scrollY; target = window.scrollY; }
-  }, { passive: true });
-})();
-
-// Throughput chart &mdash; a calm sine-wave of synthetic actions per minute, NOT jittery
-(function() {
-  const line = document.getElementById('chart-line');
-  const area = document.getElementById('chart-area');
-  const cursor = document.getElementById('chart-cursor');
-  if (!line) return;
-  const W = 600, H = 140;
-  const N = 80;
-  // base curve: smooth low-freq sine + small noise; updates SLOWLY
-  const data = new Array(N).fill(0).map((_, i) => 70 + Math.sin(i * 0.18) * 24 + Math.cos(i * 0.06) * 14);
-
-  function build() {
-    const pts = data.map((v, i) => `${(i / (N - 1)) * W},${H - v}`);
-    line.setAttribute('d', 'M' + pts.join(' L'));
-    area.setAttribute('d', 'M0,' + H + ' L' + pts.join(' L') + ` L${W},${H} Z`);
-    const last = data[N - 1];
-    cursor.setAttribute('cx', W);
-    cursor.setAttribute('cy', H - last);
-  }
-  build();
-
-  // Update every 2.4s, smoothly: shift one element off, push smoothed new value
-  let t = N;
-  setInterval(() => {
-    t += 1;
-    const target = 70 + Math.sin(t * 0.18) * 24 + Math.cos(t * 0.06) * 14 + (Math.random() - 0.5) * 6;
-    // animate over 2 seconds: easing the last point toward target
-    const start = data[N - 1];
-    const t0 = performance.now();
-    function ease(now) {
-      const u = Math.min(1, (now - t0) / 1800);
-      const e = 1 - Math.pow(1 - u, 3);
-      data[N - 1] = start + (target - start) * e;
-      build();
-      if (u < 1) requestAnimationFrame(ease);
-      else {
-        // shift left
-        data.shift();
-        data.push(target);
-        build();
-      }
-    }
-    requestAnimationFrame(ease);
-  }, 2400);
-})();
-
-// Slow KPI tickers
-(function() {
-  const p50 = document.getElementById('kpi-p50');
-  const receipts = document.getElementById('kpi-receipts');
-  const cost = document.getElementById('kpi-cost');
-  const ac = document.getElementById('agent-count');
-  const actions = document.getElementById('actions');
-  function bumpReceipts() {
-    const r = parseInt(receipts.firstChild.textContent.replace(/,/g, '') || '8421', 10);
-    const nv = r + Math.floor(Math.random() * 3) + 1;
-    receipts.childNodes[0].nodeValue = nv.toLocaleString();
-  }
-  function bumpActions() {
-    const a = parseInt(actions.textContent.replace(/,/g, '') || '42180', 10);
-    const nv = a + Math.floor(Math.random() * 4) + 1;
-    actions.textContent = nv.toLocaleString();
-  }
-  function bumpP50() {
-    const choices = ['238', '240', '242', '244', '236', '241'];
-    const v = choices[Math.floor(Math.random() * choices.length)];
-    p50.childNodes[0].nodeValue = v;
-  }
-  setInterval(bumpReceipts, 3500);
-  setInterval(bumpActions, 4200);
-  setInterval(bumpP50, 5500);
-})();
-
-// Recent activity (slow, calm)
-(function() {
-  const list = document.getElementById('recent-list');
-  if (!list) return;
-  const items = [
-    { agent: 'forecast', body: 'weather kalshi-DEN-rain &middot; conf 0.62', t: '2s' },
-    { agent: 'options', body: 'spread SPY-2026-05-09-540C &middot; 0.04', t: '14s' },
-    { agent: 'review',  body: 'auto-impl/court-feed-43d2 &middot; 6/7 ok', t: '38s' },
-    { agent: 'health',  body: 'gateway uptime &middot; 14h22m &middot; ok', t: '1m' },
-    { agent: 'outreach',body: 'strategic-reply queued &middot; 2 tracked', t: '2m' },
-    { agent: 'browser', body: 'session 14 actions &middot; capt 0 &middot; $0.0085', t: '3m' },
-    { agent: 'audit',   body: 'secrets scan &middot; 0 leaks &middot; rotated 28d', t: '5m' },
-  ];
-  list.innerHTML = items.map(it => `
-    <div class="r">
-      <div class="top"><span>${it.agent}</span><span class="t">${it.t}</span></div>
-      <div class="body">${it.body}</div>
-    </div>
-  `).join('');
-})();
-
-// Counter animation for stats
-(function() {
-  function animateCount(el, target, decimals = 0, dur = 1600) {
-    const start = performance.now();
-    function step(now) {
-      const t = Math.min(1, (now - start) / dur);
-      const e = 1 - Math.pow(1 - t, 3);
-      const v = target * e;
-      el.childNodes[0].nodeValue = decimals ? v.toFixed(decimals) : Math.floor(v).toLocaleString();
-      if (t < 1) requestAnimationFrame(step);
-    }
-    requestAnimationFrame(step);
-  }
-  const io = new IntersectionObserver((entries) => {
-    entries.forEach(e => {
-      if (!e.isIntersecting || e.target.dataset.done) return;
-      e.target.dataset.done = '1';
-      const target = parseFloat(e.target.dataset.target);
-      const dec = parseInt(e.target.dataset.decimal || '0', 10);
-      animateCount(e.target, target, dec);
-    });
-  }, { threshold: 0.3 });
-  document.querySelectorAll('.stat .v').forEach(el => io.observe(el));
-})();
-
-// Reveal-on-scroll
-const io = new IntersectionObserver((entries) => {
-  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); });
-}, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
-document.querySelectorAll('.reveal').forEach((el, i) => {
-  el.style.transitionDelay = (i % 3) * 80 + 'ms';
-  io.observe(el);
-});
-
-// Scroll progress bar
-(function() {
-  const bar = document.getElementById('scroll-progress');
-  if (!bar) return;
-  let raf = 0;
-  function update() {
-    const total = document.documentElement.scrollHeight - window.innerHeight;
-    const u = total > 0 ? Math.min(1, window.scrollY / total) : 0;
-    bar.style.transform = `scaleX(${u})`;
-    raf = 0;
-  }
-  window.addEventListener('scroll', () => { if (!raf) raf = requestAnimationFrame(update); }, { passive: true });
-  update();
-})();
-
-// Capability card mouse spotlight
-document.querySelectorAll('.cap').forEach(c => {
-  c.addEventListener('mousemove', (e) => {
-    const r = c.getBoundingClientRect();
-    c.style.setProperty('--mx', (e.clientX - r.left) + 'px');
-    c.style.setProperty('--my', (e.clientY - r.top) + 'px');
-  });
-});
-
-// Architecture flow particles - SVG-based, slow drift left-to-right
-(function() {
-  const layer = document.getElementById('flow-particles');
-  if (!layer) return;
-  const lanes = [
-    { x1: 220, x2: 310 },
-    { x1: 510, x2: 600 },
-    { x1: 800, x2: 890 },
-  ];
-  const palette = ['#6366f1', '#ec4899', '#14b8a6'];
-  function spawn() {
-    const lane = lanes[Math.floor(Math.random() * lanes.length)];
-    const color = palette[Math.floor(Math.random() * palette.length)];
-    const c = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
-    c.setAttribute('cx', lane.x1);
-    c.setAttribute('cy', 160);
-    c.setAttribute('r', 3);
-    c.setAttribute('fill', color);
-    c.setAttribute('filter', 'url(#glow)');
-    c.style.opacity = '0.95';
-    layer.appendChild(c);
-    const t0 = performance.now();
-    const dur = 1400 + Math.random() * 600;
-    function step(now) {
-      const u = Math.min(1, (now - t0) / dur);
-      const e = u < 0.5 ? 2 * u * u : 1 - Math.pow(-2 * u + 2, 2) / 2;
-      c.setAttribute('cx', lane.x1 + (lane.x2 - lane.x1) * e);
-      c.style.opacity = (1 - Math.abs(u - 0.5) * 0.6).toFixed(2);
-      if (u < 1) requestAnimationFrame(step);
-      else c.remove();
-    }
-    requestAnimationFrame(step);
-  }
-  setInterval(spawn, 700);
-  for (let i = 0; i < 3; i++) setTimeout(spawn, i * 300);
-})();
-
-// Early-access form -> POST /api/early-access
-(function() {
-  const form = document.getElementById('ea-form');
-  if (!form) return;
-  const status = form.querySelector('.ea-status');
-  const btn = form.querySelector('button[type="submit"]');
-  form.addEventListener('submit', async (e) => {
-    e.preventDefault();
-    const data = Object.fromEntries(new FormData(form));
-    if (!data.email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email)) {
-      status.textContent = 'Please enter a valid email.';
-      status.style.color = '#f59e0b';
-      return;
-    }
-    btn.disabled = true;
-    const originalLabel = btn.innerHTML;
-    btn.innerHTML = 'Sending...';
-    status.textContent = '';
-    try {
-      const res = await fetch('/api/early-access', {
-        method: 'POST',
-        headers: { 'content-type': 'application/json' },
-        body: JSON.stringify(data),
-      });
-      const j = await res.json().catch(() => ({}));
-      if (res.ok && j.ok) {
-        status.textContent = 'Got it. We will be in touch.';
-        status.style.color = '#10b981';
-        form.reset();
-        btn.style.display = 'none';
-      } else {
-        status.textContent = (j.error || 'Something went wrong') + ' \u2014 try email instead.';
-        status.style.color = '#f59e0b';
-        btn.disabled = false;
-        btn.innerHTML = originalLabel;
-      }
-    } catch (err) {
-      status.textContent = 'Network error \u2014 email hello@gridfleet.ai';
-      status.style.color = '#f59e0b';
-      btn.disabled = false;
-      btn.innerHTML = originalLabel;
-    }
-  });
-})();
-
-// Demo: sample agent outputs with animated thinking reveal
-(function() {
-  const samples = document.getElementById('demo-samples');
-  const output = document.getElementById('demo-output');
-  if (!samples || !output) return;
-
-  const demos = {
-    forecast: {
-      thinking: [
-        "dispatching to forecast agent...",
-        "fetching market context (Kalshi YES/NO, options chain, term structure)...",
-        "running ensemble: 3 base models + 1 calibrator...",
-        "scoring against baseline + 30d skill record...",
-      ],
-      result: `<pre><span class="label">job_id</span>      <span class="accent">f-7c4a-2b0e</span>
-<span class="label">agent</span>       forecast
-<span class="label">question</span>    Will SPY close above 580 on May 16?
-<span class="label">window</span>      11 trading days
-<span class="label">ensemble</span>    3 models + 1 calibrator
-<span class="label">drivers</span>     low IV regime (-1.4&sigma;), sector breadth firm,
-            5d return +1.8%, no major catalyst on calendar
-
-<span class="value">probability</span>  <span class="accent">0.43</span>  <span class="ok">(calibrated)</span>
-<span class="value">interval</span>     0.38 - 0.49  (90% credible)
-<span class="value">edge vs implied</span> +6 bps  (Kalshi YES at 0.37)
-<span class="value">score</span>        0.71  (vs 30d agent skill 0.68)
-
-<span class="ok">recommend</span>    YES at \u2264 0.40, hold off above 0.45</pre>
-<div class="receipt">receipt #fcst-2026-05-05-7c4a &middot; cost $0.034 &middot; written to ledger &middot; reviewable for 90 days</div>`,
-    },
-    review: {
-      thinking: [
-        "checking out branch...",
-        "running grid:sanity:full + lint + typecheck...",
-        "TRON reading diff...",
-        "cross-referencing related test coverage...",
-      ],
-      result: `<pre><span class="label">job_id</span>      <span class="accent">r-3f1d-9a82</span>
-<span class="label">agent</span>       review (TRON)
-<span class="label">target</span>      pull request #142
-<span class="label">change</span>      refactor billing webhook handler
-
-<span class="value">verdict</span>     <span class="accent">APPROVE WITH CONCERNS</span>  (2 raised)
-
-<span class="value">checks</span>      sanity  <span class="ok">pass</span>
-            lint    <span class="ok">pass</span>
-            types   <span class="ok">pass</span>
-            tests   <span class="ok">14/14</span>
-
-<span class="value">concerns</span>
-  1. line 47   nullable handling on stripe.event.data.object
-              suggested guard: \`if (!evt?.data?.object) return early\`
-  2. line 89   no test covers the duplicate-delivery path
-              webhook idempotency relies on event.id; recommend
-              regression test before merge
-
-<span class="value">scope</span>       safe to merge after concern #1; concern #2 can ship as follow-up</pre>
-<div class="receipt">receipt #rvw-2026-05-05-3f1d &middot; cost $0.011 &middot; PR comment posted &middot; not auto-merged</div>`,
-    },
-    audit: {
-      thinking: [
-        "enumerating repos + cron scripts + secrets vault...",
-        "running secret-pattern scan + policy drift check...",
-        "cross-checking against known-leaked tokens (HaveIBeenPwned)...",
-        "compiling report...",
-      ],
-      result: `<pre><span class="label">job_id</span>      <span class="accent">a-9b2e-4c11</span>
-<span class="label">agent</span>       audit (DUMONT)
-<span class="label">scope</span>       42 repos &middot; 87 cron scripts &middot; 1 secrets vault
-
-<span class="value">scan complete</span>  <span class="ok">pass</span>  (3.4s)
-
-<span class="label">findings</span>
-  &middot; <span class="ok">0 critical</span>  no high-risk credentials in tracked code
-  &middot; <span class="accent">2 advisory</span>  stale .env file in archived repo (last commit
-                  214d ago, no live secrets); redacted PAT
-                  marker in workflow comment (cosmetic)
-  &middot; <span class="ok">0 policy drift</span>  config-integrity-guard rules all green
-  &middot; <span class="ok">vault rotated</span>  28 days ago (next due 2026-06-02)
-
-<span class="label">checks run</span>
-  pattern scan      <span class="ok">pass</span>  (47 patterns: AWS, GH, Stripe, etc.)
-  HIBP cross-ref   <span class="ok">pass</span>  (no token in known leaks)
-  policy diff       <span class="ok">pass</span>  (vs blessed baseline)
-  vault age         <span class="ok">pass</span>  (28d &lt; 90d threshold)</pre>
-<div class="receipt">receipt #audit-2026-05-05-9b2e &middot; cost $0.022 &middot; full report archived &middot; alert if findings change</div>`,
-    },
-  };
-
-  function pickDemo(key) {
-    const d = demos[key];
-    if (!d) return;
-    samples.querySelectorAll("button").forEach(b => b.classList.toggle("active", b.dataset.demo === key));
-    output.innerHTML = '<div class="thinking">running...<span class="dot">.</span><span class="dot">.</span><span class="dot">.</span></div>';
-    let stepIdx = 0;
-    const stepEl = document.createElement("pre");
-    stepEl.style.color = "var(--text-3)";
-    stepEl.style.fontSize = "12px";
-    stepEl.style.marginTop = "8px";
-    output.appendChild(stepEl);
-
-    function nextStep() {
-      if (stepIdx >= d.thinking.length) {
-        // reveal result
-        output.innerHTML = d.result;
-        return;
-      }
-      stepEl.textContent += "\u00b7 " + d.thinking[stepIdx] + "\n";
-      stepIdx++;
-      setTimeout(nextStep, 600 + Math.random() * 400);
-    }
-    setTimeout(nextStep, 350);
-  }
-
-  samples.querySelectorAll("button").forEach(b => {
-    b.addEventListener("click", () => pickDemo(b.dataset.demo));
-  });
-})();
-
-// Footer uptime ticker
-(function() {
-  const el = document.getElementById('foot-uptime');
-  if (!el) return;
-  let mins = 14 * 60 + 22;
-  setInterval(() => {
-    mins++;
-    const h = Math.floor(mins / 60);
-    const m = mins % 60;
-    el.textContent = h + 'h ' + (m < 10 ? '0' : '') + m + 'm';
-  }, 60000);
-})();
-</script>
 
 
 </body>
