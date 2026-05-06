@@ -749,184 +749,160 @@ footer {
   animation: pulse-dot 2.4s infinite;
 }
 
-/* ===== Cinematic Phase 2 hero - Receipt River split-panel ===== */
+/* ===== Cinematic Phase 2 v3 hero - Gradient mesh + bold typography ===== */
+/* References: lusion.co, uncommondesign.group, activetheory.net (via WebFetch) */
+/* Approach: full-bleed atmospheric mesh, oversized display type, restrained motion */
+
 .cinematic-hero {
   position: relative; z-index: 2;
   min-height: 100vh;
-  padding: 96px 0 48px;
+  padding: 0;
   overflow: hidden;
-}
-.cinematic-hero-grid {
-  display: grid;
-  grid-template-columns: 1.05fr 1fr;
+  display: flex;
   align-items: center;
-  gap: 0;
-  max-width: 1280px;
-  margin: 0 auto;
-  min-height: calc(100vh - 144px);
+  justify-content: center;
+}
+
+/* Atmospheric gradient mesh - 3 drifting orbs, each on its own slow loop */
+.cinematic-hero::before,
+.cinematic-hero::after,
+.cinematic-hero .mesh-3 {
+  content: ''; position: absolute; pointer-events: none; z-index: 1;
+  filter: blur(80px);
+  will-change: transform;
 }
 .cinematic-hero::before {
-  content: ''; position: absolute; inset: 0; pointer-events: none; z-index: 0;
-  background: radial-gradient(ellipse 90% 80% at 22% 42%, rgba(20, 35, 100, 0.45) 0%, rgba(9, 9, 13, 0) 65%);
+  top: -10%; left: -10%; width: 60vw; height: 60vw;
+  background: radial-gradient(circle, rgba(99, 102, 241, 0.5) 0%, rgba(99,102,241,0) 70%);
+  animation: gf-mesh-drift-1 28s ease-in-out infinite alternate;
 }
-.cinematic-hero-text { padding: 0 48px 0 32px; position: relative; z-index: 2; }
+.cinematic-hero::after {
+  top: 30%; right: -15%; width: 70vw; height: 70vw;
+  background: radial-gradient(circle, rgba(124, 58, 237, 0.45) 0%, rgba(124,58,237,0) 70%);
+  animation: gf-mesh-drift-2 36s ease-in-out infinite alternate;
+}
+.cinematic-hero .mesh-3 {
+  bottom: -20%; left: 25%; width: 65vw; height: 65vw;
+  background: radial-gradient(circle, rgba(34, 211, 238, 0.30) 0%, rgba(34,211,238,0) 70%);
+  animation: gf-mesh-drift-3 44s ease-in-out infinite alternate;
+}
+.cinematic-hero .mesh-noise {
+  position: absolute; inset: 0; pointer-events: none; z-index: 2;
+  background-image:
+    radial-gradient(ellipse at center, transparent 30%, rgba(5,6,10,0.7) 100%),
+    url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 0.05 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+  background-size: cover, 200px 200px;
+}
+@keyframes gf-mesh-drift-1 {
+  0%   { transform: translate(0, 0)       scale(1); }
+  100% { transform: translate(15vw, 10vh) scale(1.15); }
+}
+@keyframes gf-mesh-drift-2 {
+  0%   { transform: translate(0, 0)         scale(1); }
+  100% { transform: translate(-12vw, -8vh)  scale(1.1); }
+}
+@keyframes gf-mesh-drift-3 {
+  0%   { transform: translate(0, 0)        scale(1); }
+  100% { transform: translate(8vw, -12vh)  scale(1.2); }
+}
+
+/* Hero content - centered, generous breathing room */
+.cinematic-hero-content {
+  position: relative; z-index: 5;
+  text-align: center;
+  max-width: 1100px;
+  padding: 0 32px;
+  display: flex; flex-direction: column; align-items: center; gap: 32px;
+}
+
 .cinematic-hero .hero-pill {
   display: inline-flex; align-items: center; gap: 8px;
-  padding: 6px 12px; margin-bottom: 28px;
-  font: 500 11px/1 var(--gf-font-display); letter-spacing: 0.1em; text-transform: uppercase;
-  border: 1px solid var(--gf-color-border);
+  padding: 8px 16px;
+  font: 500 11px/1 var(--gf-font-display);
+  letter-spacing: 0.18em; text-transform: uppercase;
+  border: 1px solid rgba(255,255,255,0.10);
   border-radius: 999px;
-  background: rgba(255,255,255,0.025);
+  background: rgba(255,255,255,0.03);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
   color: var(--gf-color-text-secondary);
 }
 .cinematic-hero .hero-pill .dot {
   width: 6px; height: 6px; border-radius: 50%;
   background: var(--gf-color-verified);
-  box-shadow: 0 0 8px rgba(34,197,94,0.6);
-  animation: gf-pill-pulse 2s ease-in-out infinite;
+  box-shadow: 0 0 10px rgba(34,197,94,0.7);
+  animation: gf-pill-pulse 2.4s ease-in-out infinite;
 }
-@keyframes gf-pill-pulse { 0%,100% { opacity: 0.7; } 50% { opacity: 1; } }
+@keyframes gf-pill-pulse { 0%,100% { opacity: 0.65; } 50% { opacity: 1; } }
+
+/* Display H1 - this is the centerpiece */
 .cinematic-hero h1 {
-  font: 700 clamp(40px, 5.5vw, 64px)/1.05 var(--gf-font-display);
-  letter-spacing: -0.025em;
+  font: 200 clamp(56px, 9vw, 132px)/0.95 var(--gf-font-display);
+  letter-spacing: -0.045em;
   color: var(--gf-color-text-primary);
-  margin: 0 0 22px;
+  margin: 0;
+  text-wrap: balance;
 }
 .cinematic-hero h1 .accent {
-  background: linear-gradient(120deg, var(--gf-color-accent) 0%, var(--gf-color-accent-secondary) 100%);
+  font-style: italic;
+  font-weight: 300;
+  background: linear-gradient(120deg, #a5b4fc 0%, #c4b5fd 35%, #67e8f9 100%);
   -webkit-background-clip: text; background-clip: text; color: transparent;
 }
 .cinematic-hero .hero-lede {
-  font: 400 clamp(16px, 1.4vw, 18px)/1.55 var(--gf-font-display);
+  font: 400 clamp(17px, 1.5vw, 21px)/1.55 var(--gf-font-display);
   color: var(--gf-color-text-secondary);
-  max-width: 52ch;
-  margin: 0 0 32px;
+  max-width: 56ch;
+  margin: 0;
+  letter-spacing: -0.005em;
 }
 .cinematic-hero .hero-cta {
-  display: flex; gap: 12px; align-items: center; flex-wrap: wrap;
-  margin-bottom: 16px;
-}
-.cinematic-hero .hero-trust {
-  margin-top: 12px;
-  font: 400 13px/1.5 var(--gf-font-display);
-  color: var(--gf-color-text-tertiary);
-}
-
-/* Right panel - Receipt River */
-.receipt-panel {
-  position: relative;
-  height: calc(100vh - 144px);
-  min-height: 540px;
-  background: var(--gf-color-panel-right);
-  border-left: 1px solid var(--gf-color-border);
-  overflow: hidden;
-  z-index: 1;
-}
-.receipt-panel::before, .receipt-panel::after {
-  content: ''; position: absolute; left: 0; right: 0; height: 80px;
-  pointer-events: none; z-index: 3;
-}
-.receipt-panel::before {
-  top: 0;
-  background: linear-gradient(to bottom, var(--gf-color-panel-right) 0%, rgba(12,12,18,0) 100%);
-}
-.receipt-panel::after {
-  bottom: 0;
-  background: linear-gradient(to top, var(--gf-color-panel-right) 0%, rgba(12,12,18,0) 100%);
-}
-.receipt-stream-wrap {
-  position: absolute; inset: 0;
-  display: flex; flex-direction: column;
-  padding: 32px 36px;
-}
-.receipt-stream {
-  display: flex; flex-direction: column; gap: 14px;
-  will-change: transform;
-  animation: receipt-scroll 38s linear infinite;
-}
-@keyframes receipt-scroll {
-  0%   { transform: translateY(0); }
-  100% { transform: translateY(-50%); }
-}
-.receipt-card {
-  background: rgba(18, 19, 25, 0.95);
-  border: 1px solid var(--gf-color-border-verified);
-  border-left: 3px solid var(--gf-color-verified);
-  border-radius: 8px;
-  padding: 14px 16px;
-  font-family: var(--gf-font-mono);
-  flex-shrink: 0;
-  transition: border-left-color 0.2s ease-out, transform 0.2s ease-out;
-}
-.receipt-card:hover {
-  transform: translateY(-1px);
-  border-left-color: #4ade80;
-}
-.receipt-row {
-  display: flex; align-items: center; gap: 8px;
-  font-size: 12px; line-height: 1.4;
-}
-.receipt-label {
-  color: var(--gf-color-text-tertiary);
-  text-transform: uppercase; letter-spacing: 0.06em; font-size: 10px; font-weight: 500;
-}
-.receipt-value { color: var(--gf-color-text-mono); }
-.receipt-status {
-  margin-left: auto;
-  font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase;
-  color: var(--gf-color-text-tertiary);
-}
-.receipt-task {
-  margin: 6px 0 4px;
-  font-size: 13px; line-height: 1.4;
-  color: var(--gf-color-text-primary);
-  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
-}
-.receipt-hash {
-  margin-left: auto;
-  font-size: 11px;
-  color: var(--gf-color-accent-secondary);
-}
-.receipt-footer {
-  display: flex; align-items: center; justify-content: space-between;
+  display: flex; gap: 14px; align-items: center; flex-wrap: wrap; justify-content: center;
   margin-top: 8px;
-  font-size: 11px;
 }
-.receipt-time { color: var(--gf-color-text-tertiary); font-family: var(--gf-font-display); }
-.verified-badge {
-  display: inline-flex; align-items: center; gap: 4px;
-  background: rgba(34, 197, 94, 0.10);
-  border: 1px solid var(--gf-color-border-verified);
-  color: var(--gf-color-text-verified);
-  border-radius: 4px;
-  padding: 2px 8px;
-  font: 600 10px/1 var(--gf-font-mono);
-  letter-spacing: 0.08em; text-transform: uppercase;
+.cinematic-hero .gf-cta {
+  padding: 14px 28px;
+  font-size: 14px;
+  letter-spacing: 0.01em;
 }
-.verified-badge svg { width: 10px; height: 10px; flex-shrink: 0; }
 
-/* Mobile collapse */
+/* Scroll cue at the bottom of hero */
+.scroll-cue {
+  position: absolute; bottom: 40px; left: 50%; transform: translateX(-50%);
+  display: flex; flex-direction: column; align-items: center; gap: 8px;
+  font: 500 10px/1 var(--gf-font-display);
+  letter-spacing: 0.25em; text-transform: uppercase;
+  color: var(--gf-color-text-tertiary);
+  z-index: 5;
+}
+.scroll-cue .scroll-line {
+  width: 1px; height: 32px;
+  background: linear-gradient(to bottom, transparent 0%, var(--gf-color-text-tertiary) 50%, transparent 100%);
+  animation: gf-scroll-cue 2.6s ease-in-out infinite;
+}
+@keyframes gf-scroll-cue {
+  0%, 100% { transform: scaleY(0.3); transform-origin: top; opacity: 0.4; }
+  50%      { transform: scaleY(1);   transform-origin: top; opacity: 1; }
+}
+
+/* Mobile - same hero, tighter */
 @media (max-width: 900px) {
-  .cinematic-hero { padding: 80px 24px 40px; min-height: auto; }
-  .cinematic-hero-grid { grid-template-columns: 1fr; gap: 32px; min-height: auto; }
-  .cinematic-hero-text { padding: 0; }
-  .receipt-panel {
-    height: auto; min-height: auto;
-    border-left: 0; border-top: 1px solid var(--gf-color-border);
-    background: transparent;
-    padding: 16px 0;
-  }
-  .receipt-panel::before, .receipt-panel::after { display: none; }
-  .receipt-stream-wrap { position: static; padding: 0; }
-  .receipt-stream { animation: none; transform: none; }
-  .receipt-stream > .receipt-card:nth-child(n+4) { display: none; }
-  /* Cut backdrop-filter on receipts on mobile per CLU perf rule */
-  .receipt-card { background: rgba(18, 19, 25, 1); }
+  .cinematic-hero { min-height: 90vh; padding: 24px; }
+  .cinematic-hero-content { gap: 24px; }
+  .cinematic-hero h1 { font-size: clamp(44px, 11vw, 72px); }
+  .scroll-cue { display: none; }
+  .cinematic-hero::before,
+  .cinematic-hero::after,
+  .cinematic-hero .mesh-3 { filter: blur(60px); }
 }
 
+/* Reduced motion - stop drift, keep static gradient */
 @media (prefers-reduced-motion: reduce) {
-  .receipt-stream { animation: none; transform: none; }
-  .cinematic-hero .hero-pill .dot { animation: none; }
+  .cinematic-hero::before,
+  .cinematic-hero::after,
+  .cinematic-hero .mesh-3,
+  .scroll-cue .scroll-line,
+  .cinematic-hero .hero-pill .dot { animation: none !important; }
 }
 </style>
 </head>
@@ -943,145 +919,20 @@ footer {
 </nav>
 
 <header class="cinematic-hero" data-scene>
-  <div class="cinematic-hero-grid">
-    <div class="cinematic-hero-text">
-      <div class="hero-pill"><span class="dot"></span><span>FLEET ONLINE &middot; <span id="agent-count">7</span> agents &middot; <span id="actions">42,180</span> actions today</span></div>
-      <h1>Your agents.<br/>Their <span class="accent">receipts.</span><br/>Every run.</h1>
-      <p class="hero-lede">GridFleet orchestrates your AI agents and returns a verified receipt for every unit of work &mdash; no black boxes, no guessing.</p>
-      <div class="hero-cta">
-        <a href="/signup" class="gf-cta gf-cta-magnetic" data-magnetic>Start building</a>
-        <a href="/docs" class="gf-cta gf-cta--ghost">Read the docs</a>
-      </div>
-      <div class="hero-trust">No credit card. No public pricing. Reach out to get started.</div>
+  <div class="mesh-3" aria-hidden="true"></div>
+  <div class="mesh-noise" aria-hidden="true"></div>
+  <div class="cinematic-hero-content">
+    <div class="hero-pill"><span class="dot"></span><span>Fleet online &middot; <span id="agent-count">7</span> agents active</span></div>
+    <h1>Autonomous AI,<br/><span class="accent">organised</span> as a fleet.</h1>
+    <p class="hero-lede">GridFleet orchestrates your AI agents and returns a verified receipt for every unit of work. No black boxes. No guessing.</p>
+    <div class="hero-cta">
+      <a href="/signup" class="gf-cta gf-cta-magnetic" data-magnetic>Start building</a>
+      <a href="/docs" class="gf-cta gf-cta--ghost">Read the docs</a>
     </div>
-    <aside class="receipt-panel" aria-label="Live agent receipts">
-      <div class="receipt-stream-wrap">
-        <div class="receipt-stream">
-          <!-- Pass 1: visible to crawlers + screen readers -->
-          <article class="receipt-card" aria-label="Receipt: deploy-agent-01">
-            <div class="receipt-row"><span class="receipt-label">agent</span><span class="receipt-value">deploy-agent-01</span><span class="receipt-status">COMPLETE</span></div>
-            <div class="receipt-task">Staging push v2.4.1</div>
-            <div class="receipt-row"><span class="receipt-label">duration</span><span class="receipt-value">1m 08s</span><span class="receipt-hash">0xa3f7b2e4...</span></div>
-            <div class="receipt-footer"><span class="verified-badge"><svg viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M2 5l2 2 4-4"/></svg>VERIFIED</span><span class="receipt-time">4 min ago</span></div>
-          </article>
-          <article class="receipt-card" aria-label="Receipt: research-agent-03">
-            <div class="receipt-row"><span class="receipt-label">agent</span><span class="receipt-value">research-agent-03</span><span class="receipt-status">COMPLETE</span></div>
-            <div class="receipt-task">Competitor pricing analysis</div>
-            <div class="receipt-row"><span class="receipt-label">duration</span><span class="receipt-value">4m 12s</span><span class="receipt-hash">0x8c2f1d96...</span></div>
-            <div class="receipt-footer"><span class="verified-badge"><svg viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M2 5l2 2 4-4"/></svg>VERIFIED</span><span class="receipt-time">7 min ago</span></div>
-          </article>
-          <article class="receipt-card" aria-label="Receipt: audit-agent-07">
-            <div class="receipt-row"><span class="receipt-label">agent</span><span class="receipt-value">audit-agent-07</span><span class="receipt-status">COMPLETE</span></div>
-            <div class="receipt-task">SOC2 control evidence sweep</div>
-            <div class="receipt-row"><span class="receipt-label">duration</span><span class="receipt-value">9m 44s</span><span class="receipt-hash">0xd1e4b502...</span></div>
-            <div class="receipt-footer"><span class="verified-badge"><svg viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M2 5l2 2 4-4"/></svg>VERIFIED</span><span class="receipt-time">12 min ago</span></div>
-          </article>
-          <article class="receipt-card" aria-label="Receipt: write-agent-02">
-            <div class="receipt-row"><span class="receipt-label">agent</span><span class="receipt-value">write-agent-02</span><span class="receipt-status">COMPLETE</span></div>
-            <div class="receipt-task">Q2 board deck draft</div>
-            <div class="receipt-row"><span class="receipt-label">duration</span><span class="receipt-value">6m 33s</span><span class="receipt-hash">0x5a8e2c4f...</span></div>
-            <div class="receipt-footer"><span class="verified-badge"><svg viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M2 5l2 2 4-4"/></svg>VERIFIED</span><span class="receipt-time">19 min ago</span></div>
-          </article>
-          <article class="receipt-card" aria-label="Receipt: review-agent-04">
-            <div class="receipt-row"><span class="receipt-label">agent</span><span class="receipt-value">review-agent-04</span><span class="receipt-status">COMPLETE</span></div>
-            <div class="receipt-task">PR #441 code review</div>
-            <div class="receipt-row"><span class="receipt-label">duration</span><span class="receipt-value">2m 51s</span><span class="receipt-hash">0xb7d3a09c...</span></div>
-            <div class="receipt-footer"><span class="verified-badge"><svg viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M2 5l2 2 4-4"/></svg>VERIFIED</span><span class="receipt-time">23 min ago</span></div>
-          </article>
-          <article class="receipt-card" aria-label="Receipt: data-agent-09">
-            <div class="receipt-row"><span class="receipt-label">agent</span><span class="receipt-value">data-agent-09</span><span class="receipt-status">COMPLETE</span></div>
-            <div class="receipt-task">Revenue cohort report</div>
-            <div class="receipt-row"><span class="receipt-label">duration</span><span class="receipt-value">3m 18s</span><span class="receipt-hash">0xe9f1b427...</span></div>
-            <div class="receipt-footer"><span class="verified-badge"><svg viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M2 5l2 2 4-4"/></svg>VERIFIED</span><span class="receipt-time">28 min ago</span></div>
-          </article>
-          <article class="receipt-card" aria-label="Receipt: test-agent-05">
-            <div class="receipt-row"><span class="receipt-label">agent</span><span class="receipt-value">test-agent-05</span><span class="receipt-status">COMPLETE</span></div>
-            <div class="receipt-task">Integration suite run</div>
-            <div class="receipt-row"><span class="receipt-label">duration</span><span class="receipt-value">7m 02s</span><span class="receipt-hash">0x2c4a8f31...</span></div>
-            <div class="receipt-footer"><span class="verified-badge"><svg viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M2 5l2 2 4-4"/></svg>VERIFIED</span><span class="receipt-time">34 min ago</span></div>
-          </article>
-          <article class="receipt-card" aria-label="Receipt: scrape-agent-11">
-            <div class="receipt-row"><span class="receipt-label">agent</span><span class="receipt-value">scrape-agent-11</span><span class="receipt-status">COMPLETE</span></div>
-            <div class="receipt-task">Lead enrichment batch (200)</div>
-            <div class="receipt-row"><span class="receipt-label">duration</span><span class="receipt-value">5m 27s</span><span class="receipt-hash">0xa018c6e5...</span></div>
-            <div class="receipt-footer"><span class="verified-badge"><svg viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M2 5l2 2 4-4"/></svg>VERIFIED</span><span class="receipt-time">41 min ago</span></div>
-          </article>
-          <article class="receipt-card" aria-label="Receipt: monitor-agent-06">
-            <div class="receipt-row"><span class="receipt-label">agent</span><span class="receipt-value">monitor-agent-06</span><span class="receipt-status">COMPLETE</span></div>
-            <div class="receipt-task">Uptime alert resolution</div>
-            <div class="receipt-row"><span class="receipt-label">duration</span><span class="receipt-value">0m 44s</span><span class="receipt-hash">0xf5b2e108...</span></div>
-            <div class="receipt-footer"><span class="verified-badge"><svg viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M2 5l2 2 4-4"/></svg>VERIFIED</span><span class="receipt-time">52 min ago</span></div>
-          </article>
-          <article class="receipt-card" aria-label="Receipt: legal-agent-02">
-            <div class="receipt-row"><span class="receipt-label">agent</span><span class="receipt-value">legal-agent-02</span><span class="receipt-status">COMPLETE</span></div>
-            <div class="receipt-task">NDA review and flag</div>
-            <div class="receipt-row"><span class="receipt-label">duration</span><span class="receipt-value">11m 15s</span><span class="receipt-hash">0x7d3e9a2b...</span></div>
-            <div class="receipt-footer"><span class="verified-badge"><svg viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M2 5l2 2 4-4"/></svg>VERIFIED</span><span class="receipt-time">1h ago</span></div>
-          </article>
-          <!-- Pass 2: aria-hidden duplicate for seamless infinite loop -->
-          <article class="receipt-card" aria-hidden="true">
-            <div class="receipt-row"><span class="receipt-label">agent</span><span class="receipt-value">deploy-agent-01</span><span class="receipt-status">COMPLETE</span></div>
-            <div class="receipt-task">Staging push v2.4.1</div>
-            <div class="receipt-row"><span class="receipt-label">duration</span><span class="receipt-value">1m 08s</span><span class="receipt-hash">0xa3f7b2e4...</span></div>
-            <div class="receipt-footer"><span class="verified-badge"><svg viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M2 5l2 2 4-4"/></svg>VERIFIED</span><span class="receipt-time">4 min ago</span></div>
-          </article>
-          <article class="receipt-card" aria-hidden="true">
-            <div class="receipt-row"><span class="receipt-label">agent</span><span class="receipt-value">research-agent-03</span><span class="receipt-status">COMPLETE</span></div>
-            <div class="receipt-task">Competitor pricing analysis</div>
-            <div class="receipt-row"><span class="receipt-label">duration</span><span class="receipt-value">4m 12s</span><span class="receipt-hash">0x8c2f1d96...</span></div>
-            <div class="receipt-footer"><span class="verified-badge"><svg viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M2 5l2 2 4-4"/></svg>VERIFIED</span><span class="receipt-time">7 min ago</span></div>
-          </article>
-          <article class="receipt-card" aria-hidden="true">
-            <div class="receipt-row"><span class="receipt-label">agent</span><span class="receipt-value">audit-agent-07</span><span class="receipt-status">COMPLETE</span></div>
-            <div class="receipt-task">SOC2 control evidence sweep</div>
-            <div class="receipt-row"><span class="receipt-label">duration</span><span class="receipt-value">9m 44s</span><span class="receipt-hash">0xd1e4b502...</span></div>
-            <div class="receipt-footer"><span class="verified-badge"><svg viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M2 5l2 2 4-4"/></svg>VERIFIED</span><span class="receipt-time">12 min ago</span></div>
-          </article>
-          <article class="receipt-card" aria-hidden="true">
-            <div class="receipt-row"><span class="receipt-label">agent</span><span class="receipt-value">write-agent-02</span><span class="receipt-status">COMPLETE</span></div>
-            <div class="receipt-task">Q2 board deck draft</div>
-            <div class="receipt-row"><span class="receipt-label">duration</span><span class="receipt-value">6m 33s</span><span class="receipt-hash">0x5a8e2c4f...</span></div>
-            <div class="receipt-footer"><span class="verified-badge"><svg viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M2 5l2 2 4-4"/></svg>VERIFIED</span><span class="receipt-time">19 min ago</span></div>
-          </article>
-          <article class="receipt-card" aria-hidden="true">
-            <div class="receipt-row"><span class="receipt-label">agent</span><span class="receipt-value">review-agent-04</span><span class="receipt-status">COMPLETE</span></div>
-            <div class="receipt-task">PR #441 code review</div>
-            <div class="receipt-row"><span class="receipt-label">duration</span><span class="receipt-value">2m 51s</span><span class="receipt-hash">0xb7d3a09c...</span></div>
-            <div class="receipt-footer"><span class="verified-badge"><svg viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M2 5l2 2 4-4"/></svg>VERIFIED</span><span class="receipt-time">23 min ago</span></div>
-          </article>
-          <article class="receipt-card" aria-hidden="true">
-            <div class="receipt-row"><span class="receipt-label">agent</span><span class="receipt-value">data-agent-09</span><span class="receipt-status">COMPLETE</span></div>
-            <div class="receipt-task">Revenue cohort report</div>
-            <div class="receipt-row"><span class="receipt-label">duration</span><span class="receipt-value">3m 18s</span><span class="receipt-hash">0xe9f1b427...</span></div>
-            <div class="receipt-footer"><span class="verified-badge"><svg viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M2 5l2 2 4-4"/></svg>VERIFIED</span><span class="receipt-time">28 min ago</span></div>
-          </article>
-          <article class="receipt-card" aria-hidden="true">
-            <div class="receipt-row"><span class="receipt-label">agent</span><span class="receipt-value">test-agent-05</span><span class="receipt-status">COMPLETE</span></div>
-            <div class="receipt-task">Integration suite run</div>
-            <div class="receipt-row"><span class="receipt-label">duration</span><span class="receipt-value">7m 02s</span><span class="receipt-hash">0x2c4a8f31...</span></div>
-            <div class="receipt-footer"><span class="verified-badge"><svg viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M2 5l2 2 4-4"/></svg>VERIFIED</span><span class="receipt-time">34 min ago</span></div>
-          </article>
-          <article class="receipt-card" aria-hidden="true">
-            <div class="receipt-row"><span class="receipt-label">agent</span><span class="receipt-value">scrape-agent-11</span><span class="receipt-status">COMPLETE</span></div>
-            <div class="receipt-task">Lead enrichment batch (200)</div>
-            <div class="receipt-row"><span class="receipt-label">duration</span><span class="receipt-value">5m 27s</span><span class="receipt-hash">0xa018c6e5...</span></div>
-            <div class="receipt-footer"><span class="verified-badge"><svg viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M2 5l2 2 4-4"/></svg>VERIFIED</span><span class="receipt-time">41 min ago</span></div>
-          </article>
-          <article class="receipt-card" aria-hidden="true">
-            <div class="receipt-row"><span class="receipt-label">agent</span><span class="receipt-value">monitor-agent-06</span><span class="receipt-status">COMPLETE</span></div>
-            <div class="receipt-task">Uptime alert resolution</div>
-            <div class="receipt-row"><span class="receipt-label">duration</span><span class="receipt-value">0m 44s</span><span class="receipt-hash">0xf5b2e108...</span></div>
-            <div class="receipt-footer"><span class="verified-badge"><svg viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M2 5l2 2 4-4"/></svg>VERIFIED</span><span class="receipt-time">52 min ago</span></div>
-          </article>
-          <article class="receipt-card" aria-hidden="true">
-            <div class="receipt-row"><span class="receipt-label">agent</span><span class="receipt-value">legal-agent-02</span><span class="receipt-status">COMPLETE</span></div>
-            <div class="receipt-task">NDA review and flag</div>
-            <div class="receipt-row"><span class="receipt-label">duration</span><span class="receipt-value">11m 15s</span><span class="receipt-hash">0x7d3e9a2b...</span></div>
-            <div class="receipt-footer"><span class="verified-badge"><svg viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M2 5l2 2 4-4"/></svg>VERIFIED</span><span class="receipt-time">1h ago</span></div>
-          </article>
-        </div>
-      </div>
-    </aside>
+  </div>
+  <div class="scroll-cue" aria-hidden="true">
+    <span>Scroll</span>
+    <span class="scroll-line"></span>
   </div>
 </header>
 
@@ -1094,7 +945,7 @@ footer {
   </div>
 </section>
 
-<section id="dashboard data-scene class="dash-section">
+<section id="dashboard" data-scene class="dash-section">
   <div class="container">
     <div class="reveal" style="max-width:760px;">
       <div class="eyebrow">// THE FLEET, IN MOTION</div>
@@ -1201,7 +1052,7 @@ footer {
   </div>
 </section>
 
-<section id="architecture data-scene class="arch-section">
+<section id="architecture" data-scene class="arch-section">
   <div class="container">
     <div class="reveal" style="max-width:760px;">
       <div class="eyebrow">// ARCHITECTURE</div>
@@ -1266,7 +1117,7 @@ footer {
   </div>
 </section>
 
-<section id="capabilities data-scene class="quotes-section">
+<section id="capabilities" data-scene class="quotes-section">
   <div class="container">
     <div class="reveal" style="max-width:760px;margin:0 auto 56px;text-align:center;">
       <div class="eyebrow" style="display:inline-block;">// WHAT RUNS ON THE FLEET</div>
@@ -1308,7 +1159,7 @@ footer {
   </div>
 </section>
 
-<section id="try data-scene class="demo-section">
+<section id="try" data-scene class="demo-section">
   <div class="container">
     <div class="reveal" style="max-width:760px;">
       <div class="eyebrow">// TRY IT</div>
@@ -1338,7 +1189,7 @@ footer {
   </div>
 </section>
 
-<section id="access data-scene class="cta-section">
+<section id="access" data-scene class="cta-section">
   <div class="container">
     <h2 class="reveal">Tell us what you<br/>want the fleet to run.</h2>
     <p class="reveal">Early access is invitation-only. We match operators to the agents that fit their work.</p>
