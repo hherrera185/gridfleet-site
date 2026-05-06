@@ -1,0 +1,283 @@
+/* ============================================================================
+   GridFleet cinematic scaffolding -- Phase 1
+   Per CLU orchestration brief 2026-05-06 + TRON v2 color tokens.
+   Shared primitives only: tokens, type scale, glass-card, scene-transition,
+   gradient atmosphere, container/grid. NO per-page styling here.
+   Pages still load their own per-page CSS; this is additive.
+   ============================================================================ */
+
+:root {
+  /* ---------- color tokens (TRON v2 system) ----------
+     v2 superset works for both "Receipt River" and "wrap-2D" directions;
+     the verified-green stays unused if v1 wins. */
+  --gf-color-bg:                #09090d;
+  --gf-color-surface:           #101015;
+  --gf-color-surface-elevated:  #18191f;
+  --gf-color-panel-right:       #0c0c12;
+
+  --gf-color-accent:            #4d7cfe;   /* electric blue, primary */
+  --gf-color-accent-secondary:  #7c3aed;   /* violet, AI signal */
+  --gf-color-verified:          #22c55e;   /* RESERVED -- VERIFIED badges only */
+
+  --gf-color-text-primary:      #f2f4f8;
+  --gf-color-text-secondary:    #8b92a5;
+  --gf-color-text-tertiary:     #4b5166;
+  --gf-color-text-mono:         #a0aec0;
+  --gf-color-text-verified:     #16a34a;
+
+  --gf-color-border:            rgba(255, 255, 255, 0.06);
+  --gf-color-border-accent:     rgba(77, 124, 254, 0.15);
+  --gf-color-border-verified:   rgba(34, 197, 94, 0.25);
+  --gf-color-divider:           rgba(255, 255, 255, 0.04);
+
+  /* ---------- type scale ---------- */
+  --gf-text-xs:    0.75rem;
+  --gf-text-sm:    0.875rem;
+  --gf-text-base:  1rem;
+  --gf-text-lg:    1.125rem;
+  --gf-text-xl:    1.25rem;
+  --gf-text-2xl:   1.5rem;
+  --gf-text-3xl:   1.875rem;
+  --gf-text-4xl:   2.25rem;
+  --gf-text-5xl:   3rem;
+  --gf-text-6xl:   3.75rem;
+
+  --gf-font-display: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --gf-font-mono:    'JetBrains Mono', ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+
+  --gf-leading-tight:  1.2;
+  --gf-leading-normal: 1.6;
+  --gf-leading-loose:  1.75;
+
+  --gf-tracking-tight:  -0.02em;
+  --gf-tracking-normal:  0;
+  --gf-tracking-wide:    0.08em;
+
+  /* ---------- spacing scale (4px base) ---------- */
+  --gf-space-1:  0.25rem;
+  --gf-space-2:  0.5rem;
+  --gf-space-3:  0.75rem;
+  --gf-space-4:  1rem;
+  --gf-space-6:  1.5rem;
+  --gf-space-8:  2rem;
+  --gf-space-12: 3rem;
+  --gf-space-16: 4rem;
+  --gf-space-24: 6rem;
+
+  /* ---------- radii ---------- */
+  --gf-radius-sm:   4px;
+  --gf-radius-md:   8px;
+  --gf-radius-lg:   12px;
+  --gf-radius-xl:   18px;
+  --gf-radius-pill: 999px;
+
+  /* ---------- timings ---------- */
+  --gf-ease-out:  cubic-bezier(0.22, 0.61, 0.36, 1);
+  --gf-ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --gf-duration-fast:   180ms;
+  --gf-duration-base:   300ms;
+  --gf-duration-slow:   600ms;
+}
+
+/* ============================================================================
+   Atmospheric background (CSS layer, NOT canvas)
+   Fixed-position behind all content. Restraint: opacity 0.06-0.08 per CLU's
+   "no cyberpunk clutter" rule. Hero animation provides kinetic energy; this
+   is atmosphere only. Scoped via .gf-atmosphere class on <body> so pages
+   can opt in once they've adopted the cinematic system.
+   ============================================================================ */
+body.gf-atmosphere::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background:
+    radial-gradient(ellipse 80% 60% at 20% 10%, rgba(77, 124, 254, 0.07) 0%, transparent 70%),
+    radial-gradient(ellipse 60% 80% at 80% 90%, rgba(124, 58, 237, 0.06) 0%, transparent 70%),
+    var(--gf-color-bg);
+  pointer-events: none;
+}
+
+/* ============================================================================
+   Container / 12-col grid (clamp gives fluid horizontal padding)
+   ============================================================================ */
+.gf-container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding-left: clamp(1.5rem, 5vw, 3rem);
+  padding-right: clamp(1.5rem, 5vw, 3rem);
+}
+.gf-grid-12 {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: var(--gf-space-6);
+}
+@media (max-width: 768px) {
+  .gf-grid-12 {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: var(--gf-space-4);
+  }
+}
+
+/* ============================================================================
+   Glass card primitive (CSS-only, no JS)
+   Use sparingly. Do NOT nest .gf-glass inside .gf-glass on mobile (perf).
+   ============================================================================ */
+.gf-glass {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--gf-color-border);
+  border-radius: var(--gf-radius-lg);
+  backdrop-filter: blur(12px) saturate(140%);
+  -webkit-backdrop-filter: blur(12px) saturate(140%);
+  box-shadow: 0 4px 32px rgba(0, 0, 0, 0.40);
+}
+.gf-glass--elevated {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: var(--gf-color-border-accent);
+  box-shadow: 0 8px 48px rgba(0, 0, 0, 0.50);
+}
+.gf-glass--receipt {
+  background: rgba(24, 25, 31, 0.85);
+  border: 1px solid var(--gf-color-border-verified);
+  border-radius: var(--gf-radius-md);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+/* ============================================================================
+   Scene-transition primitive
+   Markup: <section data-scene class="gf-scene"> ... </section>
+   cinematic.js adds .gf-scene--visible when the section enters the viewport.
+   No JavaScript animation loops here -- class toggle, CSS does the work.
+   ============================================================================ */
+.gf-scene {
+  opacity: 0;
+  transform: translateY(24px);
+  transition:
+    opacity var(--gf-duration-slow) var(--gf-ease-out),
+    transform var(--gf-duration-slow) var(--gf-ease-out);
+  will-change: opacity, transform;
+}
+.gf-scene--visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+.gf-scene--stagger > * {
+  opacity: 0;
+  transform: translateY(16px);
+  transition:
+    opacity var(--gf-duration-base) var(--gf-ease-out),
+    transform var(--gf-duration-base) var(--gf-ease-out);
+}
+.gf-scene--visible.gf-scene--stagger > *:nth-child(1) { transition-delay:    0ms; opacity: 1; transform: translateY(0); }
+.gf-scene--visible.gf-scene--stagger > *:nth-child(2) { transition-delay:   80ms; opacity: 1; transform: translateY(0); }
+.gf-scene--visible.gf-scene--stagger > *:nth-child(3) { transition-delay:  160ms; opacity: 1; transform: translateY(0); }
+.gf-scene--visible.gf-scene--stagger > *:nth-child(4) { transition-delay:  240ms; opacity: 1; transform: translateY(0); }
+.gf-scene--visible.gf-scene--stagger > *:nth-child(5) { transition-delay:  320ms; opacity: 1; transform: translateY(0); }
+.gf-scene--visible.gf-scene--stagger > *:nth-child(6) { transition-delay:  400ms; opacity: 1; transform: translateY(0); }
+
+/* ============================================================================
+   CTA primitives
+   Magnetic hover applied via cinematic.js on desktop (.gf-cta-magnetic).
+   Mobile gets a subtle pulse ring (CSS-only, no JS).
+   ============================================================================ */
+.gf-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--gf-space-2);
+  padding: var(--gf-space-3) var(--gf-space-6);
+  font: 500 var(--gf-text-sm)/1 var(--gf-font-display);
+  letter-spacing: var(--gf-tracking-normal);
+  border-radius: var(--gf-radius-md);
+  border: 1px solid transparent;
+  background: var(--gf-color-accent);
+  color: #fff;
+  cursor: pointer;
+  transition:
+    transform var(--gf-duration-fast) var(--gf-ease-out),
+    background var(--gf-duration-fast) var(--gf-ease-out),
+    box-shadow var(--gf-duration-fast) var(--gf-ease-out);
+  text-decoration: none;
+}
+.gf-cta:hover { background: #5e8cff; box-shadow: 0 8px 24px rgba(77, 124, 254, 0.35); }
+.gf-cta:active { transform: translateY(1px); }
+.gf-cta--ghost {
+  background: transparent;
+  border-color: var(--gf-color-border-accent);
+  color: var(--gf-color-text-primary);
+}
+.gf-cta--ghost:hover { background: rgba(77, 124, 254, 0.08); box-shadow: none; }
+
+@media (pointer: coarse) {
+  .gf-cta-magnetic { position: relative; }
+  .gf-cta-magnetic::after {
+    content: '';
+    position: absolute;
+    inset: -4px;
+    border-radius: inherit;
+    border: 1px solid rgba(77, 124, 254, 0.25);
+    animation: gf-pulse-ring 2.4s var(--gf-ease-out) infinite;
+    pointer-events: none;
+  }
+}
+@keyframes gf-pulse-ring {
+  0%   { opacity: 0.6; transform: scale(1); }
+  100% { opacity: 0;   transform: scale(1.18); }
+}
+
+/* ============================================================================
+   Pill / chip / badge
+   ============================================================================ */
+.gf-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--gf-space-2);
+  padding: var(--gf-space-1) var(--gf-space-3);
+  font: 500 var(--gf-text-xs)/1 var(--gf-font-display);
+  letter-spacing: var(--gf-tracking-wide);
+  text-transform: uppercase;
+  border: 1px solid var(--gf-color-border);
+  border-radius: var(--gf-radius-pill);
+  background: rgba(255, 255, 255, 0.03);
+  color: var(--gf-color-text-secondary);
+}
+.gf-badge--verified {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--gf-space-1);
+  padding: 2px var(--gf-space-2);
+  font: 500 var(--gf-text-xs)/1 var(--gf-font-mono);
+  letter-spacing: var(--gf-tracking-wide);
+  text-transform: uppercase;
+  background: rgba(34, 197, 94, 0.10);
+  border: 1px solid var(--gf-color-border-verified);
+  color: var(--gf-color-verified);
+  border-radius: var(--gf-radius-sm);
+}
+
+/* ============================================================================
+   Reduced-motion: kill all motion. Cinematic still reads via the static
+   composition; nothing should ANIMATE for users opting out.
+   ============================================================================ */
+@media (prefers-reduced-motion: reduce) {
+  .gf-scene,
+  .gf-scene > * {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+  .gf-cta,
+  .gf-cta-magnetic { transition: none !important; animation: none !important; }
+  .gf-cta-magnetic::after { animation: none !important; opacity: 0 !important; }
+}
+
+/* Mobile: cut the heavy backdrop-filter stacking (CLU perf rule) */
+@media (max-width: 768px) {
+  .gf-glass .gf-glass {
+    /* nested glass = single layer only on mobile */
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    background: var(--gf-color-surface);
+  }
+}
