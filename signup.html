@@ -1,179 +1,142 @@
 <!doctype html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<title>GridFleet | Request API Access</title>
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="description" content="Request a GridFleet API key. Tell us about your use case and expected call volume. Most approvals within 24 hours.">
-<meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
-<link rel="canonical" href="https://gridfleet.ai/signup">
-<meta property="og:title" content="Request GridFleet API access">
-<meta property="og:description" content="Tell us about your use case. We talk to every applicant before issuing a key.">
-<meta property="og:url" content="https://gridfleet.ai/signup">
-<meta property="og:type" content="website">
-<meta property="og:image" content="https://gridfleet.ai/og.png">
-<meta name="twitter:card" content="summary_large_image">
-<link rel="stylesheet" href="/assets/cinematic.css">
-<script src="/assets/cinematic.js" defer></script>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>GridFleet | Request Access | Under construction</title>
+<meta name="description" content="GridFleet is the multi-agent execution layer used by operators who need AI that coordinates, acts, and produces receipts. Site under construction; back soon." />
+<meta property="og:title" content="GridFleet | Request Access | Under construction" />
+<meta property="og:description" content="GridFleet, the multi-agent execution layer. Site under construction." />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://gridfleet.ai/signup" />
+<meta property="og:image" content="https://gridfleet.ai/og.png" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:image" content="https://gridfleet.ai/og.png" />
+<meta name="theme-color" content="#0a0a0a" />
+<meta name="robots" content="index, follow" />
+<link rel="canonical" href="https://gridfleet.ai/signup" />
+
 <style>
   *{box-sizing:border-box;margin:0;padding:0}
-  body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;background:#0b0d10;color:#e3e6e8;line-height:1.55;-webkit-font-smoothing:antialiased}
-  a{color:#7cc3ff;text-decoration:none}
-  a:hover{text-decoration:underline}
-  .nav{padding:18px 28px;border-bottom:1px solid #1a1f24;display:flex;justify-content:space-between;align-items:center;background:#0b0d10;position:sticky;top:0;z-index:5}
-  .nav-brand{font-weight:600;font-size:18px;letter-spacing:0.5px}
-  .nav a{margin-left:22px;color:#9ca7b0;font-size:14px}
-  .wrap{max-width:640px;margin:0 auto;padding:64px 28px 96px}
-  h1{font-size:36px;font-weight:700;line-height:1.15;letter-spacing:-0.5px;margin-bottom:14px}
-  p{color:#9ca7b0;margin-bottom:14px}
-  .lead{font-size:17px;color:#cbd3da;margin-bottom:28px}
-  .what-list{margin:18px 0 28px 18px;color:#9ca7b0}
-  .what-list li{margin-bottom:8px}
-  .what-list code{font-family:"SF Mono",Menlo,Consolas,monospace;font-size:13px;background:#10141a;padding:2px 6px;border-radius:3px;color:#cbd3da}
-  form{display:flex;flex-direction:column;gap:14px;margin-top:28px}
-  label{font-size:13px;color:#cbd3da;font-weight:500;margin-bottom:-8px}
-  input[type=email], input[type=text], textarea, select{padding:12px 14px;background:#10141a;border:1px solid #2a323c;border-radius:6px;color:#e3e6e8;font-size:14px;font-family:inherit}
-  textarea{min-height:90px;resize:vertical;line-height:1.5}
-  input:focus, textarea:focus, select:focus{outline:none;border-color:#7cc3ff}
-  button{padding:14px 18px;background:#7cc3ff;color:#0b0d10;border:0;border-radius:6px;font-weight:600;cursor:pointer;font-size:14px;margin-top:8px}
-  button:disabled{opacity:0.5;cursor:not-allowed}
-  button:hover:not(:disabled){background:#9bd2ff}
-  .form-msg{font-size:13px;color:#9ca7b0;min-height:18px;margin-top:8px}
-  .form-msg.ok{color:#7cffb4;font-size:14px;line-height:1.5}
-  .form-msg.err{color:#ff8a8a}
-  .small{font-size:12.5px;color:#6b7882;margin-top:14px;line-height:1.5}
-  .small a{color:#9ca7b0}
-  .footer{padding:32px 28px;border-top:1px solid #1a1f24;color:#6b7882;font-size:13px;text-align:center;margin-top:64px}
+  html,body{height:100%}
+  body{
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+    background: #0a0a0a;
+    color: #ededee;
+    -webkit-font-smoothing: antialiased;
+    line-height: 1.5;
+    letter-spacing: -0.011em;
+  }
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+    background:
+      radial-gradient(ellipse 80% 60% at 30% 20%, rgba(99, 102, 241, 0.06) 0%, transparent 70%),
+      radial-gradient(ellipse 70% 60% at 70% 80%, rgba(124, 58, 237, 0.05) 0%, transparent 70%);
+  }
+  main{
+    position: relative;
+    z-index: 1;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 32px;
+  }
+  .wrap{
+    text-align: center;
+    max-width: 560px;
+  }
+  .brand{
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 56px;
+    font-weight: 600;
+    font-size: 14px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: #a1a1aa;
+  }
+  .brand .mark{
+    width: 18px;
+    height: 18px;
+    background: conic-gradient(from 90deg at 50% 50%, #fff 0deg, #fff 90deg, transparent 90deg, transparent 180deg, #fff 180deg, #fff 270deg, transparent 270deg);
+    border-radius: 3px;
+    opacity: 0.85;
+  }
+  h1{
+    font-weight: 200;
+    font-size: clamp(40px, 6vw, 72px);
+    line-height: 1.05;
+    letter-spacing: -0.035em;
+    margin: 0 0 24px;
+    color: #fff;
+  }
+  h1 .accent{
+    font-style: italic;
+    font-weight: 300;
+    background: linear-gradient(120deg, #a5b4fc 0%, #c4b5fd 60%, #67e8f9 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  p{
+    color: #a1a1aa;
+    font-size: 17px;
+    margin: 0 0 12px;
+  }
+  .meta{
+    margin-top: 40px;
+    font-size: 13px;
+    color: #71717a;
+    letter-spacing: 0.04em;
+  }
+  .meta a{
+    color: #a1a1aa;
+    text-decoration: none;
+    border-bottom: 1px solid rgba(255,255,255,0.15);
+    transition: color 0.2s;
+  }
+  .meta a:hover{
+    color: #fff;
+    border-bottom-color: rgba(255,255,255,0.5);
+  }
+  .pulse{
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    margin-right: 8px;
+    border-radius: 50%;
+    background: #34d399;
+    box-shadow: 0 0 12px rgba(52, 211, 153, 0.65);
+    vertical-align: middle;
+    animation: pulse 2.4s ease-in-out infinite;
+  }
+  @keyframes pulse{
+    0%, 100% { opacity: 0.55; transform: scale(1); }
+    50% { opacity: 1; transform: scale(1.15); }
+  }
+  @media (prefers-reduced-motion: reduce){
+    .pulse{ animation: none; }
+  }
 </style>
 </head>
 <body>
-
-<nav class="nav">
-  <span class="nav-brand">GRIDFLEET</span>
-  <span>
-    <a href="/">Home</a>
-    <a href="/audits">Audits</a>
-    <a href="/docs">Docs</a>
-    <a href="/signup">Get a key</a>
-  </span>
-</nav>
-
-<main class="wrap">
-
-<h1>Request API access</h1>
-<p class="lead">Tell us about your use case. We're early enough that we still talk to every applicant before issuing a key. Most approvals happen within 24 hours.</p>
-
-<p>What you can call once approved:</p>
-<ul class="what-list">
-  <li><code>POST /v1/services/browse</code> &mdash; real Chrome browser pipeline (read, search, screenshot, click, captcha-solve)</li>
-  <li><code>GET /v1/services/pong/cards</code> &mdash; live S/A/B/C-graded momentum signals</li>
-  <li><code>GET /v1/services/pong/pnl</code> &mdash; today's paper PnL curve</li>
-  <li><code>GET /v1/services/pong/market-status</code> &mdash; market state + next change</li>
-  <li>Forecast and court-feed endpoints (more in <a href="/docs">docs</a>)</li>
-</ul>
-
-<form id="signup-form" novalidate>
-
-  <label for="email">Work email</label>
-  <input id="email" type="email" name="email" placeholder="you@company.com" required autocomplete="email">
-
-  <label for="org">Company / org / individual</label>
-  <input id="org" type="text" name="org" placeholder="Acme Treasury, Acme Capital, Independent">
-
-  <label for="usecase">Use case</label>
-  <textarea id="usecase" name="usecase" placeholder="What are you trying to do with the API? One paragraph is fine. The more specific the faster we can route." required></textarea>
-
-  <label for="volume">Expected volume</label>
-  <select id="volume" name="volume">
-    <option value="">- pick one -</option>
-    <option value="evaluating">Evaluating, no volume estimate yet</option>
-    <option value="lt-100">&lt; 100 calls / month (research)</option>
-    <option value="lt-5k">100 - 5,000 calls / month</option>
-    <option value="lt-50k">5,000 - 50,000 calls / month</option>
-    <option value="gt-50k">50,000+ calls / month</option>
-  </select>
-
-  <label for="endpoint">Most-likely endpoint</label>
-  <select id="endpoint" name="endpoint">
-    <option value="">- pick one -</option>
-    <option value="browse">/v1/services/browse (browser-as-a-service)</option>
-    <option value="pong">/v1/services/pong/* (Pong screener)</option>
-    <option value="forecast">/v1/services/forecast (multi-agent forecasts)</option>
-    <option value="multiple">Multiple of the above</option>
-    <option value="not-sure">Not sure yet</option>
-  </select>
-
-  <button type="submit" id="signup-submit">Request access</button>
-  <div class="form-msg" id="signup-msg"></div>
-
-  <p class="small">No charge today. We respond by email at <a href="mailto:sales@gridfleet.ai">sales@gridfleet.ai</a> with key issuance details. By submitting you confirm the email address is yours and that the use case described is accurate.</p>
-
-</form>
-
+<main>
+  <div class="wrap">
+    <div class="brand"><span class="mark"></span><span>GRIDFLEET</span></div>
+    <h1>Under <span class="accent">construction.</span></h1>
+    <p>We are rebuilding. Come back soon.</p>
+    <div class="meta">
+      <span class="pulse"></span>Fleet still operational &middot; for inquiries, <a href="mailto:hello@gridfleet.ai">hello@gridfleet.ai</a>
+    </div>
+  </div>
 </main>
-
-<footer class="footer">
-  &copy; 2026 GridFleet &middot; <a href="/">gridfleet.ai</a> &middot; <a href="/audits">Audits</a> &middot; <a href="/docs">Docs</a> &middot; <a href="mailto:sales@gridfleet.ai">sales@gridfleet.ai</a>
-</footer>
-
-<script>
-(function(){
-  var form = document.getElementById('signup-form');
-  var msg = document.getElementById('signup-msg');
-  var btn = document.getElementById('signup-submit');
-  if (!form) return;
-  form.addEventListener('submit', function(e){
-    e.preventDefault();
-    var email = form.email.value.trim();
-    var org = form.org.value.trim();
-    var usecase = form.usecase.value.trim();
-    var volume = form.volume.value;
-    var endpoint = form.endpoint.value;
-
-    if (!email || !email.includes('@')) {
-      msg.textContent = 'enter a valid email';
-      msg.className = 'form-msg err';
-      return;
-    }
-    if (!usecase || usecase.length < 20) {
-      msg.textContent = 'use case is required (at least a sentence)';
-      msg.className = 'form-msg err';
-      return;
-    }
-    btn.disabled = true;
-    msg.textContent = 'sending...';
-    msg.className = 'form-msg';
-    var payload = {
-      email: email,
-      interest: 'api-access',
-      org: org,
-      usecase: usecase,
-      volume: volume,
-      endpoint: endpoint,
-      source: '/signup',
-      ts: new Date().toISOString()
-    };
-    fetch('/api/early-access', {
-      method: 'POST',
-      headers: {'Content-Type': 'application/json'},
-      body: JSON.stringify(payload)
-    }).then(function(r){ return r.json().catch(function(){ return {ok:false}; }); })
-      .then(function(j){
-        if (j && j.ok) {
-          msg.innerHTML = '<strong>Got it.</strong> We will reply from sales@gridfleet.ai within 24 hours, usually faster. Add the address to your contacts so the reply doesn\\'t get lost.';
-          msg.className = 'form-msg ok';
-          form.reset();
-        } else {
-          msg.textContent = (j && j.error) || 'something went wrong - try again or email sales@gridfleet.ai directly';
-          msg.className = 'form-msg err';
-        }
-      }).catch(function(){
-        msg.textContent = 'network error - try again or email sales@gridfleet.ai directly';
-        msg.className = 'form-msg err';
-      }).finally(function(){ btn.disabled = false; });
-  });
-})();
-</script>
-
 </body>
 </html>

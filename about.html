@@ -1,151 +1,142 @@
 <!doctype html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<title>About GridFleet | The multi-agent execution layer</title>
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="description" content="What GridFleet is, who runs it, when it launched, and what's in the fleet. Concrete facts, citation-friendly.">
-<meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
-<link rel="canonical" href="https://gridfleet.ai/about">
-<meta property="og:title" content="About GridFleet">
-<meta property="og:description" content="Concrete facts about GridFleet - what it is, who runs it, what's in the fleet.">
-<meta property="og:url" content="https://gridfleet.ai/about">
-<meta property="og:type" content="website">
-<meta property="og:image" content="https://gridfleet.ai/og.png">
-<meta name="twitter:card" content="summary_large_image">
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>GridFleet | About | Under construction</title>
+<meta name="description" content="GridFleet is the multi-agent execution layer used by operators who need AI that coordinates, acts, and produces receipts. Site under construction; back soon." />
+<meta property="og:title" content="GridFleet | About | Under construction" />
+<meta property="og:description" content="GridFleet, the multi-agent execution layer. Site under construction." />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://gridfleet.ai/about" />
+<meta property="og:image" content="https://gridfleet.ai/og.png" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:image" content="https://gridfleet.ai/og.png" />
+<meta name="theme-color" content="#0a0a0a" />
+<meta name="robots" content="index, follow" />
+<link rel="canonical" href="https://gridfleet.ai/about" />
 
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "AboutPage",
-  "name": "About GridFleet",
-  "url": "https://gridfleet.ai/about",
-  "mainEntity": {"@id": "https://gridfleet.ai/#org"},
-  "breadcrumb": {
-    "@type": "BreadcrumbList",
-    "itemListElement": [
-      {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://gridfleet.ai/"},
-      {"@type": "ListItem", "position": 2, "name": "About", "item": "https://gridfleet.ai/about"}
-    ]
-  }
-}
-</script>
-
-<link rel="stylesheet" href="/assets/cinematic.css">
-<script src="/assets/cinematic.js" defer></script>
 <style>
   *{box-sizing:border-box;margin:0;padding:0}
-  body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;background:#0b0d10;color:#e3e6e8;line-height:1.65;-webkit-font-smoothing:antialiased}
-  a{color:#7cc3ff;text-decoration:none}
-  a:hover{text-decoration:underline}
-  .nav{padding:18px 28px;border-bottom:1px solid #1a1f24;display:flex;justify-content:space-between;align-items:center;background:#0b0d10;position:sticky;top:0;z-index:5}
-  .nav-brand{font-weight:600;font-size:18px;letter-spacing:0.5px}
-  .nav a{margin-left:22px;color:#9ca7b0;font-size:14px}
-  .wrap{max-width:760px;margin:0 auto;padding:64px 28px 96px}
-  h1{font-size:42px;font-weight:700;line-height:1.15;letter-spacing:-0.5px;margin-bottom:8px}
-  h2{font-size:22px;font-weight:600;margin:48px 0 14px;letter-spacing:-0.2px}
-  h3{font-size:16px;font-weight:600;margin:24px 0 8px;color:#cbd3da}
-  p{color:#9ca7b0;margin-bottom:14px}
-  .lead{font-size:18px;color:#cbd3da;margin-bottom:28px}
-  ul,ol{margin:0 0 16px 22px;color:#9ca7b0}
-  ul li, ol li{margin-bottom:8px}
-  table{width:100%;border-collapse:collapse;margin:14px 0;font-size:14.5px}
-  th{text-align:left;padding:10px 12px;border-bottom:1px solid #2a323c;color:#cbd3da;font-weight:600}
-  td{padding:10px 12px;border-bottom:1px solid #1a1f24;color:#9ca7b0;vertical-align:top}
-  td code, code{font-family:"SF Mono",Menlo,Consolas,monospace;font-size:13px;background:#10141a;padding:2px 6px;border-radius:3px;color:#cbd3da}
-  .footer{padding:32px 28px;border-top:1px solid #1a1f24;color:#6b7882;font-size:13px;text-align:center;margin-top:48px}
-  .label{font-size:12px;text-transform:uppercase;letter-spacing:1px;color:#6b7882;margin-bottom:6px}
+  html,body{height:100%}
+  body{
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+    background: #0a0a0a;
+    color: #ededee;
+    -webkit-font-smoothing: antialiased;
+    line-height: 1.5;
+    letter-spacing: -0.011em;
+  }
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+    background:
+      radial-gradient(ellipse 80% 60% at 30% 20%, rgba(99, 102, 241, 0.06) 0%, transparent 70%),
+      radial-gradient(ellipse 70% 60% at 70% 80%, rgba(124, 58, 237, 0.05) 0%, transparent 70%);
+  }
+  main{
+    position: relative;
+    z-index: 1;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 32px;
+  }
+  .wrap{
+    text-align: center;
+    max-width: 560px;
+  }
+  .brand{
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 56px;
+    font-weight: 600;
+    font-size: 14px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: #a1a1aa;
+  }
+  .brand .mark{
+    width: 18px;
+    height: 18px;
+    background: conic-gradient(from 90deg at 50% 50%, #fff 0deg, #fff 90deg, transparent 90deg, transparent 180deg, #fff 180deg, #fff 270deg, transparent 270deg);
+    border-radius: 3px;
+    opacity: 0.85;
+  }
+  h1{
+    font-weight: 200;
+    font-size: clamp(40px, 6vw, 72px);
+    line-height: 1.05;
+    letter-spacing: -0.035em;
+    margin: 0 0 24px;
+    color: #fff;
+  }
+  h1 .accent{
+    font-style: italic;
+    font-weight: 300;
+    background: linear-gradient(120deg, #a5b4fc 0%, #c4b5fd 60%, #67e8f9 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  p{
+    color: #a1a1aa;
+    font-size: 17px;
+    margin: 0 0 12px;
+  }
+  .meta{
+    margin-top: 40px;
+    font-size: 13px;
+    color: #71717a;
+    letter-spacing: 0.04em;
+  }
+  .meta a{
+    color: #a1a1aa;
+    text-decoration: none;
+    border-bottom: 1px solid rgba(255,255,255,0.15);
+    transition: color 0.2s;
+  }
+  .meta a:hover{
+    color: #fff;
+    border-bottom-color: rgba(255,255,255,0.5);
+  }
+  .pulse{
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    margin-right: 8px;
+    border-radius: 50%;
+    background: #34d399;
+    box-shadow: 0 0 12px rgba(52, 211, 153, 0.65);
+    vertical-align: middle;
+    animation: pulse 2.4s ease-in-out infinite;
+  }
+  @keyframes pulse{
+    0%, 100% { opacity: 0.55; transform: scale(1); }
+    50% { opacity: 1; transform: scale(1.15); }
+  }
+  @media (prefers-reduced-motion: reduce){
+    .pulse{ animation: none; }
+  }
 </style>
 </head>
 <body>
-
-<nav class="nav">
-  <span class="nav-brand">GRIDFLEET</span>
-  <span>
-    <a href="/">Home</a>
-    <a href="/about">About</a>
-    <a href="/audits">Audits</a>
-    <a href="/docs">Docs</a>
-    <a href="/signup">Get a key</a>
-  </span>
-</nav>
-
-<main class="wrap">
-
-<div class="label">About</div>
-<h1>GridFleet</h1>
-<p class="lead">A multi-agent execution layer. Seven specialized AI agents behind one bearer-token API. Used for browser automation, equity momentum signals, multi-agent forecasts, federal court monitoring, and quarterly DeFi config-risk audits.</p>
-
-<h2>Quick facts</h2>
-<table>
-  <tr><th style="width:35%">Brand</th><td>GridFleet (one word)</td></tr>
-  <tr><th>Domain</th><td><a href="https://gridfleet.ai">gridfleet.ai</a></td></tr>
-  <tr><th>Public API</th><td><a href="https://api.gridfleet.ai/v1/health">api.gridfleet.ai/v1</a></td></tr>
-  <tr><th>Founded</th><td>2026</td></tr>
-  <tr><th>Status</th><td>Production. v1 API live as of May 2026.</td></tr>
-  <tr><th>Hosting</th><td>Owner-operated hardware. Public surface fronted by Cloudflare Workers + Tailscale Funnel.</td></tr>
-  <tr><th>Public face</th><td><a href="https://x.com/CLU_AGENT">@CLU_AGENT</a> on X</td></tr>
-</table>
-
-<h2>The fleet</h2>
-<p>Seven specialized agents, each with a defined surface and ownership. Customers do not pick an agent; they call an endpoint, and the orchestrator routes to whichever agents the work needs.</p>
-
-<table>
-  <tr><th style="width:25%">Agent</th><th>Role</th></tr>
-  <tr><td><strong>CLU</strong></td><td>Orchestration. Routes work, manages cross-agent handoffs, enforces the verbs ACL.</td></tr>
-  <tr><td><strong>TRON</strong></td><td>Security review. Audits changes, signs off on deploys, runs weekly Grid audits.</td></tr>
-  <tr><td><strong>DUMONT</strong></td><td>Account and infrastructure operations. Owns Cloudflare, Stripe, GitHub, customer key issuance.</td></tr>
-  <tr><td><strong>BECK</strong></td><td>Diagnostics and self-healing. Detects degraded signals and triggers reversible repairs.</td></tr>
-  <tr><td><strong>YORI</strong></td><td>Content and disclosure. Public communications, X posts, changelogs.</td></tr>
-  <tr><td><strong>NEON DAVE</strong></td><td>Markets and trading research. Owns the Pong screener, weather/PM trading research.</td></tr>
-  <tr><td><strong>Master orchestrator</strong></td><td>Human-in-the-loop signoff for irreversible changes (capital movement, legal, anything one-way).</td></tr>
-</table>
-
-<h2>What's available today</h2>
-<ul>
-  <li><strong>Browser-as-a-Service</strong> &mdash; real-Chrome automation with behavioral realism + in-house captcha solver. <code>POST /v1/services/browse</code>.</li>
-  <li><strong>Pong Screener</strong> &mdash; live US small-cap momentum signals graded S/A/B/C. <code>GET /v1/services/pong/cards</code> + sibling endpoints.</li>
-  <li><strong>Multi-agent forecast</strong> &mdash; ensemble predictions across research, market-data, and scenario-simulation agents. <code>POST /v1/services/forecast</code>.</li>
-  <li><strong>Court docket monitoring</strong> &mdash; federal court subscriptions. <code>POST /v1/services/court-feed/subscribe</code>.</li>
-  <li><strong>DeFi Config-Risk Audits</strong> &mdash; quarterly audits, six risk surfaces. <a href="/audits">Details</a>.</li>
-  <li><strong>MCP servers</strong> &mdash; the browse and Pong endpoints are wrapped as Model Context Protocol servers, installable in Claude Code, Cursor, Codex CLI.</li>
-</ul>
-
-<h2>How GridFleet differs</h2>
-<h3>vs. single-LLM APIs (OpenAI, Anthropic, Google)</h3>
-<p>Single-LLM APIs return one model's completion to one prompt. GridFleet returns the result of a coordinated fleet operation, with receipts and audit trails as first-class outputs. You don't pick the model; the fleet routes the work to whichever agents it needs.</p>
-
-<h3>vs. browser-automation services (Browserbase, Browser-Use Cloud, Steel)</h3>
-<p>GridFleet ships an in-house captcha solver (Tesseract + Sonnet vision; no third-party captcha-solving fees), Phase 2a-2d behavioral realism, and Phase 3 multi-strategy popup dismissal. The browser pipeline is bundled with the rest of the fleet, so a single key gets you forecasts, screeners, and court feeds in addition to browse.</p>
-
-<h3>vs. DeFi research firms</h3>
-<p>The audit product covers the <em>operational config</em> that changes between formal audits &mdash; admin keys, oracle source lists, timelock bypass paths, governance drift &mdash; with sources cited per finding. Most "DeFi due diligence" stops at TVL and audit-firm logos.</p>
-
-<h2>Constraints we keep</h2>
-<ol>
-  <li><strong>No public-cloud lock-in.</strong> The fleet runs on dedicated hardware. Cloudflare and Tailscale handle public exposure but the agents themselves are owner-operated.</li>
-  <li><strong>Receipts on every call.</strong> Every API call returns a request_id and writes a billing-events record. Audit trails are not optional.</li>
-  <li><strong>Reversible by default.</strong> Anything irreversible (capital, legal, hard-to-undo infra) requires human signoff. The fleet has agency, not authority.</li>
-  <li><strong>No data resale.</strong> Customer request bodies and response payloads are not stored beyond what's needed for the call.</li>
-</ol>
-
-<h2>Contact</h2>
-<table>
-  <tr><th style="width:35%">Sales / API access</th><td><a href="mailto:sales@gridfleet.ai">sales@gridfleet.ai</a></td></tr>
-  <tr><th>Technical support</th><td><a href="mailto:support@gridfleet.ai">support@gridfleet.ai</a></td></tr>
-  <tr><th>Security disclosures</th><td><a href="mailto:security@gridfleet.ai">security@gridfleet.ai</a></td></tr>
-  <tr><th>DMCA</th><td><a href="mailto:dmca@gridfleet.ai">dmca@gridfleet.ai</a></td></tr>
-  <tr><th>Privacy</th><td><a href="mailto:privacy@gridfleet.ai">privacy@gridfleet.ai</a></td></tr>
-  <tr><th>Legal</th><td><a href="mailto:legal@gridfleet.ai">legal@gridfleet.ai</a></td></tr>
-</table>
-
-<p style="margin-top:32px">Page last updated 2026-05-05. <a href="/llms-full.txt">Machine-readable extract for LLM ingestion</a>.</p>
-
+<main>
+  <div class="wrap">
+    <div class="brand"><span class="mark"></span><span>GRIDFLEET</span></div>
+    <h1>Under <span class="accent">construction.</span></h1>
+    <p>We are rebuilding. Come back soon.</p>
+    <div class="meta">
+      <span class="pulse"></span>Fleet still operational &middot; for inquiries, <a href="mailto:hello@gridfleet.ai">hello@gridfleet.ai</a>
+    </div>
+  </div>
 </main>
-
-<footer class="footer">
-  &copy; 2026 GridFleet &middot; <a href="/">gridfleet.ai</a> &middot; <a href="/audits">Audits</a> &middot; <a href="/docs">Docs</a> &middot; <a href="/signup">Get a key</a>
-</footer>
-
 </body>
 </html>

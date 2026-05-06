@@ -1,267 +1,142 @@
 <!doctype html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<title>GridFleet | API Docs</title>
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="description" content="GridFleet API documentation. v1 endpoints for browser-as-a-service, Pong momentum screener, multi-agent forecasts, court docket monitoring. Bearer-token auth, JSON over HTTPS.">
-<meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
-<meta name="keywords" content="GridFleet API, multi-agent API, browser automation API, MCP server, Pong screener API, AI agent API, bearer token API">
-<link rel="canonical" href="https://gridfleet.ai/docs">
-<meta property="og:title" content="GridFleet API Docs">
-<meta property="og:description" content="v1 endpoints, auth, errors, examples. JSON over HTTPS at api.gridfleet.ai/v1/*.">
-<meta property="og:url" content="https://gridfleet.ai/docs">
-<meta property="og:type" content="website">
-<meta property="og:image" content="https://gridfleet.ai/og.png">
-<meta name="twitter:card" content="summary_large_image">
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>GridFleet | API Docs | Under construction</title>
+<meta name="description" content="GridFleet is the multi-agent execution layer used by operators who need AI that coordinates, acts, and produces receipts. Site under construction; back soon." />
+<meta property="og:title" content="GridFleet | API Docs | Under construction" />
+<meta property="og:description" content="GridFleet, the multi-agent execution layer. Site under construction." />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://gridfleet.ai/docs" />
+<meta property="og:image" content="https://gridfleet.ai/og.png" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:image" content="https://gridfleet.ai/og.png" />
+<meta name="theme-color" content="#0a0a0a" />
+<meta name="robots" content="index, follow" />
+<link rel="canonical" href="https://gridfleet.ai/docs" />
 
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "TechArticle",
-  "headline": "GridFleet API documentation",
-  "description": "v1 endpoints, authentication model, error codes, and examples for the GridFleet multi-agent execution layer.",
-  "url": "https://gridfleet.ai/docs",
-  "author": {"@type": "Organization", "name": "GridFleet", "url": "https://gridfleet.ai"},
-  "datePublished": "2026-05-05",
-  "dateModified": "2026-05-05",
-  "inLanguage": "en-US"
-}
-</script>
-<link rel="stylesheet" href="/assets/cinematic.css">
-<script src="/assets/cinematic.js" defer></script>
 <style>
   *{box-sizing:border-box;margin:0;padding:0}
-  body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;background:#0b0d10;color:#e3e6e8;line-height:1.6;-webkit-font-smoothing:antialiased}
-  a{color:#7cc3ff;text-decoration:none}
-  a:hover{text-decoration:underline}
-  .nav{padding:18px 28px;border-bottom:1px solid #1a1f24;display:flex;justify-content:space-between;align-items:center;background:#0b0d10;position:sticky;top:0;z-index:5}
-  .nav-brand{font-weight:600;font-size:18px;letter-spacing:0.5px}
-  .nav a{margin-left:22px;color:#9ca7b0;font-size:14px}
-  .layout{display:grid;grid-template-columns:240px 1fr;max-width:1100px;margin:0 auto;gap:0}
-  .toc{padding:48px 0 64px 28px;border-right:1px solid #1a1f24;position:sticky;top:60px;align-self:start;height:calc(100vh - 60px);overflow:auto}
-  .toc-title{font-size:11px;text-transform:uppercase;letter-spacing:1px;color:#6b7882;margin-bottom:14px;padding-left:4px}
-  .toc a{display:block;padding:6px 8px;color:#9ca7b0;font-size:13px;border-radius:4px}
-  .toc a:hover{background:#10141a;color:#e3e6e8;text-decoration:none}
-  .toc-section{font-size:11px;text-transform:uppercase;color:#6b7882;margin:18px 0 6px 4px;letter-spacing:0.5px}
-  .content{padding:48px 36px 96px}
-  h1{font-size:36px;font-weight:700;letter-spacing:-0.5px;margin-bottom:8px}
-  h2{font-size:24px;font-weight:600;margin:48px 0 16px;letter-spacing:-0.2px;border-top:1px solid #1a1f24;padding-top:36px}
-  h2:first-of-type{border-top:0;padding-top:0}
-  h3{font-size:17px;font-weight:600;margin:28px 0 12px}
-  h4{font-size:14px;font-weight:600;margin:18px 0 8px;color:#cbd3da;text-transform:uppercase;letter-spacing:0.5px}
-  p{color:#9ca7b0;margin-bottom:14px}
-  .endpoint{display:inline-block;font-family:"SF Mono",Menlo,Consolas,monospace;font-size:13px;background:#0a1320;color:#7cc3ff;padding:4px 10px;border-radius:4px;border:1px solid #1c2734}
-  code{font-family:"SF Mono",Menlo,Consolas,monospace;font-size:13px;background:#10141a;padding:2px 6px;border-radius:3px;color:#cbd3da;border:1px solid #1a1f24}
-  pre{background:#0e1216;border:1px solid #1a1f24;border-radius:6px;padding:16px;overflow-x:auto;margin:12px 0;font-family:"SF Mono",Menlo,Consolas,monospace;font-size:12.5px;line-height:1.5;color:#cbd3da}
-  pre code{background:transparent;border:0;padding:0;font-size:12.5px;color:inherit}
-  .lead{font-size:17px;color:#cbd3da;margin-bottom:24px;max-width:680px}
-  table{width:100%;border-collapse:collapse;margin:14px 0;font-size:13.5px}
-  th{text-align:left;padding:10px 12px;border-bottom:1px solid #2a323c;color:#cbd3da;font-weight:600}
-  td{padding:10px 12px;border-bottom:1px solid #1a1f24;color:#9ca7b0;vertical-align:top}
-  td code{font-size:12.5px}
-  .note{padding:12px 16px;background:#0e1825;border-left:3px solid #7cc3ff;border-radius:4px;margin:14px 0;font-size:13.5px;color:#cbd3da}
-  .footer{padding:32px 28px;border-top:1px solid #1a1f24;color:#6b7882;font-size:13px;text-align:center;max-width:1100px;margin:0 auto}
-  @media(max-width:880px){
-    .layout{grid-template-columns:1fr}
-    .toc{display:none}
+  html,body{height:100%}
+  body{
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+    background: #0a0a0a;
+    color: #ededee;
+    -webkit-font-smoothing: antialiased;
+    line-height: 1.5;
+    letter-spacing: -0.011em;
+  }
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+    background:
+      radial-gradient(ellipse 80% 60% at 30% 20%, rgba(99, 102, 241, 0.06) 0%, transparent 70%),
+      radial-gradient(ellipse 70% 60% at 70% 80%, rgba(124, 58, 237, 0.05) 0%, transparent 70%);
+  }
+  main{
+    position: relative;
+    z-index: 1;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 32px;
+  }
+  .wrap{
+    text-align: center;
+    max-width: 560px;
+  }
+  .brand{
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 56px;
+    font-weight: 600;
+    font-size: 14px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: #a1a1aa;
+  }
+  .brand .mark{
+    width: 18px;
+    height: 18px;
+    background: conic-gradient(from 90deg at 50% 50%, #fff 0deg, #fff 90deg, transparent 90deg, transparent 180deg, #fff 180deg, #fff 270deg, transparent 270deg);
+    border-radius: 3px;
+    opacity: 0.85;
+  }
+  h1{
+    font-weight: 200;
+    font-size: clamp(40px, 6vw, 72px);
+    line-height: 1.05;
+    letter-spacing: -0.035em;
+    margin: 0 0 24px;
+    color: #fff;
+  }
+  h1 .accent{
+    font-style: italic;
+    font-weight: 300;
+    background: linear-gradient(120deg, #a5b4fc 0%, #c4b5fd 60%, #67e8f9 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  p{
+    color: #a1a1aa;
+    font-size: 17px;
+    margin: 0 0 12px;
+  }
+  .meta{
+    margin-top: 40px;
+    font-size: 13px;
+    color: #71717a;
+    letter-spacing: 0.04em;
+  }
+  .meta a{
+    color: #a1a1aa;
+    text-decoration: none;
+    border-bottom: 1px solid rgba(255,255,255,0.15);
+    transition: color 0.2s;
+  }
+  .meta a:hover{
+    color: #fff;
+    border-bottom-color: rgba(255,255,255,0.5);
+  }
+  .pulse{
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    margin-right: 8px;
+    border-radius: 50%;
+    background: #34d399;
+    box-shadow: 0 0 12px rgba(52, 211, 153, 0.65);
+    vertical-align: middle;
+    animation: pulse 2.4s ease-in-out infinite;
+  }
+  @keyframes pulse{
+    0%, 100% { opacity: 0.55; transform: scale(1); }
+    50% { opacity: 1; transform: scale(1.15); }
+  }
+  @media (prefers-reduced-motion: reduce){
+    .pulse{ animation: none; }
   }
 </style>
 </head>
 <body>
-
-<nav class="nav">
-  <span class="nav-brand">GRIDFLEET</span>
-  <span>
-    <a href="/">Home</a>
-    <a href="/audits">Audits</a>
-    <a href="/docs">Docs</a>
-  </span>
-</nav>
-
-<div class="layout">
-
-<aside class="toc">
-  <div class="toc-title">API v1</div>
-  <a href="#overview">Overview</a>
-  <a href="#auth">Authentication</a>
-  <a href="#errors">Errors &amp; rate limits</a>
-  <div class="toc-section">Browser</div>
-  <a href="#browse">POST /v1/services/browse</a>
-  <div class="toc-section">Pong screener</div>
-  <a href="#pong-cards">GET /pong/cards</a>
-  <a href="#pong-card">GET /pong/card</a>
-  <a href="#pong-pnl">GET /pong/pnl</a>
-  <a href="#pong-market">GET /pong/market-status</a>
-  <div class="toc-section">More</div>
-  <a href="#health">GET /v1/health</a>
-  <a href="#contact">Get a key</a>
-</aside>
-
-<main class="content">
-
-<h1 id="overview">GridFleet API</h1>
-<p class="lead">v1. Bearer-token authenticated. JSON over HTTPS. Public surface at <code>https://api.gridfleet.ai/v1/*</code>.</p>
-
-<p>The fleet exposes three real services through the v1 API: a managed browser pipeline (real Chrome with behavioral realism + an in-house captcha solver), the live Pong momentum screener for US small-cap equities, and a forecast endpoint backed by the multi-agent prediction stack. All endpoints share the same auth, the same rate-limit envelope, and the same per-call billing semantics.</p>
-
-<h2 id="auth">Authentication</h2>
-
-<p>Every request must include an <code>Authorization: Bearer gk_&lt;...&gt;</code> header. Keys are issued per customer and tied to a quota tier.</p>
-
-<pre><code>curl -H "Authorization: Bearer gk_your_key_here" \
-  https://api.gridfleet.ai/v1/services/pong/market-status</code></pre>
-
-<table>
-  <tr><th>Status</th><th>Meaning</th></tr>
-  <tr><td><code>401</code> <code>missing_authorization_header</code></td><td>No Bearer header present.</td></tr>
-  <tr><td><code>401</code> <code>invalid_or_revoked_api_key</code></td><td>Key not recognized or revoked.</td></tr>
-  <tr><td><code>402</code> <code>monthly_usd_quota_exceeded_payment_required</code></td><td>Customer has hit the dollar-amount cap for the month.</td></tr>
-  <tr><td><code>429</code> <code>per_minute_rate_limit_exceeded</code></td><td>Too many calls in the last 60 seconds for this tier. <code>Retry-After</code> header included.</td></tr>
-  <tr><td><code>429</code> <code>monthly_call_quota_exceeded</code></td><td>Tier call cap exhausted for the calendar month.</td></tr>
-</table>
-
-<h2 id="errors">Errors and rate limits</h2>
-
-<p>Successful responses always include <code>{"ok": true, ...}</code>. Errors return <code>{"ok": false, "error": "&lt;code&gt;", ...}</code> plus an HTTP status. Two response headers help with quota awareness:</p>
-
-<table>
-  <tr><th>Header</th><th>Meaning</th></tr>
-  <tr><td><code>X-Grid-Request-Id</code></td><td>UUID of this request &mdash; quote in any support ticket.</td></tr>
-  <tr><td><code>X-Grid-Quota-Calls-Remaining</code></td><td>Calls left in the current calendar month.</td></tr>
-  <tr><td><code>X-Grid-Quota-Usd-Remaining</code></td><td>Dollar quota left in the current calendar month.</td></tr>
-</table>
-
-<div class="note">Per-minute rate limits vary by tier. The 60-second sliding window is enforced before any work runs &mdash; so an over-rate call costs $0 and returns a <code>Retry-After</code> hint.</div>
-
-<h2 id="browse">Browser-as-a-Service</h2>
-
-<p><span class="endpoint">POST /v1/services/browse</span></p>
-
-<p>Drives a real Chrome instance with human-realistic behavior (Phase 2a-2d) and Phase 3 popup dismissal. Phase 4 in-house captcha solver is available on higher tiers (no third-party fees). Body schema:</p>
-
-<pre><code>{
-  "action": "read" | "search" | "screenshot" | "click" | "type" | "solve-captcha" | "scroll" | "popups",
-  "url":      "for read | screenshot | click",
-  "query":    "for search",
-  "selector": "for click | type",
-  "text":     "for type"
-}</code></pre>
-
-<h4>Examples</h4>
-
-<pre><code># Fetch a URL through the real Chrome pipeline
-curl -X POST https://api.gridfleet.ai/v1/services/browse \
-  -H "Authorization: Bearer $GK" \
-  -H "Content-Type: application/json" \
-  -d '{"action":"read","url":"https://example.com"}'
-
-# Search the web
-curl -X POST https://api.gridfleet.ai/v1/services/browse \
-  -H "Authorization: Bearer $GK" \
-  -H "Content-Type: application/json" \
-  -d '{"action":"search","query":"latest fed minutes 2026"}'
-
-# Solve a captcha on the currently-loaded page
-curl -X POST https://api.gridfleet.ai/v1/services/browse \
-  -H "Authorization: Bearer $GK" \
-  -H "Content-Type: application/json" \
-  -d '{"action":"solve-captcha"}'</code></pre>
-
-<h4>Response shape</h4>
-
-<pre><code>{
-  "ok": true,
-  "request_id": "uuid",
-  "data": "&lt;page text or structured result&gt;",
-  "duration_ms": 2417,
-  "cost_usd": 0.01,
-  "usage": {
-    "calls_this_month": 14,
-    "usd_this_month": 0.18,
-    "tier": "starter"
-  }
-}</code></pre>
-
-<h2 id="pong-cards">Pong screener &mdash; live cards</h2>
-
-<p><span class="endpoint">GET /v1/services/pong/cards</span></p>
-
-<p>Live S/A/B/C-graded penny-stock momentum cards, with composite score, L2 fidelity, MFE/MAE. Only cards from the current scan window are returned.</p>
-
-<h4>Query parameters</h4>
-
-<table>
-  <tr><th>Param</th><th>Default</th><th>Notes</th></tr>
-  <tr><td><code>minGrade</code></td><td><code>A</code></td><td>One of <code>S</code>, <code>A</code>, <code>B</code>, <code>C</code>. Invalid values return <code>400 invalid_minGrade</code>.</td></tr>
-  <tr><td><code>limit</code></td><td><code>20</code></td><td>1&ndash;50.</td></tr>
-</table>
-
-<h4>Example</h4>
-
-<pre><code>curl -H "Authorization: Bearer $GK" \
-  "https://api.gridfleet.ai/v1/services/pong/cards?minGrade=A&amp;limit=10"</code></pre>
-
-<div class="note">Empty-data billing guard: if the scan window is empty (premarket, post-close, or between scans), <code>cost_usd</code> is <code>0</code> and you're not charged for the call.</div>
-
-<h2 id="pong-card">Pong screener &mdash; single card</h2>
-
-<p><span class="endpoint">GET /v1/services/pong/card?ticker=&lt;TKR&gt;</span></p>
-
-<p>Full detail for one ticker. Returns <code>404 ticker_not_in_current_scan</code> with <code>cost_usd: 0</code> if the ticker isn't currently graded.</p>
-
-<pre><code>curl -H "Authorization: Bearer $GK" \
-  "https://api.gridfleet.ai/v1/services/pong/card?ticker=AAPL"</code></pre>
-
-<h2 id="pong-pnl">Pong screener &mdash; PnL curve</h2>
-
-<p><span class="endpoint">GET /v1/services/pong/pnl</span></p>
-
-<p>Cumulative paper-trading PnL curve for the current trading day, with timestamps for hover lookups.</p>
-
-<pre><code>curl -H "Authorization: Bearer $GK" \
-  https://api.gridfleet.ai/v1/services/pong/pnl</code></pre>
-
-<h2 id="pong-market">Market status</h2>
-
-<p><span class="endpoint">GET /v1/services/pong/market-status</span></p>
-
-<p>Returns the current US equity market status. One of <code>MARKET_OPEN</code>, <code>MARKET_CLOSED</code>, <code>PRE_MARKET</code>, <code>AH_MARKET</code>. Computed locally from current time + day-of-week + holiday calendar; doesn't hit any internal data, so it's the cheapest call in the API.</p>
-
-<pre><code>curl -H "Authorization: Bearer $GK" \
-  https://api.gridfleet.ai/v1/services/pong/market-status
-
-# Response
-{
-  "ok": true,
-  "status": "MARKET_OPEN",
-  "nextChange": "2026-05-05 16:00 ET",
-  "cost_usd": 0.001,
-  "usage": {...}
-}</code></pre>
-
-<h2 id="health">Health</h2>
-
-<p><span class="endpoint">GET /v1/health</span></p>
-
-<p>Public, no auth. Useful for proxy/uptime checks.</p>
-
-<pre><code>curl https://api.gridfleet.ai/v1/health
-# {"ok":true,"service":"gridfleet-tunnel-proxy","upstream":"..."}</code></pre>
-
-<h2 id="contact">Get an API key</h2>
-
-<p>Email <a href="mailto:sales@gridfleet.ai">sales@gridfleet.ai</a> with your use-case and expected call volume. Self-serve onboarding is on the way.</p>
-
-<p>For research collaborations, public-good audits, or non-commercial use, mention it in the email &mdash; we're flexible.</p>
-
+<main>
+  <div class="wrap">
+    <div class="brand"><span class="mark"></span><span>GRIDFLEET</span></div>
+    <h1>Under <span class="accent">construction.</span></h1>
+    <p>We are rebuilding. Come back soon.</p>
+    <div class="meta">
+      <span class="pulse"></span>Fleet still operational &middot; for inquiries, <a href="mailto:hello@gridfleet.ai">hello@gridfleet.ai</a>
+    </div>
+  </div>
 </main>
-
-</div>
-
-<footer class="footer">
-  &copy; 2026 GridFleet &middot; <a href="/">gridfleet.ai</a> &middot; <a href="mailto:sales@gridfleet.ai">sales@gridfleet.ai</a>
-</footer>
-
 </body>
 </html>
