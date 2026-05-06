@@ -3,10 +3,10 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>GridFleet | Under construction</title>
-<meta name="description" content="GridFleet is the multi-agent execution layer used by operators who need AI that coordinates, acts, and produces receipts. Site under construction; back soon." />
-<meta property="og:title" content="GridFleet | Under construction" />
-<meta property="og:description" content="GridFleet, the multi-agent execution layer. Site under construction." />
+<title>GridFleet | Autonomous AI execution fleet</title>
+<meta name="description" content="GridFleet is the multi-agent execution layer for operators who need AI systems that coordinate, act, verify, and return receipts through a single API." />
+<meta property="og:title" content="GridFleet | Autonomous AI execution fleet" />
+<meta property="og:description" content="A live fleet of specialized AI agents for browser automation, market signals, forecasts, and risk audits - built with receipts, governance, and operator control." />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https://gridfleet.ai/" />
 <meta property="og:image" content="https://gridfleet.ai/og.png" />
@@ -14,9 +14,10 @@
 <meta property="og:image:height" content="630" />
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:image" content="https://gridfleet.ai/og.png" />
-<meta name="theme-color" content="#0a0a0a" />
+<meta name="theme-color" content="#05060a" />
 <meta name="robots" content="index, follow" />
 <link rel="canonical" href="https://gridfleet.ai/" />
+<link rel="stylesheet" href="/assets/cinematic.css" />
 <script type="application/ld+json">
 [
   {
@@ -66,7 +67,7 @@
     "name": "GridFleet Browser-as-a-Service",
     "serviceType": "Browser automation API",
     "provider": {"@id":"https://gridfleet.ai/#org"},
-    "description": "Real-Chrome browser automation with Phase 2a-2d behavioral realism, Phase 3 multi-strategy popup dismissal, and Phase 4 in-house captcha solver. Actions: read, search, screenshot, click, type, solve-captcha, scroll, popups."
+    "description": "Real-Chrome browser automation with behavioral realism, popup dismissal, captcha handling, and receipt-backed actions including read, search, screenshot, click, type, scroll, and popups."
   },
   {
     "@context": "https://schema.org",
@@ -75,7 +76,7 @@
     "name": "GridFleet Pong Screener",
     "serviceType": "Equity momentum signals API",
     "provider": {"@id":"https://gridfleet.ai/#org"},
-    "description": "Live S/A/B/C-graded penny-stock momentum cards with composite score, L2 fidelity, MFE/MAE. Daily PnL curve, market-status endpoint."
+    "description": "Live S/A/B/C-graded small-cap momentum cards with composite score, L2 fidelity, MFE/MAE, market-state checks, and PnL tracking."
   },
   {
     "@context": "https://schema.org",
@@ -84,7 +85,7 @@
     "name": "DeFi Config-Risk Audits",
     "serviceType": "Quarterly DeFi protocol audit",
     "provider": {"@id":"https://gridfleet.ai/#org"},
-    "description": "Quarterly audits scoring six on-chain risk surfaces: admin keys, oracle dependency, verifier centralization, timelock window, governance drift, audit recency. For DAO treasuries and institutional DeFi holders.",
+    "description": "Quarterly audits scoring six on-chain risk surfaces: admin keys, oracle dependency, verifier centralization, timelock window, governance drift, and audit recency.",
     "url": "https://gridfleet.ai/audits"
   },
   {
@@ -92,169 +93,114 @@
     "@type": "FAQPage",
     "@id": "https://gridfleet.ai/#faq",
     "mainEntity": [
-      {
-        "@type": "Question",
-        "name": "What is GridFleet?",
-        "acceptedAnswer": {"@type":"Answer","text":"GridFleet is a multi-agent execution layer. It runs a coordinated fleet of seven specialized AI agents - CLU (orchestration), TRON (security review), DUMONT (account operations), BECK (diagnostics), YORI (content), NEON DAVE (markets and trading), and a master orchestrator - all behind a single bearer-token API at api.gridfleet.ai. Customers use it for browser automation, equity momentum signals, multi-agent forecasts, and DeFi config-risk audits."}
-      },
-      {
-        "@type": "Question",
-        "name": "How is GridFleet different from a single LLM API?",
-        "acceptedAnswer": {"@type":"Answer","text":"Single-LLM APIs (OpenAI, Anthropic, etc.) give you one model answering one prompt. GridFleet exposes coordinated work across multiple specialized agents that hand off, verify, and audit each other - the answer is the result of a fleet, not a single completion. Calls return receipts (request_id, billing event, audit trail) so the operation is verifiable, not a black box."}
-      },
-      {
-        "@type": "Question",
-        "name": "What endpoints are available?",
-        "acceptedAnswer": {"@type":"Answer","text":"v1 endpoints at api.gridfleet.ai/v1: /services/browse (POST - browser automation: read, search, screenshot, click, type, solve-captcha), /services/pong/cards (GET - live momentum signals), /services/pong/card (GET - single ticker detail), /services/pong/pnl (GET - paper P&L curve), /services/pong/market-status (GET - market state), /services/forecast (POST - multi-agent prediction), /services/court-feed (federal court docket monitoring). Full docs at gridfleet.ai/docs."}
-      },
-      {
-        "@type": "Question",
-        "name": "How do I get an API key?",
-        "acceptedAnswer": {"@type":"Answer","text":"Request access at gridfleet.ai/signup with your use case and expected call volume, or email sales@gridfleet.ai. We respond within 24 hours. Keys are gk_-prefixed bearer tokens with monthly call and dollar quotas."}
-      },
-      {
-        "@type": "Question",
-        "name": "Can GridFleet be installed as an MCP server?",
-        "acceptedAnswer": {"@type":"Answer","text":"Yes. The Browser-as-a-Service and Pong Screener endpoints are wrapped as Model Context Protocol (MCP) servers - install via npm or claude mcp add and the tools surface in Claude Code, Cursor, Codex CLI, or any MCP-compatible client. Customer-side requires only an API key in MCP_GRID_API_KEY."}
-      },
-      {
-        "@type": "Question",
-        "name": "Where is GridFleet hosted?",
-        "acceptedAnswer": {"@type":"Answer","text":"The fleet runs on owner-operated infrastructure (no public-cloud lock-in). Public surface is fronted by Cloudflare Workers + Tailscale Funnel; the agent fleet itself runs on dedicated hardware. Status: api.gridfleet.ai/v1/health."}
-      },
-      {
-        "@type": "Question",
-        "name": "What does the Pong Screener cover?",
-        "acceptedAnswer": {"@type":"Answer","text":"US small-cap and penny-stock momentum signals during regular trading hours. Cards are S/A/B/C-graded based on a composite score combining Level 2 order-book fidelity, MFE (maximum favorable excursion), MAE (maximum adverse excursion), and additional micro-structure features. Updates intra-day; market-status endpoint surfaces MARKET_OPEN, MARKET_CLOSED, PRE_MARKET, AH_MARKET states."}
-      },
-      {
-        "@type": "Question",
-        "name": "What is the DeFi config-risk audit?",
-        "acceptedAnswer": {"@type":"Answer","text":"Quarterly audits for DAO treasuries and institutional DeFi holders covering six risk surfaces: admin keys and upgradeability, oracle dependency, verifier centralization, timelock window and bypass paths, governance drift, audit recency and coverage gap. Each finding is sourced - on-chain evidence with contract addresses and tx hashes - so the customer can verify every score independently."}
-      }
+      {"@type":"Question","name":"What is GridFleet?","acceptedAnswer":{"@type":"Answer","text":"GridFleet is a multi-agent execution layer. It runs specialized AI agents that coordinate, verify, and produce receipts behind a single bearer-token API at api.gridfleet.ai."}},
+      {"@type":"Question","name":"How is GridFleet different from a single LLM API?","acceptedAnswer":{"@type":"Answer","text":"Single-LLM APIs return one model response. GridFleet coordinates multiple agents, records handoffs, runs checks, and returns verifiable receipts so operators can inspect what happened."}},
+      {"@type":"Question","name":"What endpoints are available?","acceptedAnswer":{"@type":"Answer","text":"v1 endpoints include browser automation, Pong market signals, single ticker detail, PnL curves, market status, forecasts, and court-feed monitoring. Full docs are available at gridfleet.ai/docs."}},
+      {"@type":"Question","name":"How do I get an API key?","acceptedAnswer":{"@type":"Answer","text":"Request access at gridfleet.ai/signup with your use case and expected volume, or email sales@gridfleet.ai. Keys are gk_-prefixed bearer tokens with quotas."}},
+      {"@type":"Question","name":"Can GridFleet be installed as an MCP server?","acceptedAnswer":{"@type":"Answer","text":"Yes. Browser and market tools are designed to surface in MCP-compatible clients such as Claude Code, Cursor, Codex CLI, and other local agent workbenches."}},
+      {"@type":"Question","name":"Where is GridFleet hosted?","acceptedAnswer":{"@type":"Answer","text":"The fleet runs on owner-operated infrastructure with public access fronted by Cloudflare Workers and Tailscale. The public API surface is api.gridfleet.ai/v1."}},
+      {"@type":"Question","name":"What does the Pong Screener cover?","acceptedAnswer":{"@type":"Answer","text":"US small-cap and penny-stock momentum signals during regular trading hours, graded with composite score, L2 fidelity, maximum favorable excursion, and maximum adverse excursion."}},
+      {"@type":"Question","name":"What is the DeFi config-risk audit?","acceptedAnswer":{"@type":"Answer","text":"A sourced audit for DAO treasuries and DeFi operators covering admin keys, upgradeability, oracle dependency, verifier centralization, timelocks, governance drift, and audit coverage."}}
     ]
   }
 ]
 </script>
 <style>
-  *{box-sizing:border-box;margin:0;padding:0}
-  html,body{height:100%}
-  body{
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
-    background: #0a0a0a;
-    color: #ededee;
-    -webkit-font-smoothing: antialiased;
-    line-height: 1.5;
-    letter-spacing: -0.011em;
-  }
-  body::before {
-    content: '';
-    position: fixed;
-    inset: 0;
-    pointer-events: none;
-    z-index: 0;
-    background:
-      radial-gradient(ellipse 80% 60% at 30% 20%, rgba(99, 102, 241, 0.06) 0%, transparent 70%),
-      radial-gradient(ellipse 70% 60% at 70% 80%, rgba(124, 58, 237, 0.05) 0%, transparent 70%);
-  }
-  main{
-    position: relative;
-    z-index: 1;
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 32px;
-  }
-  .wrap{
-    text-align: center;
-    max-width: 560px;
-  }
-  .brand{
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
-    margin-bottom: 56px;
-    font-weight: 600;
-    font-size: 14px;
-    letter-spacing: 0.16em;
-    text-transform: uppercase;
-    color: #a1a1aa;
-  }
-  .brand .mark{
-    width: 18px;
-    height: 18px;
-    background: conic-gradient(from 90deg at 50% 50%, #fff 0deg, #fff 90deg, transparent 90deg, transparent 180deg, #fff 180deg, #fff 270deg, transparent 270deg);
-    border-radius: 3px;
-    opacity: 0.85;
-  }
-  h1{
-    font-weight: 200;
-    font-size: clamp(40px, 6vw, 72px);
-    line-height: 1.05;
-    letter-spacing: -0.035em;
-    margin: 0 0 24px;
-    color: #fff;
-  }
-  h1 .accent{
-    font-style: italic;
-    font-weight: 300;
-    background: linear-gradient(120deg, #a5b4fc 0%, #c4b5fd 60%, #67e8f9 100%);
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-  }
-  p{
-    color: #a1a1aa;
-    font-size: 17px;
-    margin: 0 0 12px;
-  }
-  .meta{
-    margin-top: 40px;
-    font-size: 13px;
-    color: #71717a;
-    letter-spacing: 0.04em;
-  }
-  .meta a{
-    color: #a1a1aa;
-    text-decoration: none;
-    border-bottom: 1px solid rgba(255,255,255,0.15);
-    transition: color 0.2s;
-  }
-  .meta a:hover{
-    color: #fff;
-    border-bottom-color: rgba(255,255,255,0.5);
-  }
-  .pulse{
-    display: inline-block;
-    width: 8px;
-    height: 8px;
-    margin-right: 8px;
-    border-radius: 50%;
-    background: #34d399;
-    box-shadow: 0 0 12px rgba(52, 211, 153, 0.65);
-    vertical-align: middle;
-    animation: pulse 2.4s ease-in-out infinite;
-  }
-  @keyframes pulse{
-    0%, 100% { opacity: 0.55; transform: scale(1); }
-    50% { opacity: 1; transform: scale(1.15); }
-  }
-  @media (prefers-reduced-motion: reduce){
-    .pulse{ animation: none; }
-  }
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:#05060a;color:#f6f7fb;font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;-webkit-font-smoothing:antialiased;line-height:1.5;overflow-x:hidden}a{color:inherit;text-decoration:none}.site{position:relative;z-index:2}.hero{position:relative;min-height:100svh;display:grid;place-items:center;overflow:hidden;background:radial-gradient(circle at 50% 20%,rgba(58,91,255,.16),transparent 42%),linear-gradient(180deg,#05060a 0%,#070811 62%,#05060a 100%)}#fleet-canvas{position:absolute;inset:0;width:100%;height:100%;z-index:0}.noise{position:absolute;inset:0;z-index:1;pointer-events:none;opacity:.28;background-image:linear-gradient(rgba(255,255,255,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.028) 1px,transparent 1px);background-size:72px 72px;mask-image:radial-gradient(circle at 50% 45%,#000 0%,transparent 70%)}.nav{position:fixed;top:22px;left:50%;transform:translateX(-50%);z-index:20;width:min(1120px,calc(100% - 32px));display:flex;align-items:center;justify-content:space-between;padding:12px 14px;border:1px solid rgba(255,255,255,.1);border-radius:999px;background:rgba(5,6,10,.52);backdrop-filter:blur(18px);box-shadow:0 20px 80px rgba(0,0,0,.36)}.brand{display:flex;align-items:center;gap:10px;font-weight:650;letter-spacing:.12em;text-transform:uppercase;font-size:12px;color:#fff}.mark{width:21px;height:21px;border-radius:6px;background:conic-gradient(from 45deg,#fff 0 25%,transparent 0 50%,#8fb2ff 0 75%,transparent 0);box-shadow:0 0 28px rgba(105,145,255,.55)}.nav-links{display:flex;gap:20px;color:#aab1c4;font-size:13px}.nav-cta{padding:9px 14px;border:1px solid rgba(143,178,255,.35);border-radius:999px;color:#fff;background:rgba(77,124,254,.12)}.hero-inner{position:relative;z-index:3;width:min(1220px,calc(100% - 36px));display:grid;grid-template-columns:1fr;gap:32px;padding-top:72px;text-align:center}.eyebrow{display:inline-flex;align-items:center;gap:10px;margin:0 auto 20px;padding:8px 13px;border:1px solid rgba(255,255,255,.12);border-radius:999px;background:rgba(255,255,255,.045);color:#c8d0e6;font-size:12px;letter-spacing:.14em;text-transform:uppercase}.live-dot{width:8px;height:8px;border-radius:50%;background:#44f0a8;box-shadow:0 0 22px rgba(68,240,168,.9)}h1{margin:0 auto;max-width:1120px;font-size:clamp(54px,11vw,154px);font-weight:250;letter-spacing:-.075em;line-height:.88;text-wrap:balance}.italic{font-style:italic;font-weight:300;background:linear-gradient(115deg,#fff 0%,#c7d7ff 42%,#78fff0 100%);-webkit-background-clip:text;background-clip:text;color:transparent}.lede{max-width:760px;margin:30px auto 0;color:#adb6ca;font-size:clamp(17px,2.1vw,23px);letter-spacing:-.018em}.cta-row{display:flex;justify-content:center;gap:14px;flex-wrap:wrap;margin-top:36px}.cta{display:inline-flex;align-items:center;justify-content:center;min-height:48px;padding:0 20px;border-radius:999px;font-weight:650;font-size:14px}.cta.primary{background:#f8fbff;color:#070811;box-shadow:0 18px 60px rgba(116,168,255,.24)}.cta.secondary{border:1px solid rgba(255,255,255,.14);background:rgba(255,255,255,.055);color:#fff}.hero-strip{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;margin:64px auto 0;width:min(920px,100%);border:1px solid rgba(255,255,255,.09);border-radius:22px;overflow:hidden;background:rgba(255,255,255,.08);text-align:left}.metric{padding:18px 20px;background:rgba(5,6,10,.56);backdrop-filter:blur(10px)}.metric b{display:block;font-size:18px;color:#fff}.metric span{display:block;margin-top:5px;color:#8f98ae;font-size:12px;text-transform:uppercase;letter-spacing:.1em}.scroll-cue{position:absolute;left:50%;bottom:24px;z-index:4;transform:translateX(-50%);color:#747f96;font-size:11px;letter-spacing:.18em;text-transform:uppercase}.section{position:relative;padding:120px 24px}.container{width:min(1180px,100%);margin:0 auto}.section-kicker{color:#7fb2ff;font-size:12px;letter-spacing:.18em;text-transform:uppercase;margin-bottom:14px}.section h2{max-width:920px;margin:0;font-size:clamp(36px,6vw,86px);font-weight:280;line-height:.98;letter-spacing:-.055em}.section-copy{max-width:640px;color:#a9b1c4;font-size:18px;margin-top:22px}.showcase{display:grid;grid-template-columns:1.05fr .95fr;gap:28px;align-items:stretch;margin-top:52px}.panel{border:1px solid rgba(255,255,255,.1);border-radius:30px;background:linear-gradient(180deg,rgba(255,255,255,.075),rgba(255,255,255,.025));box-shadow:0 24px 90px rgba(0,0,0,.35);overflow:hidden}.command{padding:28px;min-height:440px;position:relative}.receipt{display:grid;gap:12px}.line{display:flex;align-items:center;gap:12px;padding:13px 14px;border:1px solid rgba(255,255,255,.08);border-radius:16px;background:rgba(0,0,0,.22);color:#cbd5ee;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:13px}.line:before{content:"";width:8px;height:8px;border-radius:50%;background:#68f0b3;box-shadow:0 0 16px rgba(104,240,179,.8)}.line.dim{opacity:.55}.agent-map{min-height:440px;position:relative;background:radial-gradient(circle at 50% 45%,rgba(77,124,254,.22),transparent 40%),#080a12}.node{position:absolute;width:86px;height:86px;border-radius:50%;display:grid;place-items:center;border:1px solid rgba(255,255,255,.18);background:rgba(255,255,255,.055);box-shadow:0 0 70px rgba(90,132,255,.16);font-size:11px;letter-spacing:.12em;color:#eaf0ff}.node.core{width:132px;height:132px;left:50%;top:50%;transform:translate(-50%,-50%);background:rgba(77,124,254,.13);font-size:15px}.n1{left:12%;top:12%}.n2{right:14%;top:14%}.n3{left:16%;bottom:16%}.n4{right:16%;bottom:15%}.orbit{position:absolute;inset:58px;border:1px solid rgba(143,178,255,.16);border-radius:50%;animation:spin 28s linear infinite}.orbit.two{inset:102px;animation-duration:18s;animation-direction:reverse}@keyframes spin{to{transform:rotate(360deg)}}.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:46px}.card{padding:26px;border:1px solid rgba(255,255,255,.09);border-radius:26px;background:rgba(255,255,255,.045)}.card h3{margin:0 0 12px;font-size:20px}.card p{margin:0;color:#98a2b8}.dark-band{background:linear-gradient(180deg,#05060a,#090b14 45%,#05060a)}.timeline{margin-top:50px;border-left:1px solid rgba(255,255,255,.1)}.step{position:relative;padding:0 0 42px 34px}.step:before{content:"";position:absolute;left:-6px;top:6px;width:11px;height:11px;border-radius:50%;background:#8fb2ff;box-shadow:0 0 28px rgba(143,178,255,.8)}.step h3{margin:0;font-size:24px}.step p{max-width:720px;margin:10px 0 0;color:#a2abc0}.final{padding-bottom:150px;text-align:center}.final h2{margin:auto}.footer{border-top:1px solid rgba(255,255,255,.08);padding:34px 24px;color:#7f8799}.footer-inner{width:min(1180px,100%);margin:0 auto;display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}.fallback-copy{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}.gf-scene{opacity:1;transform:none}@media (max-width:860px){.nav-links{display:none}.hero-strip,.showcase,.cards{grid-template-columns:1fr}.hero{min-height:100vh}.section{padding:88px 20px}.agent-map,.command{min-height:340px}h1{font-size:clamp(48px,16vw,90px)}.node{width:68px;height:68px}.node.core{width:108px;height:108px}}@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.orbit{animation:none}#fleet-canvas{display:none}.hero{background:radial-gradient(circle at 50% 30%,rgba(77,124,254,.25),transparent 46%),#05060a}}
 </style>
+<script src="/assets/cinematic.js" defer></script>
+<script>
+(function(){
+'use strict';
+var reduce=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;if(reduce)return;
+var canvas,ctx,w=0,h=0,dpr=1,pts=[],mouse={x:.5,y:.5};
+function resize(){canvas=document.getElementById('fleet-canvas');if(!canvas)return;ctx=canvas.getContext('2d',{alpha:true});dpr=Math.min(2,window.devicePixelRatio||1);w=canvas.clientWidth;h=canvas.clientHeight;canvas.width=Math.floor(w*dpr);canvas.height=Math.floor(h*dpr);ctx.setTransform(dpr,0,0,dpr,0,0);build();}
+function build(){var n=Math.min(520,Math.floor(w*h/1900));pts=[];for(var i=0;i<n;i++){var a=(i/n)*Math.PI*2*5.7;var r=Math.sqrt(i/n);pts.push({a:a,r:r,seed:Math.random()*10,x:Math.random()*w,y:Math.random()*h});}}
+function draw(t){if(!ctx)return;ctx.clearRect(0,0,w,h);var cx=w*.5+(mouse.x-.5)*34,cy=h*.48+(mouse.y-.5)*24;var time=t*.00018;ctx.globalCompositeOperation='lighter';for(var i=0;i<pts.length;i++){var p=pts[i];var ring=110+p.r*Math.min(w,h)*.38;var x=cx+Math.cos(p.a+time*(.5+p.r))*ring+Math.sin(time*7+p.seed)*10;var y=cy+Math.sin(p.a+time*(.7+p.r))*ring*.56+Math.cos(time*5+p.seed)*8;var pulse=(Math.sin(t*.002+p.seed)+1)*.5;ctx.beginPath();ctx.fillStyle='rgba('+Math.floor(90+90*p.r)+','+Math.floor(130+80*pulse)+',255,'+(.12+.24*(1-p.r))+')';ctx.arc(x,y,1.1+pulse*1.9,0,Math.PI*2);ctx.fill();}
+ctx.globalCompositeOperation='source-over';var g=ctx.createRadialGradient(cx,cy,10,cx,cy,Math.min(w,h)*.48);g.addColorStop(0,'rgba(117,151,255,.18)');g.addColorStop(.45,'rgba(124,58,237,.06)');g.addColorStop(1,'rgba(0,0,0,0)');ctx.fillStyle=g;ctx.fillRect(0,0,w,h);requestAnimationFrame(draw);}
+function boot(){canvas=document.getElementById('fleet-canvas');if(!canvas)return;resize();window.addEventListener('resize',resize,{passive:true});window.addEventListener('pointermove',function(e){mouse.x=e.clientX/window.innerWidth;mouse.y=e.clientY/window.innerHeight;},{passive:true});requestAnimationFrame(draw);}if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',boot);else boot();
+})();
+</script>
 </head>
-<body>
-<main>
-  <div class="wrap">
-    <div class="brand"><span class="mark"></span><span>GRIDFLEET</span></div>
-    <h1>Under <span class="accent">construction.</span></h1>
-    <p>We are rebuilding. Come back soon.</p>
-    <div class="meta">
-      <span class="pulse"></span>Fleet still operational &middot; for inquiries, <a href="mailto:hello@gridfleet.ai">hello@gridfleet.ai</a>
+<body class="gf-atmosphere">
+<nav class="nav" aria-label="Primary navigation">
+  <a class="brand" href="/"><span class="mark"></span><span>GridFleet</span></a>
+  <div class="nav-links"><a href="#fleet">Fleet</a><a href="#services">Services</a><a href="#receipts">Receipts</a><a href="/docs">Docs</a></div>
+  <a class="nav-cta" href="/signup">Request access</a>
+</nav>
+<main class="site">
+  <section class="hero" aria-label="GridFleet cinematic hero">
+    <canvas id="fleet-canvas" aria-hidden="true"></canvas>
+    <div class="noise" aria-hidden="true"></div>
+    <div class="hero-inner">
+      <div class="eyebrow"><span class="live-dot"></span>Fleet online - operator controlled</div>
+      <h1>Autonomous AI, <span class="italic">organized as a fleet.</span></h1>
+      <p class="lede">GridFleet coordinates specialized agents that browse, forecast, audit, trade-scan, verify, and return receipts through one governed execution layer.</p>
+      <div class="cta-row"><a class="cta primary" href="/signup">Request API access</a><a class="cta secondary" href="/docs">Read the docs</a></div>
+      <div class="hero-strip" aria-label="GridFleet operational highlights">
+        <div class="metric"><b>7</b><span>specialized agents</span></div>
+        <div class="metric"><b>1</b><span>receipt-backed API</span></div>
+        <div class="metric"><b>24/7</b><span>monitoring loops</span></div>
+        <div class="metric"><b>v1</b><span>service surface</span></div>
+      </div>
     </div>
-  </div>
+    <div class="scroll-cue">Scroll to inspect</div>
+  </section>
+  <section id="fleet" class="section gf-scene" data-scene>
+    <div class="container">
+      <div class="section-kicker">The execution layer</div>
+      <h2>A cinematic control room for AI work that cannot stay in a chat box.</h2>
+      <p class="section-copy">GridFleet is built for operators who need agents to act across tools, hand off to specialists, validate outcomes, and keep evidence. The site is visual; the system underneath is practical.</p>
+      <div class="showcase">
+        <div class="panel agent-map" aria-label="Agent fleet map">
+          <div class="orbit"></div><div class="orbit two"></div>
+          <div class="node core">GRID</div><div class="node n1">CLU</div><div class="node n2">TRON</div><div class="node n3">YORI</div><div class="node n4">DUMONT</div>
+        </div>
+        <div class="panel command">
+          <div class="receipt">
+            <div class="line">request.accepted / browser.search / receipt pending</div>
+            <div class="line">agent.handoff / CLU -> TRON / policy check</div>
+            <div class="line">service.pong / market status verified</div>
+            <div class="line">audit.append / evidence captured</div>
+            <div class="line dim">customer.response / result + request_id</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section id="services" class="section dark-band gf-scene" data-scene>
+    <div class="container">
+      <div class="section-kicker">Service surface</div>
+      <h2>One fleet. Multiple products. All with operator receipts.</h2>
+      <p class="section-copy">GridFleet exposes practical services for teams that need AI systems to use browsers, monitor markets, forecast events, and inspect risk without losing governance.</p>
+      <div class="cards">
+        <article class="card"><h3>Browser automation</h3><p>Real Chrome actions for read, search, screenshot, click, type, scroll, and popup handling.</p></article>
+        <article class="card"><h3>Pong signals</h3><p>Small-cap momentum cards with market-state awareness, scoring, and PnL tracking.</p></article>
+        <article class="card"><h3>Risk audits</h3><p>Evidence-backed config-risk reviews for DeFi and protocol operators.</p></article>
+      </div>
+    </div>
+  </section>
+  <section id="receipts" class="section gf-scene" data-scene>
+    <div class="container">
+      <div class="section-kicker">Receipts over vibes</div>
+      <h2>Every useful action should leave a trail.</h2>
+      <div class="timeline">
+        <div class="step"><h3>Coordinate</h3><p>Route work to the right agent lane instead of asking one model to improvise everything.</p></div>
+        <div class="step"><h3>Verify</h3><p>Run live checks, policy gates, audits, or screenshots before calling a job complete.</p></div>
+        <div class="step"><h3>Return evidence</h3><p>Give customers an answer they can inspect: request id, output, and the proof path behind it.</p></div>
+      </div>
+    </div>
+  </section>
+  <section class="section final gf-scene" data-scene>
+    <div class="container">
+      <div class="section-kicker">Built for operators</div>
+      <h2>Put your AI fleet behind an API your team can trust.</h2>
+      <p class="section-copy" style="margin-left:auto;margin-right:auto">Request access for browser automation, signal products, forecasts, or custom fleet-backed workflows.</p>
+      <div class="cta-row"><a class="cta primary" href="/signup">Request access</a><a class="cta secondary" href="mailto:hello@gridfleet.ai">Contact GridFleet</a></div>
+    </div>
+  </section>
 </main>
+<footer class="footer"><div class="footer-inner"><span>GridFleet</span><span>api.gridfleet.ai/v1</span><span>hello@gridfleet.ai</span></div></footer>
+<div class="fallback-copy">GridFleet is a multi-agent execution layer for browser automation, market signals, forecasts, court monitoring, and DeFi config-risk audits. It coordinates specialized AI agents and returns receipt-backed results through api.gridfleet.ai/v1.</div>
 </body>
 </html>
