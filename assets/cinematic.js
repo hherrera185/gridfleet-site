@@ -119,11 +119,69 @@
     for (var c = 0; c < cards.length; c++) attach(cards[c]);
   }
 
-  // ---------- 4. boot ----------
+  // ---------- 4. Public snapshot hydration ----------
+  // Optional file: /data/grid-snapshot.json. Only known public-safe fields are read.
+  function initPublicSnapshot() {
+    var root = doc.querySelector('[data-grid-snapshot]');
+    if (!root || !win.fetch) return;
+
+    function field(name) { return root.querySelector('[data-snapshot-field="' + name + '"]'); }
+    function setText(name, value) {
+      var el = field(name);
+      if (!el) return;
+      if (value === undefined || value === null || value === '') return;
+      el.textContent = String(value).slice(0, 64);
+    }
+    function first(obj, keys) {
+      for (var i = 0; i < keys.length; i++) {
+        if (obj && obj[keys[i]] !== undefined && obj[keys[i]] !== null && obj[keys[i]] !== '') return obj[keys[i]];
+      }
+      return null;
+    }
+    function formatTime(value) {
+      if (!value) return null;
+      var date = new Date(value);
+      if (isNaN(date.getTime())) return String(value).slice(0, 42);
+      return 'Verified ' + date.toLocaleString(undefined, { month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit' });
+    }
+
+    fetch('/data/grid-snapshot.json', { cache: 'no-store' })
+      .then(function (res) { if (!res.ok) throw new Error('snapshot unavailable'); return res.json(); })
+      .then(function (data) {
+        var snap = (data && (data.public || data.grid || data.snapshot || data)) || {};
+        var services = snap.services || snap.publicServices || {};
+        var status = first(snap, ['statusLabel', 'publicStatus', 'fleetStatus', 'status']) || 'Snapshot loaded';
+        var updated = formatTime(first(snap, ['updatedAt', 'generatedAt', 'timestamp', 'lastVerifiedAt']));
+        setText('status', status);
+        setText('verification', first(snap, ['verificationLabel', 'verification', 'evidenceLabel']) || 'Public JSON loaded');
+        setText('services', first(snap, ['servicesVisible', 'publicServicesOnline', 'serviceCount', 'servicesOnline']));
+        setText('checks', first(snap, ['checksReported', 'checks24h', 'verificationChecks24h', 'verifiedChecks']));
+        setText('receipts', first(snap, ['receiptsAvailable', 'receiptCount', 'evidenceItems24h', 'publicReceipts']));
+        setText('browser', first(services, ['browser', 'browserAutomation']) || first(snap, ['browserStatus']));
+        setText('monitoring', first(services, ['monitoring', 'monitors']) || first(snap, ['monitoringStatus']));
+        setText('receiptLayer', first(services, ['receiptLayer', 'receipts']) || first(snap, ['receiptLayerStatus']));
+        var updatedEl = root.querySelector('[data-snapshot-updated]');
+        if (updatedEl && updated) updatedEl.textContent = updated;
+        var orb = root.querySelector('[data-snapshot-orb]');
+        if (orb) {
+          orb.classList.remove('is-warn');
+          orb.classList.add(/degraded|pending|warn|blocked/i.test(status) ? 'is-warn' : 'is-live');
+        }
+      })
+      .catch(function () {
+        var updatedEl = root.querySelector('[data-snapshot-updated]');
+        if (updatedEl) updatedEl.textContent = 'Snapshot feed pending';
+        var orb = root.querySelector('[data-snapshot-orb]');
+        if (orb) orb.classList.add('is-warn');
+      });
+  }
+
+  // ---------- 5. boot ----------
   function boot() {
     initScenes();
     initMagneticCTAs();
     initCinematicCards();
+    initPublicSnapshot();
   }
   if (doc.readyState === 'loading') {
     doc.addEventListener('DOMContentLoaded', boot);
