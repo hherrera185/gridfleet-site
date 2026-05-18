@@ -1,0 +1,33 @@
+{
+  "schema": "gridfleet.publicSnapshot.v1",
+  "generatedAt": "2026-05-18T04:23:24Z",
+  "source": {
+    "repo": "logikclaw/the-grid",
+    "branch": "main",
+    "history": "https://github.com/logikclaw/the-grid/commits/main"
+  },
+  "public": {
+    "statusLabel": "Public site live",
+    "verificationLabel": "Verified public snapshot",
+    "servicesVisible": 6,
+    "checksReported": "3 lanes",
+    "receiptsAvailable": "Enabled",
+    "publicServices": {
+      "browser": "Presented",
+      "monitoring": "Presented",
+      "receiptLayer": "Presented"
+    },
+    "partnerCount": 1,
+    "lastVerifiedAt": "2026-05-18T04:23:24Z"
+  },
+  "safety": {
+    "publicSafe": true,
+    "excludes": [
+      "customer data",
+      "private logs",
+      "secrets",
+      "internal credentials",
+      "sensitive operations"
+    ]
+  }
+}
