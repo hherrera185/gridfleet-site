@@ -1,13 +1,13 @@
 /* ============================================================================
    GridFleet cinematic scaffolding -- Phase 1
-   Per CLU orchestration brief 2026-05-06 + TRON v2 color tokens.
+   Per CLU orchestration brief 2026-05-06 color tokens.
    Shared primitives only: tokens, type scale, glass-card, scene-transition,
    gradient atmosphere, container/grid. NO per-page styling here.
    Pages still load their own per-page CSS; this is additive.
    ============================================================================ */
 
 :root {
-  /* ---------- color tokens (TRON v2 system) ----------
+  /* ---------- color tokens (v2 system) ----------
      v2 superset works for both "Receipt River" and "wrap-2D" directions;
      the verified-green stays unused if v1 wins. */
   --gf-color-bg:                #09090d;

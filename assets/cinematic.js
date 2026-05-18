@@ -85,10 +85,45 @@
     for (var k = 0; k < ctas.length; k++) attach(ctas[k]);
   }
 
-  // ---------- 3. boot ----------
+  // ---------- 3. Cinematic cards (desktop only, CSS-var driven) ----------
+  // Markup: <article data-cinematic-card>...
+  // No animation loop: pointer events update CSS vars, CSS handles the easing.
+  function initCinematicCards() {
+    if (!isFinePointer || prefersReducedMotion) return;
+    var cards = doc.querySelectorAll('[data-cinematic-card]');
+    if (!cards.length) return;
+
+    function attach(card) {
+      function onMove(ev) {
+        var rect = card.getBoundingClientRect();
+        var px = (ev.clientX - rect.left) / rect.width;
+        var py = (ev.clientY - rect.top) / rect.height;
+        var ry = (px - 0.5) * 5;
+        var rx = (0.5 - py) * 5;
+        card.style.setProperty('--rx', rx.toFixed(2) + 'deg');
+        card.style.setProperty('--ry', ry.toFixed(2) + 'deg');
+        card.style.setProperty('--mx', (px * 100).toFixed(1) + '%');
+        card.style.setProperty('--my', (py * 100).toFixed(1) + '%');
+      }
+      function onLeave() {
+        card.style.setProperty('--rx', '0deg');
+        card.style.setProperty('--ry', '0deg');
+        card.style.setProperty('--mx', '50%');
+        card.style.setProperty('--my', '50%');
+      }
+      card.addEventListener('mousemove', onMove);
+      card.addEventListener('mouseleave', onLeave);
+      card.addEventListener('blur', onLeave);
+    }
+
+    for (var c = 0; c < cards.length; c++) attach(cards[c]);
+  }
+
+  // ---------- 4. boot ----------
   function boot() {
     initScenes();
     initMagneticCTAs();
+    initCinematicCards();
   }
   if (doc.readyState === 'loading') {
     doc.addEventListener('DOMContentLoaded', boot);
