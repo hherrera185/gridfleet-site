@@ -1,0 +1,64 @@
+{
+  "protocolVersion": "1.0",
+  "name": "Vera",
+  "description": "Vera is a phone + SMS receptionist for small businesses. She learns your business from a 5-minute onboarding (website crawl + GBP), answers inbound calls in your voice, books on your Google Calendar via two-stage commit, and escalates per your rules. She does not pretend to be human and respects all TCPA stop-words.",
+  "version": "2026.5.22",
+  "url": "https://gridfleet.ai/api/v1/agents/vera",
+  "provider": {
+    "organization": "The Grid",
+    "url": "https://gridfleet.ai"
+  },
+  "capabilities": {
+    "streaming": true,
+    "stateTransitions": true,
+    "pushNotifications": false
+  },
+  "securitySchemes": {
+    "bearer": {
+      "type": "http",
+      "scheme": "bearer",
+      "description": "Tenant-scoped bearer token issued at signup."
+    }
+  },
+  "skills": [
+    {
+      "id": "answer-inbound-call",
+      "name": "Answer Inbound Phone Call",
+      "description": "Picks up Twilio inbound, greets per tenant config, gathers intent, books/transfers/escalates.",
+      "examples": [
+        "Caller: 'Hi, I'd like to schedule a cleaning for Tuesday afternoon'",
+        "Caller: 'Are you guys open this weekend?'",
+        "Caller: 'I'm trying to reach Hector — is he there?'"
+      ],
+      "tags": ["voice", "telephony", "twilio"],
+      "inputModes": ["audio/mulaw", "text/plain"],
+      "outputModes": ["audio/mulaw", "text/plain"]
+    },
+    {
+      "id": "book-appointment",
+      "name": "Book Appointment (two-stage commit)",
+      "description": "Confirms slot availability against Google Calendar, holds the slot pending caller confirmation, writes the event after explicit yes. Prevents double-booking and ghost-bookings.",
+      "tags": ["calendar", "scheduling"]
+    },
+    {
+      "id": "answer-kb-grounded",
+      "name": "Knowledge-Grounded Q&A",
+      "description": "Answers business-specific questions (hours, services, pricing, locations, policies) from the tenant's ingested knowledge base (website pages, PDFs, GBP listing). Refuses to fabricate.",
+      "tags": ["rag", "knowledge"]
+    },
+    {
+      "id": "outbound-sms",
+      "name": "Outbound SMS / Email",
+      "description": "Sends confirmations, reminders, and tenant-authorized one-off messages. TCPA-compliant: checks consent record, honors STOP/UNSUBSCRIBE, throttled per tenant tier.",
+      "tags": ["messaging", "tcpa"]
+    },
+    {
+      "id": "escalate-to-human",
+      "name": "Escalate to Human",
+      "description": "When the caller's intent doesn't match Vera's capability OR they explicitly ask for a human, warm-transfers to the configured escalation number with a verbal handoff summary.",
+      "tags": ["handoff", "voice"]
+    }
+  ],
+  "defaultInputModes": ["text/plain", "audio/mulaw", "application/json"],
+  "defaultOutputModes": ["text/plain", "audio/mulaw", "application/json"]
+}

@@ -1,0 +1,63 @@
+{
+  "protocolVersion": "1.0",
+  "name": "The Grid",
+  "description": "Multi-agent operating system. Agents are specialized roles (receptionist, scheduler, auditor, social, etc.) that share a workspace, tools, and the same tenant context. The Grid is interoperable via the A2A protocol.",
+  "version": "2026.5.22",
+  "url": "https://gridfleet.ai",
+  "provider": {
+    "organization": "The Grid",
+    "url": "https://gridfleet.ai"
+  },
+  "documentationUrl": "https://gridfleet.ai/docs.html",
+  "capabilities": {
+    "streaming": true,
+    "stateTransitions": true,
+    "pushNotifications": false
+  },
+  "securitySchemes": {
+    "bearer": {
+      "type": "http",
+      "scheme": "bearer",
+      "description": "Tenant-scoped bearer token. Issued via https://gridfleet.ai/signup.html"
+    }
+  },
+  "skills": [
+    {
+      "id": "receptionist",
+      "name": "Phone & SMS Receptionist",
+      "description": "Answers inbound calls, gathers intent, books, escalates per business rules.",
+      "examples": [
+        "Schedule a haircut for Tuesday at 2",
+        "Tell the caller we are closed and to text us",
+        "Take a message and notify the owner"
+      ],
+      "tags": ["voice", "calendar", "messaging"]
+    },
+    {
+      "id": "knowledge-grounded-answer",
+      "name": "Knowledge-Grounded Q&A",
+      "description": "Answers from the tenant's ingested knowledge (website, PDFs, GBP). Cites sources.",
+      "tags": ["rag", "kb"]
+    },
+    {
+      "id": "message-delivery",
+      "name": "SMS + Email Delivery",
+      "description": "TCPA/CASL-compliant outbound messaging. Stop-words honored. Per-tenant from-number.",
+      "tags": ["messaging"]
+    }
+  ],
+  "publicAgents": [
+    {
+      "slug": "vera",
+      "name": "Vera",
+      "tagline": "Receptionist that learns your business in 5 minutes — answers calls, books, escalates.",
+      "cardUrl": "https://gridfleet.ai/.well-known/agents/vera.json"
+    }
+  ],
+  "defaultInputModes": ["text/plain", "application/json"],
+  "defaultOutputModes": ["text/plain", "application/json"],
+  "discoveryHints": {
+    "perAgentCards": "https://gridfleet.ai/.well-known/agents/<slug>.json",
+    "signup": "https://gridfleet.ai/signup.html"
+  }
+}
