@@ -1,59 +1,92 @@
-# GridFleet robots policy
-# https://gridfleet.ai
+# gridfleet.ai — robots policy
+# Updated 2026-06-03: hardened against AI scrapers + SEO bots
 
-User-agent: *
+# Allow search-engine indexing (Google, Bing, DuckDuckGo)
+User-agent: Googlebot
 Allow: /
-Disallow: /api/
-Sitemap: https://gridfleet.ai/sitemap.xml
 
-# AI crawlers - explicitly allowed. Content here is intended to be ingestible
-# by LLM-backed search and answer engines. See /llms.txt and /llms-full.txt
-# for the structured content extracts.
+User-agent: Bingbot
+Allow: /
 
+User-agent: DuckDuckBot
+Allow: /
+
+# Block AI training crawlers
 User-agent: GPTBot
-Allow: /
+Disallow: /
 
 User-agent: ChatGPT-User
-Allow: /
-
-User-agent: OAI-SearchBot
-Allow: /
-
-User-agent: ClaudeBot
-Allow: /
-
-User-agent: Claude-Web
-Allow: /
-
-User-agent: anthropic-ai
-Allow: /
-
-User-agent: PerplexityBot
-Allow: /
-
-User-agent: Perplexity-User
-Allow: /
+Disallow: /
 
 User-agent: Google-Extended
-Allow: /
+Disallow: /
 
-User-agent: Bytespider
-Allow: /
+User-agent: anthropic-ai
+Disallow: /
 
-User-agent: CCBot
-Allow: /
+User-agent: Claude-Web
+Disallow: /
+
+User-agent: ClaudeBot
+Disallow: /
 
 User-agent: cohere-ai
-Allow: /
+Disallow: /
 
-User-agent: Diffbot
-Allow: /
+User-agent: PerplexityBot
+Disallow: /
+
+User-agent: YouBot
+Disallow: /
+
+User-agent: Bytespider
+Disallow: /
+
+User-agent: ImagesiftBot
+Disallow: /
+
+User-agent: CCBot
+Disallow: /
+
+User-agent: Omgilibot
+Disallow: /
 
 User-agent: FacebookBot
-Allow: /
+Disallow: /
 
 User-agent: Applebot-Extended
-Allow: /
+Disallow: /
 
 User-agent: Amazonbot
+Disallow: /
+
+# Block aggressive SEO scrapers
+User-agent: AhrefsBot
+Disallow: /
+
+User-agent: SemrushBot
+Disallow: /
+
+User-agent: MJ12bot
+Disallow: /
+
+User-agent: DotBot
+Disallow: /
+
+User-agent: BLEXBot
+Disallow: /
+
+User-agent: PetalBot
+Disallow: /
+
+User-agent: DataForSeoBot
+Disallow: /
+
+# Default: allow public access (friend portal still has its own Basic auth)
+User-agent: *
+Disallow: /admin
+Disallow: /api
+Disallow: /_internal
 Allow: /
+
+Sitemap: https://gridfleet.ai/sitemap.xml
