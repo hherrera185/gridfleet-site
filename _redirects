@@ -3,3 +3,7 @@
 # the canonical .well-known/* URLs resolve to the non-dot mirror.
 /.well-known/agent.json          /a2a/agent.json          200
 /.well-known/agents/vera.json    /a2a/agents/vera.json    200
+
+# LORA art page — clean URL
+/lora                            /lora.html               200
+/lora/                           /lora.html               200

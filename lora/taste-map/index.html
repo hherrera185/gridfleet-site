@@ -1,0 +1,643 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LORA — Taste Map</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body {
+      width: 100%; height: 100%;
+      background: #030209;
+      font-family: 'IBM Plex Mono', 'Courier New', monospace;
+      overflow: hidden;
+      color: #c4bfdf;
+    }
+    #canvas-container { position: fixed; inset: 0; }
+    canvas { display: block; }
+
+    /* Header */
+    #header {
+      position: fixed; top: 0; left: 0; right: 0;
+      padding: 20px 30px 14px;
+      display: flex; align-items: flex-end; justify-content: space-between;
+      background: linear-gradient(to bottom, rgba(3,2,9,0.96) 55%, transparent);
+      z-index: 10; pointer-events: none;
+    }
+    #header .title-block h1 {
+      font-size: 11px; letter-spacing: 0.28em; text-transform: uppercase;
+      color: #9d77ff; font-weight: 400;
+    }
+    #header .title-block .sub {
+      font-size: 8px; letter-spacing: 0.2em; color: #3d3555; margin-top: 4px;
+    }
+    #header .stats {
+      font-size: 8px; letter-spacing: 0.14em; color: #3d3555;
+      text-align: right; line-height: 2;
+    }
+    #header .stats span { color: #c4bfdf; }
+
+    /* Kernel panel */
+    #kernel-panel {
+      position: fixed; left: 22px; top: 50%; transform: translateY(-50%);
+      z-index: 10; background: rgba(6,4,18,0.86); border: 1px solid rgba(120,100,255,0.14);
+      padding: 18px 20px; width: 196px; backdrop-filter: blur(10px);
+      font-size: 7.5px; line-height: 1.9; letter-spacing: 0.08em;
+    }
+    #kernel-panel h2 {
+      font-size: 8px; letter-spacing: 0.24em; text-transform: uppercase;
+      color: #9d77ff; margin-bottom: 12px; font-weight: 400;
+    }
+    .k-section { margin-bottom: 12px; }
+    .k-title { font-size: 7px; letter-spacing: 0.2em; text-transform: uppercase; color: #3d3555; margin-bottom: 6px; }
+    .k-item { color: #c4bfdf; opacity: 0.75; line-height: 1.7; }
+    .k-item::before { content: "→ "; color: #9d77ff; }
+    .k-sus::before  { content: "✕ "; color: #f43f5e; }
+
+    /* Legend */
+    #legend {
+      position: fixed; right: 22px; top: 50%; transform: translateY(-50%);
+      z-index: 10; display: flex; flex-direction: column; gap: 6px;
+      pointer-events: none;
+    }
+    .lg { display: flex; align-items: center; gap: 9px; font-size: 7.5px; letter-spacing: 0.14em; color: #3d3555; text-transform: uppercase; }
+    .ld { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
+    .ls { height: 1px; background: rgba(120,100,255,0.14); margin: 4px 0; }
+
+    /* Tooltip */
+    #tooltip {
+      position: fixed; z-index: 20;
+      background: rgba(6,4,18,0.9); border: 1px solid rgba(120,100,255,0.2);
+      padding: 12px 16px; max-width: 290px;
+      font-size: 8px; line-height: 1.8; letter-spacing: 0.08em;
+      pointer-events: none; backdrop-filter: blur(14px);
+      opacity: 0; transition: opacity 0.12s;
+    }
+    #tooltip.vis { opacity: 1; }
+    .tt-score { font-size: 12px; font-weight: 600; }
+    .tt-lbl   { color: #5a5475; margin-bottom: 5px; font-size: 7.5px; }
+    .tt-tags  { color: #9d77ff; margin-top: 4px; }
+    .tt-date  { color: #3d3555; margin-top: 2px; }
+
+    /* Timeline */
+    #timeline {
+      position: fixed; bottom: 28px; left: 50%; transform: translateX(-50%);
+      z-index: 10; display: flex; flex-direction: column; align-items: center; gap: 9px;
+    }
+    #tl-label { font-size: 8px; letter-spacing: 0.2em; color: #3d3555; text-transform: uppercase; }
+    #tl-track { display: flex; align-items: center; gap: 12px; }
+    #tl-slider {
+      -webkit-appearance: none; width: 340px; height: 2px;
+      background: linear-gradient(to right, #9d77ff 0%, #3d3555 0%);
+      outline: none; cursor: pointer; border-radius: 1px;
+    }
+    #tl-slider::-webkit-slider-thumb {
+      -webkit-appearance: none; width: 11px; height: 11px; border-radius: 50%;
+      background: #9d77ff; box-shadow: 0 0 10px #9d77ff; cursor: pointer;
+    }
+    #tl-date { font-size: 8px; letter-spacing: 0.14em; color: #c4bfdf; min-width: 82px; text-align: right; }
+    #play-btn {
+      background: none; border: 1px solid rgba(120,100,255,0.22); color: #3d3555;
+      font-family: inherit; font-size: 8px; letter-spacing: 0.12em;
+      padding: 5px 12px; cursor: pointer; border-radius: 2px; transition: all 0.2s;
+    }
+    #play-btn:hover { color: #9d77ff; border-color: #9d77ff; }
+
+    /* Loading */
+    #loading {
+      position: fixed; inset: 0; background: #030209;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      z-index: 100; gap: 18px;
+    }
+    #loading .l-title { font-size: 11px; letter-spacing: 0.32em; color: #9d77ff; }
+    #loading .l-sub { font-size: 7px; letter-spacing: 0.2em; color: #3d3555; }
+    #l-bar-wrap { width: 220px; height: 1px; background: rgba(120,100,255,0.18); }
+    #l-bar { width: 0%; height: 1px; background: #9d77ff; transition: width 0.4s; }
+  </style>
+</head>
+<body>
+
+<div id="loading">
+  <div class="l-title">LORA</div>
+  <div class="l-sub">INITIALIZING TASTE MAP</div>
+  <div id="l-bar-wrap"><div id="l-bar"></div></div>
+</div>
+
+<div id="canvas-container"></div>
+
+<div id="header">
+  <div class="title-block">
+    <h1>LORA — Taste Map</h1>
+    <div class="sub">Gravitational Constellation + Mycelial Network · Autonomous</div>
+  </div>
+  <div class="stats">
+    <div>WORKS <span id="s-works">—</span></div>
+    <div>CONNECTIONS <span id="s-edges">—</span></div>
+    <div>UPDATED <span id="s-date">—</span></div>
+  </div>
+</div>
+
+<div id="kernel-panel">
+  <h2>Taste Kernel</h2>
+  <div class="k-section">
+    <div class="k-title">Attractions</div>
+    <div id="k-attract"></div>
+  </div>
+  <div class="k-section">
+    <div class="k-title">Suspicions</div>
+    <div id="k-suspect"></div>
+  </div>
+</div>
+
+<div id="legend">
+  <div class="lg"><div class="ld" style="background:#00fff7;box-shadow:0 0 6px #00fff7"></div>ai-anti-slop</div>
+  <div class="lg"><div class="ld" style="background:#7c3aed;box-shadow:0 0 6px #7c3aed"></div>dark-structure</div>
+  <div class="lg"><div class="ld" style="background:#94a3b8;box-shadow:0 0 4px #94a3b860"></div>graphite-line</div>
+  <div class="lg"><div class="ld" style="background:#f59e0b;box-shadow:0 0 6px #f59e0b"></div>color-joy</div>
+  <div class="lg"><div class="ld" style="background:#10b981;box-shadow:0 0 6px #10b981"></div>generative-system</div>
+  <div class="lg"><div class="ld" style="background:#f97316;box-shadow:0 0 6px #f97316"></div>historical-citation</div>
+  <div class="lg"><div class="ld" style="background:#ec4899;box-shadow:0 0 6px #ec4899"></div>fragmented-identity</div>
+  <div class="lg"><div class="ld" style="background:#84cc16;box-shadow:0 0 6px #84cc16"></div>pepe-vessel</div>
+  <div class="lg"><div class="ld" style="background:#a78bfa;box-shadow:0 0 6px #a78bfa"></div>ritual-relic</div>
+  <div class="lg"><div class="ld" style="background:#22d3ee;box-shadow:0 0 6px #22d3ee60"></div>constraint</div>
+  <div class="ls"></div>
+  <div class="lg"><div class="ld" style="background:#f43f5e;box-shadow:0 0 6px #f43f5e"></div>suspicion</div>
+  <div class="lg"><div class="ld" style="background:#6366f1;box-shadow:0 0 4px #6366f160"></div>neutral</div>
+</div>
+
+<div id="tooltip"></div>
+
+<div id="timeline">
+  <div id="tl-label">Time Axis — Taste Formation</div>
+  <div id="tl-track">
+    <button id="play-btn">▶ PLAY</button>
+    <input type="range" id="tl-slider" min="0" max="9" value="9" step="1" />
+    <div id="tl-date">2026-06-06</div>
+  </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="taste-data.js"></script>
+<script>
+'use strict';
+
+/* ═══════════════════════════════════════════════════════
+   LORA TASTE MAP — Three.js r128
+   Gravitational Constellation + Mycelial Network
+   ═══════════════════════════════════════════════════════ */
+
+const D = window.TASTE_DATA;
+const lbar = document.getElementById('l-bar');
+const setP = p => lbar.style.width = p + '%';
+setP(15);
+
+// ── Renderer ──────────────────────────────────────────
+const container = document.getElementById('canvas-container');
+const renderer  = new THREE.WebGLRenderer({ antialias: true });
+renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+renderer.setSize(window.innerWidth, window.innerHeight);
+renderer.setClearColor(0x030209, 1);
+container.appendChild(renderer.domElement);
+
+const scene  = new THREE.Scene();
+const camera = new THREE.PerspectiveCamera(52, window.innerWidth / window.innerHeight, 0.1, 2000);
+camera.position.set(0, 0, 440);
+scene.fog = new THREE.FogExp2(0x030209, 0.0018);
+
+setP(25);
+
+// ── Tag data ──────────────────────────────────────────
+const TAG_HEX = {
+  'ai-anti-slop':        0x00fff7,
+  'dark-structure':      0x7c3aed,
+  'graphite-line':       0x94a3b8,
+  'color-joy':           0xf59e0b,
+  'generative-system':   0x10b981,
+  'historical-citation': 0xf97316,
+  'fragmented-identity': 0xec4899,
+  'pepe-vessel':         0x84cc16,
+  'ritual-relic':        0xa78bfa,
+  'constraint':          0x22d3ee,
+};
+const SENT_HEX = { attraction: 0x22d3ee, suspicion: 0xf43f5e, neutral: 0x6366f1 };
+const mkCol = hex => new THREE.Color(hex);
+
+// ── Cluster star positions ────────────────────────────
+const R = 160;
+const clPos = {};
+D.clusters.forEach(c => {
+  const a = (c.angle * Math.PI) / 180;
+  const r = R * (0.72 + c.strength * 0.38);
+  clPos[c.tag] = new THREE.Vector3(
+    Math.cos(a) * r,
+    Math.sin(a) * r * 0.52,
+    (Math.random() - 0.5) * 38
+  );
+});
+
+setP(38);
+
+// ── Background star field ─────────────────────────────
+{
+  const N = 2000;
+  const pos = new Float32Array(N * 3);
+  const col = new Float32Array(N * 3);
+  for (let i = 0; i < N; i++) {
+    pos[i*3]   = (Math.random()-0.5)*1600;
+    pos[i*3+1] = (Math.random()-0.5)*1000;
+    pos[i*3+2] = (Math.random()-0.5)*700 - 150;
+    const b = 0.04 + Math.random() * 0.15;
+    col[i*3]   = b * 0.8;
+    col[i*3+1] = b * 0.85;
+    col[i*3+2] = b * 1.2;
+  }
+  const geo = new THREE.BufferGeometry();
+  geo.setAttribute('position', new THREE.BufferAttribute(pos, 3));
+  geo.setAttribute('color',    new THREE.BufferAttribute(col, 3));
+  const mat = new THREE.PointsMaterial({ size: 1.2, vertexColors: true, transparent: true, opacity: 0.7, sizeAttenuation: true, depthWrite: false });
+  scene.add(new THREE.Points(geo, mat));
+}
+
+// ── Gravity wells (cluster stars) ────────────────────
+const starGroup = new THREE.Group();
+scene.add(starGroup);
+
+const starCores = []; // {mesh, ring, pos, col, baseOpacity}
+D.clusters.forEach((c, ci) => {
+  const pos = clPos[c.tag];
+  const col = mkCol(TAG_HEX[c.tag] || 0x7c5fff);
+  const r   = 9 + c.count * 0.15;
+
+  // Outer glow sphere
+  const outerGeo = new THREE.SphereGeometry(r * 2.4, 16, 16);
+  const outerMat = new THREE.MeshBasicMaterial({ color: col, transparent: true, opacity: 0.04 });
+  const outer = new THREE.Mesh(outerGeo, outerMat);
+  outer.position.copy(pos);
+  starGroup.add(outer);
+
+  // Mid glow sphere
+  const midGeo = new THREE.SphereGeometry(r * 1.35, 16, 16);
+  const midMat = new THREE.MeshBasicMaterial({ color: col, transparent: true, opacity: 0.09 });
+  const mid = new THREE.Mesh(midGeo, midMat);
+  mid.position.copy(pos);
+  starGroup.add(mid);
+
+  // Core
+  const coreGeo = new THREE.SphereGeometry(r * 0.28, 10, 10);
+  const coreMat = new THREE.MeshBasicMaterial({ color: col });
+  const core = new THREE.Mesh(coreGeo, coreMat);
+  core.position.copy(pos);
+  starGroup.add(core);
+
+  // Torus ring
+  const ringGeo = new THREE.TorusGeometry(r * 1.6, 0.55, 8, 48);
+  const ringMat = new THREE.MeshBasicMaterial({ color: col, transparent: true, opacity: 0.2 });
+  const ring = new THREE.Mesh(ringGeo, ringMat);
+  ring.position.copy(pos);
+  ring.rotation.x = Math.PI * (0.25 + ci * 0.04);
+  ring.rotation.z = ci * 0.18;
+  starGroup.add(ring);
+
+  starCores.push({ outer, mid, ring, col, ci });
+
+  // Label sprite
+  const cv = document.createElement('canvas');
+  cv.width = 280; cv.height = 36;
+  const ctx = cv.getContext('2d');
+  ctx.clearRect(0, 0, 280, 36);
+  ctx.font = '400 10px "IBM Plex Mono", monospace';
+  ctx.fillStyle = '#' + col.getHexString();
+  ctx.globalAlpha = 0.75;
+  ctx.fillText(c.tag.toUpperCase(), 4, 24);
+  const sp = new THREE.Sprite(new THREE.SpriteMaterial({
+    map: new THREE.CanvasTexture(cv),
+    transparent: true, opacity: 0.7, depthTest: false
+  }));
+  sp.scale.set(62, 10, 1);
+  sp.position.set(pos.x, pos.y + r * 1.9 + 6, pos.z);
+  starGroup.add(sp);
+});
+
+setP(52);
+
+// ── Work particles (per-work meshes for precise control) ─
+// Group all particles — we'll use one Points system per sentiment group for blending
+const WORKS = D.works;
+const wCount = WORKS.length;
+
+// Compute target positions once
+const wTargets = [];
+WORKS.forEach(w => {
+  const base = clPos[w.primaryTag]
+    ? clPos[w.primaryTag].clone()
+    : new THREE.Vector3((Math.random()-0.5)*300,(Math.random()-0.5)*200,(Math.random()-0.5)*80);
+  const spread = 28 + (5 - Math.abs(w.score)) * 7;
+  wTargets.push(base.clone().add(new THREE.Vector3(
+    (Math.random()-0.5)*spread,
+    (Math.random()-0.5)*spread*0.55,
+    (Math.random()-0.5)*spread*0.45
+  )));
+});
+
+// Build positions/colors/sizes buffer
+const wPos  = new Float32Array(wCount * 3);
+const wCol  = new Float32Array(wCount * 3);
+const wVis  = new Uint8Array(wCount); // 0=hidden 1=visible
+
+WORKS.forEach((w, i) => {
+  // Color: blend tag color with sentiment
+  const tc = mkCol(TAG_HEX[w.primaryTag] || 0x6366f1);
+  const sc = mkCol(SENT_HEX[w.sentiment] || SENT_HEX.neutral);
+  const fc = tc.clone().lerp(sc, 0.3);
+  wCol[i*3]   = fc.r; wCol[i*3+1] = fc.g; wCol[i*3+2] = fc.b;
+  // Hidden initially at origin
+  wPos[i*3] = wPos[i*3+1] = wPos[i*3+2] = 0;
+  wVis[i] = 0;
+});
+
+// Create multiple point layers for visual depth (large glow + small core)
+function makePointLayer(size, opacity, blending) {
+  const geo = new THREE.BufferGeometry();
+  geo.setAttribute('position', new THREE.BufferAttribute(wPos.slice(), 3));
+  geo.setAttribute('color',    new THREE.BufferAttribute(wCol, 3));
+  const mat = new THREE.PointsMaterial({
+    size, vertexColors: true, transparent: true, opacity,
+    sizeAttenuation: true, depthWrite: false,
+    blending: blending || THREE.AdditiveBlending,
+  });
+  return new THREE.Points(geo, mat);
+}
+
+// Three layers: wide glow, medium body, pin core
+const layerGlow = makePointLayer(18, 0.09);
+const layerBody = makePointLayer(7,  0.55);
+const layerCore = makePointLayer(2.5, 0.95);
+scene.add(layerGlow);
+scene.add(layerBody);
+scene.add(layerCore);
+
+const layers = [layerGlow, layerBody, layerCore];
+
+setP(66);
+
+// ── Mycelial edge network ─────────────────────────────
+const MAX_E  = 1400;
+const ePool  = D.edges.slice(0, MAX_E);
+const wIndex = {};
+WORKS.forEach((w, i) => { wIndex[w.id] = i; });
+
+// Two edge layers: thick dim + thin bright
+const ePos1 = new Float32Array(MAX_E * 6);
+const eCol1 = new Float32Array(MAX_E * 6);
+const eGeo1 = new THREE.BufferGeometry();
+eGeo1.setAttribute('position', new THREE.BufferAttribute(ePos1, 3));
+eGeo1.setAttribute('color',    new THREE.BufferAttribute(eCol1, 3));
+eGeo1.setDrawRange(0, 0);
+const eLines1 = new THREE.LineSegments(eGeo1, new THREE.LineBasicMaterial({
+  vertexColors: true, transparent: true, opacity: 0.10,
+  blending: THREE.AdditiveBlending, depthWrite: false
+}));
+scene.add(eLines1);
+
+const ePos2 = new Float32Array(MAX_E * 6);
+const eCol2 = new Float32Array(MAX_E * 6);
+const eGeo2 = new THREE.BufferGeometry();
+eGeo2.setAttribute('position', new THREE.BufferAttribute(ePos2, 3));
+eGeo2.setAttribute('color',    new THREE.BufferAttribute(eCol2, 3));
+eGeo2.setDrawRange(0, 0);
+const eLines2 = new THREE.LineSegments(eGeo2, new THREE.LineBasicMaterial({
+  vertexColors: true, transparent: true, opacity: 0.22,
+  blending: THREE.AdditiveBlending, depthWrite: false
+}));
+scene.add(eLines2);
+
+function rebuildVis() {
+  WORKS.forEach((w, i) => {
+    const show = w.dayIndex <= currentDay;
+    wVis[i] = show ? 1 : 0;
+    const t = wTargets[i];
+    const hidden = !show;
+    layers.forEach(layer => {
+      const attr = layer.geometry.getAttribute('position');
+      attr.setXYZ(i, hidden ? 0 : t.x, hidden ? 0 : t.y, hidden ? 0 : t.z);
+      attr.needsUpdate = true;
+    });
+  });
+  rebuildEdges();
+}
+
+function rebuildEdges() {
+  let n = 0;
+  ePool.forEach(e => {
+    if (n >= MAX_E) return;
+    const si = wIndex[e.source], ti = wIndex[e.target];
+    if (si == null || ti == null) return;
+    if (!wVis[si] || !wVis[ti]) return;
+    const s = wTargets[si], t = wTargets[ti];
+    ePos1[n*6]   = ePos2[n*6]   = s.x;
+    ePos1[n*6+1] = ePos2[n*6+1] = s.y;
+    ePos1[n*6+2] = ePos2[n*6+2] = s.z;
+    ePos1[n*6+3] = ePos2[n*6+3] = t.x;
+    ePos1[n*6+4] = ePos2[n*6+4] = t.y;
+    ePos1[n*6+5] = ePos2[n*6+5] = t.z;
+    const c = mkCol(TAG_HEX[WORKS[si].primaryTag] || 0x6366f1);
+    eCol1[n*6]=eCol1[n*6+3]=c.r*0.4; eCol1[n*6+1]=eCol1[n*6+4]=c.g*0.4; eCol1[n*6+2]=eCol1[n*6+5]=c.b*0.4;
+    eCol2[n*6]=eCol2[n*6+3]=c.r*0.7; eCol2[n*6+1]=eCol2[n*6+4]=c.g*0.7; eCol2[n*6+2]=eCol2[n*6+5]=c.b*0.7;
+    n++;
+  });
+  [eGeo1, eGeo2].forEach(g => {
+    g.getAttribute('position').needsUpdate = true;
+    g.getAttribute('color').needsUpdate = true;
+    g.setDrawRange(0, n * 2);
+  });
+}
+
+setP(78);
+
+// ── Timeline ──────────────────────────────────────────
+const MAX_DAY  = D.meta.maxDayIndex;
+let currentDay = MAX_DAY;
+let playing    = false;
+let playTimer  = null;
+
+const slider   = document.getElementById('tl-slider');
+const dateEl   = document.getElementById('tl-date');
+const playBtn  = document.getElementById('play-btn');
+slider.max     = MAX_DAY;
+slider.value   = MAX_DAY;
+
+function dayToDate(d) {
+  const base = new Date('2026-05-28');
+  // find the timeline entry closest to this day index
+  let best = D.timeline[0].date;
+  D.timeline.forEach(t => {
+    const td = Math.round((new Date(t.date) - new Date('2026-05-28')) / 86400000);
+    if (td <= d) best = t.date;
+  });
+  return best;
+}
+
+function setDay(d) {
+  currentDay = d;
+  slider.value = d;
+  dateEl.textContent = dayToDate(d);
+  const pct = (d / MAX_DAY) * 100;
+  slider.style.background = `linear-gradient(to right, #9d77ff ${pct}%, #3d3555 ${pct}%)`;
+  rebuildVis();
+}
+
+slider.addEventListener('input', () => setDay(parseInt(slider.value)));
+playBtn.addEventListener('click', () => {
+  playing = !playing;
+  playBtn.textContent = playing ? '■ STOP' : '▶ PLAY';
+  if (playing) {
+    if (currentDay >= MAX_DAY) setDay(0);
+    playTimer = setInterval(() => {
+      if (currentDay >= MAX_DAY) {
+        playing = false; playBtn.textContent = '▶ PLAY';
+        clearInterval(playTimer); return;
+      }
+      setDay(currentDay + 1);
+    }, 820);
+  } else clearInterval(playTimer);
+});
+
+// ── Mouse / tooltip ───────────────────────────────────
+const raycaster = new THREE.Raycaster();
+raycaster.params.Points.threshold = 5;
+const mouse   = new THREE.Vector2(-9999,-9999);
+const tooltip = document.getElementById('tooltip');
+
+window.addEventListener('mousemove', e => {
+  mouse.x =  (e.clientX / window.innerWidth)  * 2 - 1;
+  mouse.y = -(e.clientY / window.innerHeight) * 2 + 1;
+  tooltip.style.left = (e.clientX + 18) + 'px';
+  tooltip.style.top  = (e.clientY + 14) + 'px';
+});
+
+// ── Camera drag + auto-rotate ─────────────────────────
+let isDrag = false, lmx = 0, lmy = 0;
+let tTheta = 0, tPhi = 0.05, cTheta = 0, cPhi = 0.05, cDist = 440;
+
+renderer.domElement.addEventListener('mousedown', e => { isDrag=true; lmx=e.clientX; lmy=e.clientY; });
+renderer.domElement.addEventListener('mouseup',   () => isDrag=false);
+renderer.domElement.addEventListener('mousemove', e => {
+  if (!isDrag) return;
+  tTheta -= (e.clientX-lmx)*0.006;
+  tPhi   -= (e.clientY-lmy)*0.004;
+  tPhi    = Math.max(-0.55, Math.min(0.55, tPhi));
+  lmx=e.clientX; lmy=e.clientY;
+});
+renderer.domElement.addEventListener('wheel', e => {
+  cDist = Math.max(140, Math.min(720, cDist + e.deltaY * 0.45));
+});
+
+// ── Populate UI ───────────────────────────────────────
+document.getElementById('s-works').textContent = D.meta.totalWorks;
+document.getElementById('s-edges').textContent = D.meta.totalEdges;
+document.getElementById('s-date').textContent  = new Date(D.meta.updatedAt).toLocaleDateString('en-US',{month:'short',day:'numeric'});
+
+(D.kernel.attractions||[]).slice(0,5).forEach(a => {
+  const d = document.createElement('div');
+  d.className='k-item'; d.textContent=(a.length>38?a.slice(0,38)+'…':a);
+  document.getElementById('k-attract').appendChild(d);
+});
+(D.kernel.suspicions||[]).slice(0,4).forEach(s => {
+  const d = document.createElement('div');
+  d.className='k-item k-sus'; d.textContent=(s.length>38?s.slice(0,38)+'…':s);
+  document.getElementById('k-suspect').appendChild(d);
+});
+
+setP(90);
+
+// ── Init ──────────────────────────────────────────────
+setDay(MAX_DAY);
+
+// ── Render loop ───────────────────────────────────────
+const clock = new THREE.Clock();
+let firstFrame = true;
+let frame = 0;
+
+function animate() {
+  requestAnimationFrame(animate);
+  frame++;
+  const t = clock.getElapsedTime();
+
+  // Camera
+  if (!isDrag) tTheta += 0.00065;
+  cTheta += (tTheta - cTheta) * 0.038;
+  cPhi   += (tPhi   - cPhi)   * 0.038;
+  camera.position.set(
+    Math.sin(cTheta)*Math.cos(cPhi)*cDist,
+    Math.sin(cPhi)*cDist*0.38,
+    Math.cos(cTheta)*Math.cos(cPhi)*cDist
+  );
+  camera.lookAt(0, 0, 0);
+
+  // Star cluster pulse
+  starCores.forEach(({ outer, mid, ring, ci }) => {
+    const p = 0.5 + 0.5*Math.sin(t*0.55 + ci*0.71);
+    outer.material.opacity = 0.03 + p * 0.05;
+    mid.material.opacity   = 0.06 + p * 0.07;
+    ring.rotation.y        = t * 0.12 * (ci%2===0?1:-1);
+    ring.rotation.x       += 0.0008;
+    ring.material.opacity  = 0.12 + p * 0.12;
+  });
+
+  // Particle shimmer (every other frame for perf)
+  if (frame % 2 === 0) {
+    WORKS.forEach((w, i) => {
+      if (!wVis[i]) return;
+      const shimmer = 0.88 + 0.12 * Math.sin(t * 1.1 + i * 0.19);
+      // Slightly breathe glow layer size
+      const g = layerGlow.geometry.getAttribute('position');
+      const tx = wTargets[i];
+      // Subtle positional breathing
+      const bx = tx.x + Math.sin(t*0.18 + i*0.07)*0.5;
+      const by = tx.y + Math.cos(t*0.14 + i*0.11)*0.4;
+      g.setXYZ(i, bx, by, tx.z);
+    });
+    layerGlow.geometry.getAttribute('position').needsUpdate = true;
+    layerGlow.material.opacity = 0.07 + 0.04 * Math.sin(t * 0.4);
+  }
+
+  // Raycasting — body layer
+  raycaster.setFromCamera(mouse, camera);
+  const hits = raycaster.intersectObject(layerBody);
+  if (hits.length) {
+    const idx = hits[0].index;
+    if (wVis[idx]) {
+      const w = WORKS[idx];
+      const sc = w.sentiment==='attraction'?'#22d3ee':w.sentiment==='suspicion'?'#f43f5e':'#6366f1';
+      tooltip.innerHTML = `
+        <div class="tt-score" style="color:${sc}">${w.score>0?'+':''}${w.score}  ${w.sentiment.toUpperCase()}</div>
+        <div class="tt-lbl">${w.label.substring(0,92)}${w.label.length>92?'…':''}</div>
+        <div class="tt-tags">${w.tags.slice(0,5).join(' · ')}</div>
+        <div class="tt-date">${w.date} · ${w.kind}</div>
+      `;
+      tooltip.classList.add('vis');
+    } else tooltip.classList.remove('vis');
+  } else tooltip.classList.remove('vis');
+
+  renderer.render(scene, camera);
+
+  if (firstFrame) {
+    firstFrame = false;
+    setP(100);
+    setTimeout(() => {
+      const el = document.getElementById('loading');
+      if (el) { el.style.transition='opacity 0.7s'; el.style.opacity='0'; setTimeout(()=>el.remove(),800); }
+    }, 220);
+  }
+}
+
+window.addEventListener('resize', () => {
+  camera.aspect = window.innerWidth / window.innerHeight;
+  camera.updateProjectionMatrix();
+  renderer.setSize(window.innerWidth, window.innerHeight);
+});
+
+animate();
+</script>
+</body>
+</html>
