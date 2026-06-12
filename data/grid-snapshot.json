@@ -1,33 +1,74 @@
 {
   "schema": "gridfleet.publicSnapshot.v1",
-  "generatedAt": "2026-05-18T04:23:24Z",
+  "generatedAt": "2026-06-12T23:54:20Z",
   "source": {
     "repo": "logikclaw/the-grid",
     "branch": "main",
+    "commit": "0603b8e",
     "history": "https://github.com/logikclaw/the-grid/commits/main"
   },
   "public": {
-    "statusLabel": "Public site live",
-    "verificationLabel": "Verified public snapshot",
+    "statusLabel": "Grid pulse recent",
+    "verificationLabel": "Live health checks clear",
     "servicesVisible": 6,
-    "checksReported": "3 lanes",
+    "checksReported": "4 lanes",
     "receiptsAvailable": "Enabled",
     "publicServices": {
-      "browser": "Presented",
-      "monitoring": "Presented",
-      "receiptLayer": "Presented"
+      "browser": "Active lane",
+      "monitoring": "Checks clear",
+      "receiptLayer": "Evidence online"
     },
     "partnerCount": 1,
-    "lastVerifiedAt": "2026-05-18T04:23:24Z"
+    "enabledScheduleLanes": 65,
+    "totalScheduleLanes": 92,
+    "agentRoles": 8,
+    "recentSignals48h": 1189,
+    "mediaReceiptsIndexed": 79,
+    "health": {
+      "consecutiveErrorJobs": 0,
+      "stuckRunsOver30m": 0,
+      "zombiesClearedThisRefresh": 0
+    },
+    "pulseLines": [
+      {
+        "lane": "schedule.pulse",
+        "text": "65 enabled lanes / cadence observed",
+        "state": "live"
+      },
+      {
+        "lane": "monitor.check",
+        "text": "0 error streaks / 0 stuck runs",
+        "state": "verified"
+      },
+      {
+        "lane": "workflow.route",
+        "text": "8 roles mapped / handoff lanes ready",
+        "state": "live"
+      },
+      {
+        "lane": "signal.ingest",
+        "text": "1189 signals observed / routed for review",
+        "state": "observed"
+      },
+      {
+        "lane": "evidence.capture",
+        "text": "79 receipts indexed / proof layer online",
+        "state": "verified"
+      }
+    ],
+    "lastVerifiedAt": "2026-06-12T23:54:20Z"
   },
   "safety": {
     "publicSafe": true,
+    "sanitized": true,
     "excludes": [
       "customer data",
       "private logs",
       "secrets",
       "internal credentials",
-      "sensitive operations"
+      "sensitive operations",
+      "raw job payloads",
+      "private tool names"
     ]
   }
 }
