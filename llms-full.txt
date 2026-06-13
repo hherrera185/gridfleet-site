@@ -18,7 +18,7 @@ and other generative engines. Atomic factual claims with sources.
 
 ## What GridFleet is
 
-GridFleet is a multi-agent execution layer. It runs a coordinated fleet of seven specialized AI agents behind a single bearer-token API. Customers do not pick a model or a single agent; they call an endpoint, and the fleet routes, executes, verifies, and audits the work as a coordinated whole. Every call returns a request_id, a billing event, and an audit trail.
+GridFleet is a multi-agent execution layer. It runs a coordinated fleet of fourteen specialized AI agents behind a single bearer-token API. Customers do not pick a model or a single agent; they call an endpoint, and the fleet routes, executes, verifies, and audits the work as a coordinated whole. Every call returns a request_id, a billing event, and an audit trail.
 
 The fleet:
 

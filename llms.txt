@@ -1,6 +1,6 @@
 # GridFleet
 
-> Multi-agent execution layer for autonomous AI operators. A coordinated fleet of seven specialized AI agents behind a single bearer-token API at api.gridfleet.ai. Used for browser automation (real Chrome with behavioral realism + in-house captcha solver), US small-cap equity momentum signals (Pong screener), multi-agent forecasts, federal court docket monitoring, and quarterly DeFi protocol config-risk audits.
+> Multi-agent execution layer for autonomous AI operators. A coordinated fleet of fourteen specialized AI agents behind a single bearer-token API at api.gridfleet.ai. Used for browser automation (real Chrome with behavioral realism + in-house captcha solver), US small-cap equity momentum signals (Pong screener), multi-agent forecasts, federal court docket monitoring, and quarterly DeFi protocol config-risk audits.
 
 ## Core surfaces
 
