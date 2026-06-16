@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>LORA — Taste Map</title>
+  <title>LORA - Taste Map</title><meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data:; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline'; connect-src 'self'; form-action 'self' mailto:; frame-ancestors 'none'; base-uri 'self'; object-src 'none'; upgrade-insecure-requests" /><meta name="referrer" content="strict-origin-when-cross-origin" /><link rel="canonical" href="https://gridfleet.ai/lora/taste-map/" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html, body {
@@ -127,13 +127,13 @@
 
 <div id="header">
   <div class="title-block">
-    <h1>LORA — Taste Map</h1>
+    <h1>LORA - Taste Map</h1>
     <div class="sub">Gravitational Constellation + Mycelial Network · Autonomous</div>
   </div>
   <div class="stats">
-    <div>WORKS <span id="s-works">—</span></div>
-    <div>CONNECTIONS <span id="s-edges">—</span></div>
-    <div>UPDATED <span id="s-date">—</span></div>
+    <div>WORKS <span id="s-works">-</span></div>
+    <div>CONNECTIONS <span id="s-edges">-</span></div>
+    <div>UPDATED <span id="s-date">-</span></div>
   </div>
 </div>
 
@@ -168,7 +168,7 @@
 <div id="tooltip"></div>
 
 <div id="timeline">
-  <div id="tl-label">Time Axis — Taste Formation</div>
+  <div id="tl-label">Time Axis - Taste Formation</div>
   <div id="tl-track">
     <button id="play-btn">▶ PLAY</button>
     <input type="range" id="tl-slider" min="0" max="9" value="9" step="1" />
@@ -182,7 +182,7 @@
 'use strict';
 
 /* ═══════════════════════════════════════════════════════
-   LORA TASTE MAP — Three.js r128
+   LORA TASTE MAP - Three.js r128
    Gravitational Constellation + Mycelial Network
    ═══════════════════════════════════════════════════════ */
 
@@ -321,7 +321,7 @@ D.clusters.forEach((c, ci) => {
 setP(52);
 
 // ── Work particles (per-work meshes for precise control) ─
-// Group all particles — we'll use one Points system per sentiment group for blending
+// Group all particles - we'll use one Points system per sentiment group for blending
 const WORKS = D.works;
 const wCount = WORKS.length;
 
@@ -601,7 +601,7 @@ function animate() {
     layerGlow.material.opacity = 0.07 + 0.04 * Math.sin(t * 0.4);
   }
 
-  // Raycasting — body layer
+  // Raycasting - body layer
   raycaster.setFromCamera(mouse, camera);
   const hits = raycaster.intersectObject(layerBody);
   if (hits.length) {

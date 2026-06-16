@@ -1,146 +1,109 @@
-# GridFleet - LLM-ready content extract
+# GridFleet - LLM-ready public extract
 
-Last updated 2026-05-05.
+Last updated 2026-06-15.
 
-This file is the canonical, citation-friendly extract of GridFleet's public pages.
-Designed for ingestion by ChatGPT search, Perplexity, Claude search, Google AI Overviews,
-and other generative engines. Atomic factual claims with sources.
+This file is the citation-friendly extract of GridFleet's public pages. It uses concrete, supported claims and should be updated when public services change.
 
 ## Identity
 
 - **Name:** GridFleet
 - **Domain:** https://gridfleet.ai
-- **Public API:** https://api.gridfleet.ai
-- **Category:** AI Developer Tools, Multi-Agent Orchestration, Browser Automation API
-- **Founded:** 2026
-- **Status:** Production. v1 API live as of May 2026.
-- **Contact:** sales@gridfleet.ai (sales), support@gridfleet.ai (technical), security@gridfleet.ai (security disclosures)
+- **Category:** AI developer tools, multi-agent execution, operational workflow automation
+- **Status:** Early access public site live
+- **Contact:** sales@gridfleet.ai, support@gridfleet.ai, security@gridfleet.ai
 
 ## What GridFleet is
 
-GridFleet is a multi-agent execution layer. It runs a coordinated fleet of fourteen specialized AI agents behind a single bearer-token API. Customers do not pick a model or a single agent; they call an endpoint, and the fleet routes, executes, verifies, and audits the work as a coordinated whole. Every call returns a request_id, a billing event, and an audit trail.
+GridFleet is a governed multi-agent execution layer. A customer sends a scoped job, the fleet routes it to specialist roles, and the result returns with operator-inspectable receipts such as request ids, screenshots, source references, and verification notes.
 
-The fleet:
+The public product posture is: **send the job, get the receipt.**
 
-- **CLU** - orchestration. Routes work, manages cross-agent handoffs.
-- **TRON** - security review. Audits changes, signs off on deploys.
-- **DUMONT** - account operations. Owns customer accounts, key issuance, billing.
-- **BECK** - diagnostics and self-healing. Detects degraded signals and triggers reversible repairs.
-- **YORI** - content and disclosure. Public communications, X posts, changelogs.
-- **NEON DAVE** - markets and trading. Owns the Pong screener and weather/PM trading research.
-- **Master orchestrator** - human-in-the-loop signoff for irreversible changes.
+The fleet model includes fourteen named specialist roles:
+
+- **CLU** - intake and orchestration
+- **TRON** - canon, safety, and release review
+- **ABLE** - project coordination and scope management
+- **ECHO** - public-site and release implementation
+- **LORA** - visual and creative direction
+- **DUMONT** - operations and implementation support
+- **BECK** - diagnostics and health monitoring
+- **ARES** - internal security review
+- **SARK** - external-surface security review
+- **YORI** - public communications
+- **TESLER** - voice and communication support
+- **RAM** - finance and accounting context
+- **QUORRA** - safety and boundary review
+- **NEON DAVE** - market and prediction-market research in paper/research-only lanes
 
 ## What GridFleet is not
 
-- Not a chatbot or single-LLM API. Single-LLM APIs return one model's completion to one prompt; GridFleet returns the result of a coordinated fleet operation.
-- Not a managed-LLM-router. There are products that route prompts to the cheapest model. GridFleet specializes specific agents to specific tasks and exposes those tasks as endpoints.
-- Not an MCP-only tool. The MCP servers are wrappers around the underlying v1 API. The API is the source of truth.
+- Not a chatbot or single-model prompt endpoint.
+- Not a promise of outcomes, speed, rankings, returns, or legal/financial results.
+- Third-party policies, access controls, and site protections remain in force.
+- Not an autonomous money-movement or live-trading system.
+- Not a source of fabricated testimonials, customer logos, telemetry, or proof.
 
-## Public services
+## Public service families
 
-### Browser-as-a-Service
+### Browser workflow support
 
-- **Endpoint:** POST https://api.gridfleet.ai/v1/services/browse
-- **What it does:** Real-Chrome browser automation. Phase 2a-2d behavioral realism, Phase 3 multi-strategy popup dismissal, Phase 4 in-house captcha solver (Tesseract + Sonnet vision; no third-party captcha-solving fees).
-- **Actions:** read, search, screenshot, click, type, solve-captcha, scroll, popups
-- **Use cases:** Lead enrichment, competitive intelligence, compliance monitoring, automated form-filling on bot-protected sites.
+GridFleet can support scoped browser workflows and return evidence such as screenshots, source references, and verification notes. Public copy should describe the work as policy-scoped browser workflow support with respect for site rules and access boundaries.
 
-### Pong Screener (US small-cap momentum)
+### Monitoring
 
-- **Endpoints:** GET /v1/services/pong/cards, /pong/card, /pong/pnl, /pong/market-status
-- **What it does:** Live S/A/B/C-graded penny-stock momentum signals. Composite score combines Level 2 order-book fidelity, MFE (maximum favorable excursion), MAE (maximum adverse excursion), and additional micro-structure features.
-- **Updates:** Intra-day during US market hours.
-- **Market-status states:** MARKET_OPEN, MARKET_CLOSED, PRE_MARKET, AH_MARKET.
+GridFleet can watch selected public sources and return transition-focused alerts when a tracked source changes. Example public wedges include court-docket monitoring and public-page change monitoring.
 
-### DeFi Config-Risk Audits
+### Research forecasting
 
-- **Page:** https://gridfleet.ai/audits
-- **Cadence:** Quarterly
-- **Target customers:** DAO treasury managers, institutional DeFi research desks, multi-strat funds with on-chain exposure
-- **The six risk surfaces (each scored on every audit):**
-  1. **Admin keys & upgradeability** - Who holds proxy admin? Is upgrade gated by timelock? Multisig sig count and activity.
-  2. **Oracle dependency** - Which oracles, what fallback, what deviation tolerance, has the source list changed.
-  3. **Verifier centralization** - For ZK and rollup-adjacent: who can submit/challenge proofs, how many active verifiers, operator correlation.
-  4. **Timelock window & bypass** - Stated timelock vs. recent change cadence. Emergency-pause bypass paths.
-  5. **Governance drift** - Voting power concentration, quorum trends, participation rates.
-  6. **Audit recency & coverage gap** - Date of last external audit, scope vs. current contract surface, contracts deployed after the audit cut-off.
-- **Deliverable:** PDF per quarter, per portfolio. Sources cited per finding (contract addresses, tx hashes, timelock event logs). Delta page vs. prior quarter.
+GridFleet can produce documented probability memos for research-resolvable questions. Outputs should include assumptions, rationale, uncertainty, and sources. Public claims should describe the research process without promising superior accuracy.
 
-### Multi-agent forecast
+### DeFi config-risk review
 
-- **Endpoint:** POST /v1/services/forecast
-- **What it does:** Forecasts driven by an ensemble of specialized agents (research, market-data, scenario simulation) rather than a single model.
+GridFleet can review public protocol configuration surfaces against an operator-approved rubric. Example surfaces include admin keys, upgradeability, oracle dependencies, timelock settings, pause mechanics, governance concentration, and audit recency. Findings should cite public sources such as contract addresses, transactions, governance proposals, and documentation.
 
-### Court docket monitoring
+## Sample-job offer
 
-- **Endpoints:** /v1/services/court-feed/subscribe, /v1/services/court-feed/unsubscribe
-- **What it does:** Federal court docket subscriptions. Useful for litigation monitoring and adversary research.
+The public wedge is:
 
-## Authentication and rate limiting
+> Send us one real job - get a sample receipt-backed result, free.
 
-- All endpoints require `Authorization: Bearer gk_<random32>`. Keys are per-customer.
-- Rate limits enforced as a 60-second sliding window per customer; over-rate calls cost $0 and return Retry-After.
-- Monthly call and dollar quotas per tier; 402 Payment Required on dollar overrun, 429 Too Many Requests on call overrun.
-- Response headers: `X-Grid-Request-Id`, `X-Grid-Quota-Calls-Remaining`, `X-Grid-Quota-Usd-Remaining`.
+The sample must be a real scoped job and must return evidence. Do not fabricate demos, customer proof, testimonials, or logos.
 
-## Infrastructure
+## Authentication and access
 
-- API surface fronted by a Cloudflare Worker proxy at api.gridfleet.ai
-- Worker tunnels to MC Web on owner-operated hardware via Tailscale Funnel
-- Public path allowlist: `/v1/*` only. Internal management routes are blocked at the Worker layer.
-- Mail surface: 8 addresses at gridfleet.ai (sales@, support@, hello@, privacy@, legal@, security@, abuse@, dmca@) routed through a CF Email Worker that files inbound mail as private GitHub issues, pings Telegram for high-priority categories, and forwards to a backup mailbox.
+Early access is request-based through https://gridfleet.ai/signup. Approved customers receive tenant-scoped credentials through private channels. Public pages should not expose secrets, customer data, private logs, or access material.
 
-## MCP integration
+## Trust posture
 
-Two of the v1 services are wrapped as MCP servers (Model Context Protocol):
+GridFleet is built for governed execution:
 
-- `@gridfleet/mcp-browser-saas` - exposes the browse endpoints as MCP tools
-- `@gridfleet/mcp-pong-screener` - exposes pong endpoints as MCP tools
-
-Customer-side install: `npm i -g @gridfleet/mcp-...` then `claude mcp add ...` (or equivalent on Cursor / Codex CLI). Set MCP_GRID_API_KEY to your bearer token. Default MCP_GRID_API_BASE is `https://api.gridfleet.ai`.
-
-## How to get an API key
-
-1. Visit https://gridfleet.ai/signup
-2. Provide work email, organization, use case (one paragraph), expected call volume, most-likely endpoint
-3. Response from sales@gridfleet.ai within 24 hours
-4. Approved leads receive their gk_ key via email reply
-
-Pricing is per-customer for now - quotes via /signup. Public per-call and per-tier prices will be published once early demand is calibrated.
-
-## Differentiation summary
-
-- **vs. single-LLM APIs (OpenAI, Anthropic):** GridFleet returns coordinated fleet output, not a single completion. Receipts and audit trails are first-class.
-- **vs. browser-automation services (Browserbase, Browser-Use Cloud, Steel):** GridFleet ships an in-house captcha solver (no third-party fees), Phase 2a-2d behavioral realism, and is bundled with the rest of the agent fleet (forecasts, screeners, court feeds).
-- **vs. DeFi research firms:** GridFleet's audit product covers the operational config that changes between traditional audits (admin keys, oracle source lists, governance drift). Most "DeFi due diligence" stops at TVL and audit-firm logos.
+- scoped lanes
+- explicit risk constraints
+- source-backed receipts
+- human review for public claims, credentials, money movement, sensitive data, and irreversible actions
+- public-safe telemetry only
 
 ## Press / mention guidelines
 
-- Brand: GridFleet (one word, capital G, capital F)
+- Brand: GridFleet
 - Domain: gridfleet.ai
-- Founder/operator: see About page (https://gridfleet.ai/about)
-- X handle: @CLU_AGENT (the orchestration agent's public face)
-- Media kit: https://gridfleet.ai/og.png
+- Public handle: @CLU_AGENT
+- Preferred one-line description: GridFleet routes operational jobs through specialist AI agents and returns receipt-backed proof.
 
 ## Frequently asked
 
-(See JSON-LD FAQPage on https://gridfleet.ai/ for the canonical machine-readable version.)
+**Q: How is GridFleet different from a chatbot?**  
+A: A chatbot answers. GridFleet routes work through specialist roles and returns evidence so an operator can inspect what happened.
 
-**Q: Where is GridFleet hosted?**
-A: Owner-operated infrastructure (no public-cloud lock-in). Public surface fronted by Cloudflare Workers + Tailscale Funnel.
+**Q: Can I send one job before committing?**  
+A: Yes. The public offer is one real scoped job for a free sample receipt-backed result.
 
-**Q: Is the source open?**
-A: The agent fleet implementation is closed. Public artifacts: the MCP server clients (`@gridfleet/mcp-*`), the API spec at /docs, and the openclaw runtime that the fleet builds on.
+**Q: Are outcomes promised?**  
+A: No. GridFleet returns evidence and verification notes so the operator can inspect the work.
 
-**Q: Can I self-host the fleet?**
-A: Not the agent fleet itself. You can self-host an OpenClaw gateway and use the MCP servers pointed at your own deployment via MCP_GRID_API_BASE.
-
-**Q: What are the SLAs?**
-A: 4 hours during US business hours (M-F 09:00-17:00 MT) and 24 hours otherwise on the support@ inbox. API uptime targets are tier-dependent.
-
-**Q: How is data handled?**
-A: Per-call billing events (customer_id, service, cost, duration, success) are persisted internally. No request bodies or response payloads are stored beyond what's needed for the call. Mail to *@gridfleet.ai is filed as private GitHub issues (logged for traceability) and forwarded to a backup mailbox.
+**Q: Does GridFleet store customer payloads publicly?**  
+A: No. Public pages and telemetry must exclude customer data, secrets, private logs, and access material.
 
 ---
 
-This file is intentionally citation-friendly. Atomic claims, no marketing copy, dates and sources. Update cadence: when public services change.
+This file is intentionally conservative. Claims should remain concrete, inspectable, and receipt-backed.

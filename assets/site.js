@@ -1,10 +1,11 @@
-/* GridFleet — site.js v3 · zero deps · scroll-narrative + 3D-depth living fleet · mobile-tuned */
+/* GridFleet - site.js v3 · zero deps · scroll-narrative + 3D-depth living fleet · mobile-tuned */
 (function () {
   "use strict";
   var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   var isMobile = window.matchMedia("(max-width: 760px)").matches;
   var fine = window.matchMedia("(pointer:fine)").matches;
   var docEl = document.documentElement;
+  docEl.classList.add("js");
 
   var prog = document.createElement("div"); prog.className = "scroll-prog"; document.body.appendChild(prog);
   var nav = document.getElementById("nav");
@@ -183,4 +184,30 @@
     var ob = new IntersectionObserver(function (es) { es.forEach(function (e) { if (e.isIntersecting && !started) { started = true; run(); } }); }, { threshold: 0.2 });
     ob.observe(body);
   } else { run(); }
+})();
+
+/* ---- v7: command-deck roster activation ---- */
+(function () {
+  var roster = document.getElementById("agent-roster");
+  var log = document.getElementById("command-log");
+  var build = document.getElementById("build-pulse");
+  if (!roster || !log) return;
+  var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var agents = [].slice.call(roster.querySelectorAll("span"));
+  var routes = [
+    { text: "docket watch - CLU intake - TRON canon - BECK monitor - receipt", hot: ["CLU", "TRON", "BECK"], build: "source linked" },
+    { text: "config review - ARES/SARK - RAM context - receipt", hot: ["ARES", "SARK", "RAM"], build: "risk lane" },
+    { text: "creative reveal - LORA art lane - ECHO release check - receipt", hot: ["LORA", "ECHO"], build: "green build" },
+    { text: "client workflow - ABLE scope - DUMONT ops - TESLER comms - receipt", hot: ["ABLE", "DUMONT", "TESLER"], build: "scoped" },
+    { text: "public claim - TRON safety - QUORRA boundary - YORI hold - receipt", hot: ["TRON", "QUORRA", "YORI"], build: "canon pass" }
+  ];
+  var i = 0;
+  function show() {
+    var r = routes[i++ % routes.length];
+    log.textContent = r.text;
+    if (build) build.textContent = r.build;
+    agents.forEach(function (a) { a.classList.toggle("hot", r.hot.indexOf(a.textContent.trim()) !== -1); });
+  }
+  show();
+  if (!reduce) setInterval(show, 2200);
 })();

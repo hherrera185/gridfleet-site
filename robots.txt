@@ -1,4 +1,4 @@
-# gridfleet.ai — robots policy
+# gridfleet.ai - robots policy
 # Updated 2026-06-03: hardened against AI scrapers + SEO bots
 
 # Allow search-engine indexing (Google, Bing, DuckDuckGo)

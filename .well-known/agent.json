@@ -50,7 +50,7 @@
     {
       "slug": "vera",
       "name": "Vera",
-      "tagline": "Receptionist that learns your business in 5 minutes — answers calls, books, escalates.",
+      "tagline": "Receptionist that learns your business in 5 minutes - answers calls, books, escalates.",
       "cardUrl": "https://gridfleet.ai/.well-known/agents/vera.json"
     }
   ],

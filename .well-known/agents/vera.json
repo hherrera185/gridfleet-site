@@ -28,7 +28,7 @@
       "examples": [
         "Caller: 'Hi, I'd like to schedule a cleaning for Tuesday afternoon'",
         "Caller: 'Are you guys open this weekend?'",
-        "Caller: 'I'm trying to reach Hector — is he there?'"
+        "Caller: 'I'm trying to reach Hector - is he there?'"
       ],
       "tags": ["voice", "telephony", "twilio"],
       "inputModes": ["audio/mulaw", "text/plain"],

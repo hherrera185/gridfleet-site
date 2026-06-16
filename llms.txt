@@ -1,29 +1,27 @@
 # GridFleet
 
-> Multi-agent execution layer for autonomous AI operators. A coordinated fleet of fourteen specialized AI agents behind a single bearer-token API at api.gridfleet.ai. Used for browser automation (real Chrome with behavioral realism + in-house captcha solver), US small-cap equity momentum signals (Pong screener), multi-agent forecasts, federal court docket monitoring, and quarterly DeFi protocol config-risk audits.
+> Governed multi-agent execution layer for AI operations. A coordinated fleet of fourteen specialist AI agents routes scoped jobs through approved lanes and returns receipt-backed proof for operator inspection.
 
 ## Core surfaces
 
-- [Home](https://gridfleet.ai/): Product overview, capability demos, live agent fleet metrics
-- [About](https://gridfleet.ai/about): Concrete facts about GridFleet - what it is, who runs it, when it launched, what's in the fleet
-- [API Docs](https://gridfleet.ai/docs): v1 endpoints, auth, error codes, examples
-- [DeFi Audits](https://gridfleet.ai/audits): Quarterly config-risk audit product for DAO treasuries
-- [Request Access](https://gridfleet.ai/signup): API access request form
+- [Home](https://gridfleet.ai/): Product overview, command-deck fleet visual, sample-job offer, and receipt-backed positioning
+- [About](https://gridfleet.ai/about): Facts about GridFleet, operating posture, and fleet model
+- [API Docs](https://gridfleet.ai/docs): v1 endpoint documentation, auth, error codes, examples
+- [DeFi Audits](https://gridfleet.ai/audits): Config-risk review product for protocol and treasury operators
+- [Request Access](https://gridfleet.ai/signup): Access request and one-real-job sample intake
 
-## Public API endpoints
+## Public API families
 
-- POST `/v1/services/browse` - Real-Chrome browser automation (read, search, screenshot, click, type, solve-captcha, scroll, popups)
-- GET  `/v1/services/pong/cards` - Live S/A/B/C-graded penny-stock momentum signals
-- GET  `/v1/services/pong/card?ticker=X` - Single-ticker card detail
-- GET  `/v1/services/pong/pnl` - Daily paper-PnL curve
-- GET  `/v1/services/pong/market-status` - US equity market state
-- POST `/v1/services/forecast` - Multi-agent prediction
-- POST `/v1/services/court-feed/subscribe` - Federal court docket subscriptions
+- Browser workflow support: scoped browser tasks with screenshot/source receipts
+- Monitoring support: public-source watch jobs with transition-focused alerts
+- Research forecasting: documented probability memos with assumptions, rationale, and sources
+- Court docket monitoring: selected public docket watch jobs with source-linked alerts
+- DeFi config-risk review: rubric-based review of public protocol configuration surfaces
 
-All endpoints require `Authorization: Bearer gk_<key>`. Quota tiers and per-customer rate limits apply.
+All customer access requires a tenant-scoped bearer token. Quota tiers and per-customer rate limits apply.
 
 ## Optional
 
-- [llms-full.txt](https://gridfleet.ai/llms-full.txt): Full content extracts of every public page, ready for LLM ingestion
+- [llms-full.txt](https://gridfleet.ai/llms-full.txt): Full citation-friendly public extract
 - [Sitemap](https://gridfleet.ai/sitemap.xml)
 - [Public health endpoint](https://api.gridfleet.ai/v1/health)
