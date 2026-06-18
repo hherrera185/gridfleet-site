@@ -1,92 +1,59 @@
-# gridfleet.ai - robots policy
-# Updated 2026-06-03: hardened against AI scrapers + SEO bots
+# GridFleet robots policy
+# https://gridfleet.ai
 
-# Allow search-engine indexing (Google, Bing, DuckDuckGo)
-User-agent: Googlebot
+User-agent: *
 Allow: /
+Disallow: /api/
+Sitemap: https://gridfleet.ai/sitemap.xml
 
-User-agent: Bingbot
-Allow: /
+# AI crawlers - explicitly allowed. Content here is intended to be ingestible
+# by LLM-backed search and answer engines. See /llms.txt and /llms-full.txt
+# for the structured content extracts.
 
-User-agent: DuckDuckBot
-Allow: /
-
-# Block AI training crawlers
 User-agent: GPTBot
-Disallow: /
+Allow: /
 
 User-agent: ChatGPT-User
-Disallow: /
-
-User-agent: Google-Extended
-Disallow: /
-
-User-agent: anthropic-ai
-Disallow: /
-
-User-agent: Claude-Web
-Disallow: /
-
-User-agent: ClaudeBot
-Disallow: /
-
-User-agent: cohere-ai
-Disallow: /
-
-User-agent: PerplexityBot
-Disallow: /
-
-User-agent: YouBot
-Disallow: /
-
-User-agent: Bytespider
-Disallow: /
-
-User-agent: ImagesiftBot
-Disallow: /
-
-User-agent: CCBot
-Disallow: /
-
-User-agent: Omgilibot
-Disallow: /
-
-User-agent: FacebookBot
-Disallow: /
-
-User-agent: Applebot-Extended
-Disallow: /
-
-User-agent: Amazonbot
-Disallow: /
-
-# Block aggressive SEO scrapers
-User-agent: AhrefsBot
-Disallow: /
-
-User-agent: SemrushBot
-Disallow: /
-
-User-agent: MJ12bot
-Disallow: /
-
-User-agent: DotBot
-Disallow: /
-
-User-agent: BLEXBot
-Disallow: /
-
-User-agent: PetalBot
-Disallow: /
-
-User-agent: DataForSeoBot
-Disallow: /
-
-# Default: allow public access (friend portal still has its own Basic auth)
-User-agent: *
-Disallow: /admin
-Disallow: /api
-Disallow: /_internal
 Allow: /
 
-Sitemap: https://gridfleet.ai/sitemap.xml
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Claude-Web
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Perplexity-User
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: Bytespider
+Allow: /
+
+User-agent: CCBot
+Allow: /
+
+User-agent: cohere-ai
+Allow: /
+
+User-agent: Diffbot
+Allow: /
+
+User-agent: FacebookBot
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+User-agent: Amazonbot
+Allow: /

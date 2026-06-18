@@ -144,31 +144,6 @@
       if (isNaN(date.getTime())) return String(value).slice(0, 42);
       return 'Verified ' + date.toLocaleString(undefined, { month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit' });
     }
-    function hydratePulse(lines) {
-      if (!lines || !lines.length) return;
-      var nodes = doc.querySelectorAll('[data-pulse-line]');
-      if (!nodes.length) return;
-      for (var i = 0; i < nodes.length; i++) {
-        var item = lines[i % lines.length] || {};
-        var lane = String(item.lane || 'grid.pulse').slice(0, 28);
-        var text = String(item.text || 'public-safe signal observed').slice(0, 86);
-        if (nodes[i].classList.contains('line')) {
-          nodes[i].textContent = lane + ' / ' + text;
-        } else {
-          var b = nodes[i].querySelector('b');
-          var span = nodes[i].querySelector('span');
-          if (b) b.textContent = lane;
-          if (span) span.textContent = text;
-        }
-      }
-      var active = 0;
-      function tick() {
-        for (var j = 0; j < nodes.length; j++) nodes[j].classList.toggle('is-focus', j % lines.length === active);
-        active = (active + 1) % Math.min(lines.length, nodes.length);
-      }
-      tick();
-      if (!prefersReducedMotion) win.setInterval(tick, 2400);
-    }
 
     fetch('/data/grid-snapshot.json', { cache: 'no-store' })
       .then(function (res) { if (!res.ok) throw new Error('snapshot unavailable'); return res.json(); })
@@ -185,7 +160,6 @@
         setText('browser', first(services, ['browser', 'browserAutomation']) || first(snap, ['browserStatus']));
         setText('monitoring', first(services, ['monitoring', 'monitors']) || first(snap, ['monitoringStatus']));
         setText('receiptLayer', first(services, ['receiptLayer', 'receipts']) || first(snap, ['receiptLayerStatus']));
-        hydratePulse(snap.pulseLines || data.pulseLines || []);
         var updatedEl = root.querySelector('[data-snapshot-updated]');
         if (updatedEl && updated) updatedEl.textContent = updated;
         var orb = root.querySelector('[data-snapshot-orb]');

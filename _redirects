@@ -1,8 +1,9 @@
-# A2A discovery - Cloudflare Pages does not serve files in .well-known/
+# A2A discovery — Cloudflare Pages does not serve files in .well-known/
 # by default. These rewrites (status 200 = internal rewrite, not 301) make
 # the canonical .well-known/* URLs resolve to the non-dot mirror.
 /.well-known/agent.json          /a2a/agent.json          200
 /.well-known/agents/vera.json    /a2a/agents/vera.json    200
 
-# Legacy signup host - keep old form/action links from resolving dead.
-https://signup.gridfleet.ai/*     https://gridfleet.ai/signup     302
+# LORA art page — clean URL
+/lora                            /lora.html               200
+/lora/                           /lora.html               200
