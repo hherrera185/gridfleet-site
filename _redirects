@@ -7,6 +7,10 @@
 # LORA art page — clean URL
 /lora                            /lora.html               200
 /lora/                           /lora.html               200
+
+# Grid Workers — clean URL
+/workers                         /workers.html            200
+/workers/                        /workers.html            200
 # Internal MC/GAOS surfaces are never public Pages routes.
 /api/internal/*                   /404.html                 404
 /api/*                            /404.html                 404

@@ -1,0 +1,27 @@
+{
+  "updated_at": "2026-06-23T15:20:00Z",
+  "doctrine": "Claim connector coverage only when status is live_proven or explicitly labeled gated/browser_lane/planned. Every connector action must return a receipt.",
+  "statuses": {
+    "live_proven": "Real runtime action plus readback receipt exists.",
+    "gated": "Credential/config/runtime evidence exists, but public use requires owner gate or additional smoke test.",
+    "browser_lane": "Can operate through scoped browser workflow; no native connector claim.",
+    "planned": "Needed for product parity; not yet implemented."
+  },
+  "connectors": [
+    {"id":"telegram","label":"Telegram","status":"live_proven","workers":["CLU","MADDIE","LORA","RAM","ABLE"],"proof":["message_id","thread_id","userbot receipt","native document metadata"],"approval_gates":["client-sensitive replies","bot/token changes"]},
+    {"id":"x","label":"X / Twitter","status":"live_proven","workers":["LORA"],"proof":["tweet_id","timeline readback","metrics readback"],"approval_gates":["new public campaign","purchase/custody implication"]},
+    {"id":"github","label":"GitHub","status":"gated","workers":["DUMONT","BECK"],"proof":["remote head","PR URL","CI readback"],"approval_gates":["push","PR","merge","repo settings"]},
+    {"id":"cloudflare","label":"Cloudflare Pages","status":"gated","workers":["DUMONT"],"proof":["deployment URL","HTTP readback","screenshot"],"approval_gates":["deploy","DNS/project mutation"]},
+    {"id":"twilio","label":"Twilio Voice/SMS","status":"gated","workers":["CLU","MADDIE"],"proof":["call_sid","transcript digest","current-call readback"],"approval_gates":["outbound call","SMS","client contact"]},
+    {"id":"stripe","label":"Stripe","status":"gated","workers":["RAM","DUMONT"],"proof":["API readback","billing event ID","RAM ledger"],"approval_gates":["billing mutation","refund","charge","customer data exposure"]},
+    {"id":"email","label":"Email / Outlook / Gmail","status":"browser_lane","workers":["CLU","MADDIE","RAM"],"proof":["message id","draft/sent readback","thread URL"],"approval_gates":["external send","client-sensitive send"]},
+    {"id":"discord","label":"Discord","status":"gated","workers":["CLU","BECK"],"proof":["message id","watcher log"],"approval_gates":["public/group send","bot changes"]},
+    {"id":"slack","label":"Slack","status":"planned","workers":["CLU","BECK","MADDIE"],"proof":["channel id","message ts","bot event receipt"],"approval_gates":["workspace install","external channel send"]},
+    {"id":"teams","label":"Microsoft Teams","status":"planned","workers":["CLU","MADDIE","BECK"],"proof":["team/channel id","message id","Graph readback"],"approval_gates":["tenant app consent","external send"]},
+    {"id":"notion","label":"Notion","status":"planned","workers":["MADDIE","LORA","RAM"],"proof":["page id","block update id","readback"],"approval_gates":["workspace integration","client-data access"]},
+    {"id":"hubspot","label":"HubSpot","status":"planned","workers":["MADDIE","RAM","CLU"],"proof":["contact/deal id","note/task id","readback"],"approval_gates":["CRM write","external email workflow"]},
+    {"id":"salesforce","label":"Salesforce","status":"planned","workers":["RAM","CLU"],"proof":["record id","audit trail","readback"],"approval_gates":["enterprise CRM mutation"]},
+    {"id":"linear_jira","label":"Linear / Jira","status":"planned","workers":["BECK","DUMONT"],"proof":["issue id","comment id","status readback"],"approval_gates":["ticket mutation","release/status claims"]},
+    {"id":"zendesk_intercom","label":"Zendesk / Intercom","status":"planned","workers":["CLU","MADDIE","BECK"],"proof":["ticket/conversation id","reply id","readback"],"approval_gates":["customer-facing reply"]}
+  ]
+}

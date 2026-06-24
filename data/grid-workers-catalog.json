@@ -1,0 +1,86 @@
+{
+  "updated_at": "2026-06-23T14:30:00Z",
+  "positioning": {
+    "headline": "Hire AI operators that do the work and return proof.",
+    "subheadline": "Grid Workers are specialized AI operators with memory, tools, safe autonomy, and receipt-backed execution.",
+    "contrast": "Chatbots answer. Generic workers claim. Grid operators prove."
+  },
+  "autonomy_levels": [
+    {"level": 0, "name": "Chat only", "description": "Answers and drafts; no tool writes."},
+    {"level": 1, "name": "Internal research", "description": "Reads approved sources and produces internal reports."},
+    {"level": 2, "name": "Internal write", "description": "Updates files, dashboards, and internal state with receipts."},
+    {"level": 3, "name": "External draft", "description": "Prepares public/client actions for human approval."},
+    {"level": 4, "name": "Approved external execute", "description": "Sends or updates approved channels with readback proof."},
+    {"level": 5, "name": "High-risk gated execute", "description": "Money, legal, credentials, deploys, calls, or public posts require scoped approval and dual receipts."}
+  ],
+  "workers": [
+    {
+      "id": "maddie",
+      "name": "MADDIE",
+      "title": "Event Planner",
+      "category": "Client operations",
+      "promise": "Keeps event planning moving across clients, vendors, and dashboards.",
+      "default_autonomy_level": 3,
+      "workflows": ["Client message acknowledgement", "Vendor tracking", "Live event dashboard", "Topic-aware replies", "Decision/blocker escalation"],
+      "approval_gates": ["Phone calls", "Client commitments", "Vendor booking", "Payments"],
+      "proof": ["source message/thread", "dashboard readback", "vendor ledger", "reply receipt"]
+    },
+    {
+      "id": "lora",
+      "name": "LORA",
+      "title": "Creative / Social / Crypto Art Scout",
+      "category": "Creative and market signal",
+      "promise": "Finds, studies, curates, posts, and reports cultural signal without unsafe market actions.",
+      "default_autonomy_level": 4,
+      "workflows": ["Daily looking practice", "Taste graph refresh", "Gated public posts", "Reply monitor with caps", "Tezos/objkt scouting"],
+      "approval_gates": ["Purchases", "Wallet actions", "Unapproved public campaigns", "Provider/account mutation"],
+      "proof": ["tweet ID", "timeline readback", "image inspection receipt", "source hash", "cap ledger"]
+    },
+    {
+      "id": "ram",
+      "name": "RAM",
+      "title": "Finance / Burn / Accounting Operator",
+      "category": "Finance",
+      "promise": "Turns spend, revenue, purchasing, and accounting risk into controlled operating lanes.",
+      "default_autonomy_level": 2,
+      "workflows": ["Burn-rate snapshots", "Provider export blocker tracking", "ASC 606 SaaS controls", "Purchase preflight", "Cost anomaly alerts"],
+      "approval_gates": ["Funds movement", "Purchasing", "Signer/custody execution", "Budget changes"],
+      "proof": ["burn snapshot", "cost export source", "preflight ledger", "approval receipt"]
+    },
+    {
+      "id": "clu",
+      "name": "CLU",
+      "title": "Communications Operator",
+      "category": "Comms",
+      "promise": "Routes messages, triages inboxes, coordinates voice/text, and prevents communication drift.",
+      "default_autonomy_level": 3,
+      "workflows": ["Thread routing", "Inbox triage", "Echo/noise collapse", "Voice bridge readiness", "Escalation summaries"],
+      "approval_gates": ["Outbound calls", "Client-sensitive messages", "Bot/userbot changes"],
+      "proof": ["topic ID", "message ID", "call ID", "transcript digest", "routing ledger"]
+    },
+    {
+      "id": "beck",
+      "name": "BECK",
+      "title": "Grid Doctor / Reliability Operator",
+      "category": "Reliability",
+      "promise": "Watches the system, diagnoses failures, and prepares safe repairs.",
+      "default_autonomy_level": 2,
+      "workflows": ["Cron SLO digest", "Failure streak classification", "Semantic health checks", "Safe diagnostics", "Owner routing"],
+      "approval_gates": ["Service restarts", "Destructive repairs", "Public incident actions"],
+      "proof": ["SLO digest", "process readback", "route receipt", "diagnostic log"]
+    },
+    {
+      "id": "dumont",
+      "name": "DUMONT",
+      "title": "Infrastructure / API / Credential Operator",
+      "category": "Infrastructure",
+      "promise": "Handles infrastructure, APIs, credentials, deployment evidence, and signer-lane readiness with strict gates.",
+      "default_autonomy_level": 2,
+      "workflows": ["API enablement checks", "Credential availability checks", "Deployment proof", "Signer-lane readiness", "Provider blocker routing"],
+      "approval_gates": ["Credential mutation", "Cloud/provider changes", "Deployments", "Signer/custody actions"],
+      "proof": ["API readback", "deployment URL", "config hash", "signer readiness receipt"]
+    }
+  ],
+  "receipt_statuses": ["verified", "posted_unverified", "skipped_no_write", "blocked", "failed", "degraded"],
+  "launch_priorities": ["Public workers page", "Reusable worker catalog JSON", "Receipt timeline", "Setup wizard", "Worker dashboards", "Trial job intake"]
+}

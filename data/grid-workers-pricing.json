@@ -1,0 +1,15 @@
+{
+  "updated_at": "2026-06-23T15:45:00Z",
+  "strategy": "Seat-plus-credit pricing for governed AI operators. Credits meter cost and risk; high-risk execution remains gated and is not unlocked solely by credits.",
+  "tiers": [
+    {"id":"free_trial","name":"Free Trial — One Real Job","price":"Free","term":"7 days or included credits consumed","workers":"1 trial worker","credits":"2,000 trial credits","autonomy":"L0-L2 by default; L3 drafts only","limits":["Up to 3 scoped jobs","No external sends by default","No public posts/calls/payments/deploys/credential mutation","Unused credits expire and have no cash value"]},
+    {"id":"starter","name":"Starter — Solo Operator","price":"$49/month indicative","workers":"1 active worker","credits":"20,000/month","autonomy":"L0-L2 plus L3 drafts","limits":["Live-proven/browser-lane connectors only","Overage disabled by default","Standard receipts timeline"]},
+    {"id":"operator","name":"Operator — Small Team","price":"$149/month indicative","workers":"Up to 3 active workers","credits":"75,000/month","autonomy":"L0-L3; L4 approved execute after setup","limits":["Weekly proof digest","Guided onboarding for one workflow","Opt-in credit packs only"]},
+    {"id":"command","name":"Command — Operations Pod","price":"$499/month indicative","workers":"Up to 10 active workers","credits":"300,000/month","autonomy":"L0-L4 with gates; L5 scoped approval only","limits":["Connector health dashboard","Searchable receipt ledger","Audit export","Admin monthly credit cap"]},
+    {"id":"enterprise","name":"Enterprise — Governed Workforce","price":"Custom annual contract","workers":"Custom","credits":"Custom pooled credits","autonomy":"Configurable governance, RBAC, SSO/SAML target, retention, escalation","limits":["Custom connector validation","Enterprise audit package","Annual/multi-month terms preferred"]}
+  ],
+  "credit_formula": "credits charged = base job credits + model/runtime credits + connector/action credits + verification credits + risk premium credits",
+  "receipt_statuses": ["verified","degraded","blocked","failed","skipped_no_write","posted_unverified"],
+  "asc606_notes": ["Bundled subscription credits usually defer revenue until service delivery or over subscription term depending on promise.","Top-up credit packs are deferred revenue until consumed/expired under policy.","Setup/onboarding may be separate performance obligation requiring SSP allocation.","Breakage should not be recognized until supportable and not probable of significant reversal.","Credits have no cash value and are service entitlements only."],
+  "abuse_gates": ["Verified email required","No external sends from trial by default","Hard trial cost caps","Idempotency for writes","Readback receipt before verified status","High-risk actions require approval"]
+}
