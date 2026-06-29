@@ -466,7 +466,7 @@ section.dispatch,section.trust{padding:clamp(72px,11vw,128px) 0;position:relativ
 .proof-observatory:before{content:"";position:absolute;inset:0;background:linear-gradient(rgba(255,255,255,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.026) 1px,transparent 1px);background-size:64px 64px;mask-image:radial-gradient(circle at 50% 45%,#000 0%,transparent 72%);opacity:.42;z-index:-2}.proof-observatory:after{content:"";position:absolute;inset:auto -10% -34% -10%;height:42%;background:radial-gradient(ellipse at center,rgba(113,112,255,.28),transparent 62%);filter:blur(28px);z-index:-3}.proof-orbit{position:absolute;right:clamp(-110px,2vw,40px);top:42px;width:min(42vw,520px);aspect-ratio:1;border:1px solid rgba(255,255,255,.075);border-radius:999px;opacity:.7;z-index:-1}.proof-orbit:before,.proof-orbit:after{content:"";position:absolute;inset:11%;border:1px solid rgba(255,255,255,.055);border-radius:inherit}.proof-orbit:after{inset:24%;border-color:rgba(113,112,255,.22)}.proof-orbit span{position:absolute;width:8px;height:8px;border-radius:999px;background:#8ff0c6;box-shadow:0 0 22px rgba(143,240,198,.8)}.proof-orbit span:nth-child(1){left:16%;top:24%}.proof-orbit span:nth-child(2){right:22%;top:48%;background:#9aa7ff}.proof-orbit span:nth-child(3){left:44%;bottom:15%;background:#7ee7ff}.proof-observatory-wrap{position:relative;display:grid;gap:28px}.proof-observatory-copy{max-width:850px}.proof-observatory .kicker{color:#aeb8ff}.proof-observatory .section-title{max-width:920px;font-size:clamp(2.65rem,6vw,5.6rem);line-height:.91;letter-spacing:-.075em}.proof-observatory .section-lede{max-width:760px;color:rgba(235,241,255,.74)}.proof-command-frame{position:relative;border:1px solid rgba(255,255,255,.12);border-radius:28px;padding:clamp(16px,2vw,24px);background:linear-gradient(180deg,rgba(255,255,255,.07),rgba(255,255,255,.032));box-shadow:0 30px 120px rgba(0,0,0,.48),inset 0 1px 0 rgba(255,255,255,.08);backdrop-filter:blur(14px)}.proof-command-frame:before{content:"";position:absolute;inset:1px;border-radius:27px;border:1px solid rgba(255,255,255,.04);pointer-events:none}.proof-frame-top,.proof-frame-bottom{display:flex;justify-content:space-between;gap:14px;color:rgba(235,241,255,.48);font-size:.72rem;letter-spacing:.14em;text-transform:uppercase}.proof-frame-bottom{justify-content:flex-start;flex-wrap:wrap;margin-top:16px}.proof-frame-bottom span{border:1px solid rgba(255,255,255,.09);border-radius:999px;padding:.42rem .7rem;background:rgba(255,255,255,.035)}.proof-metric-grid{display:grid;grid-template-columns:1.15fr .95fr .95fr 1.05fr;gap:12px;margin-top:18px}.proof-metric-card{position:relative;min-width:0;min-height:230px;padding:20px;border:1px solid rgba(255,255,255,.11);border-radius:22px;background:radial-gradient(circle at 16% 10%,rgba(255,255,255,.11),transparent 32%),linear-gradient(180deg,rgba(11,14,27,.92),rgba(9,11,20,.72));overflow:hidden;box-shadow:inset 0 1px 0 rgba(255,255,255,.08)}.proof-metric-card:after{content:"";position:absolute;left:18px;right:18px;bottom:16px;height:2px;background:linear-gradient(90deg,rgba(143,240,198,.9),rgba(122,144,255,.2),transparent)}.proof-card-index{position:absolute;right:18px;top:16px;color:rgba(235,241,255,.26);font-size:.78rem;font-family:ui-monospace,SFMono-Regular,Menlo,monospace}.proof-metric-label{margin:0 40px 0 0;color:#aeb8ff;font-size:.72rem;line-height:1.2;text-transform:uppercase;letter-spacing:.14em}.proof-metric-value{display:block;margin:42px 0 14px;font-size:clamp(2.7rem,5vw,5.3rem);line-height:.78;letter-spacing:-.085em;color:#f7fbff;text-shadow:0 0 34px rgba(126,231,255,.16)}.proof-metric-copy{max-width:17rem;margin:0;color:rgba(235,241,255,.7);font-size:.95rem;line-height:1.45}.proof-metric-fresh{position:absolute;left:20px;bottom:26px;color:#8ff0c6;font-size:.72rem;letter-spacing:.12em;text-transform:uppercase}.proof-observatory-note{max-width:840px;margin:0;color:rgba(235,241,255,.62);font-size:.95rem}.proof-metric-card-1{grid-row:span 2}.proof-metric-card-1 .proof-metric-value{font-size:clamp(3.5rem,7vw,7.2rem)}.proof-metric-card-4{background:radial-gradient(circle at 70% 20%,rgba(143,240,198,.13),transparent 36%),linear-gradient(180deg,rgba(11,14,27,.94),rgba(9,11,20,.74))}@media(max-width:980px){.proof-metric-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.proof-metric-card-1{grid-row:auto}.proof-observatory .section-title{font-size:clamp(2.4rem,9vw,4.4rem)}}@media(max-width:620px){.proof-observatory{padding:68px 0}.proof-orbit{opacity:.34;right:-190px}.proof-metric-grid{grid-template-columns:1fr}.proof-metric-card{min-height:190px}.proof-frame-top{align-items:flex-start;flex-direction:column}.proof-observatory .section-title{letter-spacing:-.055em}}@media(prefers-reduced-motion:reduce){.proof-orbit,.proof-metric-card{transition:none!important;animation:none!important}}
 
 
-/* Mobile proof-card polish: prevent freshness badges from colliding with copy. */
+/* Mobile proof-card polish: prevent freshness badges from colliding with copy; pulse live feeds subtly. */
 .proof-metric-card{display:flex;flex-direction:column;padding-bottom:22px;}
 .proof-metric-copy{padding-right:.25rem;}
 .proof-metric-fresh{position:static;display:inline-flex;align-items:center;gap:.45rem;width:max-content;margin-top:auto;padding-top:18px;}
@@ -478,153 +478,9 @@ section.dispatch,section.trust{padding:clamp(72px,11vw,128px) 0;position:relativ
 @media(max-width:620px){.proof-metric-card{min-height:214px;padding-bottom:22px}.proof-metric-value{margin:34px 0 12px}.proof-metric-copy{font-size:.92rem;line-height:1.38}.proof-metric-fresh{padding-top:14px}}
 @media(prefers-reduced-motion:reduce){.proof-metric-live,.proof-metric-live:before{animation:none!important}}
 
-
-/* =====================================================================
-   PHASE D — award-level pass
-   Full-page faint grid · GAOS/HARMONIC 3D control panel · HARMONIC
-   anatomy · product offer sections. Self-contained, no JS dependency,
-   reduced-motion safe, separate desktop / mobile treatments.
-   ===================================================================== */
-
-/* --- Full-page faint grid field (sits behind all content) --- */
-.grid-field{position:fixed;inset:0;z-index:0;pointer-events:none;
-  background-image:linear-gradient(rgba(54,224,255,.045) 1px,transparent 1px),linear-gradient(90deg,rgba(54,224,255,.035) 1px,transparent 1px);
-  background-size:56px 56px;
-  -webkit-mask-image:radial-gradient(135% 95% at 50% -8%,#000 0%,transparent 78%);
-  mask-image:radial-gradient(135% 95% at 50% -8%,#000 0%,transparent 78%);
-  opacity:.55}
-.nav,main,.foot{position:relative;z-index:1}
-@media(max-width:760px){.grid-field{background-size:42px 42px;opacity:.4}}
-
-/* --- GAOS / HARMONIC: opaque 3D control panel (replaces orbit visual) --- */
-.harmonic-grid{align-items:stretch}
-.harmonic-copy{animation:hCopyInRight .9s var(--ease) both}
-.harmonic-visual{
-  min-height:560px;border-radius:28px;
-  border:1px solid rgba(125,227,255,.22);
-  /* OPAQUE deck — not transparent */
-  background:
-    radial-gradient(150% 80% at 50% -12%,rgba(77,209,255,.16),transparent 62%),
-    linear-gradient(180deg,#0c1422 0%,#0a1019 58%,#070c14 100%);
-  box-shadow:
-    0 60px 150px -50px rgba(0,0,0,.96),
-    0 0 100px -52px rgba(77,209,255,.55),
-    inset 0 1px 0 rgba(255,255,255,.10),
-    inset 0 0 70px rgba(4,8,16,.85);
-  padding:26px;display:flex;flex-direction:column;gap:18px;overflow:hidden;
-  animation:hPanelInLeft .9s var(--ease) both}
-/* neutralize the old perspective-ellipse pseudo, repurpose as etched bezel */
-.harmonic-visual::before{content:"";position:absolute;inset:11px;left:11px;right:11px;top:11px;bottom:11px;
-  width:auto;height:auto;border:1px solid rgba(255,255,255,.06);border-radius:20px;
-  background:none;transform:none;filter:none;pointer-events:none;z-index:3}
-.hpanel-laser{position:absolute;left:14px;right:14px;top:0;height:2px;z-index:4;
-  background:linear-gradient(90deg,transparent,rgba(125,227,255,.95),transparent);
-  box-shadow:0 0 20px rgba(77,209,255,.85);animation:hLaser 4.6s var(--ease) infinite}
-@keyframes hLaser{0%{top:6%;opacity:0}8%{opacity:1}92%{opacity:1}100%{top:94%;opacity:0}}
-.hpanel-head{position:relative;z-index:5;display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap}
-.hpanel-mark{font-family:var(--mono);font-weight:600;color:#dff6ff;
-  font-size:clamp(15px,2.2vw,22px);letter-spacing:.10em;line-height:1;
-  white-space:nowrap;max-width:100%;overflow:hidden;text-overflow:ellipsis;
-  text-shadow:0 0 22px rgba(77,209,255,.45)}
-.hpanel-mark i{font-style:normal;color:var(--cyan);margin:0 .35em;opacity:.8}
-.hpanel-status{font-family:var(--mono);font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:#7de3ff;
-  border:1px solid rgba(125,227,255,.3);border-radius:999px;padding:6px 11px;background:rgba(77,209,255,.07);white-space:nowrap}
-.hpanel-core{position:relative;z-index:5;flex:1;min-height:230px;display:grid;place-items:center}
-.hpanel-ring{position:absolute;width:62%;aspect-ratio:1;border-radius:50%;border:1px solid rgba(125,227,255,.32);
-  box-shadow:0 0 30px -6px rgba(77,209,255,.3) inset;animation:hSpin 22s linear infinite}
-.hpanel-ring.r2{width:84%;border-color:rgba(174,123,255,.28);animation-duration:34s;animation-direction:reverse}
-.hpanel-reactor{position:relative;z-index:2;width:150px;height:150px;border-radius:50%;display:grid;place-items:center;text-align:center;
-  background:radial-gradient(circle,rgba(234,248,255,.20),rgba(77,209,255,.12) 44%,rgba(6,11,20,.92) 84%);
-  border:1px solid rgba(255,255,255,.20);box-shadow:0 0 60px -8px rgba(77,209,255,.5),inset 0 0 30px rgba(4,8,16,.7)}
-.hpanel-reactor span{font-family:var(--mono);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:#7de3ff}
-.hpanel-reactor strong{display:block;margin-top:4px;font-size:clamp(15px,1.6vw,19px);letter-spacing:.04em;color:#fff;max-width:130px}
-.hpanel-readout{position:relative;z-index:5;display:grid;gap:9px}
-.hpanel-row{display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:12px;
-  padding:11px 14px;border-radius:13px;border:1px solid rgba(255,255,255,.08);
-  background:linear-gradient(90deg,rgba(77,209,255,.08),rgba(255,255,255,.02))}
-.hpanel-row span{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:#8fb4cc}
-.hpanel-row b{font-size:13.5px;color:#eef7fd;font-weight:500}
-.hpanel-row i{width:9px;height:9px;border-radius:50%;background:var(--green);box-shadow:0 0 12px rgba(66,226,155,.9)}
-@keyframes hSpin{to{transform:rotate(360deg)}}
-@keyframes hPanelInLeft{from{opacity:0;transform:translateX(-58px)}to{opacity:1;transform:none}}
-@keyframes hCopyInRight{from{opacity:0;transform:translateX(52px)}to{opacity:1;transform:none}}
-/* mobile control-panel treatment (distinct from desktop) */
-@media(max-width:980px){
-  .harmonic-visual{min-height:auto;padding:22px;animation:none}
-  .harmonic-copy{animation:none}
-  .hpanel-core{min-height:200px}
-  .hpanel-reactor{width:128px;height:128px}
-}
-@media(max-width:520px){
-  .harmonic-visual{border-radius:22px;padding:18px;gap:14px}
-  .hpanel-mark{font-size:14px;letter-spacing:.06em}
-  .hpanel-status{font-size:9.5px;padding:5px 9px}
-  .hpanel-reactor{width:112px;height:112px}
-  .hpanel-row{grid-template-columns:auto 1fr auto;padding:10px 12px}
-}
-
-/* --- Premium HARMONIC anatomy section --- */
-.harmonic-anatomy{position:relative;margin-top:46px}
-.harmonic-anatomy .anatomy-head{max-width:760px;margin-bottom:26px}
-.harmonic-anatomy .anatomy-head h3{font-size:clamp(22px,3vw,30px);color:#fff;margin:0 0 10px;letter-spacing:-.02em}
-.harmonic-anatomy .anatomy-head p{color:rgba(236,244,255,.7);line-height:1.65;margin:0}
-.anatomy-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
-.anatomy-node{position:relative;padding:20px 18px;border-radius:18px;
-  border:1px solid rgba(255,255,255,.10);
-  background:linear-gradient(180deg,rgba(77,209,255,.06),rgba(255,255,255,.022));
-  box-shadow:inset 0 1px 0 rgba(255,255,255,.06);overflow:hidden;transition:.35s var(--ease)}
-.anatomy-node:hover{border-color:rgba(125,227,255,.42);transform:translateY(-4px)}
-.anatomy-node::after{content:"";position:absolute;left:18px;right:18px;bottom:14px;height:2px;
-  background:linear-gradient(90deg,rgba(125,227,255,.8),rgba(174,123,255,.2),transparent)}
-.anatomy-glyph{font-family:var(--mono);font-size:30px;font-weight:700;line-height:1;color:#7de3ff;
-  text-shadow:0 0 22px rgba(77,209,255,.5)}
-.anatomy-node h4{margin:12px 0 7px;font-size:14.5px;color:#fff;letter-spacing:-.01em}
-.anatomy-node p{margin:0 0 14px;font-size:13px;line-height:1.5;color:rgba(236,244,255,.66)}
-@media(max-width:980px){.anatomy-grid{grid-template-columns:repeat(2,1fr)}}
-@media(max-width:520px){.anatomy-grid{grid-template-columns:1fr}}
-
-/* --- Product offer sections --- */
-section.offers{padding:clamp(72px,11vw,128px) 0;position:relative;
-  background:linear-gradient(180deg,var(--bg),var(--bg2))}
-.offers-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px;margin:46px 0 0}
-.offer{position:relative;display:flex;flex-direction:column;padding:30px 28px;border-radius:22px;
-  border:1px solid rgba(54,224,255,.14);
-  background:linear-gradient(180deg,rgba(54,224,255,.05),rgba(255,255,255,.014) 36%,transparent);
-  box-shadow:0 30px 80px -50px rgba(0,0,0,.85);transition:.35s var(--ease);overflow:hidden}
-.offer::before{content:"";position:absolute;inset:0;pointer-events:none;opacity:0;transition:.4s;
-  background:radial-gradient(420px 200px at 100% 0,rgba(54,224,255,.10),transparent 60%)}
-.offer:hover{border-color:rgba(54,224,255,.34);transform:translateY(-5px)}
-.offer:hover::before{opacity:1}
-.offer-tag{display:inline-flex;width:max-content;font-family:var(--mono);font-size:11px;letter-spacing:.16em;
-  text-transform:uppercase;color:var(--cyan);background:rgba(54,224,255,.08);border:1px solid var(--line2);
-  padding:5px 11px;border-radius:7px;margin:0 0 16px}
-.offer-outcome{font-size:20px;font-weight:640;color:#eef7fd;line-height:1.25;margin:0 0 14px;letter-spacing:-.01em}
-.offer-gets{list-style:none;padding:0;margin:0 0 18px;display:grid;gap:9px}
-.offer-gets li{position:relative;padding-left:24px;color:var(--dim);font-size:14.5px;line-height:1.5}
-.offer-gets li::before{content:"";position:absolute;left:0;top:7px;width:12px;height:12px;border-radius:4px;
-  background:rgba(66,226,155,.14);border:1px solid var(--green);box-shadow:0 0 10px -2px rgba(66,226,155,.6)}
-.offer-proof{margin:0 0 20px;padding:13px 15px;border-radius:13px;font-size:13px;line-height:1.55;
-  color:#bfe9f6;border:1px solid rgba(54,224,255,.18);background:rgba(54,224,255,.05)}
-.offer-proof b{color:#7de3ff;font-weight:600}
-.offer-foot{margin-top:auto;display:flex;flex-wrap:wrap;align-items:center;gap:14px;justify-content:space-between}
-.offer-price{font-family:var(--mono);font-size:12px;letter-spacing:.04em;color:var(--faint)}
-.offer-price b{color:#cfe7f5;font-weight:600}
-.offer-foot .btn{white-space:nowrap}
-@media(max-width:900px){.offers-grid{grid-template-columns:1fr;gap:16px}.offer{padding:26px 22px}}
-@media(max-width:520px){.offer-outcome{font-size:18px}.offer-foot{gap:12px}.offer-foot .btn{width:100%;justify-content:center}}
-
-/* reduced motion — disable all Phase D motion, keep content fully visible */
-@media(prefers-reduced-motion:reduce){
-  .harmonic-visual,.harmonic-copy{animation:none!important;opacity:1!important;transform:none!important}
-  .hpanel-laser{display:none}
-  .hpanel-ring{animation:none!important}
-  .anatomy-node,.offer{transition:none!important}
-}
-
 </style>
 </head>
 <body>
-<div class="grid-field" aria-hidden="true"></div>
 <a class="skip" href="#main">Skip to content</a>
 
 <header class="nav" id="nav">
@@ -634,7 +490,6 @@ section.offers{padding:clamp(72px,11vw,128px) 0;position:relative;
   </a>
   <nav class="nav-links" aria-label="Primary">
     <a href="/workers.html">Workers</a>
-    <a href="#offers">Services</a>
     <a href="#how">How it works</a>
     <a href="#fleet-roles">The fleet</a>
     <a href="#receipts">Receipts</a>
@@ -736,79 +591,6 @@ section.offers{padding:clamp(72px,11vw,128px) 0;position:relative;
   </section>
 
 
-  <!-- PRODUCT OFFERS -->
-  <section class="offers" id="offers" aria-labelledby="offers-title">
-    <div class="wrap">
-      <p class="kicker reveal">What you can buy now</p>
-      <h2 class="section-title reveal" id="offers-title">Four ways to put the fleet to work.</h2>
-      <p class="prose reveal">Each offer routes through the same governed fleet and returns the same thing: an inspectable, receipt-backed result. Pricing is quote-based while public pricing is finalized - start a conversation and we scope it to your work.</p>
-      <div class="offers-grid">
-
-        <article class="offer reveal">
-          <p class="offer-tag">AI Receptionist</p>
-          <h3 class="offer-outcome">Every call answered, qualified, and logged - so nothing slips past the front desk.</h3>
-          <ul class="offer-gets">
-            <li>A named voice agent that greets callers, answers common questions, and routes or books</li>
-            <li>A written summary of each handled call: who called, what they wanted, what happened next</li>
-            <li>Operator-set boundaries on what the agent may say, promise, and escalate</li>
-          </ul>
-          <p class="offer-proof"><b>Proof promise:</b> every handled call returns an inspectable receipt - summary, outcome, and timestamp - never a claim you have to take on faith.</p>
-          <div class="offer-foot">
-            <span class="offer-price"><b>Starting price:</b> by quote</span>
-            <a class="btn btn-primary" href="#access">Book AI receptionist demo <span aria-hidden="true">&rarr;</span></a>
-          </div>
-        </article>
-
-        <article class="offer reveal">
-          <p class="offer-tag">Event &amp; Wedding Planner</p>
-          <h3 class="offer-outcome">Turn a flood of vendor threads and details into one organized, tracked plan.</h3>
-          <ul class="offer-gets">
-            <li>A structured intake that captures date, budget range, guest count, and priorities</li>
-            <li>Coordinated tracking of vendors, tasks, and timelines through one access layer</li>
-            <li>A running plan you can inspect, with each update attached to its source</li>
-          </ul>
-          <p class="offer-proof"><b>Proof promise:</b> every step returns a receipt - what was checked, what changed, and where the detail came from.</p>
-          <div class="offer-foot">
-            <span class="offer-price"><b>Starting price:</b> by quote</span>
-            <a class="btn btn-primary" href="#access">Launch wedding planning intake <span aria-hidden="true">&rarr;</span></a>
-          </div>
-        </article>
-
-        <article class="offer reveal">
-          <p class="offer-tag">Agentic Ops Audits</p>
-          <h3 class="offer-outcome">See the operational and config risk before it becomes an incident.</h3>
-          <ul class="offer-gets">
-            <li>A scoped review of selected surfaces against an operator-approved rubric</li>
-            <li>Findings ranked by severity, each tied to the evidence behind it</li>
-            <li>A report you can act on - including DeFi protocol configuration-risk reviews</li>
-          </ul>
-          <p class="offer-proof"><b>Proof promise:</b> every finding is source-linked and inspectable - scored against a rubric, not asserted.</p>
-          <div class="offer-foot">
-            <span class="offer-price"><b>Starting price:</b> by quote</span>
-            <a class="btn btn-primary" href="/audits.html">Request ops audit <span aria-hidden="true">&rarr;</span></a>
-          </div>
-        </article>
-
-        <article class="offer reveal">
-          <p class="offer-tag">Custom Workflow Automation</p>
-          <h3 class="offer-outcome">Bring the repetitive cross-tool job that is eating your team's time.</h3>
-          <ul class="offer-gets">
-            <li>We map your workflow to specialist roles inside the governed fleet</li>
-            <li>One integration exposes any specialist through the same receipt-backed access layer</li>
-            <li>Boundaries, review gates, and evidence defined up front with you</li>
-          </ul>
-          <p class="offer-proof"><b>Proof promise:</b> every run returns request ids, evidence, and a clear status - queued, verified, or stopped safely.</p>
-          <div class="offer-foot">
-            <span class="offer-price"><b>Starting price:</b> by quote</span>
-            <a class="btn btn-primary" href="#access">Talk to GridFleet <span aria-hidden="true">&rarr;</span></a>
-          </div>
-        </article>
-
-      </div>
-    </div>
-  </section>
-
-
   <!-- GAOS / HARMONIC CONTROL LAYER -->
   <section class="harmonic" id="harmonic" aria-labelledby="harmonic-title">
     <div class="wrap harmonic-grid">
@@ -822,22 +604,14 @@ section.offers{padding:clamp(72px,11vw,128px) 0;position:relative;
           <article><span>HARMONIC</span><h3>Hierarchical Agentic Reasoning Memory Orchestration and Normalized Instruction Context</h3><p>HARMONIC grounds agent context in current instructions, trusted artifacts, evidence boundaries, source hierarchy, and memory discipline.</p><b>HARMONIC shows what can be trusted.</b></article>
         </div>
       </div>
-      <div class="harmonic-visual reveal" aria-label="GAOS / HARMONIC control panel">
-        <div class="hpanel-laser" aria-hidden="true"></div>
-        <div class="hpanel-head">
-          <span class="hpanel-mark">GAOS<i>·</i>HARMONIC</span>
-          <span class="hpanel-status">supervisory · online</span>
-        </div>
-        <div class="hpanel-core" aria-hidden="true">
-          <div class="hpanel-ring"></div>
-          <div class="hpanel-ring r2"></div>
-          <div class="hpanel-reactor"><span>control layer</span><strong>HARMONIC</strong></div>
-        </div>
-        <div class="hpanel-readout">
-          <div class="hpanel-row"><span>observe</span><b>fleet state</b><i aria-hidden="true"></i></div>
-          <div class="hpanel-row"><span>ground</span><b>trusted context</b><i aria-hidden="true"></i></div>
-          <div class="hpanel-row"><span>gate</span><b>review boundary</b><i aria-hidden="true"></i></div>
-        </div>
+      <div class="harmonic-visual reveal" aria-label="Representative control layer visual">
+        <div class="harmonic-orbit orbit-a"></div>
+        <div class="harmonic-orbit orbit-b"></div>
+        <div class="harmonic-core"><span>GAOS</span><strong>HARMONIC</strong></div>
+        <div class="signal s1"></div><div class="signal s2"></div><div class="signal s3"></div><div class="signal s4 muted"></div>
+        <div class="receipt-card card-a"><span>observe</span><b>fleet state</b></div>
+        <div class="receipt-card card-b"><span>ground</span><b>trusted context</b></div>
+        <div class="receipt-card card-c"><span>gate</span><b>review boundary</b></div>
       </div>
     </div>
     <div class="wrap harmonic-flow reveal" aria-label="Signal pipeline">
@@ -868,23 +642,6 @@ section.offers{padding:clamp(72px,11vw,128px) 0;position:relative;
       <article><h3>Memory is not truth</h3><p>Memory is useful only when the system knows where it came from, how current it is, and whether it deserves authority.</p></article>
       <article><h3>Evidence before action</h3><p>Observation and recommendations are visible before they become activated work.</p></article>
       <article><h3>Designed for phased autonomy</h3><p>The Grid can expand capability without turning on every risk surface at once.</p></article>
-    </div>
-    <div class="wrap harmonic-anatomy reveal" aria-label="HARMONIC anatomy">
-      <div class="anatomy-head">
-        <p class="kicker">Anatomy of HARMONIC</p>
-        <h3>Eight disciplines that keep agent context honest.</h3>
-        <p>HARMONIC is not a model. It is the grounding discipline that decides which context an agent is allowed to trust before it acts - decomposed here into its working parts.</p>
-      </div>
-      <div class="anatomy-grid">
-        <article class="anatomy-node"><span class="anatomy-glyph">H</span><h4>Hierarchical</h4><p>Sources are ranked. Current directives outrank stale memory, every time.</p></article>
-        <article class="anatomy-node"><span class="anatomy-glyph">A</span><h4>Agentic</h4><p>Specialist roles act inside scoped lanes, not one model guessing alone.</p></article>
-        <article class="anatomy-node"><span class="anatomy-glyph">R</span><h4>Reasoning</h4><p>Decisions are grounded in evidence the system can point back to.</p></article>
-        <article class="anatomy-node"><span class="anatomy-glyph">M</span><h4>Memory</h4><p>Recall is bounded and provenance-tracked - useful only when its origin is known.</p></article>
-        <article class="anatomy-node"><span class="anatomy-glyph">O</span><h4>Orchestration</h4><p>Work is coordinated across roles, tools, and review gates as a single flow.</p></article>
-        <article class="anatomy-node"><span class="anatomy-glyph">N</span><h4>Normalized</h4><p>Raw operating state becomes sanitized, structured, comparable context.</p></article>
-        <article class="anatomy-node"><span class="anatomy-glyph">I</span><h4>Instruction</h4><p>The operator's current instruction is the top of the authority stack.</p></article>
-        <article class="anatomy-node"><span class="anatomy-glyph">C</span><h4>Context</h4><p>Evidence boundaries are explicit - what an agent may use, and what it may not.</p></article>
-      </div>
     </div>
   </section>
 
@@ -1014,45 +771,45 @@ section.offers{padding:clamp(72px,11vw,128px) 0;position:relative;
     <div class="proof-orbit" aria-hidden="true"><span></span><span></span><span></span></div>
     <div class="wrap proof-observatory-wrap">
       <div class="proof-observatory-copy">
-        <p class="kicker">Proof, not promises</p>
-        <h2 class="section-title" id="live-proof-title">The Grid is not a claim. Every job returns proof.</h2>
-        <p class="section-lede">A public-safe view of how GridFleet works: every job routes through a governed fleet and returns an inspectable, receipt-backed result. Private operational detail stays off the public site.</p>
+        <p class="kicker">Live proof observatory</p>
+        <h2 class="section-title" id="live-proof-title">The Grid is not a claim. It is a live instrument panel.</h2>
+        <p class="section-lede">A public-safe window into verified GridFleet activity: historical proof preserved, live counters labeled honestly, and private operational detail kept off the public site.</p>
       </div>
-      <div class="proof-command-frame" aria-label="How GridFleet returns proof">
-        <div class="proof-frame-top"><span>HOW PROOF WORKS</span><span>RECEIPT-BACKED</span></div>
+      <div class="proof-command-frame" aria-label="Public-safe GridFleet proof metrics">
+        <div class="proof-frame-top"><span>PUBLIC SAFE TELEMETRY</span><span>HISTORICAL + LIVE</span></div>
         <div class="proof-metric-grid">
         <article class="proof-metric-card proof-metric-card-1">
           <span class="proof-card-index">01</span>
-          <p class="proof-metric-label">every job</p>
-          <strong class="proof-metric-value">Receipt</strong>
-          <p class="proof-metric-copy">Each handled job returns an inspectable receipt - summary, outcome, and timestamp.</p>
-          <span class="proof-metric-fresh">built in</span>
+          <p class="proof-metric-label">artifact stream</p>
+          <strong class="proof-metric-value">38,709</strong>
+          <p class="proof-metric-copy">Creative proof artifacts generated</p>
+          <span class="proof-metric-fresh proof-metric-live">live feed</span>
         </article>
         <article class="proof-metric-card proof-metric-card-2">
           <span class="proof-card-index">02</span>
-          <p class="proof-metric-label">every claim</p>
-          <strong class="proof-metric-value">Source-linked</strong>
-          <p class="proof-metric-copy">Findings are tied to their source and scored against a rubric - never asserted on faith.</p>
-          <span class="proof-metric-fresh">traceable</span>
+          <p class="proof-metric-label">signal layer</p>
+          <strong class="proof-metric-value">29,448</strong>
+          <p class="proof-metric-copy">Signals reviewed by the proof layer</p>
+          <span class="proof-metric-fresh">verified snapshot</span>
         </article>
         <article class="proof-metric-card proof-metric-card-3">
           <span class="proof-card-index">03</span>
-          <p class="proof-metric-label">every agent</p>
-          <strong class="proof-metric-value">Governed</strong>
-          <p class="proof-metric-copy">Specialist agents run inside a governance layer with review gates before anything ships.</p>
-          <span class="proof-metric-fresh">reviewed</span>
+          <p class="proof-metric-label">receipt archive</p>
+          <strong class="proof-metric-value">1,978</strong>
+          <p class="proof-metric-copy">Autonomy receipts archived</p>
+          <span class="proof-metric-fresh">verified snapshot</span>
         </article>
         <article class="proof-metric-card proof-metric-card-4">
           <span class="proof-card-index">04</span>
-          <p class="proof-metric-label">on failure</p>
-          <strong class="proof-metric-value">Stops safely</strong>
-          <p class="proof-metric-copy">When a job can't be verified it stops and says so - no guess presented as fact.</p>
-          <span class="proof-metric-fresh">fail-safe</span>
+          <p class="proof-metric-label">safety cadence</p>
+          <strong class="proof-metric-value">1,386</strong>
+          <p class="proof-metric-copy">Autonomous safety actions in the last 7 days</p>
+          <span class="proof-metric-fresh proof-metric-live">live feed</span>
         </article>
         </div>
         <div class="proof-frame-bottom"><span>no customer data</span><span>no raw logs</span><span>no private routes</span><span>no internal receipts</span></div>
       </div>
-      <p class="proof-observatory-note">GridFleet does not publish operational counts or customer data. The proof is the receipt you receive for your own job - routed through the same governed receipt and review layer the Grid runs internally.</p>
+      <p class="proof-observatory-note">Every number shown here is an aggregate public projection. The source-of-truth lineage stays inside GridFleet's internal receipt and governance layer.</p>
     </div>
   </section>
 

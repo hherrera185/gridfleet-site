@@ -466,7 +466,7 @@ section.dispatch,section.trust{padding:clamp(72px,11vw,128px) 0;position:relativ
 .proof-observatory:before{content:"";position:absolute;inset:0;background:linear-gradient(rgba(255,255,255,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.026) 1px,transparent 1px);background-size:64px 64px;mask-image:radial-gradient(circle at 50% 45%,#000 0%,transparent 72%);opacity:.42;z-index:-2}.proof-observatory:after{content:"";position:absolute;inset:auto -10% -34% -10%;height:42%;background:radial-gradient(ellipse at center,rgba(113,112,255,.28),transparent 62%);filter:blur(28px);z-index:-3}.proof-orbit{position:absolute;right:clamp(-110px,2vw,40px);top:42px;width:min(42vw,520px);aspect-ratio:1;border:1px solid rgba(255,255,255,.075);border-radius:999px;opacity:.7;z-index:-1}.proof-orbit:before,.proof-orbit:after{content:"";position:absolute;inset:11%;border:1px solid rgba(255,255,255,.055);border-radius:inherit}.proof-orbit:after{inset:24%;border-color:rgba(113,112,255,.22)}.proof-orbit span{position:absolute;width:8px;height:8px;border-radius:999px;background:#8ff0c6;box-shadow:0 0 22px rgba(143,240,198,.8)}.proof-orbit span:nth-child(1){left:16%;top:24%}.proof-orbit span:nth-child(2){right:22%;top:48%;background:#9aa7ff}.proof-orbit span:nth-child(3){left:44%;bottom:15%;background:#7ee7ff}.proof-observatory-wrap{position:relative;display:grid;gap:28px}.proof-observatory-copy{max-width:850px}.proof-observatory .kicker{color:#aeb8ff}.proof-observatory .section-title{max-width:920px;font-size:clamp(2.65rem,6vw,5.6rem);line-height:.91;letter-spacing:-.075em}.proof-observatory .section-lede{max-width:760px;color:rgba(235,241,255,.74)}.proof-command-frame{position:relative;border:1px solid rgba(255,255,255,.12);border-radius:28px;padding:clamp(16px,2vw,24px);background:linear-gradient(180deg,rgba(255,255,255,.07),rgba(255,255,255,.032));box-shadow:0 30px 120px rgba(0,0,0,.48),inset 0 1px 0 rgba(255,255,255,.08);backdrop-filter:blur(14px)}.proof-command-frame:before{content:"";position:absolute;inset:1px;border-radius:27px;border:1px solid rgba(255,255,255,.04);pointer-events:none}.proof-frame-top,.proof-frame-bottom{display:flex;justify-content:space-between;gap:14px;color:rgba(235,241,255,.48);font-size:.72rem;letter-spacing:.14em;text-transform:uppercase}.proof-frame-bottom{justify-content:flex-start;flex-wrap:wrap;margin-top:16px}.proof-frame-bottom span{border:1px solid rgba(255,255,255,.09);border-radius:999px;padding:.42rem .7rem;background:rgba(255,255,255,.035)}.proof-metric-grid{display:grid;grid-template-columns:1.15fr .95fr .95fr 1.05fr;gap:12px;margin-top:18px}.proof-metric-card{position:relative;min-width:0;min-height:230px;padding:20px;border:1px solid rgba(255,255,255,.11);border-radius:22px;background:radial-gradient(circle at 16% 10%,rgba(255,255,255,.11),transparent 32%),linear-gradient(180deg,rgba(11,14,27,.92),rgba(9,11,20,.72));overflow:hidden;box-shadow:inset 0 1px 0 rgba(255,255,255,.08)}.proof-metric-card:after{content:"";position:absolute;left:18px;right:18px;bottom:16px;height:2px;background:linear-gradient(90deg,rgba(143,240,198,.9),rgba(122,144,255,.2),transparent)}.proof-card-index{position:absolute;right:18px;top:16px;color:rgba(235,241,255,.26);font-size:.78rem;font-family:ui-monospace,SFMono-Regular,Menlo,monospace}.proof-metric-label{margin:0 40px 0 0;color:#aeb8ff;font-size:.72rem;line-height:1.2;text-transform:uppercase;letter-spacing:.14em}.proof-metric-value{display:block;margin:42px 0 14px;font-size:clamp(2.7rem,5vw,5.3rem);line-height:.78;letter-spacing:-.085em;color:#f7fbff;text-shadow:0 0 34px rgba(126,231,255,.16)}.proof-metric-copy{max-width:17rem;margin:0;color:rgba(235,241,255,.7);font-size:.95rem;line-height:1.45}.proof-metric-fresh{position:absolute;left:20px;bottom:26px;color:#8ff0c6;font-size:.72rem;letter-spacing:.12em;text-transform:uppercase}.proof-observatory-note{max-width:840px;margin:0;color:rgba(235,241,255,.62);font-size:.95rem}.proof-metric-card-1{grid-row:span 2}.proof-metric-card-1 .proof-metric-value{font-size:clamp(3.5rem,7vw,7.2rem)}.proof-metric-card-4{background:radial-gradient(circle at 70% 20%,rgba(143,240,198,.13),transparent 36%),linear-gradient(180deg,rgba(11,14,27,.94),rgba(9,11,20,.74))}@media(max-width:980px){.proof-metric-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.proof-metric-card-1{grid-row:auto}.proof-observatory .section-title{font-size:clamp(2.4rem,9vw,4.4rem)}}@media(max-width:620px){.proof-observatory{padding:68px 0}.proof-orbit{opacity:.34;right:-190px}.proof-metric-grid{grid-template-columns:1fr}.proof-metric-card{min-height:190px}.proof-frame-top{align-items:flex-start;flex-direction:column}.proof-observatory .section-title{letter-spacing:-.055em}}@media(prefers-reduced-motion:reduce){.proof-orbit,.proof-metric-card{transition:none!important;animation:none!important}}
 
 
-/* Mobile proof-card polish: prevent freshness badges from colliding with copy. */
+/* Mobile proof-card polish: prevent freshness badges from colliding with copy; pulse live feeds subtly. */
 .proof-metric-card{display:flex;flex-direction:column;padding-bottom:22px;}
 .proof-metric-copy{padding-right:.25rem;}
 .proof-metric-fresh{position:static;display:inline-flex;align-items:center;gap:.45rem;width:max-content;margin-top:auto;padding-top:18px;}
@@ -1014,45 +1014,45 @@ section.offers{padding:clamp(72px,11vw,128px) 0;position:relative;
     <div class="proof-orbit" aria-hidden="true"><span></span><span></span><span></span></div>
     <div class="wrap proof-observatory-wrap">
       <div class="proof-observatory-copy">
-        <p class="kicker">Proof, not promises</p>
-        <h2 class="section-title" id="live-proof-title">The Grid is not a claim. Every job returns proof.</h2>
-        <p class="section-lede">A public-safe view of how GridFleet works: every job routes through a governed fleet and returns an inspectable, receipt-backed result. Private operational detail stays off the public site.</p>
+        <p class="kicker">Live proof observatory</p>
+        <h2 class="section-title" id="live-proof-title">The Grid is not a claim. It is a live instrument panel.</h2>
+        <p class="section-lede">A public-safe window into verified GridFleet activity: historical proof preserved, live counters labeled honestly, and private operational detail kept off the public site.</p>
       </div>
-      <div class="proof-command-frame" aria-label="How GridFleet returns proof">
-        <div class="proof-frame-top"><span>HOW PROOF WORKS</span><span>RECEIPT-BACKED</span></div>
+      <div class="proof-command-frame" aria-label="Public-safe GridFleet proof metrics">
+        <div class="proof-frame-top"><span>PUBLIC SAFE TELEMETRY</span><span>HISTORICAL + LIVE</span></div>
         <div class="proof-metric-grid">
         <article class="proof-metric-card proof-metric-card-1">
           <span class="proof-card-index">01</span>
-          <p class="proof-metric-label">every job</p>
-          <strong class="proof-metric-value">Receipt</strong>
-          <p class="proof-metric-copy">Each handled job returns an inspectable receipt - summary, outcome, and timestamp.</p>
-          <span class="proof-metric-fresh">built in</span>
+          <p class="proof-metric-label">artifact stream</p>
+          <strong class="proof-metric-value">38,709</strong>
+          <p class="proof-metric-copy">Creative proof artifacts generated</p>
+          <span class="proof-metric-fresh proof-metric-live">live feed</span>
         </article>
         <article class="proof-metric-card proof-metric-card-2">
           <span class="proof-card-index">02</span>
-          <p class="proof-metric-label">every claim</p>
-          <strong class="proof-metric-value">Source-linked</strong>
-          <p class="proof-metric-copy">Findings are tied to their source and scored against a rubric - never asserted on faith.</p>
-          <span class="proof-metric-fresh">traceable</span>
+          <p class="proof-metric-label">signal layer</p>
+          <strong class="proof-metric-value">29,448</strong>
+          <p class="proof-metric-copy">Signals reviewed by the proof layer</p>
+          <span class="proof-metric-fresh">verified snapshot</span>
         </article>
         <article class="proof-metric-card proof-metric-card-3">
           <span class="proof-card-index">03</span>
-          <p class="proof-metric-label">every agent</p>
-          <strong class="proof-metric-value">Governed</strong>
-          <p class="proof-metric-copy">Specialist agents run inside a governance layer with review gates before anything ships.</p>
-          <span class="proof-metric-fresh">reviewed</span>
+          <p class="proof-metric-label">receipt archive</p>
+          <strong class="proof-metric-value">1,978</strong>
+          <p class="proof-metric-copy">Autonomy receipts archived</p>
+          <span class="proof-metric-fresh">verified snapshot</span>
         </article>
         <article class="proof-metric-card proof-metric-card-4">
           <span class="proof-card-index">04</span>
-          <p class="proof-metric-label">on failure</p>
-          <strong class="proof-metric-value">Stops safely</strong>
-          <p class="proof-metric-copy">When a job can't be verified it stops and says so - no guess presented as fact.</p>
-          <span class="proof-metric-fresh">fail-safe</span>
+          <p class="proof-metric-label">safety cadence</p>
+          <strong class="proof-metric-value">1,386</strong>
+          <p class="proof-metric-copy">Autonomous safety actions in the last 7 days</p>
+          <span class="proof-metric-fresh proof-metric-live">live feed</span>
         </article>
         </div>
         <div class="proof-frame-bottom"><span>no customer data</span><span>no raw logs</span><span>no private routes</span><span>no internal receipts</span></div>
       </div>
-      <p class="proof-observatory-note">GridFleet does not publish operational counts or customer data. The proof is the receipt you receive for your own job - routed through the same governed receipt and review layer the Grid runs internally.</p>
+      <p class="proof-observatory-note">Every number shown here is an aggregate public projection. The source-of-truth lineage stays inside GridFleet's internal receipt and governance layer.</p>
     </div>
   </section>
 
