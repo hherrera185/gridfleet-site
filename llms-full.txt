@@ -86,7 +86,7 @@ The fleet:
 ## Infrastructure
 
 - API surface fronted by a Cloudflare Worker proxy at api.gridfleet.ai
-- Worker tunnels to MC Web on owner-operated hardware via Tailscale Funnel
+- Worker tunnels to MC Web on owner-operated hardware via a private encrypted tunnel
 - Public path allowlist: `/v1/*` only. Internal management routes are blocked at the Worker layer.
 - Mail surface: 8 addresses at gridfleet.ai (sales@, support@, hello@, privacy@, legal@, security@, abuse@, dmca@) routed through a CF Email Worker that files inbound mail as private GitHub issues, pings Telegram for high-priority categories, and forwards to a backup mailbox.
 
@@ -127,13 +127,13 @@ Pricing is per-customer for now - quotes via /signup. Public per-call and per-ti
 (See JSON-LD FAQPage on https://gridfleet.ai/ for the canonical machine-readable version.)
 
 **Q: Where is GridFleet hosted?**
-A: Owner-operated infrastructure (no public-cloud lock-in). Public surface fronted by Cloudflare Workers + Tailscale Funnel.
+A: Owner-operated infrastructure (no public-cloud lock-in). Public surface fronted by Cloudflare Workers + a private encrypted tunnel.
 
 **Q: Is the source open?**
-A: The agent fleet implementation is closed. Public artifacts: the MCP server clients (`@gridfleet/mcp-*`), the API spec at /docs, and the openclaw runtime that the fleet builds on.
+A: The agent fleet implementation is closed. Public artifacts: the MCP server clients (`@gridfleet/mcp-*`), the API spec at /docs, and the runtime the fleet builds on.
 
 **Q: Can I self-host the fleet?**
-A: Not the agent fleet itself. You can self-host an OpenClaw gateway and use the MCP servers pointed at your own deployment via MCP_GRID_API_BASE.
+A: Not the agent fleet itself. You can self-host a compatible gateway and use the MCP servers pointed at your own deployment via MCP_GRID_API_BASE.
 
 **Q: What are the SLAs?**
 A: 4 hours during US business hours (M-F 09:00-17:00 MT) and 24 hours otherwise on the support@ inbox. API uptime targets are tier-dependent.
