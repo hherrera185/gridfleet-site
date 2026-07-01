@@ -2,9 +2,9 @@
   "schema": "gridfleet.publicSnapshot.v1",
   "generatedAt": "2026-05-18T04:23:24Z",
   "source": {
-    "repo": "logikclaw/the-grid",
+    "repo": "private",
     "branch": "main",
-    "history": "https://github.com/logikclaw/the-grid/commits/main"
+    "history": "not public"
   },
   "public": {
     "statusLabel": "Public site live",

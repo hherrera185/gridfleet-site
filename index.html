@@ -996,15 +996,18 @@ section.offers{padding:clamp(72px,11vw,128px) 0;position:relative;
         <p class="prose">The lowest-friction path is a real workflow: a docket watch, DeFi config-risk question, vendor portal extraction, or monitoring job. We scope it, run the safe lane, and return a sample receipt you can inspect.</p>
         <p class="muted">Prefer email? <a href="/cdn-cgi/l/email-protection#0b786a676e784b6c79626f6d676e6e7f256a62"><span class="__cf_email__" data-cfemail="5122303d34221136233835373d3434257f3038">[email&#160;protected]</span></a></p>
       </div>
-      <form class="form reveal" action="mailto:sales@gridfleet.ai" method="post" enctype="text/plain">
+      <form class="form reveal" data-early-access action="/api/early-access" method="post">
+        <label>Name<input type="text" name="name" autocomplete="name" placeholder="Your name" /></label>
         <label>Work email<input type="email" name="email" required autocomplete="email" placeholder="you@company.com" /></label>
-        <label>What should the fleet do?<textarea name="use_case" required rows="3" placeholder="e.g. monitor one court docket for new filings; review public DeFi protocol config risk; extract an approved vendor report"></textarea></label>
+        <label>What should the fleet do?<textarea name="message" required rows="3" placeholder="e.g. monitor one court docket for new filings; review public DeFi protocol config risk; extract an approved vendor report"></textarea></label>
         <div class="form-row">
           <label>Expected volume<input type="text" name="volume" placeholder="calls/day, latency needs" /></label>
           <label>Risk constraints<input type="text" name="risk" placeholder="money movement, compliance" /></label>
         </div>
+        <label style="position:absolute;left:-9999px;top:auto;height:1px;width:1px;overflow:hidden" aria-hidden="true">Website<input type="text" name="website" tabindex="-1" autocomplete="off" /></label>
         <button class="btn btn-primary btn-lg" type="submit">Send one job free <span aria-hidden="true">→</span></button>
-        <p class="form-note">No customer data is stored on this page. This static fallback opens your email client to GridFleet sales while the hosted signup endpoint is being verified. Do not include credentials, secrets, private customer data, or wallet keys.</p>
+        <p class="form-status" role="status" aria-live="polite" style="display:none;margin:12px 0 0;font-weight:600"></p>
+        <p class="form-note">No customer data is stored on this page. Prefer email? Write to <a href="mailto:sales@gridfleet.ai">sales@gridfleet.ai</a>. Do not include credentials, secrets, private customer data, or wallet keys.</p>
       </form>
     </div>
   </section>
