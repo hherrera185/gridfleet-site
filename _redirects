@@ -1,16 +1,10 @@
-# A2A discovery — Cloudflare Pages does not serve files in .well-known/
+# A2A discovery â€” Cloudflare Pages does not serve files in .well-known/
 # by default. These rewrites (status 200 = internal rewrite, not 301) make
 # the canonical .well-known/* URLs resolve to the non-dot mirror.
 /.well-known/agent.json          /a2a/agent.json          200
 /.well-known/agents/vera.json    /a2a/agents/vera.json    200
 
-# LORA art page — clean URL
-/lora                            /lora.html               200
-/lora/                           /lora.html               200
 
-# Grid Workers — clean URL
-/workers                         /workers.html            200
-/workers/                        /workers.html            200
 # Internal MC/GAOS surfaces are never public Pages routes.
 /api/internal/*                   /404.html                 404
 /api/*                            /404.html                 404
