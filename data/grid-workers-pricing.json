@@ -1,6 +1,18 @@
 {
-  "updated_at": "2026-06-23T15:45:00Z",
-  "strategy": "Seat-plus-credit pricing for governed AI operators. Credits meter cost and risk; high-risk execution remains gated and is not unlocked solely by credits.",
+  "updated_at": "2026-07-01T00:00:00Z",
+  "strategy": "Seat-plus-credit pricing for governed AI operators. Credits meter cost and risk; high-risk execution remains gated and is not unlocked solely by credits. Vera, the flagship AI receptionist, has transparent published pricing; the workers marketplace remains by-quote.",
+  "vera": {
+    "product": "Vera — AI Receptionist (flagship)",
+    "page": "https://gridfleet.ai/vera",
+    "pricing_basis": "Introductory founding-customer pricing, locked for 12 months",
+    "trial": "First week of calls free; no card required",
+    "tiers": [
+      {"id":"vera_starter","name":"Starter","price":"$99/month","included":["Up to 200 handled call minutes/month","1 dedicated business number","Google Calendar booking (two-stage commit)","Email summary + receipt per call","24/7 answering","Human escalation"]},
+      {"id":"vera_pro","name":"Pro","price":"$249/month","included":["Up to 600 handled call minutes/month","Everything in Starter","TCPA-aware SMS confirmations, reminders, follow-ups","Knowledge-base ingestion of the business website and documents","Priority routing and custom escalation rules","Weekly call and booking digest"]},
+      {"id":"vera_enterprise","name":"Enterprise","price":"By quote","included":["Multi-location numbers and routing","Custom minute pools","SLA with uptime and answer-rate targets","Custom integrations (CRM, field-service tools)","Dedicated onboarding"]}
+    ],
+    "overage_policy": "Handled-call minutes; if a tenant runs over, GridFleet contacts them first — no surprise bills at introductory tiers"
+  },
   "tiers": [
     {"id":"free_trial","name":"Free Trial — One Real Job","price":"Free","term":"7 days or included credits consumed","workers":"1 trial worker","credits":"2,000 trial credits","autonomy":"L0-L2 by default; L3 drafts only","limits":["Up to 3 scoped jobs","No external sends by default","No public posts/calls/payments/deploys/credential mutation","Unused credits expire and have no cash value"]},
     {"id":"starter","name":"Starter — Solo Operator","price":"By quote","workers":"1 active worker","credits":"20,000/month","autonomy":"L0-L2 plus L3 drafts","limits":["Live-proven/browser-lane connectors only","Overage disabled by default","Standard receipts timeline"]},

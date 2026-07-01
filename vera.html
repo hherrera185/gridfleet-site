@@ -1,0 +1,250 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data:; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline'; connect-src 'self'; form-action 'self' mailto:; frame-ancestors 'none'; base-uri 'self'; object-src 'none'; upgrade-insecure-requests" />
+<meta name="robots" content="index, follow, max-image-preview:large" />
+<meta name="theme-color" content="#05060a" />
+<title>Vera — AI receptionist that answers, books, and proves it | GridFleet</title>
+<meta name="description" content="Vera answers every call, qualifies the caller, books the appointment on your Google Calendar, and hands you a receipt. TCPA-aware SMS, human escalation, KB-grounded answers. From $99/mo — first week of calls free." />
+<link rel="canonical" href="https://gridfleet.ai/vera" />
+<meta property="og:title" content="Vera — every call answered, qualified, booked. With proof." />
+<meta property="og:description" content="AI receptionist for service businesses: answers inbound calls, books Google Calendar appointments, sends TCPA-aware confirmations, escalates to humans. Founding-customer pricing from $99/mo." />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://gridfleet.ai/vera" />
+<meta property="og:image" content="https://gridfleet.ai/og.png" />
+<link rel="stylesheet" href="/assets/site.css" />
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {"@type":"Product","@id":"https://gridfleet.ai/vera#product","name":"Vera AI Receptionist","brand":{"@type":"Brand","name":"GridFleet"},"description":"AI phone receptionist for small businesses: answers inbound calls, books Google Calendar appointments with two-stage commit, answers from your business knowledge base, sends TCPA-compliant SMS confirmations, and escalates to a human on request.","url":"https://gridfleet.ai/vera","offers":[
+      {"@type":"Offer","name":"Starter","price":"99","priceCurrency":"USD","description":"Up to 200 handled minutes/mo, 1 dedicated number, calendar booking, per-call email summary. Introductory founding-customer pricing."},
+      {"@type":"Offer","name":"Pro","price":"249","priceCurrency":"USD","description":"Up to 600 handled minutes/mo, SMS follow-ups, knowledge-base ingestion of your website, priority routing. Introductory founding-customer pricing."}
+    ]},
+    {"@type":"FAQPage","@id":"https://gridfleet.ai/vera#faq","mainEntity":[
+      {"@type":"Question","name":"Is Vera TCPA compliant?","acceptedAnswer":{"@type":"Answer","text":"Vera never pretends to be human, keeps a consent record before sending SMS, honors STOP and UNSUBSCRIBE immediately, and throttles outbound messaging per plan. Outbound SMS is confirmations and reminders tied to a caller's own request — not cold outreach."}},
+      {"@type":"Question","name":"What happens when a caller asks for a human?","acceptedAnswer":{"@type":"Answer","text":"Vera warm-transfers to your configured escalation number and gives the human a verbal handoff summary. If nobody picks up, she takes a structured message and it lands in your inbox with the call receipt."}},
+      {"@type":"Question","name":"What happens after hours?","acceptedAnswer":{"@type":"Answer","text":"Vera answers 24/7. Off-hours she books directly into open calendar slots, answers knowledge-base questions, and queues anything needing a human for the morning summary."}},
+      {"@type":"Question","name":"What if Vera doesn't know the answer?","acceptedAnswer":{"@type":"Answer","text":"Vera answers only from your ingested knowledge base — website, documents, business profile. If the answer isn't there, she says so and offers to take a message or transfer, instead of making something up."}}
+    ]}
+  ]
+}
+</script>
+<style>
+.vera-hero{min-height:82vh;display:flex;align-items:center;border-bottom:1px solid var(--line);background:radial-gradient(900px 520px at 78% 12%,rgba(54,224,255,.14),transparent 60%),radial-gradient(700px 420px at 8% 85%,rgba(120,80,255,.07),transparent 55%),linear-gradient(180deg,var(--bg),var(--bg2))}
+.vera-hero .wrap{padding-top:130px;padding-bottom:84px}
+.flow{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:36px}
+.flow-step{border:1px solid var(--line);border-radius:16px;padding:20px;background:var(--panel);position:relative}
+.flow-step b{display:block;color:var(--cyan);font-family:var(--mono);font-size:12px;margin-bottom:10px}
+.flow-step h3{font-size:19px;margin-bottom:8px}
+.flow-step p{color:var(--dim);font-size:15px;margin:0}
+.pill-row{display:flex;gap:8px;flex-wrap:wrap;margin:18px 0 0}
+.pill{font-family:var(--mono);font-size:11px;color:var(--cyan);border:1px solid var(--line2);background:rgba(54,224,255,.06);padding:4px 9px;border-radius:999px}
+.price-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:38px}
+.price-card{border:1px solid var(--line);border-radius:18px;padding:28px;background:linear-gradient(180deg,rgba(255,255,255,.03),rgba(255,255,255,.01));display:flex;flex-direction:column;position:relative;overflow:hidden}
+.price-card.featured{border-color:rgba(54,224,255,.55);box-shadow:var(--glow)}
+.price-card .plan-name{font-family:var(--mono);font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:var(--cyan)}
+.price-card .plan-price{font-size:44px;font-weight:700;margin:14px 0 2px;letter-spacing:-.02em}
+.price-card .plan-price small{font-size:16px;font-weight:500;color:var(--dim)}
+.price-card .plan-sub{color:var(--faint);font-family:var(--mono);font-size:12px;margin:0 0 18px}
+.price-card ul{list-style:none;padding:0;margin:0 0 24px;display:grid;gap:10px;flex:1}
+.price-card ul li{position:relative;padding-left:26px;color:var(--dim);font-size:15px}
+.price-card ul li::before{content:"";position:absolute;left:0;top:6px;width:13px;height:13px;border-radius:4px;background:rgba(66,226,155,.14);border:1px solid var(--green)}
+.price-card .btn{justify-content:center}
+.featured-tag{position:absolute;top:16px;right:16px;font-family:var(--mono);font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:#021018;background:linear-gradient(180deg,#5fe9ff,var(--cyan-deep));padding:4px 9px;border-radius:999px}
+.intro-note{margin-top:20px;color:var(--faint);font-size:13.5px;font-family:var(--mono)}
+.receipt-demo{background:#070b11;border:1px solid var(--line2);border-radius:18px;padding:22px;font-family:var(--mono);box-shadow:var(--glow)}
+.receipt-demo .rrow{display:flex;justify-content:space-between;border-bottom:1px solid rgba(255,255,255,.08);padding:10px 0;gap:18px;font-size:13.5px}
+.receipt-demo .rrow span{color:var(--faint)}
+.receipt-demo .rrow b{color:var(--green);font-weight:500;text-align:right}
+.receipt-demo .rhead{display:flex;justify-content:space-between;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--faint);padding-bottom:12px}
+.faq-list{margin-top:34px;display:grid;gap:14px}
+.faq-item{border:1px solid var(--line);border-radius:14px;background:var(--panel)}
+.faq-item summary{cursor:pointer;padding:18px 20px;font-weight:600;font-size:16.5px;list-style:none;display:flex;justify-content:space-between;align-items:center;gap:16px}
+.faq-item summary::after{content:"+";color:var(--cyan);font-family:var(--mono);font-size:20px;flex-shrink:0}
+.faq-item[open] summary::after{content:"–"}
+.faq-item p{color:var(--dim);font-size:15.5px;margin:0;padding:0 20px 18px;max-width:70ch}
+select.plan-select{font-family:var(--sans);font-size:15.5px;color:var(--ink);background:#070b11;border:1px solid var(--line2);border-radius:11px;padding:13px 15px;transition:.2s;width:100%}
+select.plan-select:focus{outline:none;border-color:var(--cyan);box-shadow:0 0 0 3px rgba(54,224,255,.14)}
+@media(max-width:900px){.flow,.price-grid{grid-template-columns:1fr}.vera-hero{min-height:auto}}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<nav class="nav scrolled" aria-label="Primary">
+  <a class="brand" href="/"><span class="brand-mark"><i></i><i></i><i></i><i></i></span><span class="brand-word">GRID<b>FLEET</b></span></a>
+  <div class="nav-links"><a href="/vera">Vera</a><a href="/workers.html">Workers</a><a href="/#how">How it works</a><a href="/#receipts">Receipts</a><a href="/docs.html">Docs</a></div>
+  <a class="btn btn-primary nav-cta" href="#signup">Start free week</a>
+</nav>
+<main id="main">
+
+<!-- HERO -->
+<section class="vera-hero">
+  <div class="wrap">
+    <p class="eyebrow"><span class="pulse"></span> Vera — flagship AI receptionist</p>
+    <h1 class="hero-title">Every call answered, qualified, <span class="grad">booked — with proof.</span></h1>
+    <p class="hero-sub"><strong>Missed calls are missed revenue.</strong> Vera picks up every inbound call in your business's voice, answers real questions from your own website and documents, books the appointment straight onto your Google Calendar, and hands you a receipt for every call. When someone wants a human, she warm-transfers — with a handoff summary.</p>
+    <div class="hero-cta">
+      <a class="btn btn-primary btn-lg" href="#signup">Get your first week of calls free <span aria-hidden="true">→</span></a>
+      <a class="btn btn-ghost btn-lg" href="#pricing">See pricing</a>
+    </div>
+    <dl class="hero-stats">
+      <div><dt>24/7</dt><dd>answers, nights &amp; weekends</dd></div>
+      <div><dt>2-stage</dt><dd>calendar commit, no double-booking</dd></div>
+      <div><dt>receipt</dt><dd>for every handled call</dd></div>
+    </dl>
+    <p class="muted" style="margin-top:18px">No fabricated demos. Vera identifies as an AI on every call and never invents an answer. <a href="/a2a/agents/vera.json">Machine-readable agent card</a>.</p>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="how" id="how">
+  <div class="wrap">
+    <p class="kicker">How it works</p>
+    <h2 class="section-title">Answer. Qualify. Book. Receipt.</h2>
+    <div class="flow">
+      <div class="flow-step"><b>01 — ANSWER</b><h3>Picks up in your voice</h3><p>Vera answers your dedicated line 24/7, greets callers per your config, and never lets a call ring out to voicemail.</p></div>
+      <div class="flow-step"><b>02 — QUALIFY</b><h3>Understands the intent</h3><p>She gathers what the caller needs — service, timing, location — and answers business questions from your ingested knowledge base. If it's not in the KB, she says so instead of guessing.</p></div>
+      <div class="flow-step"><b>03 — BOOK</b><h3>Two-stage calendar commit</h3><p>Vera checks your Google Calendar, holds the slot, confirms it back to the caller, and only writes the event after an explicit yes. No double-bookings, no ghost appointments.</p></div>
+      <div class="flow-step"><b>04 — RECEIPT</b><h3>Proof lands in your inbox</h3><p>Every call ends with a receipt: who called, what they wanted, what was booked or escalated, and the confirmation trail. You inspect what happened — you don't take it on faith.</p></div>
+    </div>
+    <div class="pill-row" aria-label="Vera capabilities"><span class="pill">inbound calls (Twilio)</span><span class="pill">Google Calendar booking</span><span class="pill">KB-grounded answers</span><span class="pill">TCPA-aware SMS</span><span class="pill">human warm-transfer</span><span class="pill">identifies as AI</span></div>
+  </div>
+</section>
+
+<!-- RECEIPT -->
+<section class="receipts" id="receipt">
+  <div class="wrap receipts-grid">
+    <div>
+      <p class="kicker">The receipt is the product</p>
+      <h2 class="section-title">You see every call. Not a summary of a claim — the evidence.</h2>
+      <p class="prose">Most answering services tell you "we handled 40 calls." Vera shows you each one: the intent, the outcome, the calendar event ID, the SMS confirmation status, and whether a human was needed. Same receipt doctrine as everything on The Grid.</p>
+      <ul class="check-list">
+        <li>Call ID, duration, and outcome on every call</li>
+        <li>Calendar event reference for every booking</li>
+        <li>SMS confirmation status with consent record</li>
+        <li>Escalations flagged with the handoff summary</li>
+      </ul>
+    </div>
+    <div class="receipt-demo" data-parallax="0.06" aria-label="Example call receipt">
+      <div class="rhead"><span>CALL RECEIPT</span><span>ca_7f2e…9b1</span></div>
+      <div class="rrow"><span>caller</span><b>+1 (•••) •••-4821</b></div>
+      <div class="rrow"><span>intent</span><b>book cleaning — Tue PM</b></div>
+      <div class="rrow"><span>kb answers</span><b>hours · service area</b></div>
+      <div class="rrow"><span>calendar</span><b>evt_8c31 · confirmed</b></div>
+      <div class="rrow"><span>sms confirm</span><b>sent · consent on file</b></div>
+      <div class="rrow"><span>escalation</span><b>not needed</b></div>
+      <div class="rrow"><span>duration</span><b>2m 41s</b></div>
+      <div class="rrow" style="border-bottom:0"><span>status</span><b>booked · verified</b></div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="band" id="pricing">
+  <div class="wrap">
+    <p class="kicker">Founding-customer pricing</p>
+    <h2 class="section-title">Simple plans. First week of calls free.</h2>
+    <p class="prose">Introductory pricing for founding customers — locked in for 12 months. Every plan starts with your first week of calls free: real callers, real bookings, real receipts. Keep it only if it pays for itself. Same promise as the rest of the fleet — one real job, proven, before you pay.</p>
+    <div class="price-grid">
+      <article class="price-card">
+        <span class="plan-name">Starter</span>
+        <div class="plan-price">$99<small>/mo</small></div>
+        <p class="plan-sub">solo operators &amp; single-chair shops</p>
+        <ul>
+          <li>Up to 200 handled call minutes / month</li>
+          <li>1 dedicated business number</li>
+          <li>Google Calendar booking (two-stage commit)</li>
+          <li>Email summary + receipt for every call</li>
+          <li>24/7 answering, nights &amp; weekends</li>
+          <li>Human escalation to your phone</li>
+        </ul>
+        <a class="btn btn-ghost" href="#signup" data-plan="Starter — $99/mo">Start with Starter</a>
+      </article>
+      <article class="price-card featured">
+        <span class="featured-tag">Most popular</span>
+        <span class="plan-name">Pro</span>
+        <div class="plan-price">$249<small>/mo</small></div>
+        <p class="plan-sub">busy service businesses</p>
+        <ul>
+          <li>Up to 600 handled call minutes / month</li>
+          <li>Everything in Starter</li>
+          <li>TCPA-aware SMS confirmations, reminders &amp; follow-ups</li>
+          <li>Knowledge-base ingestion of your website &amp; documents</li>
+          <li>Priority routing &amp; custom escalation rules</li>
+          <li>Weekly call &amp; booking digest</li>
+        </ul>
+        <a class="btn btn-primary" href="#signup" data-plan="Pro — $249/mo">Start with Pro</a>
+      </article>
+      <article class="price-card">
+        <span class="plan-name">Enterprise</span>
+        <div class="plan-price">Quote</div>
+        <p class="plan-sub">multi-location &amp; franchise</p>
+        <ul>
+          <li>Multi-location numbers &amp; routing</li>
+          <li>Custom minute pools</li>
+          <li>SLA with uptime &amp; answer-rate targets</li>
+          <li>Custom integrations (CRM, field-service tools)</li>
+          <li>Dedicated onboarding &amp; tuning</li>
+        </ul>
+        <a class="btn btn-ghost" href="#signup" data-plan="Enterprise — by quote">Talk to us</a>
+      </article>
+    </div>
+    <p class="intro-note">Introductory founding-customer rates. Minutes are handled-call minutes; if you run over, we contact you first — no surprise bills. Cancel anytime during the free week and pay nothing.</p>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="band" id="faq">
+  <div class="wrap">
+    <p class="kicker">Straight answers</p>
+    <h2 class="section-title">The questions owners actually ask.</h2>
+    <div class="faq-list">
+      <details class="faq-item"><summary>Is this legal? What about TCPA and consent?</summary><p>Vera is built TCPA-aware from day one. She never pretends to be human — every call is disclosed as AI-assisted. Outbound SMS is limited to confirmations, reminders, and messages a caller asked for; a consent record is checked before any send, STOP and UNSUBSCRIBE are honored immediately, and messaging is throttled per plan. Vera does no cold outbound calling or texting.</p></details>
+      <details class="faq-item"><summary>What happens when a caller wants a human?</summary><p>Vera warm-transfers to your escalation number and gives whoever picks up a spoken handoff summary — who's calling and what they need. If nobody answers, she takes a structured message, and it lands in your inbox attached to the call receipt so nothing gets lost.</p></details>
+      <details class="faq-item"><summary>What happens off-hours and on weekends?</summary><p>Vera answers 24/7. Off-hours she books directly into your open calendar slots, answers questions from your knowledge base, and queues anything that needs a human decision into your morning summary — so you open the day with booked jobs instead of voicemails.</p></details>
+      <details class="faq-item"><summary>What if she doesn't know the answer?</summary><p>Vera only answers from your ingested knowledge base — your website, documents, and business profile. If the answer isn't there, she says so and offers to take a message or transfer. She refuses to fabricate. Every answer she gives is grounded in something you gave her.</p></details>
+      <details class="faq-item"><summary>How long does setup take?</summary><p>About five minutes of your time: point Vera at your website and business profile, connect your Google Calendar, set your escalation number and rules. She learns your services, hours, and pricing from what you already publish, and you review before she goes live.</p></details>
+      <details class="faq-item"><summary>Do I have to change my phone number?</summary><p>No. You get a dedicated Vera number and forward your existing line to it (or publish it directly). Turn forwarding off any time and you're back to exactly where you were.</p></details>
+    </div>
+  </div>
+</section>
+
+<!-- SIGNUP -->
+<section class="access" id="signup">
+  <div class="wrap access-grid">
+    <div>
+      <p class="kicker">First week free</p>
+      <h2 class="section-title">Put Vera on your phones this week.</h2>
+      <p class="prose">Tell us about your business and pick a plan. We set Vera up on a dedicated number, you forward your line, and your first week of real calls — answered, booked, receipted — is free. You'll see every receipt before you pay anything.</p>
+      <p class="muted">Prefer email? Write to <a href="mailto:sales@gridfleet.ai">sales@gridfleet.ai</a> with "Vera" in the subject.</p>
+    </div>
+    <form class="form" data-early-access action="/api/early-access" method="post">
+      <label>Name<input type="text" name="name" autocomplete="name" placeholder="Your name" /></label>
+      <label>Work email<input type="email" name="email" required autocomplete="email" placeholder="you@company.com" /></label>
+      <label>Business<input type="text" name="company" autocomplete="organization" placeholder="Business name" /></label>
+      <label>Plan<select class="plan-select" name="plan"><option value="Starter — $99/mo">Starter — $99/mo (200 min)</option><option value="Pro — $249/mo" selected>Pro — $249/mo (600 min)</option><option value="Enterprise — by quote">Enterprise — by quote</option><option value="Not sure yet">Not sure yet — recommend one</option></select></label>
+      <label>About your calls<textarea name="message" required rows="3" placeholder="e.g. HVAC company, ~15 calls/day, most calls are booking or 'are you open' — we miss the ones after 5pm"></textarea></label>
+      <label style="position:absolute;left:-9999px;top:auto;height:1px;width:1px;overflow:hidden" aria-hidden="true">Website<input type="text" name="website" tabindex="-1" autocomplete="off" /></label>
+      <button class="btn btn-primary btn-lg" type="submit">Claim my free week <span aria-hidden="true">→</span></button>
+      <p class="form-status" role="status" aria-live="polite" style="display:none;margin:12px 0 0;font-weight:600"></p>
+      <p class="form-note">No card required for the free week. Do not include credentials, secrets, or private customer data.</p>
+    </form>
+  </div>
+</section>
+</main>
+
+<footer class="foot">
+  <div class="wrap foot-grid">
+    <div><span class="brand-word">GRID<b>FLEET</b></span><p class="muted">The execution layer for autonomous AI operations. 16 specialist agents run The Grid; 6 launch workers are hireable today; Vera is the flagship receptionist.</p></div>
+    <nav aria-label="Footer"><a href="/vera">Vera</a><a href="/workers.html">Workers</a><a href="/about.html">About</a><a href="/docs.html">Docs</a><a href="/signup.html">Request access</a></nav>
+    <div class="foot-sec"><a href="mailto:sales@gridfleet.ai">sales@gridfleet.ai</a><span class="muted">Responsible disclosure welcome.</span></div>
+  </div>
+  <div class="wrap foot-base"><span class="muted">© 2026 GridFleet · gridfleet.ai</span><span class="muted">Operator-controlled · receipt-backed</span></div>
+</footer>
+
+<script src="/assets/site.js" defer></script>
+</body>
+</html>

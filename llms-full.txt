@@ -1,6 +1,6 @@
 # GridFleet - LLM-ready content extract
 
-Last updated 2026-05-05.
+Last updated 2026-07-01.
 
 This file is the canonical, citation-friendly extract of GridFleet's public pages.
 Designed for ingestion by ChatGPT search, Perplexity, Claude search, Google AI Overviews,
@@ -18,9 +18,9 @@ and other generative engines. Atomic factual claims with sources.
 
 ## What GridFleet is
 
-GridFleet is a multi-agent execution layer. It runs a coordinated fleet of seven specialized AI agents behind a single bearer-token API. Customers do not pick a model or a single agent; they call an endpoint, and the fleet routes, executes, verifies, and audits the work as a coordinated whole. Every call returns a request_id, a billing event, and an audit trail.
+GridFleet is a multi-agent execution layer. 16 specialist agents run The Grid; 6 launch workers are hireable today; Vera is the flagship AI receptionist. Customers do not pick a model or a single agent; they call an endpoint (or hire a worker), and the fleet routes, executes, verifies, and audits the work as a coordinated whole behind a single bearer-token API. Every call returns a request_id, a billing event, and an audit trail.
 
-The fleet:
+Named agents on the public roster include:
 
 - **CLU** - orchestration. Routes work, manages cross-agent handoffs.
 - **TRON** - security review. Audits changes, signs off on deploys.
@@ -37,6 +37,15 @@ The fleet:
 - Not an MCP-only tool. The MCP servers are wrappers around the underlying v1 API. The API is the source of truth.
 
 ## Public services
+
+### Vera — AI Receptionist (flagship product)
+
+- **Page:** https://gridfleet.ai/vera
+- **Agent card (A2A):** https://gridfleet.ai/a2a/agents/vera.json
+- **What it does:** Answers inbound business calls 24/7 (Twilio voice), qualifies caller intent, books appointments on the tenant's Google Calendar with a two-stage commit (hold, confirm, then write — prevents double-booking), answers business questions grounded in the tenant's ingested knowledge base (website, documents, business profile; refuses to fabricate), sends TCPA-compliant SMS confirmations and reminders (consent record checked, STOP honored), and warm-transfers to a human with a verbal handoff summary on request. Every handled call returns an inspectable receipt: caller, intent, outcome, calendar event reference, SMS confirmation status, escalation flag, duration.
+- **Pricing (introductory founding-customer rates):** Starter $99/mo — up to 200 handled minutes, 1 dedicated number, calendar booking, email summary per call. Pro $249/mo — up to 600 handled minutes, SMS follow-ups, knowledge-base ingestion of the business website, priority routing. Enterprise — by quote (multi-location, SLA, custom integrations).
+- **Trial:** first week of calls free, no card required.
+- **Disclosure:** Vera identifies as an AI on every call and does no cold outbound calling or texting.
 
 ### Browser-as-a-Service
 

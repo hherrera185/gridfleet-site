@@ -1,10 +1,11 @@
 # GridFleet
 
-> Multi-agent execution layer for autonomous AI operators. A coordinated fleet of seven specialized AI agents behind a single bearer-token API at api.gridfleet.ai. Used for browser automation (real Chrome with behavioral realism + in-house captcha solver), US small-cap equity momentum signals (Pong screener), multi-agent forecasts, federal court docket monitoring, and quarterly DeFi protocol config-risk audits.
+> Multi-agent execution layer for autonomous AI operators. 16 specialist agents run The Grid; 6 launch workers are hireable today; Vera is the flagship AI receptionist (answers calls, books Google Calendar appointments, TCPA-aware SMS, human escalation — plans from $99/mo). One bearer-token API at api.gridfleet.ai. Used for browser automation (real Chrome with behavioral realism + in-house captcha solver), US small-cap equity momentum signals (Pong screener), multi-agent forecasts, federal court docket monitoring, and quarterly DeFi protocol config-risk audits.
 
 ## Core surfaces
 
 - [Home](https://gridfleet.ai/): Product overview, capability demos, live agent fleet metrics
+- [Vera — AI Receptionist](https://gridfleet.ai/vera): Flagship product. Answers every call, qualifies, books, returns a receipt. Starter $99/mo (200 min), Pro $249/mo (600 min), Enterprise by quote. First week of calls free. Introductory founding-customer pricing.
 - [About](https://gridfleet.ai/about): Concrete facts about GridFleet - what it is, who runs it, when it launched, what's in the fleet
 - [API Docs](https://gridfleet.ai/docs): v1 endpoints, auth, error codes, examples
 - [DeFi Audits](https://gridfleet.ai/audits): Quarterly config-risk audit product for DAO treasuries

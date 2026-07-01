@@ -238,7 +238,7 @@
     var parts = [];
     var msg = form.querySelector('[name="message"]');
     if (msg && msg.value.trim()) parts.push(msg.value.trim());
-    ["company", "volume", "risk"].forEach(function (extra) {
+    ["plan", "company", "volume", "risk"].forEach(function (extra) {
       var f = form.querySelector('[name="' + extra + '"]');
       if (f && f.value.trim()) parts.push(extra + ": " + f.value.trim());
     });
@@ -289,11 +289,28 @@
       });
   }
 
+  function initPlanButtons() {
+    // Pricing CTAs carry data-plan; clicking one preselects the matching
+    // option in the signup form's plan <select> before the anchor scroll.
+    var buttons = document.querySelectorAll("[data-plan]");
+    var select = document.querySelector('form[data-early-access] [name="plan"]');
+    if (!select || !buttons.length) return;
+    for (var i = 0; i < buttons.length; i++) {
+      buttons[i].addEventListener("click", function () {
+        var want = this.getAttribute("data-plan");
+        for (var j = 0; j < select.options.length; j++) {
+          if (select.options[j].value === want) { select.selectedIndex = j; break; }
+        }
+      });
+    }
+  }
+
   function init() {
     var forms = document.querySelectorAll("form[data-early-access]");
     for (var i = 0; i < forms.length; i++) {
       forms[i].addEventListener("submit", handleSubmit);
     }
+    initPlanButtons();
   }
 
   if (document.readyState === "loading") {
