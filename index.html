@@ -621,6 +621,55 @@ section.offers{padding:clamp(72px,11vw,128px) 0;position:relative;
   .anatomy-node,.offer{transition:none!important}
 }
 
+/* ===== WOW pass 2: hero photoreal grid layer, kinetic section headings, live proof band ===== */
+/* hero background image (generated Tron light-grid), sits under the live canvas; falls back to base bg if the asset fails to load */
+.hero-bg{position:absolute;inset:0;z-index:0;pointer-events:none;
+  background:var(--bg) url("/assets/hero-grid.jpg") center 60% / cover no-repeat;
+  opacity:.92;will-change:transform;
+  animation:heroDrift 36s ease-in-out infinite alternate}
+@keyframes heroDrift{0%{transform:scale(1.06) translate3d(0,0,0)}100%{transform:scale(1.15) translate3d(0,-2.4%,0)}}
+@media(max-width:760px){.hero-bg{background-position:center 68%;opacity:.82}}
+@media(prefers-reduced-motion:reduce){.hero-bg{animation:none;transform:scale(1.04)}}
+
+/* kinetic section headings: per-word rise + de-blur, staggered, on scroll-in */
+.kinetic .kw{display:inline-block;opacity:0;transform:translateY(.85em);filter:blur(6px);
+  transition:opacity .6s var(--ease),transform .78s var(--ease),filter .6s var(--ease);
+  transition-delay:var(--d,0s);will-change:transform,opacity,filter}
+.kinetic.kin-in .kw{opacity:1;transform:none;filter:blur(0)}
+@media(prefers-reduced-motion:reduce){.kinetic .kw{opacity:1;transform:none;filter:none;transition:none}}
+
+/* live proof band */
+.proofband{position:relative;padding:clamp(64px,9vw,104px) 0;border-top:1px solid var(--line);
+  background:linear-gradient(180deg,var(--bg),rgba(9,14,22,.55));overflow:hidden}
+.proofband::before{content:"";position:absolute;inset:0;z-index:0;pointer-events:none;
+  background:radial-gradient(58% 120% at 84% 0%,rgba(54,224,255,.10),transparent 60%),radial-gradient(46% 100% at 8% 100%,rgba(126,108,255,.08),transparent 60%)}
+.proofband .wrap{position:relative;z-index:1}
+.proofband-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(178px,1fr));gap:14px;margin:42px 0 0}
+.pb-stat{position:relative;padding:26px 22px 24px;border:1px solid var(--line);border-radius:18px;
+  background:linear-gradient(180deg,rgba(54,224,255,.05),rgba(255,255,255,.012) 42%,transparent);
+  overflow:hidden;opacity:0;transform:translateY(26px) scale(.98);
+  transition:opacity .7s var(--ease),transform .7s var(--ease),border-color .35s var(--ease);
+  transition-delay:var(--d,0s)}
+.pb-stat.in{opacity:1;transform:none}
+.pb-stat:hover{border-color:rgba(54,224,255,.34);transform:translateY(-4px)}
+.pb-stat::after{content:"";position:absolute;left:22px;right:22px;bottom:0;height:2px;
+  background:linear-gradient(90deg,var(--cyan),rgba(122,144,255,.25),transparent);
+  transform:scaleX(0);transform-origin:0 50%;transition:transform 1s var(--ease) .3s}
+.pb-stat.in::after{transform:scaleX(1)}
+.pb-val{font-family:var(--mono);font-weight:700;font-size:clamp(34px,4.4vw,52px);line-height:1;
+  color:#eaf6ff;letter-spacing:-.02em;text-shadow:0 0 24px rgba(54,224,255,.3)}
+.pb-val .pb-suf{font-size:.5em;color:var(--cyan);margin-left:2px;vertical-align:.32em;text-shadow:none}
+.pb-label{margin:14px 0 0;color:var(--dim);font-size:14px;line-height:1.42;max-width:24ch}
+.pb-tag{display:inline-flex;align-items:center;gap:7px;margin:16px 0 0;font-family:var(--mono);
+  font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--faint)}
+.pb-tag i{width:6px;height:6px;border-radius:50%;background:var(--faint);flex:none}
+.pb-tag-live{color:#8ff0c6}
+.pb-tag-live i{background:var(--green);box-shadow:0 0 8px rgba(66,226,155,.85);animation:pl 2s infinite}
+.pb-tag-est{color:var(--amber)}.pb-tag-est i{background:var(--amber)}
+.proofband-note{margin:26px 0 0;color:var(--faint);font-size:12.5px;font-family:var(--mono);letter-spacing:.02em;max-width:82ch;line-height:1.6}
+@media(prefers-reduced-motion:reduce){.pb-stat{opacity:1;transform:none;transition:none}.pb-stat::after{transform:scaleX(1)}.pb-tag-live i{animation:none}}
+@media(max-width:520px){.proofband-grid{grid-template-columns:1fr 1fr}.pb-val{font-size:clamp(30px,9vw,40px)}}
+
 </style>
 </head>
 <body>
@@ -648,6 +697,7 @@ section.offers{padding:clamp(72px,11vw,128px) 0;position:relative;
 
   <!-- HERO -->
   <section class="hero">
+    <div class="hero-bg" aria-hidden="true"></div>
     <canvas id="fleet" class="hero-canvas" aria-hidden="true"></canvas>
     <div class="hero-veil" aria-hidden="true"></div>
     
@@ -708,6 +758,17 @@ section.offers{padding:clamp(72px,11vw,128px) 0;position:relative;
       <p class="kicker">The difference</p>
       <h2 class="lead">A chatbot <em>answers</em>. GridFleet <em>acts</em> - and shows its work.</h2>
       <p class="prose">Most AI products end at a confident sentence. GridFleet ends at a verified outcome: the right specialist role picks up the job, uses real tools inside a governed lane, and returns request ids, screenshots, source references and checks. You inspect evidence instead of trusting a claim.</p>
+    </div>
+  </section>
+
+  <!-- LIVE PROOF NUMBERS BAND -->
+  <section class="proofband" id="proof-numbers" aria-labelledby="proofband-title" data-proofband hidden>
+    <div class="wrap">
+      <p class="kicker reveal">Receipts, not adjectives</p>
+      <h2 class="section-title reveal" id="proofband-title">The Grid runs on proof. Here are the numbers.</h2>
+      <p class="prose reveal">Public-safe telemetry from the fleet&rsquo;s own governed proof layer &mdash; the same receipts and checks your job routes through. Every figure is labelled with how it was verified.</p>
+      <div class="proofband-grid" data-proofband-grid aria-live="polite"></div>
+      <p class="proofband-note" data-proofband-note></p>
     </div>
   </section>
 

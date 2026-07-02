@@ -7,7 +7,42 @@
   "redaction": "public-safe aggregate projection; private lineage stays in canonical manifest and internal services",
   "metrics": [
     {
+      "metric_id": "fleet.specialist_agents",
+      "proof_band_order": 3,
+      "public_label": "Specialist agents in the fleet",
+      "category": "fleet_roster",
+      "current_value": 16,
+      "formatted_current_value": "16",
+      "status": "ok",
+      "freshness": {
+        "state": "fresh",
+        "microcopy": "Canonical fleet roster."
+      },
+      "updated_at": "2026-06-19T04:01:16Z",
+      "public_safe": true,
+      "allowed_surfaces": [
+        "gridfleet_ai"
+      ],
+      "metric_type": "roster_count",
+      "metric_era": "latest_snapshot",
+      "aggregation_mode": "latest_snapshot",
+      "display_strategy": "trust_badge",
+      "public_copy": "Canonical count of specialist agents that run the fleet.",
+      "dedupe_key": "fleet:specialist_agents",
+      "hero_candidate": true,
+      "client_hook_score": 92,
+      "display_priority": 5,
+      "live_tracking_status": "snapshot_only",
+      "confidence_level": "high",
+      "can_animate": true,
+      "can_show_plus_sign": false,
+      "can_be_public_hero": true,
+      "public_source_note": "Canonical GridFleet fleet roster size, consistent across the public site.",
+      "latest_snapshot_value": 16
+    },
+    {
       "metric_id": "creative.assets_generated",
+      "proof_band_order": 6,
       "public_label": "Creative proof artifacts generated",
       "category": "innovation_pipeline",
       "current_value": 38709,
@@ -119,6 +154,7 @@
     },
     {
       "metric_id": "tron.autonomous_actions_7d",
+      "proof_band_order": 4,
       "public_label": "Autonomous safety actions in the last 7 days",
       "category": "security_autonomy",
       "current_value": 1386,
@@ -153,6 +189,7 @@
     },
     {
       "metric_id": "reliability.cron_slo",
+      "proof_band_order": 1,
       "public_label": "Reliability checks passing",
       "category": "reliability",
       "current_value": 100.0,
@@ -186,6 +223,7 @@
     },
     {
       "metric_id": "security.supply_chain_files_scanned",
+      "proof_band_order": 5,
       "public_label": "Supply-chain files scanned",
       "category": "security",
       "current_value": 960,
@@ -219,6 +257,7 @@
     },
     {
       "metric_id": "security.incidents_30d",
+      "proof_band_order": 2,
       "public_label": "Security incidents in 30 days",
       "category": "security",
       "current_value": 0,
@@ -253,6 +292,7 @@
     },
     {
       "metric_id": "deployment.builds_deployed_30d",
+      "proof_band_order": 7,
       "public_label": "Verified builds in the last 30 days",
       "category": "deployment",
       "current_value": 7,

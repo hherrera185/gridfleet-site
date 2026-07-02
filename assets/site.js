@@ -38,11 +38,51 @@
     h1.innerHTML = out; requestAnimationFrame(function () { h1.classList.add("kin-in"); });
   })();
 
+  /* ---- kinetic section headings: per-word rise+de-blur on scroll-in ---- */
+  (function () {
+    if (reduce || !("IntersectionObserver" in window)) return;
+    // DOM-aware splitter: wraps words in <span class="kw"> while preserving inner tags (em/a/span)
+    function kineticize(el) {
+      if (el.dataset.kin) return; el.dataset.kin = "1";
+      var wi = 0;
+      function wrapText(node) {
+        var frag = document.createDocumentFragment();
+        node.nodeValue.split(/(\s+)/).forEach(function (tok) {
+          if (!tok) return;
+          if (!tok.trim()) { frag.appendChild(document.createTextNode(tok)); return; }
+          var s = document.createElement("span"); s.className = "kw";
+          s.style.setProperty("--d", (wi * 0.05) + "s"); s.textContent = tok; wi++;
+          frag.appendChild(s);
+        });
+        node.parentNode.replaceChild(frag, node);
+      }
+      (function walk(parent) {
+        [].slice.call(parent.childNodes).forEach(function (n) {
+          if (n.nodeType === 3) { if (n.nodeValue.trim()) wrapText(n); }
+          else if (n.nodeType === 1 && n.tagName !== "BR") walk(n);
+        });
+      })(el);
+      el.classList.add("kinetic");
+    }
+    var heads = [].slice.call(document.querySelectorAll(".section-title, .lead")).filter(function (el) {
+      return !el.classList.contains("hero-title");
+    });
+    var kio = new IntersectionObserver(function (es) {
+      es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add("kin-in"); kio.unobserve(e.target); } });
+    }, { threshold: 0.25, rootMargin: "0px 0px -8% 0px" });
+    heads.forEach(function (el) { kineticize(el); kio.observe(el); });
+  })();
+
   /* ---- reveals ---- */
   var revs = [].slice.call(document.querySelectorAll(".reveal"));
   if ("IntersectionObserver" in window && !reduce) {
     var io = new IntersectionObserver(function (es) { es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); } }); }, { threshold: 0.12, rootMargin: "0px 0px -7% 0px" });
-    revs.forEach(function (el, i) { el.style.transitionDelay = (i % 3) * 80 + "ms"; io.observe(el); });
+    revs.forEach(function (el) {
+      // stagger by position among sibling .reveal elements so grids cascade
+      var sibs = [].slice.call(el.parentNode.children).filter(function (c) { return c.classList && c.classList.contains("reveal"); });
+      var idx = sibs.indexOf(el); if (idx < 0) idx = 0;
+      el.style.transitionDelay = (idx % 6) * 70 + "ms"; io.observe(el);
+    });
     var sio = new IntersectionObserver(function (es) { es.forEach(function (e) { if (e.isIntersecting) e.target.classList.add("in-view"); }); }, { threshold: 0.3 });
     document.querySelectorAll("section.band, section.access").forEach(function (s) { sio.observe(s); });
   } else { revs.forEach(function (el) { el.classList.add("in"); }); }
@@ -318,4 +358,107 @@
   } else {
     init();
   }
+})();
+
+/* ---- WOW pass 2: live proof band. Count-up on scroll-in, sourced from the
+   public-safe metrics snapshot. Degrades gracefully (band stays hidden) if the
+   JSON is unreachable or lacks enough real, fresh data — never a broken "0". ---- */
+(function () {
+  "use strict";
+  var band = document.querySelector("[data-proofband]");
+  if (!band || !window.fetch) return;
+  var grid = band.querySelector("[data-proofband-grid]");
+  var noteEl = band.querySelector("[data-proofband-note]");
+  if (!grid) return;
+  var staticMode = (window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches) || !("IntersectionObserver" in window);
+
+  function fetchSnap() {
+    return fetch("/assets/public-grid-metrics.snapshot.json", { cache: "no-store" })
+      .then(function (r) {
+        if (r.ok) return r.json();
+        return fetch("/data/public-grid-metrics.snapshot.json", { cache: "no-store" }).then(function (r2) { if (!r2.ok) throw new Error("no snapshot"); return r2.json(); });
+      });
+  }
+  function val(m) { return m.latest_snapshot_value != null ? m.latest_snapshot_value : (m.rolling_window_value != null ? m.rolling_window_value : (m.combined_lifetime_total != null ? m.combined_lifetime_total : m.current_value)); }
+  function isFresh(m) { return m.status === "ok" && m.freshness && m.freshness.state === "fresh"; }
+  function tagFor(m) {
+    if (m.confidence_level && m.confidence_level !== "high") return { cls: "pb-tag-est", txt: "estimated" };
+    if (m.live_tracking_status === "live_connected" && isFresh(m)) return { cls: "pb-tag-live", txt: "measured · live" };
+    return { cls: "", txt: "measured · verified" };
+  }
+  function fmt(n) { return new Intl.NumberFormat("en-US").format(n); }
+
+  function build(data) {
+    var metrics = (data && data.metrics) || [];
+    // curation + order live in the public-safe snapshot (proof_band_order); JS carries no metric ids
+    var chosen = metrics.filter(function (m) {
+      if (!m || !m.public_safe || (m.allowed_surfaces || []).indexOf("gridfleet_ai") < 0) return false;
+      if (typeof m.proof_band_order !== "number") return false;
+      if (!(isFresh(m) || m.metric_type === "roster_count")) return false; // never stale
+      var v = val(m);
+      return v != null && !isNaN(Number(v));
+    }).sort(function (a, b) { return a.proof_band_order - b.proof_band_order; });
+    if (chosen.length < 3) return false; // not enough real data -> keep band hidden
+    chosen = chosen.slice(0, 7);
+
+    grid.innerHTML = "";
+    chosen.forEach(function (m, i) {
+      var v = Math.round(Number(val(m)));
+      var suf = m.metric_type === "percentage" ? "%" : "";
+      var tag = tagFor(m);
+      var card = document.createElement("div");
+      card.className = "pb-stat";
+      card.style.setProperty("--d", (i * 70) + "ms");
+      var valDiv = document.createElement("div");
+      valDiv.className = "pb-val";
+      valDiv.setAttribute("data-pbcount", String(v));
+      valDiv.setAttribute("data-suf", suf);
+      var num = document.createElement("span");
+      num.className = "pb-num";
+      num.textContent = staticMode ? fmt(v) : "0";
+      valDiv.appendChild(num);
+      if (suf) { var s = document.createElement("span"); s.className = "pb-suf"; s.textContent = suf; valDiv.appendChild(s); }
+      var lab = document.createElement("div");
+      lab.className = "pb-label";
+      lab.textContent = m.public_label || "";
+      var tg = document.createElement("div");
+      tg.className = "pb-tag " + tag.cls;
+      tg.appendChild(document.createElement("i"));
+      tg.appendChild(document.createTextNode(tag.txt));
+      card.appendChild(valDiv); card.appendChild(lab); card.appendChild(tg);
+      grid.appendChild(card);
+    });
+
+    if (noteEl) {
+      var when = "";
+      if (data.generated_at) { var d = new Date(data.generated_at); if (!isNaN(d.getTime())) when = d.toLocaleDateString(undefined, { year: "numeric", month: "short", day: "numeric" }); }
+      noteEl.textContent = "Public-safe aggregate projection from GridFleet's own proof layer" + (when ? " · latest verified snapshot " + when : "") + ". “Live” = a freshness-confirmed feed; “verified” = the latest verified snapshot; “estimated” figures are marked as such. No customer data, secrets, or private logs are published.";
+    }
+    band.removeAttribute("hidden");
+    return true;
+  }
+
+  function reveal() {
+    var cards = [].slice.call(grid.querySelectorAll(".pb-stat"));
+    if (staticMode) { cards.forEach(function (c) { c.classList.add("in"); }); return; }
+    var cardIo = new IntersectionObserver(function (es) { es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add("in"); cardIo.unobserve(e.target); } }); }, { threshold: 0.2 });
+    cards.forEach(function (c) { cardIo.observe(c); });
+    [].slice.call(grid.querySelectorAll("[data-pbcount]")).forEach(function (el) {
+      var target = parseFloat(el.getAttribute("data-pbcount")) || 0;
+      var num = el.querySelector(".pb-num");
+      var done = false;
+      var vio = new IntersectionObserver(function (es) {
+        es.forEach(function (e) {
+          if (e.isIntersecting && !done) {
+            done = true; var t0 = null;
+            function step(ts) { if (!t0) t0 = ts; var p = Math.min(1, (ts - t0) / 1300); num.textContent = fmt(Math.round(target * (1 - Math.pow(1 - p, 3)))); if (p < 1) requestAnimationFrame(step); else num.textContent = fmt(target); }
+            requestAnimationFrame(step); vio.disconnect();
+          }
+        });
+      }, { threshold: 0.6 });
+      vio.observe(el);
+    });
+  }
+
+  fetchSnap().then(function (data) { if (build(data)) reveal(); }).catch(function () { /* band stays hidden */ });
 })();
