@@ -670,6 +670,69 @@ section.offers{padding:clamp(72px,11vw,128px) 0;position:relative;
 @media(prefers-reduced-motion:reduce){.pb-stat{opacity:1;transform:none;transition:none}.pb-stat::after{transform:scaleX(1)}.pb-tag-live i{animation:none}}
 @media(max-width:520px){.proofband-grid{grid-template-columns:1fr 1fr}.pb-val{font-size:clamp(30px,9vw,40px)}}
 
+
+/* =====================================================================
+   FABLE5 AWARD PASS — animated hero grid, cycling command-deck avatars,
+   proof-card overflow containment, mobile polish. Self-contained,
+   reduced-motion safe. Appended last so it wins the cascade.
+   ===================================================================== */
+
+/* --- Hero: let the animated Tron light-grid canvas lead; the still
+   image becomes a faint base glow rather than the whole hero. --- */
+.hero-canvas{z-index:1;opacity:.96}
+.hero-bg{opacity:.4;animation-duration:52s}
+@media(prefers-reduced-motion:reduce){
+  /* No canvas under reduced motion — present a tasteful static Tron still. */
+  .hero-bg{opacity:.92;transform:scale(1.04);animation:none}
+}
+
+/* --- Command deck: cycling avatar portraits + changing role titles --- */
+.operator-portrait{overflow:hidden;background:
+  radial-gradient(circle at 50% 24%,rgba(255,207,102,.18),transparent 30%),
+  linear-gradient(180deg,rgba(54,224,255,.10),rgba(66,226,155,.06) 42%,rgba(3,7,11,.6))}
+.operator-portrait::before{content:none}          /* drop hardcoded RELEASE ENGINEER label */
+.op-av{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 20%;
+  opacity:0;transform:scale(1.07);filter:saturate(1.06) contrast(1.03);
+  transition:opacity .9s var(--ease),transform 6.5s ease-out;will-change:opacity,transform}
+.op-av.is-on{opacity:1;transform:scale(1)}
+.operator-portrait .portrait-scan{z-index:3}
+.portrait-frame{position:absolute;inset:0;z-index:4;pointer-events:none;border-radius:22px;
+  box-shadow:inset 0 0 0 1px rgba(66,226,155,.28),inset 0 -64px 60px -34px rgba(0,0,0,.9),
+    inset 0 30px 54px -40px rgba(66,226,155,.42)}
+.portrait-frame::before,.portrait-frame::after{content:"";position:absolute;width:20px;height:20px;
+  border:1.6px solid rgba(102,247,214,.72)}
+.portrait-frame::before{left:11px;top:11px;border-right:0;border-bottom:0;border-radius:6px 0 0 0}
+.portrait-frame::after{right:11px;bottom:11px;border-left:0;border-top:0;border-radius:0 0 6px 0}
+.op-code{position:absolute;left:12px;top:12px;z-index:5;font-family:var(--mono);font-size:10px;
+  letter-spacing:.2em;text-transform:uppercase;color:#c9ffe9;background:rgba(4,10,8,.5);
+  border:1px solid rgba(102,247,214,.42);border-radius:6px;padding:4px 8px;backdrop-filter:blur(3px)}
+#deck-title{transition:opacity .38s var(--ease)}
+#deck-title.swap{opacity:0}
+.deck-status .pulse{display:inline-block;vertical-align:middle;margin-right:4px}
+@media(prefers-reduced-motion:reduce){.op-av{transition:none}}
+
+/* --- Proof-metric cards: keep every word inside its panel at all sizes --- */
+.proof-metric-card{min-width:0}
+.proof-metric-value{overflow-wrap:anywhere;word-break:break-word;hyphens:auto;max-width:100%;
+  font-size:clamp(2.1rem,4.4vw,3.5rem);line-height:.94;letter-spacing:-.04em}
+.proof-metric-card-1 .proof-metric-value{font-size:clamp(2.6rem,5.4vw,4.6rem)}
+.proof-metric-label,.proof-metric-copy,.proof-metric-fresh{min-width:0;max-width:100%;overflow-wrap:anywhere}
+.proof-metric-copy{max-width:100%}
+.proof-frame-bottom span{min-width:0;overflow-wrap:anywhere}
+
+/* --- Mobile polish: no horizontal scroll, comfortable command deck --- */
+@media(max-width:760px){
+  html,body{max-width:100%;overflow-x:hidden}
+  .operator-portrait{min-height:230px}
+  .op-code{font-size:9px;padding:3px 7px}
+  .proof-metric-value{font-size:clamp(2rem,9vw,3rem)}
+  .proof-metric-card-1 .proof-metric-value{font-size:clamp(2.3rem,11vw,3.4rem)}
+}
+@media(max-width:520px){
+  .operator-portrait{min-height:260px}
+  .deck-head b{font-size:16px}
+}
+
 </style>
 </head>
 <body>
@@ -720,13 +783,16 @@ section.offers{padding:clamp(72px,11vw,128px) 0;position:relative;
       </div>
       <div class="hero-demo command-deck cinematic-deck" aria-label="GridFleet command deck release view">
         <div class="deck-head">
-          <div><span class="deck-kicker">COMMAND DECK</span><b>Release engineer view</b></div>
-          <span class="deck-status">build pulse green</span>
+          <div><span class="deck-kicker">COMMAND DECK</span><b id="deck-title">Communications Operator</b></div>
+          <span class="deck-status"><span class="pulse"></span> live · on deck</span>
         </div>
         <div class="operator-stage">
-          <div class="operator-portrait" aria-hidden="true">
-            <span class="portrait-scan"></span>
-            <span class="portrait-face"><i></i><b></b></span>
+          <div class="operator-portrait" aria-label="Fleet member on deck">
+            <img class="op-av is-on" id="op-av-a" src="/assets/agents/clu.jpg" alt="" decoding="async" />
+            <img class="op-av" id="op-av-b" alt="" decoding="async" />
+            <span class="portrait-scan" aria-hidden="true"></span>
+            <span class="portrait-frame" aria-hidden="true"></span>
+            <span class="op-code" id="op-code">CLU</span>
           </div>
           <div class="release-panes">
             <div class="pane pane-build"><span>BUILD</span><b id="build-pulse">green</b></div>

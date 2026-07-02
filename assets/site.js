@@ -21,7 +21,15 @@
     prog.style.transform = "scaleX(" + Math.min(1, scrollY / max) + ")";
     if (nav) nav.classList.toggle("scrolled", scrollY > 24);
     heroEnergy = Math.min(1, scrollY / vh);
-    if (heroInner && !reduce) { heroInner.style.transform = "translateY(" + heroEnergy * 56 + "px)"; heroInner.style.opacity = String(1 - heroEnergy * 1.05); }
+    if (heroInner && !reduce) {
+      // Graceful, long scroll-linked dissolve: hold full opacity through the first
+      // ~18% of a viewport, then ease out over ~1.6 viewports with a smoothstep curve
+      // so the headline drifts away gently instead of snapping out.
+      var fp = Math.min(1, Math.max(0, (scrollY - vh * 0.18) / (vh * 1.6)));
+      var eased = fp * fp * (3 - 2 * fp);
+      heroInner.style.transform = "translateY(" + (eased * 64) + "px)";
+      heroInner.style.opacity = String(1 - eased * 0.97);
+    }
     if (!reduce && !isMobile) parallaxEls.forEach(function (el) { var sp = parseFloat(el.getAttribute("data-parallax")) || 0.12; var r = el.getBoundingClientRect(); el.style.transform = "translateY(" + (-(r.top + r.height / 2 - vh / 2) * sp) + "px)"; });
   }
   window.addEventListener("scroll", readScroll, { passive: true });
@@ -120,38 +128,86 @@
   if (!cv || reduce) { readScroll(); return; }
   var ctx = cv.getContext("2d"), W = 0, H = 0;
   var dpr = Math.min(window.devicePixelRatio || 1, isMobile ? 1.5 : 2);
-  var nodes = [], links = [], packets = [], mouse = { x: 0.5, y: 0.5 }, running = true, tick = 0;
-  var HUBS = 14; // the real fleet
+  var mouse = { x: 0.5, y: 0.5 }, running = true, tick = 0, flow = 0;
+  var ROWS = isMobile ? 13 : 18;   // receding horizontal grid lines per plane
+  var COLS = isMobile ? 9 : 15;    // converging vertical lines each side of centre
+  var trails = [], stars = [];
+  var CY = "54,224,255", VI = "126,108,255";
+  // depth d in [0,1): 0 = far horizon, 1 = near viewer. Eased so lines bunch near the horizon.
+  function persp(d) { return d / (1 + (1 - d) * 2.2); }
   function resize() { W = cv.clientWidth; H = cv.clientHeight; cv.width = W * dpr; cv.height = H * dpr; ctx.setTransform(dpr, 0, 0, dpr, 0, 0); build(); }
-  function build() {
-    nodes = []; links = []; packets = [];
-    var others = isMobile ? Math.max(8, Math.round(W * H / 120000)) : Math.max(16, Math.round(W * H / 64000));
-    for (var i = 0; i < HUBS; i++) {
-      var a = (i / HUBS) * 6.283 - 1.57, ring = 0.16 + 0.14 * (i % 3) / 2, r = Math.min(W, H) * ring;
-      var z = 0.5 + Math.random() * 0.5; // depth
-      var x = W / 2 + Math.cos(a) * r * 1.5, y = H / 2 + Math.sin(a) * r * 1.15;
-      nodes.push({ x: x, y: y, hub: true, z: z, r: 2.4 + z * 2, bx: x, by: y, ph: Math.random() * 6 });
-    }
-    for (var j = 0; j < others; j++) { var ox = Math.random() * W, oy = Math.random() * H, oz = 0.3 + Math.random() * 0.5; nodes.push({ x: ox, y: oy, hub: false, z: oz, r: 0.8 + oz, bx: ox, by: oy, ph: Math.random() * 6 }); }
-    for (var h = 0; h < HUBS; h++) { var d = nodes.map(function (n, idx) { return { idx: idx, dd: Math.hypot(n.x - nodes[h].x, n.y - nodes[h].y) }; }).filter(function (o) { return o.idx !== h; }).sort(function (a, b) { return a.dd - b.dd; }).slice(0, 3); d.forEach(function (o) { links.push([h, o.idx]); }); }
-    for (var k = 0; k < (isMobile ? 5 : 9); k++) spawnPacket();
+  function spawnTrail(t) {
+    trails.push({ col: ((Math.random() * COLS * 2) | 0) - COLS, floor: Math.random() < 0.62, t: t || 0, sp: 0.0024 + Math.random() * 0.0044, vio: Math.random() < 0.28 });
   }
-  function spawnPacket() { if (!links.length) return; var l = links[(Math.random() * links.length) | 0]; packets.push({ a: l[0], b: l[1], t: 0, sp: 0.004 + Math.random() * 0.006 }); }
+  function build() {
+    trails = []; stars = [];
+    for (var i = 0, n = isMobile ? 5 : 10; i < n; i++) spawnTrail(Math.random());
+    for (var s = 0, sc = isMobile ? 24 : 52; s < sc; s++) stars.push({ x: Math.random(), y: Math.random(), z: Math.random(), ph: Math.random() * 6 });
+  }
   function frame() {
     if (!running) return;
-    tick += 0.01 + heroEnergy * 0.018;
+    var speed = 1 + heroEnergy * 1.5;
+    flow = (flow + (0.0017 + heroEnergy * 0.0024) * (isMobile ? 0.8 : 1)) % 1;
+    tick += 0.016;
     ctx.clearRect(0, 0, W, H);
-    var mx = (mouse.x - 0.5) * (isMobile ? 0 : 30), my = (mouse.y - 0.5) * (isMobile ? 0 : 30), zoom = 1 + heroEnergy * 0.4;
-    ctx.save(); ctx.translate(W / 2, H / 2); ctx.scale(zoom, zoom); ctx.translate(-W / 2, -H / 2);
-    nodes.forEach(function (n) { var amp = (n.hub ? 10 : 5) * n.z; n.x = n.bx + Math.sin(tick + n.ph) * amp + mx * n.z; n.y = n.by + Math.cos(tick * 0.9 + n.ph) * amp * 0.8 + my * n.z; });
-    links.forEach(function (l) { var a = nodes[l[0]], b = nodes[l[1]]; if (!a || !b) return; var dist = Math.hypot(a.x - b.x, a.y - b.y), op = Math.max(0, (0.18 + heroEnergy * 0.12) * ((a.z + b.z) / 2) - dist / 3800); ctx.strokeStyle = "rgba(54,224,255," + op + ")"; ctx.lineWidth = (a.z + b.z) / 2; ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y); ctx.stroke(); });
-    for (var i = packets.length - 1; i >= 0; i--) { var p = packets[i], a = nodes[p.a], b = nodes[p.b]; if (!a || !b) { packets.splice(i, 1); continue; } p.t += p.sp * (1 + heroEnergy); if (p.t >= 1) { packets.splice(i, 1); if (Math.random() < 0.92) spawnPacket(); continue; } var x = a.x + (b.x - a.x) * p.t, y = a.y + (b.y - a.y) * p.t, g = ctx.createRadialGradient(x, y, 0, x, y, 7); g.addColorStop(0, "rgba(120,240,255,.95)"); g.addColorStop(1, "rgba(54,224,255,0)"); ctx.fillStyle = g; ctx.beginPath(); ctx.arc(x, y, 7, 0, 6.283); ctx.fill(); ctx.fillStyle = "#cdfaff"; ctx.beginPath(); ctx.arc(x, y, 1.6, 0, 6.283); ctx.fill(); }
-    nodes.sort(function (a, b) { return a.z - b.z; }).forEach(function (n) {
-      if (n.hub) { var pulse = 1 + Math.sin(tick * 2 + n.ph) * 0.3, g = ctx.createRadialGradient(n.x, n.y, 0, n.x, n.y, 18 * pulse * n.z); g.addColorStop(0, "rgba(54,224,255," + (0.5 * n.z) + ")"); g.addColorStop(1, "rgba(54,224,255,0)"); ctx.fillStyle = g; ctx.beginPath(); ctx.arc(n.x, n.y, 18 * pulse * n.z, 0, 6.283); ctx.fill(); ctx.fillStyle = "rgba(159,239,255," + (0.6 + n.z * 0.4) + ")"; }
-      else { ctx.fillStyle = "rgba(138,160,182," + (0.3 + n.z * 0.4) + ")"; }
-      ctx.beginPath(); ctx.arc(n.x, n.y, n.r, 0, 6.283); ctx.fill();
+    var horizon = H * 0.5, half = H * 0.5;
+    var vpx = W / 2 + (mouse.x - 0.5) * (isMobile ? 0 : W * 0.06);
+    var spread = W * (isMobile ? 0.98 : 0.82);
+
+    // horizon bloom + line
+    var hg = ctx.createRadialGradient(vpx, horizon, 0, vpx, horizon, W * 0.62);
+    hg.addColorStop(0, "rgba(54,224,255,0.20)"); hg.addColorStop(0.42, "rgba(54,224,255,0.05)"); hg.addColorStop(1, "rgba(54,224,255,0)");
+    ctx.fillStyle = hg; ctx.fillRect(0, 0, W, H);
+    ctx.strokeStyle = "rgba(170,242,255,0.55)"; ctx.lineWidth = 1;
+    ctx.beginPath(); ctx.moveTo(0, horizon); ctx.lineTo(W, horizon); ctx.stroke();
+
+    // depth haze near the horizon
+    stars.forEach(function (st) {
+      var y = horizon + (st.y - 0.5) * half * 0.55;
+      var op = (0.08 + st.z * 0.20) * (0.5 + 0.5 * Math.sin(tick + st.ph));
+      ctx.fillStyle = "rgba(170,242,255," + op + ")";
+      ctx.fillRect(st.x * W, y, 1.3 + st.z, 1.3 + st.z);
     });
-    ctx.restore();
+
+    function drawPlane(sign) {
+      var c, r;
+      for (c = -COLS; c <= COLS; c++) {
+        var xNear = vpx + (c / COLS) * spread;
+        ctx.strokeStyle = "rgba(54,224,255," + (0.05 + 0.06 * (1 - Math.abs(c) / COLS)) + ")";
+        ctx.lineWidth = 1;
+        ctx.beginPath(); ctx.moveTo(vpx, horizon); ctx.lineTo(xNear, horizon + sign * half); ctx.stroke();
+      }
+      for (r = 0; r < ROWS; r++) {
+        var d = ((r + flow) % ROWS) / ROWS, pd = persp(d);
+        var y = horizon + sign * half * pd;
+        var op2 = Math.pow(d, 1.25) * 0.5 * Math.min(1, d * 8);
+        var wHalf = spread * pd;
+        ctx.strokeStyle = "rgba(54,224,255," + op2 + ")";
+        ctx.lineWidth = 0.6 + pd * 1.7;
+        ctx.beginPath(); ctx.moveTo(vpx - wHalf, y); ctx.lineTo(vpx + wHalf, y); ctx.stroke();
+      }
+    }
+    drawPlane(1); drawPlane(-1);
+
+    // light-cycle data-trails accelerating toward the viewer along a lane
+    for (var i = trails.length - 1; i >= 0; i--) {
+      var tr = trails[i]; tr.t += tr.sp * speed;
+      if (tr.t >= 1) { trails.splice(i, 1); spawnTrail(0); continue; }
+      var sg = tr.floor ? 1 : -1, pd2 = persp(tr.t);
+      var x2 = vpx + (tr.col / COLS) * spread * pd2, y2 = horizon + sg * half * pd2;
+      var pdT = persp(Math.max(0, tr.t - 0.12));
+      var xT = vpx + (tr.col / COLS) * spread * pdT, yT = horizon + sg * half * pdT;
+      var col = tr.vio ? VI : CY;
+      var lg = ctx.createLinearGradient(xT, yT, x2, y2);
+      lg.addColorStop(0, "rgba(" + col + ",0)"); lg.addColorStop(1, "rgba(" + col + "," + (0.45 + pd2 * 0.45) + ")");
+      ctx.strokeStyle = lg; ctx.lineWidth = 1 + pd2 * 3.2;
+      ctx.beginPath(); ctx.moveTo(xT, yT); ctx.lineTo(x2, y2); ctx.stroke();
+      var rr = 2 + pd2 * 7;
+      var g2 = ctx.createRadialGradient(x2, y2, 0, x2, y2, rr * 2.4);
+      g2.addColorStop(0, "rgba(" + col + ",0.95)"); g2.addColorStop(1, "rgba(" + col + ",0)");
+      ctx.fillStyle = g2; ctx.beginPath(); ctx.arc(x2, y2, rr * 2.4, 0, 6.283); ctx.fill();
+      ctx.fillStyle = "rgba(214,250,255,0.95)"; ctx.beginPath(); ctx.arc(x2, y2, Math.max(1, rr * 0.5), 0, 6.283); ctx.fill();
+    }
     requestAnimationFrame(frame);
   }
   if (fine) window.addEventListener("mousemove", function (e) { mouse.x = e.clientX / window.innerWidth; mouse.y = e.clientY / window.innerHeight; }, { passive: true });
@@ -250,6 +306,49 @@
   }
   show();
   if (!reduce) setInterval(show, 2200);
+})();
+
+/* ---- fable5: command-deck avatar + title cycler (reads public fleet roster) ----
+   Cycles the on-deck portrait image and its role TITLE through the fleet with a
+   smooth crossfade. Pauses on hover. Degrades to the seeded first agent if the
+   roster is unreachable or motion is reduced. Public-safe: title + avatar only. */
+(function () {
+  var portrait = document.querySelector(".operator-portrait");
+  var a = document.getElementById("op-av-a"), b = document.getElementById("op-av-b");
+  var title = document.getElementById("deck-title"), code = document.getElementById("op-code");
+  if (!portrait || !a || !b || !title || !window.fetch) return;
+  var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  fetch("/data/fleet-roster.json", { cache: "no-store" })
+    .then(function (r) { return r.ok ? r.json() : null; })
+    .then(function (d) {
+      var list = d && d.roster ? d.roster : null;
+      if (!list || !list.length) return;
+      // preload so crossfades never flash
+      list.forEach(function (m) { var im = new Image(); im.src = m.avatar; });
+      // seed first frame from the roster (overrides static markup)
+      a.src = list[0].avatar; a.classList.add("is-on"); b.classList.remove("is-on");
+      title.textContent = list[0].title; if (code) code.textContent = list[0].code;
+      if (reduce || list.length < 2) return;
+      var i = 0, showingA = true, paused = false;
+      function step() {
+        if (paused || document.hidden) return;
+        i = (i + 1) % list.length;
+        var m = list[i];
+        var incoming = showingA ? b : a, outgoing = showingA ? a : b;
+        incoming.src = m.avatar;
+        title.classList.add("swap");
+        setTimeout(function () {
+          title.textContent = m.title; if (code) code.textContent = m.code;
+          title.classList.remove("swap");
+        }, 360);
+        incoming.classList.add("is-on"); outgoing.classList.remove("is-on");
+        showingA = !showingA;
+      }
+      var deck = portrait.closest(".command-deck") || portrait;
+      deck.addEventListener("mouseenter", function () { paused = true; });
+      deck.addEventListener("mouseleave", function () { paused = false; });
+      setInterval(step, 3200);
+    }).catch(function () {});
 })();
 
 /* ---- early-access form handler: POSTs JSON to the /api/early-access worker.

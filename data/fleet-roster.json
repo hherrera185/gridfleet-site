@@ -1,0 +1,22 @@
+{
+  "version": 1,
+  "note": "Public-safe command-deck roster: role title + avatar only. No internal detail.",
+  "roster": [
+    { "code": "CLU",       "title": "Communications Operator", "avatar": "/assets/agents/clu.jpg" },
+    { "code": "LORA",      "title": "Creative Director",       "avatar": "/assets/agents/lora.jpg" },
+    { "code": "PALOMA",    "title": "Bilingual Receptionist",  "avatar": "/assets/agents/paloma.jpg" },
+    { "code": "MADDIE",    "title": "Event & Wedding Planner", "avatar": "/assets/agents/maddie.jpg" },
+    { "code": "TRON",      "title": "Security Chief",          "avatar": "/assets/agents/tron.jpg" },
+    { "code": "RAM",       "title": "Finance Operator",        "avatar": "/assets/agents/ram.jpg" },
+    { "code": "BECK",      "title": "Grid Doctor",             "avatar": "/assets/agents/beck.jpg" },
+    { "code": "DUMONT",    "title": "Infrastructure Operator", "avatar": "/assets/agents/dumont.jpg" },
+    { "code": "ECHO",      "title": "Release Engineer",        "avatar": "/assets/agents/echo.jpg" },
+    { "code": "QUORRA",    "title": "Safety Auditor",          "avatar": "/assets/agents/quorra.jpg" },
+    { "code": "YORI",      "title": "Growth & Social",         "avatar": "/assets/agents/yori.jpg" },
+    { "code": "ARES",      "title": "Red Team",                "avatar": "/assets/agents/ares.jpg" },
+    { "code": "TESLER",    "title": "Comms Engineer",          "avatar": "/assets/agents/tesler.jpg" },
+    { "code": "NEON-DAVE", "title": "Markets Desk",            "avatar": "/assets/agents/neon-dave.jpg" },
+    { "code": "SARK",      "title": "Public Red-Team",         "avatar": "/assets/agents/sark.jpg" },
+    { "code": "ABLE",      "title": "Operations PM",           "avatar": "/assets/agents/able.jpg" }
+  ]
+}
