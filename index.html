@@ -1,25 +1,33 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" class="no-js">
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data:; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline'; connect-src 'self'; form-action 'self' mailto:; frame-ancestors 'none'; base-uri 'self'; object-src 'none'; upgrade-insecure-requests" />
 <meta name="referrer" content="strict-origin-when-cross-origin" />
 <meta name="robots" content="index, follow, max-image-preview:large" />
-<meta name="theme-color" content="#05060a" />
-<title>GridFleet - AI agents that do the work and return proof</title>
+<meta name="theme-color" content="#05070a" />
+<title>GridFleet — AI agents that do the work and return proof</title>
 <meta name="description" content="GridFleet routes real operational jobs through a governed fleet of specialist AI agents, then returns receipt-backed proof you can inspect. Send one real job and get a sample result free." />
 <link rel="canonical" href="https://gridfleet.ai/" />
-<meta property="og:title" content="GridFleet - send the job, get the receipt" />
+<meta property="og:title" content="GridFleet — send the job, get the receipt" />
 <meta property="og:description" content="A governed command-deck fleet of specialist AI agents. Send one operational job, see it route through the fleet, and get receipt-backed proof you can inspect." />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https://gridfleet.ai/" />
 <meta property="og:image" content="https://gridfleet.ai/og.png" />
 <meta property="og:image:width" content="1200" /><meta property="og:image:height" content="630" />
 <meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:title" content="GridFleet - send the job, get the receipt" />
+<meta name="twitter:title" content="GridFleet — send the job, get the receipt" />
 <meta name="twitter:image" content="https://gridfleet.ai/og.png" />
 <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml" />
+<link rel="preload" href="/assets/fonts/space-grotesk-var.woff2" as="font" type="font/woff2" crossorigin />
+<link rel="preload" href="/assets/fonts/jetbrains-mono-var.woff2" as="font" type="font/woff2" crossorigin />
+<style>
+/* critical fallback (before the stylesheet so it never overrides it) */
+body{background:#05070a;color:#f2f6f4;font-family:ui-sans-serif,system-ui,sans-serif;margin:0}
+#intro.gone{display:none}
+</style>
+<link rel="stylesheet" href="/assets/main.css" />
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -35,1218 +43,351 @@
   ]
 }
 </script>
-
-
-
-
-<style id="gridfleet-inline-site-css">
-/* GridFleet - site.css · "The Grid, rendered" · self-contained, zero external deps */
-:root{
-  --bg:#05060a; --bg2:#080b12; --panel:#0b1018; --line:#16202e; --line2:#1f2e40;
-  --ink:#e8f2fb; --dim:#8aa0b6; --faint:#5d728a;
-  --cyan:#36e0ff; --cyan-deep:#0bb8e6; --amber:#ffb24d; --green:#42e29b;
-  --glow:0 0 0 1px rgba(54,224,255,.18), 0 18px 60px -24px rgba(54,224,255,.35);
-  --max:1180px; --ease:cubic-bezier(.2,.7,.2,1);
-  --mono:ui-monospace,"SF Mono","JetBrains Mono",Menlo,Consolas,monospace;
-  --sans:"Inter",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
-}
-*{box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden;
-  background-image:radial-gradient(1200px 700px at 78% -8%,rgba(54,224,255,.10),transparent 60%),radial-gradient(900px 600px at 10% 8%,rgba(120,80,255,.06),transparent 55%);}
-a{color:inherit;text-decoration:none}
-.wrap{max-width:var(--max);margin:0 auto;padding:0 28px}
-.skip{position:absolute;left:-999px}.skip:focus{left:12px;top:12px;background:var(--cyan);color:#021018;padding:8px 14px;border-radius:8px;z-index:99}
-
-/* type */
-h1,h2,h3{letter-spacing:-.02em;line-height:1.05;margin:0}
-.kicker{font-family:var(--mono);font-size:12px;letter-spacing:.32em;text-transform:uppercase;color:var(--cyan);margin:0 0 14px}
-.section-title{font-size:clamp(28px,4.2vw,46px);font-weight:680;max-width:18ch}
-.lead{font-size:clamp(26px,4vw,44px);font-weight:680;max-width:20ch;margin:0 0 18px}
-.lead em{font-style:normal;color:var(--cyan)}
-.prose{color:var(--dim);font-size:18px;max-width:62ch;margin:18px 0 0}
-.muted{color:var(--faint);font-size:14px}
-.muted a{color:var(--dim);border-bottom:1px solid var(--line2)}
-
-/* buttons */
-.btn{display:inline-flex;align-items:center;gap:9px;font-weight:600;font-size:15px;border-radius:11px;padding:12px 20px;border:1px solid transparent;transition:.25s var(--ease);cursor:pointer;white-space:nowrap}
-.btn-lg{padding:15px 26px;font-size:16px}
-.btn-primary{background:linear-gradient(180deg,#5fe9ff,var(--cyan-deep));color:#021018;box-shadow:0 10px 30px -10px rgba(54,224,255,.6)}
-.btn-primary:hover{transform:translateY(-2px);box-shadow:0 18px 44px -12px rgba(54,224,255,.75)}
-.btn-ghost{background:rgba(255,255,255,.02);border-color:var(--line2);color:var(--ink)}
-.btn-ghost:hover{border-color:var(--cyan);color:var(--cyan)}
-
-/* nav */
-.nav{position:fixed;inset:0 0 auto 0;z-index:50;display:flex;align-items:center;gap:28px;padding:16px 28px;max-width:var(--max);margin:0 auto;transition:.3s var(--ease)}
-.nav.scrolled{background:rgba(5,6,10,.72);backdrop-filter:blur(14px);border-bottom:1px solid var(--line);padding-top:12px;padding-bottom:12px}
-.brand{display:flex;align-items:center;gap:11px}
-.brand-mark{display:grid;grid-template-columns:repeat(2,9px);grid-gap:3px}
-.brand-mark i{width:9px;height:9px;background:var(--cyan);border-radius:2px;opacity:.85;animation:bm 3s var(--ease) infinite}
-.brand-mark i:nth-child(2){animation-delay:.2s;opacity:.5}.brand-mark i:nth-child(3){animation-delay:.4s;opacity:.6}.brand-mark i:nth-child(4){animation-delay:.6s;opacity:.9}
-@keyframes bm{0%,100%{opacity:.3;transform:scale(.9)}50%{opacity:1;transform:scale(1)}}
-.brand-word{font-family:var(--mono);font-weight:600;letter-spacing:.14em;font-size:15px}.brand-word b{color:var(--cyan);font-weight:600}
-.nav-links{display:flex;gap:26px;margin-left:8px}
-.nav-links a{color:var(--dim);font-size:14.5px;font-weight:500;transition:.2s}.nav-links a:hover{color:var(--ink)}
-.nav-cta{margin-left:auto}
-
-/* hero */
-.hero{position:relative;min-height:100vh;min-height:100svh;display:flex;align-items:center;overflow:hidden}
-.hero-canvas{position:absolute;inset:0;width:100%;height:100%;z-index:0}
-.hero-veil{position:absolute;inset:0;z-index:1;background:radial-gradient(60% 60% at 50% 42%,transparent,rgba(5,6,10,.55) 78%,var(--bg)),linear-gradient(180deg,rgba(5,6,10,.4),transparent 25%,transparent 70%,var(--bg))}
-.hero-inner{position:relative;z-index:2;max-width:var(--max);margin:0 auto;padding:0 28px;width:100%}
-.eyebrow{display:inline-flex;align-items:center;gap:9px;font-family:var(--mono);font-size:12.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--dim);background:rgba(54,224,255,.06);border:1px solid var(--line2);padding:7px 14px;border-radius:100px}
-.pulse{width:8px;height:8px;border-radius:50%;background:var(--green);box-shadow:0 0 0 0 rgba(66,226,155,.6);animation:pl 2s infinite}
-@keyframes pl{0%{box-shadow:0 0 0 0 rgba(66,226,155,.5)}70%{box-shadow:0 0 0 8px rgba(66,226,155,0)}100%{box-shadow:0 0 0 0 rgba(66,226,155,0)}}
-.hero-title{font-size:clamp(40px,7.4vw,86px);font-weight:720;margin:22px 0 0;letter-spacing:-.03em}
-.grad{background:linear-gradient(100deg,#aef2ff,var(--cyan) 40%,#7ea2ff);-webkit-background-clip:text;background-clip:text;color:transparent}
-.hero-sub{color:var(--dim);font-size:clamp(17px,2vw,21px);max-width:56ch;margin:24px 0 0}
-.hero-cta{display:flex;flex-wrap:wrap;gap:14px;margin:34px 0 0}
-.hero-stats{display:flex;gap:46px;margin:54px 0 0;padding:0;border-top:1px solid var(--line);padding-top:26px;max-width:560px}
-.hero-stats dt{font-size:34px;font-weight:700;font-family:var(--mono);color:var(--ink)}
-.hero-stats dd{margin:4px 0 0;color:var(--faint);font-size:13.5px;font-family:var(--mono);letter-spacing:.04em}
-.scroll-cue{position:absolute;bottom:26px;left:50%;transform:translateX(-50%);z-index:2;display:flex;flex-direction:column;align-items:center;gap:8px;color:var(--faint);font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase}
-.scroll-cue i{width:1px;height:34px;background:linear-gradient(var(--cyan),transparent);animation:sc 2.4s var(--ease) infinite}
-@keyframes sc{0%{opacity:0;transform:scaleY(.3)}50%{opacity:1}100%{opacity:0;transform:translateY(14px) scaleY(.3)}}
-
-/* sections */
-section.band,section.how,section.fleet,section.receipts,section.snapshot,section.access{padding:clamp(72px,11vw,128px) 0;position:relative}
-.band{border-top:1px solid var(--line)}
-.how{background:linear-gradient(180deg,var(--bg),var(--bg2))}
-.section-title{margin-bottom:8px}
-
-/* steps */
-.steps{list-style:none;padding:0;margin:48px 0 0;display:grid;grid-template-columns:repeat(3,1fr);gap:26px;counter-reset:s}
-.step{position:relative;padding:30px 26px 30px;background:linear-gradient(180deg,rgba(255,255,255,.02),transparent);border:1px solid var(--line);border-radius:18px;transition:.35s var(--ease)}
-.step:hover{border-color:var(--line2);transform:translateY(-4px);box-shadow:0 30px 60px -34px rgba(0,0,0,.8)}
-.step-no{font-family:var(--mono);font-size:13px;color:var(--cyan);letter-spacing:.1em}
-.step h3{font-size:21px;margin:14px 0 10px;font-weight:640}
-.step p{color:var(--dim);font-size:15.5px;margin:0}
-
-/* roles */
-.roles{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin:48px 0 0}
-.role{padding:28px 24px;background:var(--panel);border:1px solid var(--line);border-radius:18px;position:relative;overflow:hidden;transition:.35s var(--ease)}
-.role::before{content:"";position:absolute;inset:0;background:radial-gradient(380px 160px at 100% 0,rgba(54,224,255,.08),transparent 60%);opacity:0;transition:.4s}
-.role:hover{border-color:var(--line2);transform:translateY(-4px)}.role:hover::before{opacity:1}
-.role-tag{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--cyan);background:rgba(54,224,255,.07);border:1px solid var(--line2);padding:4px 10px;border-radius:6px}
-.role h3{font-size:19px;margin:16px 0 9px;font-weight:640}
-.role p{color:var(--dim);font-size:15px;margin:0}
-
-/* receipts */
-.receipts{background:linear-gradient(180deg,var(--bg2),var(--bg))}
-.receipts-grid,.access-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:60px;align-items:center}
-.check-list{list-style:none;padding:0;margin:26px 0 0;display:grid;gap:12px}
-.check-list li{position:relative;padding-left:30px;color:var(--ink);font-size:16px}
-.check-list li::before{content:"";position:absolute;left:0;top:7px;width:16px;height:16px;border-radius:5px;background:rgba(66,226,155,.14);border:1px solid var(--green);box-shadow:0 0 12px -2px rgba(66,226,155,.6)}
-.receipt{margin:0;font-family:var(--mono);background:linear-gradient(180deg,#0a1019,#070b11);border:1px solid var(--line2);border-radius:18px;padding:0;overflow:hidden;box-shadow:var(--glow)}
-.receipt-head{display:flex;justify-content:space-between;align-items:center;padding:16px 20px;border-bottom:1px solid var(--line);font-size:12px;letter-spacing:.18em;color:var(--cyan)}
-.receipt-id{color:var(--faint);letter-spacing:.04em}
-.receipt-row{display:flex;justify-content:space-between;padding:13px 20px;border-bottom:1px solid rgba(22,32,46,.6);font-size:14px}
-.receipt-row span{color:var(--faint)}.receipt-row b{color:var(--ink);font-weight:500}
-.receipt-row b.ok{color:var(--green)}
-.receipt-foot{padding:14px 20px;font-size:11.5px;letter-spacing:.1em;color:var(--faint);text-transform:uppercase}
-
-/* snapshot */
-.snap-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin:42px 0 0}
-.snap{padding:24px 22px;background:var(--panel);border:1px solid var(--line);border-radius:16px}
-.snap-k{display:block;font-family:var(--mono);font-size:12px;letter-spacing:.08em;color:var(--faint);text-transform:uppercase}
-.snap-v{display:block;margin-top:12px;font-size:26px;font-weight:680;color:var(--ink);font-family:var(--mono)}
-.snap-v[data-live="1"]{color:var(--green)}
-
-/* access form */
-.access{border-top:1px solid var(--line)}
-.form{display:grid;gap:16px;background:var(--panel);border:1px solid var(--line2);border-radius:20px;padding:30px;box-shadow:0 40px 90px -50px rgba(54,224,255,.35)}
-.form label{display:grid;gap:8px;font-family:var(--mono);font-size:12.5px;letter-spacing:.06em;color:var(--dim);text-transform:uppercase}
-.form input,.form textarea{font-family:var(--sans);font-size:15.5px;color:var(--ink);background:#070b11;border:1px solid var(--line2);border-radius:11px;padding:13px 15px;transition:.2s;resize:vertical}
-.form input:focus,.form textarea:focus{outline:none;border-color:var(--cyan);box-shadow:0 0 0 3px rgba(54,224,255,.14)}
-.form input::placeholder,.form textarea::placeholder{color:#3f5266}
-.form-row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
-.form-note{font-size:12px;color:var(--faint);margin:2px 0 0;font-family:var(--mono)}
-
-/* footer */
-.foot{border-top:1px solid var(--line);padding:56px 0 30px;background:var(--bg2)}
-.foot-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:30px;align-items:start}
-.foot-grid nav{display:flex;flex-direction:column;gap:10px}
-.foot-grid nav a,.foot-sec a{color:var(--dim);font-size:14.5px}.foot-grid nav a:hover,.foot-sec a:hover{color:var(--cyan)}
-.foot-sec{display:flex;flex-direction:column;gap:8px}
-.foot-base{display:flex;justify-content:space-between;margin-top:36px;padding-top:22px;border-top:1px solid var(--line)}
-
-/* reveal animation */
-.reveal{opacity:0;transform:translateY(22px);transition:.7s var(--ease)}
-.reveal.in{opacity:1;transform:none}
-@media (prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none}.hero-canvas{display:none}}
-
-/* responsive */
-@media(max-width:900px){
-  .nav-links{display:none}
-  .steps,.roles{grid-template-columns:1fr}
-  .receipts-grid,.access-grid,.foot-grid{grid-template-columns:1fr;gap:36px}
-  .snap-grid{grid-template-columns:1fr 1fr}
-  .hero-stats{gap:30px;flex-wrap:wrap}
-}
-@media(max-width:520px){.snap-grid{grid-template-columns:1fr}.form-row{grid-template-columns:1fr}.hero-cta .btn{width:100%;justify-content:center}}
-
-
-/* ===== v2 scroll-narrative + kinetic additions ===== */
-.scroll-prog{position:fixed;top:0;left:0;height:2px;width:100%;z-index:60;transform:scaleX(0);transform-origin:0 50%;background:linear-gradient(90deg,var(--cyan),#7ea2ff);box-shadow:0 0 12px rgba(54,224,255,.7)}
-
-/* kinetic headline: words rise + de-blur in stagger */
-.hero-title .kw{display:inline-block;opacity:0;transform:translateY(1.1em) rotate(2deg);filter:blur(8px);transition:opacity .7s var(--ease),transform .9s var(--ease),filter .7s var(--ease);transition-delay:var(--d,0s);will-change:transform,opacity,filter}
-.hero-title.kin-in .kw{opacity:1;transform:none;filter:blur(0)}
-
-/* hero parallax/fade handled in JS via transform on .hero-inner */
-.hero-inner{will-change:transform,opacity}
-
-/* magnetic button: smooth return */
-.btn-primary{transition:transform .35s var(--ease),box-shadow .25s var(--ease),background .25s var(--ease);will-change:transform}
-.btn-primary:hover{transform:translateY(-2px)}
-
-/* enrich reveal: add subtle scale + per-section direction */
-.reveal{opacity:0;transform:translateY(26px) scale(.985);transition:opacity .8s var(--ease),transform .8s var(--ease)}
-.reveal.in{opacity:1;transform:none}
-.role.reveal{transform:translateY(30px) scale(.97)}
-.step.reveal{transform:translateY(34px)}
-
-/* parallax layer hook */
-[data-parallax]{will-change:transform}
-
-/* receipt: gentle float so the "proof" feels alive */
-@keyframes floaty{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
-.receipt{animation:floaty 7s var(--ease) infinite}
-@media (prefers-reduced-motion:reduce){.receipt{animation:none}.hero-title .kw{opacity:1;transform:none;filter:none}.reveal{opacity:1;transform:none}}
-
-/* hero: slightly deeper veil so kinetic type pops over the live network */
-.hero-veil{background:radial-gradient(58% 58% at 50% 44%,transparent,rgba(5,6,10,.6) 76%,var(--bg)),linear-gradient(180deg,rgba(5,6,10,.45),transparent 24%,transparent 66%,var(--bg))}
-
-/* section dividers: hairline glow on scroll-in */
-section.band,section.access{position:relative}
-section.band::before,section.access::before{content:"";position:absolute;top:-1px;left:50%;transform:translateX(-50%);width:0;height:1px;background:linear-gradient(90deg,transparent,var(--cyan),transparent);transition:width 1.2s var(--ease)}
-section.band.in-view::before,section.access.in-view::before{width:60%}
-
-
-/* ===== v3 mobile-first optimization ===== */
-@media (max-width: 760px) {
-  body { font-size: 16px; }
-  .wrap { padding: 0 20px; }
-  .nav { padding: 12px 18px; gap: 12px; }
-  .nav-cta { padding: 9px 15px; font-size: 13.5px; }
-  .brand-word { font-size: 13.5px; }
-
-  .hero { min-height: 92svh; align-items: center; }
-  .hero-title { font-size: clamp(38px, 12vw, 56px); letter-spacing: -.025em; line-height: 1.04; }
-  .hero-sub { font-size: 16.5px; margin-top: 18px; }
-  .eyebrow { font-size: 11px; padding: 6px 11px; }
-  .hero-cta { margin-top: 26px; gap: 11px; }
-  .hero-cta .btn { width: 100%; justify-content: center; }
-  .hero-stats { gap: 22px; margin-top: 36px; padding-top: 20px; flex-wrap: wrap; }
-  .hero-stats dt { font-size: 27px; }
-  .hero-stats dd { font-size: 12px; }
-  .scroll-cue { display: none; }
-
-  section.band, section.how, section.fleet, section.receipts, section.snapshot, section.access { padding: 64px 0; }
-  .section-title { font-size: clamp(26px, 7.4vw, 34px); }
-  .lead { font-size: clamp(24px, 7.6vw, 32px); }
-  .prose { font-size: 16.5px; }
-
-  .steps, .roles { grid-template-columns: 1fr; gap: 14px; }
-  .step, .role { padding: 24px 20px; }
-  .receipts-grid, .access-grid, .foot-grid { grid-template-columns: 1fr; gap: 30px; }
-  .receipt { animation: none; }           /* save battery */
-  .snap-grid { grid-template-columns: 1fr 1fr; gap: 12px; }
-  .snap { padding: 18px 16px; }
-  .snap-v { font-size: 22px; }
-  .form { padding: 22px; }
-  .form-row { grid-template-columns: 1fr; }
-  .foot-base { flex-direction: column; gap: 8px; }
-
-  /* tap targets */
-  .btn { min-height: 48px; }
-  .nav-links a, .foot-grid nav a { padding: 4px 0; }
-}
-
-@media (max-width: 420px) {
-  .hero-title { font-size: clamp(34px, 13vw, 46px); }
-  .snap-grid { grid-template-columns: 1fr; }
-  .hero-stats { gap: 16px; }
-  .hero-stats dt { font-size: 24px; }
-}
-
-/* tighten hero canvas on mobile so type stays the hero, network stays subtle */
-@media (max-width: 760px) {
-  .hero-veil { background: radial-gradient(70% 50% at 50% 42%, transparent, rgba(5,6,10,.72) 70%, var(--bg)), linear-gradient(180deg, rgba(5,6,10,.5), transparent 22%, transparent 60%, var(--bg)); }
-}
-
-
-/* ===== v4: product-forward hero (terminal + live receipt) ===== */
-.hero-inner{display:grid;grid-template-columns:1.04fr .96fr;gap:54px;align-items:center}
-.hero-copy{min-width:0}
-.hero-title{font-size:clamp(42px,5.6vw,76px)}
-.hero-demo{position:relative;perspective:1400px}
-
-.term{font-family:var(--mono);background:linear-gradient(180deg,rgba(12,18,27,.92),rgba(7,11,17,.95));border:1px solid var(--line2);border-radius:16px;overflow:hidden;box-shadow:0 40px 100px -40px rgba(0,0,0,.9),0 0 0 1px rgba(54,224,255,.1),0 0 80px -30px rgba(54,224,255,.4);transform:rotateY(-6deg) rotateX(2deg);transition:transform .6s var(--ease);backdrop-filter:blur(6px)}
-.hero-demo:hover .term{transform:rotateY(0) rotateX(0)}
-.term-bar{display:flex;align-items:center;gap:7px;padding:12px 15px;border-bottom:1px solid var(--line);background:rgba(255,255,255,.015)}
-.term-bar i{width:11px;height:11px;border-radius:50%;background:#26323f}
-.term-bar i:first-child{background:#ff5d6c}.term-bar i:nth-child(2){background:#ffc14d}.term-bar i:nth-child(3){background:#42e29b}
-.term-host{margin-left:auto;font-size:12px;color:var(--faint);letter-spacing:.04em}
-.term-body{padding:18px 18px 20px;min-height:300px;font-size:13.5px;line-height:1.85}
-.tl{display:block;white-space:pre-wrap;word-break:break-word}
-.tl.cmd{color:var(--ink)}.tl.cmd .pr{color:var(--cyan)}
-.tl.dim{color:var(--faint)}
-.tl.arrow{color:var(--dim)}.tl.arrow b{color:var(--cyan);font-weight:500}
-.tl .ok{color:var(--green)}
-.caret{display:inline-block;width:8px;height:15px;background:var(--cyan);vertical-align:-2px;animation:blink 1s steps(1) infinite;margin-left:2px}
-@keyframes blink{50%{opacity:0}}
-.rcpt{margin-top:14px;border:1px solid var(--line2);border-radius:12px;overflow:hidden;background:rgba(7,11,17,.6);opacity:0;transform:translateY(10px);transition:.5s var(--ease)}
-.rcpt.show{opacity:1;transform:none}
-.rcpt-h{display:flex;justify-content:space-between;padding:11px 14px;border-bottom:1px solid var(--line);font-size:11px;letter-spacing:.16em;color:var(--cyan)}
-.rcpt-h span:last-child{color:var(--faint);letter-spacing:.02em}
-.rcpt-r{display:flex;justify-content:space-between;padding:9px 14px;border-bottom:1px solid rgba(22,32,46,.5);font-size:12.5px}
-.rcpt-r:last-child{border-bottom:0}.rcpt-r span{color:var(--faint)}.rcpt-r b{color:var(--ink);font-weight:500}.rcpt-r b.ok{color:var(--green)}
-
-@media (max-width:900px){
-  .hero-inner{grid-template-columns:1fr;gap:40px}
-  .hero-demo{order:2}
-  .term{transform:none}
-  .term-body{min-height:260px}
-}
-@media (max-width:760px){
-  .hero{min-height:auto;padding:120px 0 64px}
-  .hero-title{font-size:clamp(38px,11vw,54px)}
-  .term-body{min-height:240px;font-size:12.5px}
-}
-
-
-/* ===== v5: luminous craft pass - gradient mesh, glow, density ===== */
-.hero::before{content:"";position:absolute;inset:0;z-index:0;pointer-events:none;
-  background:
-    radial-gradient(48% 42% at 22% 28%, rgba(54,224,255,.30), transparent 60%),
-    radial-gradient(40% 40% at 82% 22%, rgba(126,108,255,.26), transparent 62%),
-    radial-gradient(46% 50% at 68% 82%, rgba(20,180,255,.20), transparent 60%),
-    radial-gradient(40% 40% at 12% 80%, rgba(66,226,155,.12), transparent 60%);
-  filter:blur(20px);animation:mesh 22s ease-in-out infinite;opacity:.9}
-@keyframes mesh{0%,100%{transform:translate3d(0,0,0) scale(1)}33%{transform:translate3d(2%,-2%,0) scale(1.06)}66%{transform:translate3d(-2%,1%,0) scale(1.03)}}
-body::after{content:"";position:fixed;inset:0;z-index:1;pointer-events:none;opacity:.045;mix-blend-mode:overlay;
-  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
-.hero-veil{background:radial-gradient(64% 64% at 50% 46%,transparent,rgba(5,6,10,.42) 80%,var(--bg)),linear-gradient(180deg,rgba(5,6,10,.35),transparent 30%,transparent 72%,var(--bg))}
-.hero-title{font-size:clamp(46px,6.4vw,88px);font-weight:760;letter-spacing:-.035em;line-height:.98}
-.grad{background:linear-gradient(96deg,#c8f6ff,#36e0ff 46%,#8fa6ff);-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 0 26px rgba(54,224,255,.55))}
-.hero-sub{color:#a9c2d8;font-size:clamp(17px,1.5vw,20px)}
-.eyebrow{background:rgba(54,224,255,.09);border-color:rgba(54,224,255,.28);color:#bfe9f6}
-.hero-demo{transform:scale(1.05)}
-.term{box-shadow:0 50px 120px -40px rgba(0,0,0,.95),0 0 0 1px rgba(54,224,255,.16),0 0 120px -30px rgba(54,224,255,.6);transform:rotateY(-7deg) rotateX(3deg) scale(1.02)}
-.term-body{font-size:14px;min-height:330px}
-.rcpt{box-shadow:0 0 0 1px rgba(54,224,255,.14),0 20px 50px -24px rgba(54,224,255,.4)}
-.hero-stats{border-top-color:rgba(54,224,255,.16)}
-.hero-stats dt{color:#eaf6ff;text-shadow:0 0 22px rgba(54,224,255,.35)}
-.btn-primary{box-shadow:0 12px 34px -8px rgba(54,224,255,.7),inset 0 1px 0 rgba(255,255,255,.4)}
-.kicker{text-shadow:0 0 18px rgba(54,224,255,.5)}
-.section-title{color:#eef7fd}
-.role,.step{background:linear-gradient(180deg,rgba(54,224,255,.04),rgba(255,255,255,.012) 30%,transparent);border-color:rgba(54,224,255,.1)}
-.role:hover,.step:hover{border-color:rgba(54,224,255,.32)}
-@media (max-width:760px){.hero::before{filter:blur(28px);opacity:.8}.hero-demo{transform:none}.term{transform:none;box-shadow:0 30px 80px -40px rgba(0,0,0,.9),0 0 80px -34px rgba(54,224,255,.5)}}
-
-/* ===== v6: dispatch, receipt JSON, trust/governance ===== */
-section.dispatch,section.trust{padding:clamp(72px,11vw,128px) 0;position:relative}
-.dispatch{background:linear-gradient(180deg,var(--bg2),var(--bg))}
-.dispatch-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:16px;margin:42px 0 0}
-.dispatch-card,.trust-item{padding:24px 20px;background:linear-gradient(180deg,rgba(54,224,255,.04),rgba(255,255,255,.012));border:1px solid rgba(54,224,255,.12);border-radius:18px;transition:.35s var(--ease)}
-.dispatch-card:hover,.trust-item:hover{border-color:rgba(54,224,255,.34);transform:translateY(-4px)}
-.dispatch-card span{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--cyan)}
-.dispatch-card h3,.trust-item h3{font-size:18px;margin:12px 0 8px;font-weight:640}
-.dispatch-card p,.trust-item p{color:var(--dim);font-size:14.5px;margin:0}
-.receipt-json{margin:24px 0 0;padding:18px;background:#070b11;border:1px solid var(--line2);border-radius:14px;color:#bfe9f6;font-family:var(--mono);font-size:12.5px;line-height:1.55;overflow:auto;box-shadow:0 22px 60px -40px rgba(54,224,255,.45)}
-.trust{border-top:1px solid var(--line);background:radial-gradient(700px 360px at 85% 20%,rgba(54,224,255,.08),transparent 60%),var(--bg)}
-.trust-grid{display:grid;grid-template-columns:1fr 1fr;gap:54px;align-items:start}
-.trust-list{display:grid;gap:16px}
-@media(max-width:1100px){.dispatch-grid{grid-template-columns:repeat(2,1fr)}}
-@media(max-width:900px){.trust-grid{grid-template-columns:1fr;gap:30px}}
-@media(max-width:760px){section.dispatch,section.trust{padding:64px 0}.dispatch-grid{grid-template-columns:1fr;gap:14px}.receipt-json{font-size:11.5px}}
-
-/* ===== v7: command-deck roster hero + warmer accents ===== */
-:root{--magenta:#ff5dd6;--gold:#ffcf66;--orange:#ff8a3d}
-.command-deck{display:block;position:relative;padding:22px;border:1px solid rgba(54,224,255,.22);border-radius:24px;background:linear-gradient(145deg,rgba(9,14,22,.86),rgba(12,10,21,.78));box-shadow:0 50px 120px -45px rgba(0,0,0,.96),0 0 100px -40px rgba(255,138,61,.42),0 0 90px -42px rgba(54,224,255,.58);overflow:hidden;transform:rotateY(-5deg) rotateX(2deg)}
-.command-deck::before{content:"";position:absolute;inset:-40%;background:radial-gradient(circle at 18% 22%,rgba(255,207,102,.18),transparent 24%),radial-gradient(circle at 86% 28%,rgba(255,93,214,.16),transparent 25%),radial-gradient(circle at 52% 88%,rgba(54,224,255,.16),transparent 28%);animation:deckGlow 14s ease-in-out infinite;pointer-events:none}
-@keyframes deckGlow{50%{transform:translate3d(2%,-2%,0) rotate(4deg)}}
-.deck-head,.route-strip,.agent-roster,.deck-receipt{position:relative;z-index:1}
-.deck-head{display:flex;justify-content:space-between;gap:16px;align-items:flex-start;margin-bottom:18px}
-.deck-head b{display:block;margin-top:5px;font-size:18px;letter-spacing:-.01em}.deck-kicker,.deck-status{font-family:var(--mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold)}
-.deck-status{color:var(--cyan);border:1px solid rgba(54,224,255,.24);border-radius:999px;padding:7px 10px;background:rgba(54,224,255,.06);white-space:nowrap}
-.route-strip{font-family:var(--mono);font-size:13px;color:#d8f6ff;border:1px solid rgba(255,255,255,.08);border-radius:14px;padding:14px 16px;margin-bottom:16px;background:rgba(0,0,0,.24);box-shadow:inset 0 0 28px rgba(54,224,255,.05)}
-.agent-roster{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
-.agent-roster span{min-height:54px;display:flex;align-items:center;justify-content:center;border:1px solid rgba(138,160,182,.18);border-radius:14px;background:rgba(255,255,255,.035);font-family:var(--mono);font-size:12px;letter-spacing:.08em;color:#bcd3e8;position:relative;overflow:hidden;transition:transform .35s var(--ease),border-color .35s var(--ease),color .35s var(--ease),background .35s var(--ease)}
-.agent-roster span::after{content:attr(data-role);position:absolute;bottom:5px;left:8px;font-size:8px;letter-spacing:.12em;text-transform:uppercase;color:rgba(138,160,182,.5)}
-.agent-roster span.hot{transform:translateY(-3px);color:#fff;border-color:rgba(255,207,102,.74);background:linear-gradient(180deg,rgba(255,207,102,.17),rgba(54,224,255,.07));box-shadow:0 14px 35px -22px rgba(255,207,102,.9),0 0 26px -16px rgba(54,224,255,.9)}
-.agent-roster span.hot::before{content:"";position:absolute;inset:0;background:linear-gradient(90deg,transparent,rgba(255,255,255,.18),transparent);transform:translateX(-120%);animation:sweep 1.4s var(--ease)}
-@keyframes sweep{to{transform:translateX(120%)}}
-.deck-receipt{margin-top:18px;display:grid;gap:4px;padding:14px 16px;border-radius:15px;border:1px solid rgba(255,207,102,.28);background:linear-gradient(90deg,rgba(255,207,102,.12),rgba(255,93,214,.07),rgba(54,224,255,.08))}
-.deck-receipt span{font-family:var(--mono);font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold)}.deck-receipt b{font-size:15px;color:#fff}
-@media(max-width:900px){.command-deck{transform:none}.agent-roster{grid-template-columns:repeat(2,1fr)}}
-@media(max-width:520px){.deck-head{display:grid}.deck-status{width:max-content}.agent-roster span{min-height:48px}.hero-cta{display:grid}.hero-cta .btn{width:100%}}
-/* Ensure kinetic word spans inside gradient headline remain visible. */
-.grad .kw{color:var(--cyan);filter:drop-shadow(0 0 18px rgba(54,224,255,.45))}
-
-.free-wedge-note{margin:16px 0 0;color:#ffdf9a;font-family:var(--mono);font-size:12.5px;letter-spacing:.02em;max-width:62ch}
-.agent-roster span.hot:nth-of-type(4n+1){border-color:rgba(255,138,61,.75);box-shadow:0 14px 35px -22px rgba(255,138,61,.9),0 0 26px -16px rgba(255,93,214,.7)}
-
-/* ===== v7 full: release-engineer command deck ===== */
-.hero-inner{display:grid;grid-template-columns:minmax(0,1fr) minmax(390px,.82fr);gap:clamp(30px,5vw,70px);align-items:center}
-.cinematic-deck{min-height:620px;border-radius:28px;background:
-  linear-gradient(145deg,rgba(9,14,22,.92),rgba(20,12,22,.86) 50%,rgba(8,18,17,.82)),
-  radial-gradient(520px 320px at 64% 20%,rgba(66,226,155,.20),transparent 58%);
-}
-.cinematic-deck::after{content:"";position:absolute;inset:12px;border:1px solid rgba(255,255,255,.07);border-radius:22px;pointer-events:none}
-.operator-stage{position:relative;z-index:1;display:grid;grid-template-columns:.78fr 1fr;gap:16px;align-items:stretch;margin:18px 0}
-.operator-portrait{position:relative;min-height:220px;border-radius:22px;border:1px solid rgba(66,226,155,.25);background:
-  radial-gradient(circle at 50% 24%,rgba(255,207,102,.25),transparent 22%),
-  linear-gradient(180deg,rgba(54,224,255,.10),rgba(66,226,155,.08) 42%,rgba(0,0,0,.26));
-  overflow:hidden;box-shadow:inset 0 0 38px rgba(66,226,155,.08),0 24px 70px -45px rgba(66,226,155,.8)}
-.operator-portrait::before{content:"RELEASE ENGINEER";position:absolute;left:14px;top:14px;z-index:2;font-family:var(--mono);font-size:9px;letter-spacing:.18em;color:#b7ffdc}
-.portrait-face{position:absolute;left:50%;top:56%;width:108px;height:132px;transform:translate(-50%,-50%);border-radius:48% 48% 42% 42%;background:
-  radial-gradient(circle at 34% 38%,#e9f7ff 0 3px,transparent 4px),
-  radial-gradient(circle at 66% 38%,#e9f7ff 0 3px,transparent 4px),
-  linear-gradient(180deg,#89a8b6,#243743 56%,#121a22);
-  box-shadow:0 0 0 1px rgba(255,255,255,.12),0 24px 50px -32px #000}
-.portrait-face::before{content:"";position:absolute;left:50%;top:-25px;width:126px;height:54px;transform:translateX(-50%);border-radius:48px 48px 18px 18px;background:linear-gradient(90deg,#111722,#263341,#111722);box-shadow:0 6px 0 rgba(255,207,102,.35)}
-.portrait-face::after{content:"";position:absolute;left:38px;right:38px;bottom:28px;height:3px;border-radius:99px;background:#c6f8ff;box-shadow:0 0 14px rgba(54,224,255,.75)}
-.portrait-face i{position:absolute;left:14px;right:14px;top:50px;height:26px;border-radius:8px;background:linear-gradient(90deg,rgba(54,224,255,.2),rgba(255,255,255,.76),rgba(66,226,155,.22));box-shadow:0 0 22px rgba(54,224,255,.35)}
-.portrait-face b{position:absolute;left:31px;right:31px;bottom:-28px;height:46px;border-radius:16px 16px 0 0;background:linear-gradient(180deg,#263341,#0c1118)}
-.portrait-scan{position:absolute;inset:-50% 0;background:linear-gradient(180deg,transparent,rgba(66,226,155,.14),transparent);animation:scanline 3.2s var(--ease) infinite}
-@keyframes scanline{to{transform:translateY(70%)}}
-.release-panes{display:grid;gap:10px}
-.pane{position:relative;min-height:66px;padding:14px 16px;border-radius:16px;border:1px solid rgba(255,255,255,.08);background:rgba(255,255,255,.045);overflow:hidden}
-.pane::before{content:"";position:absolute;inset:0;background:linear-gradient(90deg,transparent,rgba(66,226,155,.12),transparent);transform:translateX(-120%);animation:paneSweep 2.4s var(--ease) infinite}
-@keyframes paneSweep{55%,100%{transform:translateX(120%)}}
-.pane span{position:relative;z-index:1;display:block;font-family:var(--mono);font-size:10px;letter-spacing:.18em;color:var(--faint)}
-.pane b{position:relative;z-index:1;display:block;margin-top:5px;font-size:15px;color:#eef7fd}
-.pane-build b{color:#a9ffd0;text-shadow:0 0 18px rgba(66,226,155,.55)}
-.pane-relay{position:relative;z-index:1;height:34px;margin:4px 0 16px;display:flex;align-items:center;gap:10px}
-.pane-relay::before{content:"";height:1px;flex:1;background:linear-gradient(90deg,transparent,rgba(66,226,155,.74),transparent)}
-.pane-relay i{width:9px;height:9px;border-radius:50%;background:var(--green);box-shadow:0 0 18px rgba(66,226,155,.8);animation:relayBlink 1.8s infinite}
-.pane-relay i:nth-child(2){animation-delay:.2s}.pane-relay i:nth-child(3){animation-delay:.4s}.pane-relay i:nth-child(4){animation-delay:.6s}.pane-relay i:nth-child(5){animation-delay:.8s}
-@keyframes relayBlink{50%{transform:scale(1.55);background:var(--gold)}}
-.receipt-stamp{position:relative;overflow:hidden}
-.receipt-stamp::after{content:"RECEIPT VERIFIED";position:absolute;right:14px;top:50%;transform:translateY(-50%) rotate(-8deg);font-family:var(--mono);font-size:11px;letter-spacing:.14em;color:rgba(66,226,155,.78);border:1px solid rgba(66,226,155,.38);border-radius:6px;padding:7px 9px;background:rgba(0,0,0,.18)}
-@media(max-width:980px){.hero-inner{grid-template-columns:1fr;padding-top:120px;padding-bottom:80px}.cinematic-deck{min-height:auto}.operator-stage{grid-template-columns:1fr}.operator-portrait{min-height:190px}}
-@media(max-width:520px){.receipt-stamp::after{display:none}.cinematic-deck{padding:18px}.release-panes .pane{min-height:58px}}
-
-/* Reveal animations are progressive enhancement: content stays visible if JS does not initialize. */
-.reveal{opacity:1;transform:none}
-.js .reveal{opacity:0;transform:translateY(26px) scale(.985)}
-.js .reveal.in{opacity:1;transform:none}
-.js .role.reveal{transform:translateY(30px) scale(.97)}
-.js .role.reveal.in{transform:none}
-.js .step.reveal{transform:translateY(34px)}
-.js .step.reveal.in{transform:none}
-@media(min-width:981px){.hero-inner{padding:96px 28px 48px}}
-
-
-/* GAOS / HARMONIC public section */
-.harmonic{position:relative;overflow:hidden;padding:120px 0;background:radial-gradient(circle at 20% 20%,rgba(77,209,255,.18),transparent 34%),radial-gradient(circle at 82% 10%,rgba(139,92,246,.18),transparent 30%),linear-gradient(180deg,rgba(5,6,10,.98),rgba(7,10,18,.96));border-top:1px solid rgba(255,255,255,.08);border-bottom:1px solid rgba(255,255,255,.08)}
-.harmonic:before{content:"";position:absolute;inset:0;background:linear-gradient(rgba(255,255,255,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.03) 1px,transparent 1px);background-size:64px 64px;mask-image:radial-gradient(circle at 50% 35%,#000,transparent 72%);pointer-events:none}
-.harmonic-grid{position:relative;display:grid;grid-template-columns:minmax(0,1.02fr) minmax(360px,.98fr);gap:54px;align-items:center}.harmonic-copy{position:relative;z-index:2}.harmonic-principle{margin:28px 0;padding:18px 20px;border:1px solid rgba(77,209,255,.28);border-radius:20px;background:rgba(77,209,255,.08);color:#eaf8ff;font-weight:700;line-height:1.5;box-shadow:0 18px 70px rgba(77,209,255,.08)}
-.harmonic-pair{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:26px}.harmonic-pair article,.harmonic-flow article,.harmonic-diff article{border:1px solid rgba(255,255,255,.12);border-radius:24px;background:linear-gradient(180deg,rgba(255,255,255,.09),rgba(255,255,255,.035));box-shadow:0 24px 80px rgba(0,0,0,.24);backdrop-filter:blur(18px)}.harmonic-pair article{padding:22px}.harmonic-pair span,.harmonic-flow span,.receipt-card span{display:inline-flex;margin-bottom:12px;color:#7de3ff;font-size:.72rem;text-transform:uppercase;letter-spacing:.16em}.harmonic-pair h3{margin:0 0 10px;font-size:1rem;color:#fff}.harmonic-pair p,.harmonic-flow p,.harmonic-diff p,.harmonic-stack p{color:rgba(236,244,255,.74);line-height:1.65}.harmonic-pair b{display:block;margin-top:14px;color:#a6ffcf;font-size:.92rem}
-.harmonic-visual{position:relative;min-height:520px;border:1px solid rgba(255,255,255,.12);border-radius:34px;background:radial-gradient(circle at 50% 42%,rgba(77,209,255,.2),transparent 30%),radial-gradient(circle at 50% 55%,rgba(139,92,246,.18),transparent 48%),rgba(255,255,255,.035);box-shadow:0 42px 120px rgba(0,0,0,.42),inset 0 1px 0 rgba(255,255,255,.16);overflow:hidden}.harmonic-visual:before{content:"";position:absolute;left:8%;right:8%;bottom:12%;height:34%;background:linear-gradient(90deg,transparent,rgba(77,209,255,.15),transparent);transform:perspective(520px) rotateX(62deg);border:1px solid rgba(77,209,255,.12);border-radius:50%;filter:blur(.2px)}.harmonic-orbit{position:absolute;inset:17%;border:1px solid rgba(125,227,255,.36);border-radius:50%;filter:drop-shadow(0 0 24px rgba(77,209,255,.22));animation:harmonicSpin 18s linear infinite}.orbit-b{inset:26%;border-color:rgba(174,123,255,.38);transform:rotate(68deg);animation-duration:24s;animation-direction:reverse}.harmonic-core{position:absolute;left:50%;top:48%;transform:translate(-50%,-50%);width:158px;height:158px;border-radius:50%;display:grid;place-items:center;text-align:center;background:radial-gradient(circle,rgba(234,248,255,.18),rgba(77,209,255,.1) 46%,rgba(5,6,10,.42));border:1px solid rgba(255,255,255,.18);box-shadow:0 0 70px rgba(77,209,255,.22)}.harmonic-core span{color:#7de3ff;font-size:.74rem;letter-spacing:.18em}.harmonic-core strong{display:block;color:#fff;margin-top:-34px;letter-spacing:.04em}.signal{position:absolute;width:12px;height:12px;border-radius:50%;background:#7de3ff;box-shadow:0 0 22px #7de3ff;animation:signalPulse 3.2s ease-in-out infinite}.s1{left:18%;top:26%}.s2{right:18%;top:34%;animation-delay:.6s}.s3{left:28%;bottom:22%;animation-delay:1.2s}.s4{right:28%;bottom:26%;background:#f6b453;box-shadow:0 0 18px rgba(246,180,83,.85);opacity:.48}.receipt-card{position:absolute;padding:14px 16px;border:1px solid rgba(255,255,255,.14);border-radius:16px;background:rgba(6,10,20,.72);backdrop-filter:blur(16px);box-shadow:0 18px 60px rgba(0,0,0,.34)}.receipt-card b{display:block;color:#fff}.card-a{left:8%;top:12%}.card-b{right:8%;top:18%}.card-c{left:50%;bottom:10%;transform:translateX(-50%)}
-.harmonic-flow{position:relative;display:grid;grid-template-columns:repeat(6,1fr);gap:12px;margin-top:34px}.harmonic-flow article{padding:18px;min-height:170px}.harmonic-flow h3,.harmonic-diff h3,.harmonic-stack h3{margin:0 0 10px;color:#fff}.harmonic-stack{position:relative;display:grid;grid-template-columns:.85fr 1.15fr;gap:28px;align-items:center;margin-top:34px;padding:28px;border:1px solid rgba(255,255,255,.1);border-radius:28px;background:rgba(255,255,255,.04)}.truth-stack{display:grid;gap:10px;margin:0;padding:0;list-style:none}.truth-stack li{display:flex;align-items:center;gap:12px;padding:12px 14px;border-radius:14px;background:linear-gradient(90deg,rgba(77,209,255,.13),rgba(255,255,255,.035));border:1px solid rgba(255,255,255,.1);color:rgba(236,244,255,.88)}.truth-stack span{display:grid;place-items:center;width:26px;height:26px;border-radius:50%;background:rgba(77,209,255,.16);color:#7de3ff;font-weight:800}.harmonic-diff{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:24px}.harmonic-diff article{padding:22px}
-@keyframes harmonicSpin{to{transform:rotate(360deg)}}@keyframes signalPulse{0%,100%{transform:scale(.72);opacity:.55}50%{transform:scale(1.18);opacity:1}}
-@media (max-width:980px){.harmonic{padding:84px 0}.harmonic-grid,.harmonic-stack{grid-template-columns:1fr}.harmonic-pair,.harmonic-diff{grid-template-columns:1fr}.harmonic-flow{grid-template-columns:1fr 1fr}.harmonic-visual{min-height:430px}}
-@media (max-width:620px){.harmonic-flow{grid-template-columns:1fr}.harmonic-visual{min-height:360px}.receipt-card{position:relative;left:auto!important;right:auto!important;top:auto!important;bottom:auto!important;transform:none!important;margin:12px}.harmonic-core{width:124px;height:124px}.harmonic-orbit{inset:18%}}
-@media (prefers-reduced-motion:reduce){.harmonic-orbit,.signal{animation:none!important}.harmonic-visual{background:radial-gradient(circle at 50% 45%,rgba(77,209,255,.18),transparent 36%),rgba(255,255,255,.035)}}
-
-
-/* Additive Live Proof cards - GAOS/HARMONIC W7 corrective deploy */
-.live-proof-shell{padding:72px 0;background:linear-gradient(180deg,rgba(9,16,30,.92),rgba(5,8,15,.98));border-top:1px solid rgba(255,255,255,.08);border-bottom:1px solid rgba(255,255,255,.08)}
-.live-proof-observatory{display:grid;gap:22px}.live-proof-subcopy,.live-proof-note{max-width:760px;color:rgba(235,241,255,.74);line-height:1.7}.live-proof-grid,.live-proof-trust{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:14px}.live-proof-card{min-height:150px;padding:18px;border:1px solid rgba(130,180,255,.18);background:rgba(255,255,255,.045);box-shadow:0 18px 40px rgba(0,0,0,.22)}.live-proof-label{font-size:.78rem;text-transform:uppercase;letter-spacing:.08em;color:rgba(190,215,255,.72)}.live-proof-value{margin-top:10px;font-size:clamp(2rem,4vw,3.4rem);font-weight:800;color:#f8fbff}.live-proof-copy{margin-top:10px;color:rgba(235,241,255,.78);line-height:1.55}.live-proof-freshness{margin-top:14px;font-size:.78rem;color:#8ff0c6}
-@media (prefers-reduced-motion:reduce){.live-proof-card{transition:none!important}}
-
-
-
-
-/* Live Proof Observatory: premium command-deck proof moment */
-.proof-observatory{position:relative;isolation:isolate;overflow:hidden;scroll-margin-top:120px;padding:clamp(108px,12vw,156px) 0 clamp(76px,10vw,132px);background:radial-gradient(circle at 18% 10%,rgba(124,118,255,.22),transparent 30%),radial-gradient(circle at 84% 36%,rgba(54,211,255,.12),transparent 28%),linear-gradient(180deg,#070912 0%,#0b0e19 52%,#05070d 100%);border-top:1px solid rgba(255,255,255,.08);border-bottom:1px solid rgba(255,255,255,.08)}
-.proof-observatory:before{content:"";position:absolute;inset:0;background:linear-gradient(rgba(255,255,255,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.026) 1px,transparent 1px);background-size:64px 64px;mask-image:radial-gradient(circle at 50% 45%,#000 0%,transparent 72%);opacity:.42;z-index:-2}.proof-observatory:after{content:"";position:absolute;inset:auto -10% -34% -10%;height:42%;background:radial-gradient(ellipse at center,rgba(113,112,255,.28),transparent 62%);filter:blur(28px);z-index:-3}.proof-orbit{position:absolute;right:clamp(-110px,2vw,40px);top:42px;width:min(42vw,520px);aspect-ratio:1;border:1px solid rgba(255,255,255,.075);border-radius:999px;opacity:.7;z-index:-1}.proof-orbit:before,.proof-orbit:after{content:"";position:absolute;inset:11%;border:1px solid rgba(255,255,255,.055);border-radius:inherit}.proof-orbit:after{inset:24%;border-color:rgba(113,112,255,.22)}.proof-orbit span{position:absolute;width:8px;height:8px;border-radius:999px;background:#8ff0c6;box-shadow:0 0 22px rgba(143,240,198,.8)}.proof-orbit span:nth-child(1){left:16%;top:24%}.proof-orbit span:nth-child(2){right:22%;top:48%;background:#9aa7ff}.proof-orbit span:nth-child(3){left:44%;bottom:15%;background:#7ee7ff}.proof-observatory-wrap{position:relative;display:grid;gap:28px}.proof-observatory-copy{max-width:850px}.proof-observatory .kicker{color:#aeb8ff}.proof-observatory .section-title{max-width:920px;font-size:clamp(2.65rem,6vw,5.6rem);line-height:.91;letter-spacing:-.075em}.proof-observatory .section-lede{max-width:760px;color:rgba(235,241,255,.74)}.proof-command-frame{position:relative;border:1px solid rgba(255,255,255,.12);border-radius:28px;padding:clamp(16px,2vw,24px);background:linear-gradient(180deg,rgba(255,255,255,.07),rgba(255,255,255,.032));box-shadow:0 30px 120px rgba(0,0,0,.48),inset 0 1px 0 rgba(255,255,255,.08);backdrop-filter:blur(14px)}.proof-command-frame:before{content:"";position:absolute;inset:1px;border-radius:27px;border:1px solid rgba(255,255,255,.04);pointer-events:none}.proof-frame-top,.proof-frame-bottom{display:flex;justify-content:space-between;gap:14px;color:rgba(235,241,255,.48);font-size:.72rem;letter-spacing:.14em;text-transform:uppercase}.proof-frame-bottom{justify-content:flex-start;flex-wrap:wrap;margin-top:16px}.proof-frame-bottom span{border:1px solid rgba(255,255,255,.09);border-radius:999px;padding:.42rem .7rem;background:rgba(255,255,255,.035)}.proof-metric-grid{display:grid;grid-template-columns:1.15fr .95fr .95fr 1.05fr;gap:12px;margin-top:18px}.proof-metric-card{position:relative;min-width:0;min-height:230px;padding:20px;border:1px solid rgba(255,255,255,.11);border-radius:22px;background:radial-gradient(circle at 16% 10%,rgba(255,255,255,.11),transparent 32%),linear-gradient(180deg,rgba(11,14,27,.92),rgba(9,11,20,.72));overflow:hidden;box-shadow:inset 0 1px 0 rgba(255,255,255,.08)}.proof-metric-card:after{content:"";position:absolute;left:18px;right:18px;bottom:16px;height:2px;background:linear-gradient(90deg,rgba(143,240,198,.9),rgba(122,144,255,.2),transparent)}.proof-card-index{position:absolute;right:18px;top:16px;color:rgba(235,241,255,.26);font-size:.78rem;font-family:ui-monospace,SFMono-Regular,Menlo,monospace}.proof-metric-label{margin:0 40px 0 0;color:#aeb8ff;font-size:.72rem;line-height:1.2;text-transform:uppercase;letter-spacing:.14em}.proof-metric-value{display:block;margin:42px 0 14px;font-size:clamp(2.7rem,5vw,5.3rem);line-height:.78;letter-spacing:-.085em;color:#f7fbff;text-shadow:0 0 34px rgba(126,231,255,.16)}.proof-metric-copy{max-width:17rem;margin:0;color:rgba(235,241,255,.7);font-size:.95rem;line-height:1.45}.proof-metric-fresh{position:absolute;left:20px;bottom:26px;color:#8ff0c6;font-size:.72rem;letter-spacing:.12em;text-transform:uppercase}.proof-observatory-note{max-width:840px;margin:0;color:rgba(235,241,255,.62);font-size:.95rem}.proof-metric-card-1{grid-row:span 2}.proof-metric-card-1 .proof-metric-value{font-size:clamp(3.5rem,7vw,7.2rem)}.proof-metric-card-4{background:radial-gradient(circle at 70% 20%,rgba(143,240,198,.13),transparent 36%),linear-gradient(180deg,rgba(11,14,27,.94),rgba(9,11,20,.74))}@media(max-width:980px){.proof-metric-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.proof-metric-card-1{grid-row:auto}.proof-observatory .section-title{font-size:clamp(2.4rem,9vw,4.4rem)}}@media(max-width:620px){.proof-observatory{padding:68px 0}.proof-orbit{opacity:.34;right:-190px}.proof-metric-grid{grid-template-columns:1fr}.proof-metric-card{min-height:190px}.proof-frame-top{align-items:flex-start;flex-direction:column}.proof-observatory .section-title{letter-spacing:-.055em}}@media(prefers-reduced-motion:reduce){.proof-orbit,.proof-metric-card{transition:none!important;animation:none!important}}
-
-
-/* Mobile proof-card polish: prevent freshness badges from colliding with copy. */
-.proof-metric-card{display:flex;flex-direction:column;padding-bottom:22px;}
-.proof-metric-copy{padding-right:.25rem;}
-.proof-metric-fresh{position:static;display:inline-flex;align-items:center;gap:.45rem;width:max-content;margin-top:auto;padding-top:18px;}
-.proof-metric-fresh:before{content:"";width:.42rem;height:.42rem;border-radius:999px;background:currentColor;box-shadow:0 0 14px currentColor;opacity:.8;}
-.proof-metric-live{animation:proofLivePulse 2.8s ease-in-out infinite;}
-.proof-metric-live:before{animation:proofLiveDot 2.8s ease-in-out infinite;}
-@keyframes proofLivePulse{0%,100%{opacity:.72;text-shadow:0 0 0 rgba(143,240,198,0)}50%{opacity:1;text-shadow:0 0 18px rgba(143,240,198,.38)}}
-@keyframes proofLiveDot{0%,100%{transform:scale(.86);opacity:.55;box-shadow:0 0 8px currentColor}50%{transform:scale(1.15);opacity:1;box-shadow:0 0 20px currentColor}}
-@media(max-width:620px){.proof-metric-card{min-height:214px;padding-bottom:22px}.proof-metric-value{margin:34px 0 12px}.proof-metric-copy{font-size:.92rem;line-height:1.38}.proof-metric-fresh{padding-top:14px}}
-@media(prefers-reduced-motion:reduce){.proof-metric-live,.proof-metric-live:before{animation:none!important}}
-
-
-/* =====================================================================
-   PHASE D — award-level pass
-   Full-page faint grid · GAOS/HARMONIC 3D control panel · HARMONIC
-   anatomy · product offer sections. Self-contained, no JS dependency,
-   reduced-motion safe, separate desktop / mobile treatments.
-   ===================================================================== */
-
-/* --- Full-page faint grid field (sits behind all content) --- */
-.grid-field{position:fixed;inset:0;z-index:0;pointer-events:none;
-  background-image:linear-gradient(rgba(54,224,255,.045) 1px,transparent 1px),linear-gradient(90deg,rgba(54,224,255,.035) 1px,transparent 1px);
-  background-size:56px 56px;
-  -webkit-mask-image:radial-gradient(135% 95% at 50% -8%,#000 0%,transparent 78%);
-  mask-image:radial-gradient(135% 95% at 50% -8%,#000 0%,transparent 78%);
-  opacity:.55}
-.nav,main,.foot{position:relative;z-index:1}
-@media(max-width:760px){.grid-field{background-size:42px 42px;opacity:.4}}
-
-/* --- GAOS / HARMONIC: opaque 3D control panel (replaces orbit visual) --- */
-.harmonic-grid{align-items:stretch}
-.harmonic-copy{animation:hCopyInRight .9s var(--ease) both}
-.harmonic-visual{
-  min-height:560px;border-radius:28px;
-  border:1px solid rgba(125,227,255,.22);
-  /* OPAQUE deck — not transparent */
-  background:
-    radial-gradient(150% 80% at 50% -12%,rgba(77,209,255,.16),transparent 62%),
-    linear-gradient(180deg,#0c1422 0%,#0a1019 58%,#070c14 100%);
-  box-shadow:
-    0 60px 150px -50px rgba(0,0,0,.96),
-    0 0 100px -52px rgba(77,209,255,.55),
-    inset 0 1px 0 rgba(255,255,255,.10),
-    inset 0 0 70px rgba(4,8,16,.85);
-  padding:26px;display:flex;flex-direction:column;gap:18px;overflow:hidden;
-  animation:hPanelInLeft .9s var(--ease) both}
-/* neutralize the old perspective-ellipse pseudo, repurpose as etched bezel */
-.harmonic-visual::before{content:"";position:absolute;inset:11px;left:11px;right:11px;top:11px;bottom:11px;
-  width:auto;height:auto;border:1px solid rgba(255,255,255,.06);border-radius:20px;
-  background:none;transform:none;filter:none;pointer-events:none;z-index:3}
-.hpanel-laser{position:absolute;left:14px;right:14px;top:0;height:2px;z-index:4;
-  background:linear-gradient(90deg,transparent,rgba(125,227,255,.95),transparent);
-  box-shadow:0 0 20px rgba(77,209,255,.85);animation:hLaser 4.6s var(--ease) infinite}
-@keyframes hLaser{0%{top:6%;opacity:0}8%{opacity:1}92%{opacity:1}100%{top:94%;opacity:0}}
-.hpanel-head{position:relative;z-index:5;display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap}
-.hpanel-mark{font-family:var(--mono);font-weight:600;color:#dff6ff;
-  font-size:clamp(15px,2.2vw,22px);letter-spacing:.10em;line-height:1;
-  white-space:nowrap;max-width:100%;overflow:hidden;text-overflow:ellipsis;
-  text-shadow:0 0 22px rgba(77,209,255,.45)}
-.hpanel-mark i{font-style:normal;color:var(--cyan);margin:0 .35em;opacity:.8}
-.hpanel-status{font-family:var(--mono);font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:#7de3ff;
-  border:1px solid rgba(125,227,255,.3);border-radius:999px;padding:6px 11px;background:rgba(77,209,255,.07);white-space:nowrap}
-.hpanel-core{position:relative;z-index:5;flex:1;min-height:230px;display:grid;place-items:center}
-.hpanel-ring{position:absolute;width:62%;aspect-ratio:1;border-radius:50%;border:1px solid rgba(125,227,255,.32);
-  box-shadow:0 0 30px -6px rgba(77,209,255,.3) inset;animation:hSpin 22s linear infinite}
-.hpanel-ring.r2{width:84%;border-color:rgba(174,123,255,.28);animation-duration:34s;animation-direction:reverse}
-.hpanel-reactor{position:relative;z-index:2;width:150px;height:150px;border-radius:50%;display:grid;place-items:center;text-align:center;
-  background:radial-gradient(circle,rgba(234,248,255,.20),rgba(77,209,255,.12) 44%,rgba(6,11,20,.92) 84%);
-  border:1px solid rgba(255,255,255,.20);box-shadow:0 0 60px -8px rgba(77,209,255,.5),inset 0 0 30px rgba(4,8,16,.7)}
-.hpanel-reactor span{font-family:var(--mono);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:#7de3ff}
-.hpanel-reactor strong{display:block;margin-top:4px;font-size:clamp(15px,1.6vw,19px);letter-spacing:.04em;color:#fff;max-width:130px}
-.hpanel-readout{position:relative;z-index:5;display:grid;gap:9px}
-.hpanel-row{display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:12px;
-  padding:11px 14px;border-radius:13px;border:1px solid rgba(255,255,255,.08);
-  background:linear-gradient(90deg,rgba(77,209,255,.08),rgba(255,255,255,.02))}
-.hpanel-row span{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:#8fb4cc}
-.hpanel-row b{font-size:13.5px;color:#eef7fd;font-weight:500}
-.hpanel-row i{width:9px;height:9px;border-radius:50%;background:var(--green);box-shadow:0 0 12px rgba(66,226,155,.9)}
-@keyframes hSpin{to{transform:rotate(360deg)}}
-@keyframes hPanelInLeft{from{opacity:0;transform:translateX(-58px)}to{opacity:1;transform:none}}
-@keyframes hCopyInRight{from{opacity:0;transform:translateX(52px)}to{opacity:1;transform:none}}
-/* mobile control-panel treatment (distinct from desktop) */
-@media(max-width:980px){
-  .harmonic-visual{min-height:auto;padding:22px;animation:none}
-  .harmonic-copy{animation:none}
-  .hpanel-core{min-height:200px}
-  .hpanel-reactor{width:128px;height:128px}
-}
-@media(max-width:520px){
-  .harmonic-visual{border-radius:22px;padding:18px;gap:14px}
-  .hpanel-mark{font-size:14px;letter-spacing:.06em}
-  .hpanel-status{font-size:9.5px;padding:5px 9px}
-  .hpanel-reactor{width:112px;height:112px}
-  .hpanel-row{grid-template-columns:auto 1fr auto;padding:10px 12px}
-}
-
-/* --- Premium HARMONIC anatomy section --- */
-.harmonic-anatomy{position:relative;margin-top:46px}
-.harmonic-anatomy .anatomy-head{max-width:760px;margin-bottom:26px}
-.harmonic-anatomy .anatomy-head h3{font-size:clamp(22px,3vw,30px);color:#fff;margin:0 0 10px;letter-spacing:-.02em}
-.harmonic-anatomy .anatomy-head p{color:rgba(236,244,255,.7);line-height:1.65;margin:0}
-.anatomy-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
-.anatomy-node{position:relative;padding:20px 18px;border-radius:18px;
-  border:1px solid rgba(255,255,255,.10);
-  background:linear-gradient(180deg,rgba(77,209,255,.06),rgba(255,255,255,.022));
-  box-shadow:inset 0 1px 0 rgba(255,255,255,.06);overflow:hidden;transition:.35s var(--ease)}
-.anatomy-node:hover{border-color:rgba(125,227,255,.42);transform:translateY(-4px)}
-.anatomy-node::after{content:"";position:absolute;left:18px;right:18px;bottom:14px;height:2px;
-  background:linear-gradient(90deg,rgba(125,227,255,.8),rgba(174,123,255,.2),transparent)}
-.anatomy-glyph{font-family:var(--mono);font-size:30px;font-weight:700;line-height:1;color:#7de3ff;
-  text-shadow:0 0 22px rgba(77,209,255,.5)}
-.anatomy-node h4{margin:12px 0 7px;font-size:14.5px;color:#fff;letter-spacing:-.01em}
-.anatomy-node p{margin:0 0 14px;font-size:13px;line-height:1.5;color:rgba(236,244,255,.66)}
-@media(max-width:980px){.anatomy-grid{grid-template-columns:repeat(2,1fr)}}
-@media(max-width:520px){.anatomy-grid{grid-template-columns:1fr}}
-
-/* --- Product offer sections --- */
-section.offers{padding:clamp(72px,11vw,128px) 0;position:relative;
-  background:linear-gradient(180deg,var(--bg),var(--bg2))}
-.offers-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px;margin:46px 0 0}
-.offer{position:relative;display:flex;flex-direction:column;padding:30px 28px;border-radius:22px;
-  border:1px solid rgba(54,224,255,.14);
-  background:linear-gradient(180deg,rgba(54,224,255,.05),rgba(255,255,255,.014) 36%,transparent);
-  box-shadow:0 30px 80px -50px rgba(0,0,0,.85);transition:.35s var(--ease);overflow:hidden}
-.offer::before{content:"";position:absolute;inset:0;pointer-events:none;opacity:0;transition:.4s;
-  background:radial-gradient(420px 200px at 100% 0,rgba(54,224,255,.10),transparent 60%)}
-.offer:hover{border-color:rgba(54,224,255,.34);transform:translateY(-5px)}
-.offer:hover::before{opacity:1}
-.offer-tag{display:inline-flex;width:max-content;font-family:var(--mono);font-size:11px;letter-spacing:.16em;
-  text-transform:uppercase;color:var(--cyan);background:rgba(54,224,255,.08);border:1px solid var(--line2);
-  padding:5px 11px;border-radius:7px;margin:0 0 16px}
-.offer-outcome{font-size:20px;font-weight:640;color:#eef7fd;line-height:1.25;margin:0 0 14px;letter-spacing:-.01em}
-.offer-gets{list-style:none;padding:0;margin:0 0 18px;display:grid;gap:9px}
-.offer-gets li{position:relative;padding-left:24px;color:var(--dim);font-size:14.5px;line-height:1.5}
-.offer-gets li::before{content:"";position:absolute;left:0;top:7px;width:12px;height:12px;border-radius:4px;
-  background:rgba(66,226,155,.14);border:1px solid var(--green);box-shadow:0 0 10px -2px rgba(66,226,155,.6)}
-.offer-proof{margin:0 0 20px;padding:13px 15px;border-radius:13px;font-size:13px;line-height:1.55;
-  color:#bfe9f6;border:1px solid rgba(54,224,255,.18);background:rgba(54,224,255,.05)}
-.offer-proof b{color:#7de3ff;font-weight:600}
-.offer-foot{margin-top:auto;display:flex;flex-wrap:wrap;align-items:center;gap:14px;justify-content:space-between}
-.offer-price{font-family:var(--mono);font-size:12px;letter-spacing:.04em;color:var(--faint)}
-.offer-price b{color:#cfe7f5;font-weight:600}
-.offer-foot .btn{white-space:nowrap}
-@media(max-width:900px){.offers-grid{grid-template-columns:1fr;gap:16px}.offer{padding:26px 22px}}
-@media(max-width:520px){.offer-outcome{font-size:18px}.offer-foot{gap:12px}.offer-foot .btn{width:100%;justify-content:center}}
-
-/* reduced motion — disable all Phase D motion, keep content fully visible */
-@media(prefers-reduced-motion:reduce){
-  .harmonic-visual,.harmonic-copy{animation:none!important;opacity:1!important;transform:none!important}
-  .hpanel-laser{display:none}
-  .hpanel-ring{animation:none!important}
-  .anatomy-node,.offer{transition:none!important}
-}
-
-/* ===== WOW pass 2: hero photoreal grid layer, kinetic section headings, live proof band ===== */
-/* hero background image (generated Tron light-grid), sits under the live canvas; falls back to base bg if the asset fails to load */
-.hero-bg{position:absolute;inset:0;z-index:0;pointer-events:none;
-  background:var(--bg) url("/assets/hero-grid.jpg") center 60% / cover no-repeat;
-  opacity:.92;will-change:transform;
-  animation:heroDrift 36s ease-in-out infinite alternate}
-@keyframes heroDrift{0%{transform:scale(1.06) translate3d(0,0,0)}100%{transform:scale(1.15) translate3d(0,-2.4%,0)}}
-@media(max-width:760px){.hero-bg{background-position:center 68%;opacity:.82}}
-@media(prefers-reduced-motion:reduce){.hero-bg{animation:none;transform:scale(1.04)}}
-
-/* kinetic section headings: per-word rise + de-blur, staggered, on scroll-in */
-.kinetic .kw{display:inline-block;opacity:0;transform:translateY(.85em);filter:blur(6px);
-  transition:opacity .6s var(--ease),transform .78s var(--ease),filter .6s var(--ease);
-  transition-delay:var(--d,0s);will-change:transform,opacity,filter}
-.kinetic.kin-in .kw{opacity:1;transform:none;filter:blur(0)}
-@media(prefers-reduced-motion:reduce){.kinetic .kw{opacity:1;transform:none;filter:none;transition:none}}
-
-/* live proof band */
-.proofband{position:relative;padding:clamp(64px,9vw,104px) 0;border-top:1px solid var(--line);
-  background:linear-gradient(180deg,var(--bg),rgba(9,14,22,.55));overflow:hidden}
-.proofband::before{content:"";position:absolute;inset:0;z-index:0;pointer-events:none;
-  background:radial-gradient(58% 120% at 84% 0%,rgba(54,224,255,.10),transparent 60%),radial-gradient(46% 100% at 8% 100%,rgba(126,108,255,.08),transparent 60%)}
-.proofband .wrap{position:relative;z-index:1}
-.proofband-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(178px,1fr));gap:14px;margin:42px 0 0}
-.pb-stat{position:relative;padding:26px 22px 24px;border:1px solid var(--line);border-radius:18px;
-  background:linear-gradient(180deg,rgba(54,224,255,.05),rgba(255,255,255,.012) 42%,transparent);
-  overflow:hidden;opacity:0;transform:translateY(26px) scale(.98);
-  transition:opacity .7s var(--ease),transform .7s var(--ease),border-color .35s var(--ease);
-  transition-delay:var(--d,0s)}
-.pb-stat.in{opacity:1;transform:none}
-.pb-stat:hover{border-color:rgba(54,224,255,.34);transform:translateY(-4px)}
-.pb-stat::after{content:"";position:absolute;left:22px;right:22px;bottom:0;height:2px;
-  background:linear-gradient(90deg,var(--cyan),rgba(122,144,255,.25),transparent);
-  transform:scaleX(0);transform-origin:0 50%;transition:transform 1s var(--ease) .3s}
-.pb-stat.in::after{transform:scaleX(1)}
-.pb-val{font-family:var(--mono);font-weight:700;font-size:clamp(34px,4.4vw,52px);line-height:1;
-  color:#eaf6ff;letter-spacing:-.02em;text-shadow:0 0 24px rgba(54,224,255,.3)}
-.pb-val .pb-suf{font-size:.5em;color:var(--cyan);margin-left:2px;vertical-align:.32em;text-shadow:none}
-.pb-label{margin:14px 0 0;color:var(--dim);font-size:14px;line-height:1.42;max-width:24ch}
-.pb-tag{display:inline-flex;align-items:center;gap:7px;margin:16px 0 0;font-family:var(--mono);
-  font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--faint)}
-.pb-tag i{width:6px;height:6px;border-radius:50%;background:var(--faint);flex:none}
-.pb-tag-live{color:#8ff0c6}
-.pb-tag-live i{background:var(--green);box-shadow:0 0 8px rgba(66,226,155,.85);animation:pl 2s infinite}
-.pb-tag-est{color:var(--amber)}.pb-tag-est i{background:var(--amber)}
-.proofband-note{margin:26px 0 0;color:var(--faint);font-size:12.5px;font-family:var(--mono);letter-spacing:.02em;max-width:82ch;line-height:1.6}
-@media(prefers-reduced-motion:reduce){.pb-stat{opacity:1;transform:none;transition:none}.pb-stat::after{transform:scaleX(1)}.pb-tag-live i{animation:none}}
-@media(max-width:520px){.proofband-grid{grid-template-columns:1fr 1fr}.pb-val{font-size:clamp(30px,9vw,40px)}}
-
-
-/* =====================================================================
-   FABLE5 AWARD PASS — animated hero grid, cycling command-deck avatars,
-   proof-card overflow containment, mobile polish. Self-contained,
-   reduced-motion safe. Appended last so it wins the cascade.
-   ===================================================================== */
-
-/* --- Hero: let the animated Tron light-grid canvas lead; the still
-   image becomes a faint base glow rather than the whole hero. --- */
-/* Anchor the animated layers to the top viewport so the horizon is always in
-   view (the hero can be very tall on mobile once the deck stacks under the copy). */
-.hero-canvas{z-index:1;opacity:.96;bottom:auto;height:100vh;height:100svh}
-.hero-bg{opacity:.34;animation-duration:52s}
-
-/* CSS-only animated Tron corridor grid — the no-JS / blocked-asset fallback so
-   the hero is ALWAYS alive (canvas is a progressive enhancement layered on top).
-   Two perspective planes (floor + ceiling) meeting at a glowing horizon. */
-.hero-grid{position:absolute;top:0;left:0;right:0;bottom:auto;height:100vh;height:100svh;
-  z-index:0;pointer-events:none;overflow:hidden;transition:opacity .9s var(--ease);
-  background:
-    linear-gradient(transparent calc(50% - 1px), rgba(150,246,255,.5) 50%, transparent calc(50% + 1px)),
-    radial-gradient(62% 42% at 50% 50%, rgba(54,224,255,.28), transparent 72%)}
-.hero-grid::before,.hero-grid::after{content:"";position:absolute;left:-45%;right:-45%;height:72%;
-  background-image:
-    repeating-linear-gradient(to right, rgba(96,234,255,.46) 0 1.5px, transparent 1.5px 66px),
-    repeating-linear-gradient(to bottom, rgba(96,234,255,.46) 0 1.5px, transparent 1.5px 66px);
-  animation:heroGridScroll 3.4s linear infinite;will-change:background-position}
-.hero-grid::before{top:50%;transform-origin:50% 0;transform:perspective(300px) rotateX(77deg);
-  -webkit-mask-image:linear-gradient(to bottom,#000,transparent 84%);mask-image:linear-gradient(to bottom,#000,transparent 84%)}
-.hero-grid::after{bottom:50%;transform-origin:50% 100%;transform:perspective(300px) rotateX(-77deg);
-  -webkit-mask-image:linear-gradient(to top,#000,transparent 84%);mask-image:linear-gradient(to top,#000,transparent 84%);
-  animation-direction:reverse}
-@keyframes heroGridScroll{from{background-position:0 0,0 0}to{background-position:0 0,0 66px}}
-/* when the JS canvas is painting, retire the CSS grid so we never double up */
-.hero.fleet-live .hero-grid{opacity:0}
-@media(prefers-reduced-motion:reduce){
-  /* No canvas + no motion: present a tasteful static Tron still + static grid. */
-  .hero-bg{opacity:.9;transform:scale(1.04);animation:none}
-  .hero-grid{opacity:.7}
-  .hero-grid::before,.hero-grid::after{animation:none}
-}
-
-/* --- Command deck: cycling avatar portraits + changing role titles --- */
-.operator-portrait{overflow:hidden;background:
-  radial-gradient(circle at 50% 24%,rgba(255,207,102,.18),transparent 30%),
-  linear-gradient(180deg,rgba(54,224,255,.10),rgba(66,226,155,.06) 42%,rgba(3,7,11,.6))}
-.operator-portrait::before{content:none}          /* drop hardcoded RELEASE ENGINEER label */
-.op-av{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 20%;
-  opacity:0;transform:scale(1.07);filter:saturate(1.06) contrast(1.03);
-  transition:opacity .9s var(--ease),transform 6.5s ease-out;will-change:opacity,transform}
-.op-av.is-on{opacity:1;transform:scale(1)}
-.operator-portrait .portrait-scan{z-index:3}
-.portrait-frame{position:absolute;inset:0;z-index:4;pointer-events:none;border-radius:22px;
-  box-shadow:inset 0 0 0 1px rgba(66,226,155,.28),inset 0 -64px 60px -34px rgba(0,0,0,.9),
-    inset 0 30px 54px -40px rgba(66,226,155,.42)}
-.portrait-frame::before,.portrait-frame::after{content:"";position:absolute;width:20px;height:20px;
-  border:1.6px solid rgba(102,247,214,.72)}
-.portrait-frame::before{left:11px;top:11px;border-right:0;border-bottom:0;border-radius:6px 0 0 0}
-.portrait-frame::after{right:11px;bottom:11px;border-left:0;border-top:0;border-radius:0 0 6px 0}
-.op-code{position:absolute;left:12px;top:12px;z-index:5;font-family:var(--mono);font-size:10px;
-  letter-spacing:.2em;text-transform:uppercase;color:#c9ffe9;background:rgba(4,10,8,.5);
-  border:1px solid rgba(102,247,214,.42);border-radius:6px;padding:4px 8px;backdrop-filter:blur(3px)}
-#deck-title{transition:opacity .38s var(--ease)}
-#deck-title.swap{opacity:0}
-.deck-status .pulse{display:inline-block;vertical-align:middle;margin-right:4px}
-@media(prefers-reduced-motion:reduce){.op-av{transition:none}}
-
-/* --- Proof-metric cards: keep every word inside its panel at all sizes --- */
-.proof-metric-card{min-width:0}
-.proof-metric-value{overflow-wrap:anywhere;word-break:break-word;hyphens:auto;max-width:100%;
-  font-size:clamp(2.1rem,4.4vw,3.5rem);line-height:.94;letter-spacing:-.04em}
-.proof-metric-card-1 .proof-metric-value{font-size:clamp(2.6rem,5.4vw,4.6rem)}
-.proof-metric-label,.proof-metric-copy,.proof-metric-fresh{min-width:0;max-width:100%;overflow-wrap:anywhere}
-.proof-metric-copy{max-width:100%}
-.proof-frame-bottom span{min-width:0;overflow-wrap:anywhere}
-
-/* --- Mobile polish: no horizontal scroll, comfortable command deck --- */
-@media(max-width:760px){
-  html,body{max-width:100%;overflow-x:hidden}
-  /* top-align the hero so the copy starts high — no centered dead-space above the fold */
-  .hero{align-items:flex-start;padding-top:104px}
-  .hero-inner{padding-top:0}
-  .operator-portrait{min-height:230px}
-  .op-code{font-size:9px;padding:3px 7px}
-  .proof-metric-value{font-size:clamp(2rem,9vw,3rem)}
-  .proof-metric-card-1 .proof-metric-value{font-size:clamp(2.3rem,11vw,3.4rem)}
-}
-@media(max-width:520px){
-  .operator-portrait{min-height:260px}
-  .deck-head b{font-size:16px}
-}
-
-</style>
+<script>
+/* inline data-URI seed so the first command-deck card renders a face even when /assets is blocked */
+window.GF_SEED = "data:image/jpeg;base64,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";
+</script>
 </head>
 <body>
-<div class="grid-field" aria-hidden="true"></div>
-<a class="skip" href="#main">Skip to content</a>
 
+<!-- intro -->
+<div id="intro" aria-hidden="true">
+  <div class="intro-word"><span>G</span><span>R</span><span>I</span><span>D</span><span>F</span><span>L</span><span>E</span><span>E</span><span>T</span></div>
+  <div class="intro-bar"><i></i></div>
+  <div class="intro-sub">Initializing the grid</div>
+</div>
+<script>
+/* failsafe: never trap the page behind the intro if scripts are blocked */
+setTimeout(function () {
+  var i = document.getElementById("intro");
+  if (i && !i.classList.contains("gone") && !window.__gfIntroLive) i.classList.add("gone");
+}, 2600);
+</script>
+
+<!-- nav -->
 <header class="nav" id="nav">
   <a class="brand" href="/" aria-label="GridFleet home">
-    <span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
-    <span class="brand-word">GRID<b>FLEET</b></span>
+    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+      <path d="M12 2 21 7v10l-9 5-3-1.7V13H4.5V8.2L12 4.3l6 3.1v8.2l-4.5 2.5" stroke="#22e6ff" stroke-width="1.5" stroke-linecap="square"/>
+    </svg>
+    <b>GRIDFLEET<span class="brand-dot">_</span></b>
   </a>
   <nav class="nav-links" aria-label="Primary">
     <a href="/vera">Vera</a>
     <a href="/workers.html">Workers</a>
-    <a href="#offers">Services</a>
-    <a href="#how">How it works</a>
-    <a href="#fleet-roles">The fleet</a>
-    <a href="#receipts">Receipts</a>
     <a href="/docs.html">Docs</a>
+    <a href="/about.html">About</a>
   </nav>
-  <a class="btn btn-primary nav-cta" href="/workers.html">Hire a Worker</a>
+  <div style="display:flex;align-items:center;gap:10px">
+    <a class="btn btn--solid nav-cta" href="#deploy">Deploy the fleet</a>
+    <button class="burger" id="burger" aria-label="Menu" aria-expanded="false" aria-controls="menu"><i></i><i></i><i></i></button>
+  </div>
 </header>
 
-<main id="main">
+<!-- overlay menu -->
+<div id="menu" role="dialog" aria-label="Site menu">
+  <div class="menu-grid">
+    <nav class="menu-main" aria-label="Scenes">
+      <a href="#fleet"><small>01</small>The living fleet</a>
+      <a href="#work"><small>02</small>Watch it work</a>
+      <a href="#receipts"><small>03</small>The receipt</a>
+      <a href="#deck"><small>04</small>Command deck</a>
+      <a href="#deploy"><small>05</small>Deploy</a>
+    </nav>
+    <nav class="menu-side" aria-label="Pages">
+      <a href="/vera">Vera — AI receptionist</a>
+      <a href="/workers.html">Hire a worker</a>
+      <a href="/docs.html">API docs</a>
+      <a href="/audits.html">DeFi audits</a>
+      <a href="/about.html">About</a>
+      <a href="/signup.html">Request access</a>
+    </nav>
+  </div>
+  <div class="menu-foot">GridFleet — send the job · get the receipt</div>
+</div>
 
-  <!-- HERO -->
-  <section class="hero">
-    <div class="hero-bg" aria-hidden="true"></div>
-    <div class="hero-grid" aria-hidden="true"></div>
-    <canvas id="fleet" class="hero-canvas" aria-hidden="true"></canvas>
-    <div class="hero-veil" aria-hidden="true"></div>
-    
-<div class="hero-inner">
-      <div class="hero-copy">
-        <p class="eyebrow"><span class="pulse"></span> Operator-controlled - receipt-backed - command deck</p>
-        <h1 class="hero-title">AI agents that do the work -<br><span class="grad">and return proof.</span></h1>
-        <p class="hero-sub"><strong>Send the job. Get the receipt.</strong> Send us one real job - get a sample receipt-backed result, free. GridFleet routes operational work through the 16 specialist agents that run The Grid — 6 launch workers are hireable today, and <a href="/vera" style="color:var(--cyan)">Vera, the flagship AI receptionist</a>, answers your phones — then returns the evidence stack so you can inspect what happened.</p>
-        <div class="hero-cta">
-          <a class="btn btn-primary btn-lg" href="#access">Try one job free <span aria-hidden="true">→</span></a>
-          <a class="btn btn-ghost btn-lg" href="#dispatch">See dispatch examples</a>
-          <a class="btn btn-ghost btn-lg" href="/docs.html">Read API docs</a>
-        </div>
-        <p class="free-wedge-note">No fabricated demos, testimonials, or logos - the sample is one real job and its evidence.</p>
-        <dl class="hero-stats">
-          <div><dt data-count="16">16</dt><dd>specialist agents</dd></div>
-          <div><dt data-count="1">1</dt><dd>access layer</dd></div>
-          <div><dt>proof</dt><dd>built into every sample</dd></div>
-        </dl>
-      </div>
-      <div class="hero-demo command-deck cinematic-deck" aria-label="GridFleet command deck release view">
-        <div class="deck-head">
-          <div><span class="deck-kicker">COMMAND DECK</span><b id="deck-title">Communications Operator</b></div>
-          <span class="deck-status"><span class="pulse"></span> live · on deck</span>
-        </div>
-        <div class="operator-stage">
-          <div class="operator-portrait" aria-label="Fleet member on deck">
-            <img class="op-av is-on" id="op-av-a" src="data:image/jpeg;base64,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" data-full="/assets/agents/clu.jpg" alt="" decoding="async" />
-            <img class="op-av" id="op-av-b" alt="" decoding="async" />
-            <span class="portrait-scan" aria-hidden="true"></span>
-            <span class="portrait-frame" aria-hidden="true"></span>
-            <span class="op-code" id="op-code">CLU</span>
-          </div>
-          <div class="release-panes">
-            <div class="pane pane-build"><span>BUILD</span><b id="build-pulse">green</b></div>
-            <div class="pane pane-route"><span>ROUTE</span><b id="command-log">dispatch - classify - verify - receipt</b></div>
-            <div class="pane pane-proof"><span>STAMP</span><b>receipt attached</b></div>
-          </div>
-        </div>
-        <div class="pane-relay" aria-hidden="true">
-          <i></i><i></i><i></i><i></i><i></i>
-        </div>
-        <div class="agent-roster" id="agent-roster" aria-label="Specialist role roster">
-          <span data-role="intake">intake</span><span data-role="canon">governance</span><span class="hot" data-role="scope">coordination</span><span class="hot" data-role="release">release</span>
-          <span class="hot" data-role="creative">creative</span><span data-role="traffic">positioning</span><span class="hot" data-role="ops">runtime</span><span data-role="health">health</span>
-          <span data-role="red team">security</span><span data-role="red team">review</span><span data-role="voice">comms</span><span data-role="finance">finance</span>
-          <span data-role="boundary">boundary</span><span data-role="research">research</span><span class="hot" data-role="reception">reception</span><span data-role="signals">signals</span>
-        </div>
-        <div class="deck-receipt receipt-stamp">
-          <span>sample wedge</span>
-          <b>one real job - free receipt-backed result</b>
-        </div>
-      </div>
+<!-- scene progress rail -->
+<div id="rail" aria-hidden="true">
+  <button class="rail-node" type="button"><span class="rail-tip">Fleet</span></button>
+  <div class="rail-seg"><i></i></div>
+  <button class="rail-node" type="button"><span class="rail-tip">Work</span></button>
+  <div class="rail-seg"><i></i></div>
+  <button class="rail-node" type="button"><span class="rail-tip">Receipts</span></button>
+  <div class="rail-seg"><i></i></div>
+  <button class="rail-node" type="button"><span class="rail-tip">Deck</span></button>
+  <div class="rail-seg"><i></i></div>
+  <button class="rail-node" type="button"><span class="rail-tip">Deploy</span></button>
+</div>
+
+<main>
+
+<!-- ============ scene 01 · living fleet ============ -->
+<section class="hero scene" id="fleet" aria-label="The living fleet">
+  <canvas id="fleet-canvas" aria-hidden="true"></canvas>
+
+  <div class="hero-ledger" id="hero-ledger" aria-hidden="true">
+    <div class="hl-head"><span>Receipt ledger</span><b>LIVE</b></div>
+    <div class="hl-list" id="hl-list"></div>
+  </div>
+
+  <div class="hero-inner wrap">
+    <div class="hero-eyebrow">
+      <span class="pulse-dot" aria-hidden="true"></span>
+      <span class="tag">The grid is live — 16 specialist agents</span>
     </div>
-    <div class="scroll-cue" aria-hidden="true"><span>Inspect the fleet</span><i></i></div>
-  </section>
-
-  <!-- POSITIONING -->
-  <section class="band" id="why">
-    <div class="wrap reveal">
-      <p class="kicker">The difference</p>
-      <h2 class="lead">A chatbot <em>answers</em>. GridFleet <em>acts</em> - and shows its work.</h2>
-      <p class="prose">Most AI products end at a confident sentence. GridFleet ends at a verified outcome: the right specialist role picks up the job, uses real tools inside a governed lane, and returns request ids, screenshots, source references and checks. You inspect evidence instead of trusting a claim.</p>
+    <h1 class="h-xxl">
+      <span class="line-mask"><span class="line-inner">The fleet does</span></span>
+      <span class="line-mask"><span class="line-inner">the work. <span class="accent">You keep</span></span></span>
+      <span class="line-mask"><span class="line-inner"><span class="accent">the receipts.</span></span></span>
+    </h1>
+    <p class="hero-sub"><strong>Send the job. Get the receipt.</strong> GridFleet routes real operational work through a governed fleet of specialist AI agents — and every action returns receipt-backed proof you can inspect.</p>
+    <div class="hero-ctas">
+      <a class="btn btn--solid" href="#deploy">Deploy the fleet <span class="btn-arrow" aria-hidden="true">&rarr;</span></a>
+      <a class="btn btn--ghost" href="#work">Watch it work</a>
     </div>
-  </section>
+  </div>
 
-  <!-- LIVE PROOF NUMBERS BAND -->
-  <section class="proofband" id="proof-numbers" aria-labelledby="proofband-title" data-proofband hidden>
-    <div class="wrap">
-      <p class="kicker reveal">Receipts, not adjectives</p>
-      <h2 class="section-title reveal" id="proofband-title">The Grid runs on proof. Here are the numbers.</h2>
-      <p class="prose reveal">Public-safe telemetry from the fleet&rsquo;s own governed proof layer &mdash; the same receipts and checks your job routes through. Every figure is labelled with how it was verified.</p>
-      <div class="proofband-grid" data-proofband-grid aria-live="polite"></div>
-      <p class="proofband-note" data-proofband-note></p>
-    </div>
-  </section>
+  <div class="hero-foot">
+    <span class="hf-live">Reliability <b>100%</b> &nbsp;·&nbsp; Incidents 30d <b>0</b><span class="hf-snap"> &nbsp;·&nbsp; latest verified snapshot</span></span>
+    <span class="scroll-cue">Scroll <i aria-hidden="true"></i></span>
+  </div>
+</section>
 
-  <!-- HOW -->
-  <section class="how" id="how">
-    <div class="wrap">
-      <p class="kicker reveal">How it works</p>
-      <h2 class="section-title reveal">Send a job. The fleet routes it. You inspect the proof.</h2>
-      <ol class="steps">
-        <li class="step reveal">
-          <span class="step-no">01</span>
-          <h3>Send the job</h3>
-          <p>One scoped request - a browser task, a monitoring check, a research question, an audit. No prompt-engineering ritual; describe the outcome you need.</p>
-        </li>
-        <li class="step reveal">
-          <span class="step-no">02</span>
-          <h3>The fleet routes it</h3>
-          <p>GridFleet assigns the right specialist role, uses the right tools, and keeps every action inside a governed, observable lane.</p>
-        </li>
-        <li class="step reveal">
-          <span class="step-no">03</span>
-          <h3>You inspect the proof</h3>
-          <p>The response carries receipts - request ids, screenshots, source links, verification notes - so the result is auditable, not just asserted.</p>
-        </li>
-      </ol>
-    </div>
-  </section>
-
-
-  <!-- PRODUCT OFFERS -->
-  <section class="offers" id="offers" aria-labelledby="offers-title">
-    <div class="wrap">
-      <p class="kicker reveal">What you can buy now</p>
-      <h2 class="section-title reveal" id="offers-title">Four ways to put the fleet to work.</h2>
-      <p class="prose reveal">Each offer routes through the same governed fleet and returns the same thing: an inspectable, receipt-backed result. Pricing is quote-based while public pricing is finalized - start a conversation and we scope it to your work.</p>
-      <div class="offers-grid">
-
-        <article class="offer reveal">
-          <p class="offer-tag">AI Receptionist</p>
-          <h3 class="offer-outcome">Every call answered, qualified, and logged - so nothing slips past the front desk.</h3>
-          <ul class="offer-gets">
-            <li>A named voice agent that greets callers, answers common questions, and routes or books</li>
-            <li>A written summary of each handled call: who called, what they wanted, what happened next</li>
-            <li>Operator-set boundaries on what the agent may say, promise, and escalate</li>
-          </ul>
-          <p class="offer-proof"><b>Proof promise:</b> every handled call returns an inspectable receipt - summary, outcome, and timestamp - never a claim you have to take on faith.</p>
-          <div class="offer-foot">
-            <span class="offer-price"><b>Starting price:</b> by quote</span>
-            <a class="btn btn-primary" href="#access">Book AI receptionist demo <span aria-hidden="true">&rarr;</span></a>
-          </div>
-        </article>
-
-        <article class="offer reveal">
-          <p class="offer-tag">Event &amp; Wedding Planner</p>
-          <h3 class="offer-outcome">Turn a flood of vendor threads and details into one organized, tracked plan.</h3>
-          <ul class="offer-gets">
-            <li>A structured intake that captures date, budget range, guest count, and priorities</li>
-            <li>Coordinated tracking of vendors, tasks, and timelines through one access layer</li>
-            <li>A running plan you can inspect, with each update attached to its source</li>
-          </ul>
-          <p class="offer-proof"><b>Proof promise:</b> every step returns a receipt - what was checked, what changed, and where the detail came from.</p>
-          <div class="offer-foot">
-            <span class="offer-price"><b>Starting price:</b> by quote</span>
-            <a class="btn btn-primary" href="#access">Launch wedding planning intake <span aria-hidden="true">&rarr;</span></a>
-          </div>
-        </article>
-
-        <article class="offer reveal">
-          <p class="offer-tag">Agentic Ops Audits</p>
-          <h3 class="offer-outcome">See the operational and config risk before it becomes an incident.</h3>
-          <ul class="offer-gets">
-            <li>A scoped review of selected surfaces against an operator-approved rubric</li>
-            <li>Findings ranked by severity, each tied to the evidence behind it</li>
-            <li>A report you can act on - including DeFi protocol configuration-risk reviews</li>
-          </ul>
-          <p class="offer-proof"><b>Proof promise:</b> every finding is source-linked and inspectable - scored against a rubric, not asserted.</p>
-          <div class="offer-foot">
-            <span class="offer-price"><b>Starting price:</b> by quote</span>
-            <a class="btn btn-primary" href="/audits.html">Request ops audit <span aria-hidden="true">&rarr;</span></a>
-          </div>
-        </article>
-
-        <article class="offer reveal">
-          <p class="offer-tag">Custom Workflow Automation</p>
-          <h3 class="offer-outcome">Bring the repetitive cross-tool job that is eating your team's time.</h3>
-          <ul class="offer-gets">
-            <li>We map your workflow to specialist roles inside the governed fleet</li>
-            <li>One integration exposes any specialist through the same receipt-backed access layer</li>
-            <li>Boundaries, review gates, and evidence defined up front with you</li>
-          </ul>
-          <p class="offer-proof"><b>Proof promise:</b> every run returns request ids, evidence, and a clear status - queued, verified, or stopped safely.</p>
-          <div class="offer-foot">
-            <span class="offer-price"><b>Starting price:</b> by quote</span>
-            <a class="btn btn-primary" href="#access">Talk to GridFleet <span aria-hidden="true">&rarr;</span></a>
-          </div>
-        </article>
-
-      </div>
-    </div>
-  </section>
-
-
-  <!-- GAOS / HARMONIC CONTROL LAYER -->
-  <section class="harmonic" id="harmonic" aria-labelledby="harmonic-title">
-    <div class="wrap harmonic-grid">
-      <div class="harmonic-copy reveal">
-        <p class="kicker">GAOS / HARMONIC</p>
-        <h2 class="section-title" id="harmonic-title">The control layer behind the fleet.</h2>
-        <p class="section-lede">GAOS/HARMONIC is GridFleet's internal supervisory and grounding architecture, designed to keep agent workflows observable, source-aligned, receipt-backed, and bounded by review as autonomy expands.</p>
-        <p class="harmonic-principle">Evidence is not action. Advice is not dispatch. Memory is not truth. Implementation is not activation.</p>
-        <div class="harmonic-pair" aria-label="GAOS and HARMONIC summary">
-          <article><span>GAOS</span><h3>Grid Autonomic Operating System</h3><p>GAOS watches the fleet's operating state: agents, jobs, workflows, receipts, health signals, stale artifacts, risk posture, and operator attention points.</p><b>GAOS shows what is happening.</b></article>
-          <article><span>HARMONIC</span><h3>Hierarchical Agentic Reasoning Memory Orchestration and Normalized Instruction Context</h3><p>HARMONIC grounds agent context in current instructions, trusted artifacts, evidence boundaries, source hierarchy, and memory discipline.</p><b>HARMONIC shows what can be trusted.</b></article>
-        </div>
-      </div>
-      <div class="harmonic-visual reveal" aria-label="GAOS / HARMONIC control panel">
-        <div class="hpanel-laser" aria-hidden="true"></div>
-        <div class="hpanel-head">
-          <span class="hpanel-mark">GAOS<i>·</i>HARMONIC</span>
-          <span class="hpanel-status">supervisory · online</span>
-        </div>
-        <div class="hpanel-core" aria-hidden="true">
-          <div class="hpanel-ring"></div>
-          <div class="hpanel-ring r2"></div>
-          <div class="hpanel-reactor"><span>control layer</span><strong>HARMONIC</strong></div>
-        </div>
-        <div class="hpanel-readout">
-          <div class="hpanel-row"><span>observe</span><b>fleet state</b><i aria-hidden="true"></i></div>
-          <div class="hpanel-row"><span>ground</span><b>trusted context</b><i aria-hidden="true"></i></div>
-          <div class="hpanel-row"><span>gate</span><b>review boundary</b><i aria-hidden="true"></i></div>
-        </div>
-      </div>
-    </div>
-    <div class="wrap harmonic-flow reveal" aria-label="Signal pipeline">
-      <article><span>01</span><h3>Observe</h3><p>Agents, jobs, workflows, tools, receipts, and health signals are monitored.</p></article>
-      <article><span>02</span><h3>Normalize</h3><p>Raw operating state becomes sanitized, structured context.</p></article>
-      <article><span>03</span><h3>Ground</h3><p>Current instructions and trusted artifacts outrank stale memory.</p></article>
-      <article><span>04</span><h3>Advise</h3><p>Readiness, risk, and operator attention points become visible.</p></article>
-      <article><span>05</span><h3>Gate</h3><p>Higher-impact work remains behind explicit review and activation boundaries.</p></article>
-      <article><span>06</span><h3>Learn</h3><p>Receipts, failures, and workflow state strengthen future operating discipline.</p></article>
-    </div>
-    <div class="wrap harmonic-stack reveal">
+<!-- ============ scene 02 · watch it work ============ -->
+<section class="scene" id="work" aria-label="Watch it work">
+  <div class="work-pin">
+    <div class="wrap work-grid">
       <div>
-        <p class="kicker">Grounded by hierarchy</p>
-        <h3>Not every signal deserves the same authority.</h3>
-        <p>GridFleet separates observation, advice, activation, and execution so old context does not outrank current truth.</p>
-      </div>
-      <ol class="truth-stack">
-        <li><span>1</span>Current operator directive</li>
-        <li><span>2</span>Governance review</li>
-        <li><span>3</span>Security review</li>
-        <li><span>4</span>Runtime receipts</li>
-        <li><span>5</span>Verified source artifacts</li>
-        <li><span>6</span>Bounded memory signals</li>
-        <li><span>7</span>Stale, rejected, or inferred context</li>
-      </ol>
-    </div>
-    <div class="wrap harmonic-diff reveal">
-      <article><h3>Memory is not truth</h3><p>Memory is useful only when the system knows where it came from, how current it is, and whether it deserves authority.</p></article>
-      <article><h3>Evidence before action</h3><p>Observation and recommendations are visible before they become activated work.</p></article>
-      <article><h3>Designed for phased autonomy</h3><p>The Grid can expand capability without turning on every risk surface at once.</p></article>
-    </div>
-    <div class="wrap harmonic-anatomy reveal" aria-label="HARMONIC anatomy">
-      <div class="anatomy-head">
-        <p class="kicker">Anatomy of HARMONIC</p>
-        <h3>Eight disciplines that keep agent context honest.</h3>
-        <p>HARMONIC is not a model. It is the grounding discipline that decides which context an agent is allowed to trust before it acts - decomposed here into its working parts.</p>
-      </div>
-      <div class="anatomy-grid">
-        <article class="anatomy-node"><span class="anatomy-glyph">H</span><h4>Hierarchical</h4><p>Sources are ranked. Current directives outrank stale memory, every time.</p></article>
-        <article class="anatomy-node"><span class="anatomy-glyph">A</span><h4>Agentic</h4><p>Specialist roles act inside scoped lanes, not one model guessing alone.</p></article>
-        <article class="anatomy-node"><span class="anatomy-glyph">R</span><h4>Reasoning</h4><p>Decisions are grounded in evidence the system can point back to.</p></article>
-        <article class="anatomy-node"><span class="anatomy-glyph">M</span><h4>Memory</h4><p>Recall is bounded and provenance-tracked - useful only when its origin is known.</p></article>
-        <article class="anatomy-node"><span class="anatomy-glyph">O</span><h4>Orchestration</h4><p>Work is coordinated across roles, tools, and review gates as a single flow.</p></article>
-        <article class="anatomy-node"><span class="anatomy-glyph">N</span><h4>Normalized</h4><p>Raw operating state becomes sanitized, structured, comparable context.</p></article>
-        <article class="anatomy-node"><span class="anatomy-glyph">I</span><h4>Instruction</h4><p>The operator's current instruction is the top of the authority stack.</p></article>
-        <article class="anatomy-node"><span class="anatomy-glyph">C</span><h4>Context</h4><p>Evidence boundaries are explicit - what an agent may use, and what it may not.</p></article>
-      </div>
-    </div>
-  </section>
-
-  <!-- DISPATCH EXAMPLES -->
-  <section class="dispatch" id="dispatch">
-    <div class="wrap">
-      <p class="kicker reveal">What you can dispatch</p>
-      <h2 class="section-title reveal">Concrete workflows, routed to specialist agents.</h2>
-      <div class="dispatch-grid">
-        <article class="dispatch-card reveal"><span>monitor</span><h3>Docket and filing watch</h3><p>Track selected public court dockets and return source-linked alerts when a filing moves.</p></article>
-        <article class="dispatch-card reveal"><span>browser</span><h3>Vendor portal extraction</h3><p>Run a scoped browser workflow, collect approved fields, and attach screenshots for verification.</p></article>
-        <article class="dispatch-card reveal"><span>market</span><h3>Pricing and product change radar</h3><p>Watch public pages for material changes and send transition-only receipts instead of noisy pings.</p></article>
-        <article class="dispatch-card reveal"><span>research</span><h3>Research forecast memo</h3><p>Route resolvable questions through a documented research lane and return probability, rationale, and sources.</p></article>
-        <article class="dispatch-card reveal"><span>audit</span><h3>DeFi config-risk review</h3><p>Review public protocol configuration surfaces against an operator-approved rubric and evidence stack.</p></article>
-      </div>
-    </div>
-  </section>
-
-  <!-- FLEET -->
-  <section class="fleet" id="fleet-roles">
-    <div class="wrap">
-      <p class="kicker reveal">The fleet</p>
-      <h2 class="section-title reveal">Specialist roles, one access layer.</h2>
-      <div class="roles">
-        <article class="role reveal"><span class="role-tag">browser</span><h3>Automate the browser work nobody wants to do</h3><p>Policy-scoped browser workflows with operator-approved boundaries. It navigates, extracts, and returns screenshots as proof - not a transcript of what it claims it did.</p></article>
-        <article class="role reveal"><span class="role-tag">monitor</span><h3>Know the moment something changes</h3><p>Always-on multi-agent monitoring across your surfaces, with transition-only alerts. You hear about the change that matters, never the noise around it.</p></article>
-        <article class="role reveal"><span class="role-tag">research</span><h3>Get a documented probability, not a guess</h3><p>Research-resolvable questions move through a documented lane with assumptions, sources, and review notes attached.</p></article>
-        <article class="role reveal"><span class="role-tag">legal</span><h3>Monitor public filings with source receipts</h3><p>Federal court-docket monitoring watches selected public sources and returns source-linked alerts when a tracked filing changes.</p></article>
-        <article class="role reveal"><span class="role-tag">audit</span><h3>See the config risk before it&apos;s an exploit</h3><p>Quarterly DeFi protocol configuration-risk reviews - admin keys, oracles, timelocks, pause mechanics - scored against a rubric and delivered as a report you can act on.</p></article>
-        <article class="role reveal"><span class="role-tag">custom</span><h3>Bring the workflow that&apos;s eating your team&apos;s time</h3><p>Describe the repetitive cross-tool job. We map it to the fleet and expose it through the same governed, receipt-backed API - one integration, any specialist.</p></article>
-      </div>
-      
-    </div>
-  </section>
-
-  <!-- RECEIPTS -->
-  <section class="receipts" id="receipts">
-    <div class="wrap receipts-grid">
-      <div class="reveal">
-        <p class="kicker">Receipts</p>
-        <h2 class="section-title">Evidence, attached to every result.</h2>
-        <p class="prose">The receipt is the product. Each response can carry the request id, the tools invoked, source references, screenshots, and verification notes - the difference between an AI that <em>says</em> it did the work and one that <em>proves</em> it.</p>
-        <ul class="check-list">
-          <li>Request id + timing on every call</li>
-          <li>Evidence stack: screenshot, source links, and verification notes</li>
-          <li>Clear status: queued, running, verified, needs operator review, or failed safely</li>
-          <li>Operator-readable notes on what was checked and what was not</li>
-        </ul>
-        <pre class="receipt-json" aria-label="Example API response"><code>{
-  "request_id": "req_8f3a_e71",
-  "status": "verified",
-  "role": "browser",
-  "evidence": {
-    "screenshots": 1,
-    "sources": 3,
-    "notes": "Extracted fields matched source page."
-  }
-}</code></pre>
-      </div>
-      <figure class="receipt reveal" data-parallax="0.06" aria-label="Example receipt">
-        <div class="receipt-head"><span>RECEIPT</span><span class="receipt-id">req_8f3a…e71</span></div>
-        <div class="receipt-row"><span>role</span><b>browser</b></div>
-        <div class="receipt-row"><span>action</span><b>navigate · extract</b></div>
-        <div class="receipt-row"><span>status</span><b class="ok">verified</b></div>
-        <div class="receipt-row"><span>evidence</span><b>screenshot · source ×3</b></div>
-        <div class="receipt-row"><span>latency</span><b>1.84s</b></div>
-        <div class="receipt-foot">governed lane · operator-inspectable</div>
-      </figure>
-    </div>
-  </section>
-
-  <!-- LIVE SNAPSHOT -->
-  <section class="snapshot" id="snapshot">
-    <div class="wrap">
-      <p class="kicker reveal">Public snapshot</p>
-      <h2 class="section-title reveal">A live, operator-controlled view of the fleet.</h2>
-      <p class="prose reveal">Public-safe telemetry only - no customer data, private logs, or access material. Cadence and health, surfaced honestly.</p>
-      <div class="snap-grid" id="snap-grid" data-src="/data/grid-snapshot.json">
-        <div class="snap"><span class="snap-k">fleet status</span><b class="snap-v" data-snap="status">operational</b></div>
-        <div class="snap"><span class="snap-k">specialist agents</span><b class="snap-v" data-snap="roles">16</b></div>
-        <div class="snap"><span class="snap-k">checks reported</span><b class="snap-v" data-snap="checks">live</b></div>
-        <div class="snap"><span class="snap-k">receipts available</span><b class="snap-v" data-snap="receipts">yes</b></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- TRUST -->
-  <section class="trust" id="trust">
-    <div class="wrap trust-grid">
-      <div class="reveal">
-        <p class="kicker">Trust & governance</p>
-        <h2 class="section-title">Operator control before autonomous action.</h2>
-        <p class="prose">GridFleet is built for governed execution: scoped lanes, explicit risk constraints, source-backed receipts, and human review where public claims, money movement, credentials, or sensitive data are involved.</p>
-      </div>
-      <div class="trust-list">
-        <article class="trust-item reveal"><h3>Scoped tool use</h3><p>Jobs run inside approved boundaries with evidence attached to the result.</p></article>
-        <article class="trust-item reveal"><h3>Public-safe telemetry</h3><p>The public snapshot excludes customer data, secrets, private logs, and access material.</p></article>
-        <article class="trust-item reveal"><h3>Review gates</h3><p>High-risk work requires operator, safety, and canon review before propagation.</p></article>
-      </div>
-    </div>
-  </section>
-
-  <!-- ACCESS -->
-  <section class="access" id="access">
-    <div class="wrap access-grid">
-      <div class="reveal">
-        <p class="kicker">Try one job free</p>
-        <h2 class="section-title">Send one real job. Get one sample receipt-backed result, free.</h2>
-        <p class="prose">The lowest-friction path is a real workflow: a docket watch, DeFi config-risk question, vendor portal extraction, or monitoring job. We scope it, run the safe lane, and return a sample receipt you can inspect.</p>
-        <p class="muted">Prefer email? <a href="/cdn-cgi/l/email-protection#0b786a676e784b6c79626f6d676e6e7f256a62"><span class="__cf_email__" data-cfemail="5122303d34221136233835373d3434257f3038">[email&#160;protected]</span></a></p>
-      </div>
-      <form class="form reveal" data-early-access action="/api/early-access" method="post">
-        <label>Name<input type="text" name="name" autocomplete="name" placeholder="Your name" /></label>
-        <label>Work email<input type="email" name="email" required autocomplete="email" placeholder="you@company.com" /></label>
-        <label>What should the fleet do?<textarea name="message" required rows="3" placeholder="e.g. monitor one court docket for new filings; review public DeFi protocol config risk; extract an approved vendor report"></textarea></label>
-        <div class="form-row">
-          <label>Expected volume<input type="text" name="volume" placeholder="calls/day, latency needs" /></label>
-          <label>Risk constraints<input type="text" name="risk" placeholder="money movement, compliance" /></label>
+        <div class="scene-head" style="margin-bottom:0">
+          <span class="tag">02 — Live trace</span>
+          <h2 class="h-xl"><span class="line-mask"><span class="line-inner">Watch it</span></span><span class="line-mask"><span class="line-inner">work.</span></span></h2>
+          <p class="lede">One representative job, end to end. The fleet plans, acts across real tools, verifies the outcome — then prints the receipt.</p>
         </div>
-        <label style="position:absolute;left:-9999px;top:auto;height:1px;width:1px;overflow:hidden" aria-hidden="true">Website<input type="text" name="website" tabindex="-1" autocomplete="off" /></label>
-        <button class="btn btn-primary btn-lg" type="submit">Send one job free <span aria-hidden="true">→</span></button>
-        <p class="form-status" role="status" aria-live="polite" style="display:none;margin:12px 0 0;font-weight:600"></p>
-        <p class="form-note">No customer data is stored on this page. Prefer email? Write to <a href="mailto:sales@gridfleet.ai">sales@gridfleet.ai</a>. Do not include credentials, secrets, private customer data, or wallet keys.</p>
-      </form>
+        <div class="work-steps" aria-hidden="true">
+          <div class="work-step"><span class="ws-num">01</span><span><span class="ws-label">Plan</span><span class="ws-sub">Steps compiled inside a policy lane</span></span></div>
+          <div class="work-step"><span class="ws-num">02</span><span><span class="ws-label">Act</span><span class="ws-sub">Real tool calls, metered time and cost</span></span></div>
+          <div class="work-step"><span class="ws-num">03</span><span><span class="ws-label">Verify</span><span class="ws-sub">Evidence captured and checksummed</span></span></div>
+          <div class="work-step"><span class="ws-num">04</span><span><span class="ws-label">Receipt</span><span class="ws-sub">Signed proof, archived to the ledger</span></span></div>
+        </div>
+        <p class="work-note">Representative trace — live jobs return real receipts.</p>
+      </div>
+
+      <div>
+        <div class="console" role="img" aria-label="A GridFleet agent trace: plan, tool calls, verification, then a printed receipt">
+          <div class="console-bar"><span>fleet-trace</span><span class="cb-live">policy lane · monitoring</span></div>
+          <div class="console-body" id="console-body"></div>
+          <div class="receipt-print-zone">
+            <div class="receipt" id="work-receipt" aria-hidden="true">
+              <div class="r-head">GRIDFLEET · RECEIPT</div>
+              <div class="r-row"><span class="r-k">job</span><b>docket-watch #4187</b></div>
+              <div class="r-row"><span class="r-k">lane</span><b>monitoring</b></div>
+              <div class="r-row"><span class="r-k">authority</span><b>scoped grant · operator</b></div>
+              <div class="r-div"></div>
+              <div class="r-row"><span class="r-k">steps</span><b>3 tool calls · verified</b></div>
+              <div class="r-row"><span class="r-k">output</span><b>2 filings · summary</b></div>
+              <div class="r-row"><span class="r-k">cost</span><b>$0.06 · 3.6s</b></div>
+              <div class="r-div"></div>
+              <div class="r-hash">sha-256 a41c02f7d95e3b8ac16094fd2e7781cc9f27</div>
+              <div class="r-seal"><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M2 8.5 6 12.5 14 3.5" stroke="currentColor" stroke-width="2.2"/></svg>VERIFIED</div>
+            </div>
+          </div>
+          <div class="console-ledgerline"><span id="console-ledgerline-b">awaiting receipt …</span><span>ledger · 1,978 archived</span></div>
+        </div>
+      </div>
     </div>
-  </section>
+  </div>
+</section>
+
+<!-- ============ scene 03 · the receipt (paper band) ============ -->
+<section class="scene" id="receipts" aria-label="Every action returns a receipt">
+  <div class="wrap">
+    <div class="scene-head">
+      <span class="tag">03 — The trust device</span>
+      <h2 class="h-xl"><span class="line-mask"><span class="line-inner">Every action</span></span><span class="line-mask"><span class="line-inner">returns a receipt.</span></span></h2>
+      <p class="lede">A chatbot answers. GridFleet acts — and signs its work. The receipt is the contract between you and an autonomous fleet: inspectable, archived, verifiable.</p>
+    </div>
+    <div class="paper-grid">
+      <div class="anatomy fade-up">
+        <div class="receipt" aria-hidden="true">
+          <div class="r-head">GRIDFLEET · RECEIPT</div>
+          <div class="r-row"><span class="r-k">job</span><b>config-risk review #2291</b></div>
+          <div class="r-row"><span class="r-k">lane</span><b>defi-audit</b></div>
+          <div class="r-row"><span class="r-k">authority</span><b>scoped grant · operator</b></div>
+          <div class="r-div"></div>
+          <div class="r-row"><span class="r-k">inputs</span><b>protocol config · public</b></div>
+          <div class="r-row"><span class="r-k">outputs</span><b>risk memo · 2 flags</b></div>
+          <div class="r-row"><span class="r-k">steps</span><b>5 tool calls · verified</b></div>
+          <div class="r-row"><span class="r-k">cost</span><b>$0.11 · 6.2s</b></div>
+          <div class="r-row"><span class="r-k">timestamp</span><b>utc · signed</b></div>
+          <div class="r-div"></div>
+          <div class="r-hash">sha-256 7be31c99a04d5f22e8c6b1770a45d9310c58</div>
+          <div class="r-seal"><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M2 8.5 6 12.5 14 3.5" stroke="currentColor" stroke-width="2.2"/></svg>VERIFIED</div>
+        </div>
+      </div>
+      <div class="anatomy-notes">
+        <div class="an-item fade-up"><span class="an-num">R-01</span><div><h3>What ran</h3><p>The job, its inputs and its outputs — stated plainly, not summarized away.</p></div></div>
+        <div class="an-item fade-up"><span class="an-num">R-02</span><div><h3>Under whose authority</h3><p>Every action traces to a scoped grant inside a policy lane. No improvised permissions, ever.</p></div></div>
+        <div class="an-item fade-up"><span class="an-num">R-03</span><div><h3>What it cost</h3><p>Time and spend are metered per tool call. You see the meter, not an invoice surprise.</p></div></div>
+        <div class="an-item fade-up"><span class="an-num">R-04</span><div><h3>Proof you can check</h3><p>A signed timestamp and a checksum over the evidence bundle. Verify it — do not take our word.</p></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ scene 04a · command deck ============ -->
+<section class="scene" id="deck" aria-label="Command deck">
+  <div class="wrap">
+    <div class="scene-head">
+      <span class="tag">04 — Command deck</span>
+      <h2 class="h-xl"><span class="line-mask"><span class="line-inner">Sixteen specialists.</span></span><span class="line-mask"><span class="line-inner">Zero improvisation.</span></span></h2>
+      <p class="lede">Every job routes to a specialist role with a fixed lane, scoped authority and a duty to report. This is the deck that runs the grid.</p>
+    </div>
+
+    <div class="deck-stage" id="deck-stage">
+      <div class="deck-glow" id="deck-glow" aria-hidden="true"></div>
+      <div class="deck-panel" id="deck-panel" aria-live="polite" aria-label="Fleet specialist roster">
+        <div class="deck-face" style="visibility:visible">
+          <div class="deck-ava" data-layer><img alt="Communications Operator — fleet specialist" src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQEAYABgAAD/2wBDAAwJCQsJCAwLCgsODQwPEx8UExEREyYbHRcfLSgwLywoLCsyOEg9MjVENissPlU/REpMUFFQMDxYXldOXkhPUE3/2wBDAQ0ODhMQEyUUFCVNMywzTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU3/wAARCADAAMADASIAAhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQAAAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/8QAHwEAAwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSExBhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/9oADAMBAAIRAxEAPwDyyiiimIKKKKACilpKACiloAoEJSgVsWOhGa2W8vrhLKzJIV3BZpCOyKOT9elXrRvDVg5eRru9cfdDwhUH1Xdz+dWovqZuqltqY1jpF9qJP2O1lmA6sq/KPqelaZ8I30VuZ7ia0hiHVjNux9doOKn1C/i1geXDqs6Y+5BcIsUR9htOB+I/GsOOa70+6IieSCdTg7Tg/T3p2iiFKctnY0f7At3AEGtac8h/gZmT9SMVn3+mXWmyiO6hKFhlTnKsPUEcEVLJImoqzrGsd2oywQYWUdyB2b6dataXcG8sbjS5yWjZTLbk8+XIozgegIyDRZPYOaUVd/MxCMUYrXwmp6XLIVAvLQAsw/5ax5xk+6kjnuD7VRltGS2iuEO6JyVz/dYdVP8AP6VLRqp30ZVopcUVJQlFFLQAlFFFAwooooAKKKKACiiigBaKDSUCF7VraPY28q3F5f7vsdqoLqpw0jHhUB7Z9fQGsoc10cUVrB4UjW+llha5uTLGsaBi6qu3PJGBkmrijOo7ILnxXql4wSzVLWNE2qlvGMqg7Z64FY7ajNOxN2TcKeu/r+B7U3ckTiW1MylDlXJCkH2x3qzcTW97GHuI/s12RnzEXCS+5XsfccH0qZSkmONOCWisVLiARqskTb4X+63cex96UyGe3w5/exAbW7lfT8O1Nt5xEWjkBaF+HUfzHuKZLGYXwCGU8qw6MKY/Jk7sY3t7qPgscnH94Hn8/wCtXrVBBqtyV4SFvM+g/wD1GqShWitkc4QFpHPoMj/ClkvAyzY4a4bMhHZeyirTS1M5RctP63JdOJitL+cj5DD5I/2mcjA/IE/hVrSr+HTIbmG9txcrcbFaAnGADknPZvSq9vLJf3FtY2pjto87Y97Y+Y9WJ/vHp+QpjyPpdzJD9lQTRsVbz0DMD9DwKiF92Ook/dQur6ellOj27mW0nTzIJCOSvofcHg1m11Al/wCEg0GW3WKKO9sSbhViXaJIz9/AHGRgHiuYIxTkuwU5Nqz3QlFFAqDUSlpKKBi0lLSUALRSUtABRSUUCFooooAcK6bxVAkV/HJIf3AgiS3iU8soQc+wyT9TmuZWul8TxxxaipjPnPLFH5CgZEce0bfqf5VpHZmM/jXzKOhWialqg+0jNtbxtPIo4GxRnaPqcD8azr26kvbqSebG9znA4CjsAOwHSug8HBX1W5sZGw15bSQA+jEZH8q5uZDHIyMMMpII96T+EIv32iOlycYzxnOKSioNhSxPc0lFFACqcGui1ZjfafpmqZXz5Abact0Zkxgn6qR+Vc6BzXT6xEmneGtKsT/x8Tk3cn+yCMKPyrSOzManxRE8NwMmuWc8CldswiniPVA3H4qa52cATSBfuhiB9M11Xhe8EVzKJQRew20nkn/nqNuQp9xgEH2x6VyTHOTTlsTTvzu42gUUd6yOgKKSigBTRQaSgApaSlFABRikpaACig0UAOWuqv76Q6BppF2iRtB5TKkeZGKsRjfjgYxxn8K5uz2G7gEgyhkXcPUZGa6bXDDczXBtY1hlW48ie2A+RsHCSKOx7H/69aR2Zz1dZJMn+H2mrd6y126/u7UZUf7R4H9a5fVABqV2PSZ//QjXZaJcvo3g3VLmMHznuPJVgPunAGfw5rKPgnU5rVbqKazmVxuXbOMtn61TWiSM4zSqSlJ6bHLBivQkUcnJ61oXOmT2WY762ntn7OyHaf8APtVSNcxT+yj/ANCFZW1sdaaauiL3xigsT1JNSMv+jxn1Zv6VLFZyTkJArTSH+GNS2KAvpcgXrXd+NtMA0vS79B8wiSGQ+vy5U/zrJs/BOp3EXmObe2PUJPKFY/h2/GtRrmW+8CX1rMfNbT5UVZVOVZc8YPfHP4YrWKsmmclSacouL2/UzdFd4NPu55bdZFgtpDBcg/cJG3Yf++uh6dq5cjFdPoUcFjcLLdoszmdYYoGHDMerMPQA8D1NYF+qLfXKxrtQSsFHoMnFTLZGtN+8yrRiigVmbhiiiigANJSmkoAKUUUDrQAlLRmigANFKaKAFUkEEdc8V0utvH/aWm3a8Jcql0/1YjP/AKDXNA1vy+Te+G7SdnKzWUht2GM5Rssv/s1aR2sY1Fqmb3iUvo3h6ysYzhrmSWaUdQwJ4H6j8q5jSLuztZvNvoFukGQ0LMVyD3Ujow966ueGLXfDFhZqB9vgtRNB/wBNFBKuv1+XNefuMHFVN2dzKgk4tPc3b7VdPawFpYW91G+/cZ5rgsSP7u0DGKx0t3eGeQcLCFLficCoQxByOtW7W4SOxvoW6zIm36hwf5ZqL33N1HlWhB5Li3SYn5GcoPqAD/WtXTNRsra1ltr2CeXeQVlgnKFB6AEYOfeqL3CHSYrcffE7yH6FVA/kap5pXsNrmWps6zf2N20Z0+zW0jRQu3cWd/8AaY9M/St7wa0mo6dq2lE5SS2JjXsGz/iR+VcSvJr0HRoU0DQ7jzB/xMLy0kmYd4ogvy59ySK0g7u5hXSjCy3MjS/LfxTdliDFEHlyOR+7+Yfqv61y8jmR2dvvMcn8a37DybHRdRvfMLTSoLWIYxjdyxz9Af8AJrnietTLYumtWxtAopRWZuJSUuaM0AB60lKetGfagBKXvRQOtABRRxRxQAUUpxSUAL2q7p2oGyeRXiWe3mXZLExwGHXg9iDyDVLtRxTTsJpNWZ011ctBo+j31kzxNBNNHGxOWXDBhk9+tZ2ttHcyw38UYiF2pd0HRXBw2PYnn8atRj7R4OcKcm1vQzD0V1xn81qhMN+kWfPCzSr9OFNaPY54Kz+b/wAyvZ26TTRCZtkTyKhb6kZ/IVqavpDWNmJmt/KL3LqMMGATA2jj8axpZN7DHCKMKPQVNZ38tk7GPYyuNrxyKGRh7ipTWxq1Ju6Lemaa1/a3xjiLyRIhTBx8xYDHPtmq+o2qQXlwkDBkjfB2nOPx7jPFJd6jJdxpEUiihQ5EcSbVz6n1PuarJIUcMOR0I9R6UO2wJSvdl/RkiF09xPH5sdtGZjGejkYwD7ZIrXtb2W8tNd1K9cySPGkZI4+844HpwtZFnhbLUiudpjRQfq4/wq9EPI8H3TNx9pu0RffYpJ/mKqOhlNXfzRnahqH2pYoYYhBawgiOIHPJ6sT3Y+tUe1BxR2rNu5ukkrISgdaOKUYpFCUlLxRQAHrSUpooASlHWjFAHNABRRRQAGilIoxQAdqBRjipIIXmmSOMFndgqgdyaYmzd0ENaWt3eXUTvYPH5cidpRuUHHuMgg+uKZeWX2ezuLZZBLFkXVtKOkifdb8cYyO201o+IytneW6Rtu01rb7MNvRdpw+PcMN3vWVp9wiF9MvpAkLMTFN1ELkfe/3WHUfj2rV6aHLFuXvmQkzRjCbR77Qf51ZS7uCOLpVH908f0qK7tJrK5kt502SRnBH9fcUweUBz5hPfGBWd2jpspK5Ye6uAObpCPRf/ANVV2mZwQ+0577QDQfKIO3zAffBFEEElxMkMKF5HO1VXqTQ22CSWpr6bZtdWYtUKo1zJ5kkjfdiiQHLH2yT+VWdb2XlhbPpySfYLUPGoI6DI+dvdif5Cq97KLWIaTZuJJCQLmVTw7DogP91f1PNaHhqUNqRXzAmnQwNFMz/dcNxz9WIx9K0XY5pNr3/6/rscmaO1T3dtJa3MsEy7ZImKMD2IqDHFZM6k76iUCjFKKQxKKKKAA0lKetGKACgUUooASilxTghpiuNoArUtdA1C7j81LZkg/wCespEafm2BV3SdAFxqUaXBEtl5jRtLA4IZghfaD9B1xTt3IdSKT8jJs9Pub+UQ2kLyv1wo6D1PoPrXSaFoy22ozGO6guL2C1klRIjuCyDgDPQkZzx7VkXutz3EJtrZEs7L/nhDwD/vHqx+tJ4evJrPXbKWEFm80JtH8QPBH61asmZT55RYlnfR+VJY32WtJW3burRP/fH9R3FVrq3kt5Ps8+NyjMbjlWU9MH0Pap/EMVvBrt9FaNmFZWC+3qPwOaSxnju40067+6zYhl7xMe3up9KOtiloudbE8NzbalaJaahL5E8I2wXLAkbf7j45x6HtSL4bvnO6E2twvYx3KEH9ayZkaKZ43+8jFT+FNIwqn1qb9yuRr4WbB8NX8fMxtYV9ZLlB/Wlaa20eB47Kdbi+kG17hAQsSnqEJ5JPc/lWMM4J9KEBZwo6k4FF0tg5G/iZatoZJpRbwAGVx8zHgKvfnsPU1Zu7yJYEsLIn7MjbnfGDM/8AePt6Ci9kTT45NPtvv9LiXu5/uj0UfrVfS44JtTtY7ptkDyqsjegzT20J+Jc72/r+kdHqmlC+j0uae6gt765tQzCY7RIQcLk9iV9fSubvtOutOmMV3C8T9QGHUeoPQj6VoeJ7ua51+785dnlP5Sp2VV4A/wA+tR2OuXNtD9mmVLuz72843KP909VP0puzZMOeMUzIIoFdFquhotzG9mphtZI4ndpnysLSAkKW9OOuKo3Wg6hax+a9uzw/89YiJE/Ncio5TVVItLzMqinFTSYpGlxD1opT1pKQD0RnYKoJJ4AHU1tR+GL1Y1kvXhsIzyDdSBCf+A9f0qUyf8IzCEjA/teRcu5Gfsynoo/2z3PashftF/cgZknnlbAySzMTWlktzFylLWOiNeTRrKO0e5t7/wC2i3dftCIhj+U/3S3U/hTDrqW3Gl6fb2mOkrjzZP8AvpuB+Aq+vhSGxAbW9Ut7Tv5SHfJ+VKdQ8L6fxa6bNfuP47l9qn8BV2t5GPMpd5f19xz9xeXupzr5801zKxwN7Fj+FdDoVneDT2mmv4tP06CcyfaCu4tJt2kKP4uDWPLdCRLq9SKOBp38qNIxgIuMtj8MD8TXSapZy6r4O0iXS0MsNqpWaNOSrdzj8/zqVFPVlTm0klonoUUk8IQny2i1K57ebuVPyFS3uk2+nQQeIPD1yZ7aKQbklHzRt71z1rpV9ezCK2tZpXJ6Kh4/wrp7y3/sjwxcaRCTc30jCa78r5lgUY4J/KqWvQmXutJO5xk+S5fcWDHOT1/H3pkbmORXHVSG/Kg8Hn8qQ7T6isjrWxe1pAurXBHR2Dj6EZ/rVDPygehzWncKNRtUuYj++gQJMh9BwGHt61Q8of8APWP8z/hTktbmdN2ik90Rg/KR61a0uLztTtUPQyLn6A5qAxD/AJ6x/mf8K0LJRp8Jv5fvkFYE/vHGC30FEVqOo/ddt2UbqTzrueT+/Ix/WkiTceTtUck+lNCMR049TxVmytjdXcFssgBlkVAewycZpLVlO0Ub+maU/iKa71TU5Tb2UK5lmUcsQAAB74xn/wCvUTW/hfPy3upAe8Cn+tX/ABhfpYxxeHrBTHbWoHmf9NG68/nn6n2rjiTWknbQ54JzXNey6HaSzRa/p+p2ullnlDQPHE/DyRxptOB3OecVylte3enylraeWBx12MV/OoIZpLeVJYXaORDlWU4IPqK6Jtdsr6ET6vo0VxIx2vcQSGJ2bHUgcZrlbnCTkldM6lGLiovoVBr63PGqWFtd56yBfKk/76Xr+IqSPR7Ka2+1z3hsIZ3K26yIZMgddxHT8qUWfh29P+j6jc2LHot1FvUf8CX/AApX8J6g0ZksZLfUIhzutpgx/wC+etaQrKTs1r5mU6XIrp2RC/hm7kBawlt79Rz/AKNKC3/fJwaxZI3ikZJFZXU4KsMEGn5khkzlkdT16EGtuOf/AISKEW1yQdUQfuJzwZgP4GPc+h/CtLJ7CvKGr1RhSSPPK0krl3Y5ZmOSTXVaYE8N6P8A2vMoN/cgrZo38C95CP5f/XrM8OaVHqF48t2dljar5s7+w7fjVfW9WfV9RkuGGyMfLFH2RB0FC0VyZ+/LkW3X/IpSzvLIzyMWdjlmJySajyTTetWrRfKlaaReIRuwe7dh+f8AKp3Nn7qH3x8rybUf8sV+b/fPJ/oPwp2nave6VKZLG5khY9dp4P1HQ1ZktIr7SPttqD9ot+LtM5LAniQe3Y+nFZFNtp3Jik1ZnQTeMNZu8R3GoTCFjhxEApI79K7zwdd2U2ntYxxRLOozJgf8fCH+P39COxryOtTSNUmsLiN4pNjxtujc9FPcH/ZPQ01Np3ZnUoRlG0dDU8XeHDot9vgUmzmJMZ/unup+n8q5gqR2r2iKSy8W6EySLtD/ACyJ/FDIP8/iK8n1Wwn0vUJrSc/vI2xkHgjsfyqpx6oihVb92W6KltcSWk6zRHDL69CPQ+1JIUeRmCbAxztXoPpXR+GfCdzr7GWSQw2aHDSYyWPoorev4/B2j2s9siC6u9jKG5kIbHGT0HNJRdi5VYqVkrs88AAIOCcHoe9SXNzJdTeZJgYGFVeAo7AV3Okf8Ihf6dbWl6ghvAgV5TlMt67un51meJ/B82iL9qtZDPZE/e/iTPTPt70uV20BVouVmrM5PBPrXU+EPD8upXqXbnyrS2YO8h4yRzgf19Kz/D+kPreqx2fmbFILO3cKOuPeuo8Q6vbW1k2m2AEem237twpwZ3/uA+g6sacY9WTVm2+SO5k69q9i/iK6u/sMd7BKqhDKzKDgYLDB6HHeqP8AbWm9/D9p/wB/pP8AGsaed7iVpJDlm/T2HtSQQSXM8cECF5ZGCqo7k9Klz6mkaKskXr+SK7txcWumx2kUbbGZJGbcTyByfY9Kr2f70S2x/wCWq5T/AHxyP6j8aua1NHD5Wl2rh7e0yGdeksp++307D2FVYYVhtTdykgk7YFBwWYfxfQfzqIScveZpOKiuVf0ynmp7W6ltLhJ4HMcqHKsvUGi6AeQTIPllG/A7HuPzqAGq2Ybo6nW4Yta05ddtECyghL2Jf4W7P9DXMKzRurKSrKcgjsa1NC1b+y73Mi+Zayjy54j0dD1/EU3XdL/su+KRt5ltIPMgkHR0PSqeq5kZQ9x8j+X+RblujD4OtYYAEE9w/nkdXK42j6c1hIhkbAwO5J6AVqXSm20KC0nOLhpzMsfdUK459M+lZsn7tPKHXq/19KJDpbO3di+asXEPXvIev4elJuP2Y8/ekH6D/wCvUVPJ/dKPcn+VRc1sWdN1CXTbxLiIBsZDI3R1PBU+xFWdY0+K2eO6syWsLob4WPVfVD7qePyrKrY0e8haOTTL9sWdyQQ//PGTs4/kfamtdCJqz5kZFAqxe2c1hdS21wu2WNsMP6j2NV6Rad1dHZeAb6ZdfjhDny5Y2Vx/ewMjP0qr4xBl8VXgHXeqj/vkUeAx/wAVNb/7j/8AoJqPxXJt8U3zDqJRj8AK2XwHG1++dux1viu6Ph7wzZ6bZHyzIPLLDg7QPm/Ek15kzkmvTPFtsde8N2ep2Y8zyh5jKOTtI+b8iK8zZcGlU3Hhrcuu4gYg16T4Hvm1bSbvSbw+ZGi4Xdz8jcY/A9K83VSTXo/gWzOl6Zeatd/u4nX5d3dV5J/PiinuPE25PMxvBifZfGCwN1XzIyfoD/hWV4g42j+7c3A/8fFXfC9yZfGVvOeDLK5/MGqviRcSTe17cD/0E038JMf4qv8A1uc/W5Yf8SjS31NuLq43Q2g7qOjyfh90e5PpVDStPOpXyQbvLjALyyHpGg5ZvwFSaneHVdQUW0ZWFQIbaEfwoOFH1PU+5NckvefJ9/8AXmd691cxXsrX7VKd7bIIxvlf+6v+PYU29ujdT7guyNRtjQdEUdBVi+kS2iFhAwZUO6Zx/wAtH/wHQfiaz62emhlH3nzP5EwdlgQqSCrnBHuBS7o5vv4jk/vD7p+o7VGD+5Yf7QP6Go6LlWHsrRuVYYIrbe4Nx4RVZxua3ugkDHqqlSWH06VkA+dHsPLp933HpV+MfatB+zwNmaGZpnj7lSAMj1x3qo9TKp0v3KDSsHMjsXmbqxOSP/r1BRRUGyVgpRk8CkpQSCCOopDEpwNLIoyGX7rcj29qbTEbxddZ0clz/p9gnXvLD/iv8qwquaVdiz1CGV/9WTskHqjcH9DUN3bm0u5rdusblc+tU9VcziuWTj8/6/rqdL8PxnxIh9InP6VQ8VNnxJqJ/wCmxp/g69Fl4itSxwspMR/4FwP1xU/jezNr4hmfBC3AEo/Hg/qDV/YMNq+vVD/DHi6bQmMEqmazY5KZ5U+q/wCFb93ZeFddhnubKUw3YjaTyk+QkgE/dIx+VecZra8NuRfzH0tJ/wD0A0RlfRhVpJXnHRnT6Zp/hnS9OtL3VJPMuZYhL5LksOfRR/WsvxN4uk1hfslqhgsl/h7vjpnHQe1Z2vOTb6QfWyX/ANCaqWk6fLquow2kOd0jctj7q9z+VNt/ChQgre0kzf8AC9rHp9vN4gvgfJtsiBO8kh44/wA/yrI1q5aQiKYg3LSNPNjorNj5fwAGfetvxDqMUTx29oALLTv3UK9pJu7e+3+f1rC0iCNpJtSvlMlta/Owb/lrIfup+J5PsDUVZqEbF0IupLnZNdf8SfSFshxeXoWS49Uj6on4/eP4VVgP9n2X2v8A5eZwVh/2F6M/17D8aqzTT6jevJIxkuJ3yT6sTUuqyK160UZzHAohX6LwT+eTWdOPKrvc3qPnko9CjSUU+NQWy33V5NMoaQRwaSlJLEk9TSUgFBIOQcEVMkrCRZYiUmU5yvGfcVBS00Fj/9k="></div>
+          <div class="deck-info">
+            <div class="deck-unit" data-layer><span>Unit 01 / 16</span><span class="du-r">Command deck</span></div>
+            <h3 class="deck-title" data-layer>Communications Operator</h3>
+            <div class="deck-meta">
+              <div class="dm-row" data-layer><span>Lane</span><span class="dm-v">Comms &amp; Routing</span></div>
+              <div class="dm-row" data-layer><span>Duty cycle</span><span class="dm-v">24 / 7</span></div>
+              <div class="dm-row dm-hide-m" data-layer><span>Receipts</span><span class="dm-v lm">Verified</span></div>
+            </div>
+          </div>
+        </div>
+        <div class="deck-face"></div>
+        <div class="deck-scan" id="deck-scan"></div>
+      </div>
+    </div>
+    <div class="deck-controls">
+      <div class="deck-ticks" id="deck-ticks" role="tablist" aria-label="Specialists"></div>
+      <div class="deck-arrows">
+        <button id="deck-prev" aria-label="Previous specialist">&larr;</button>
+        <button id="deck-next" aria-label="Next specialist">&rarr;</button>
+      </div>
+    </div>
+
+    <div class="bento">
+      <div class="bento-card b-4 fade-up">
+        <span class="bc-note">Governance</span>
+        <h3>Policy lanes, not prompts</h3>
+        <p>Each role acts inside a fixed lane with scoped authority. Money movement and credentials are hard-gated.</p>
+      </div>
+      <div class="bento-card b-4 fade-up">
+        <span class="bc-note">Capability</span>
+        <h3>Real tools, real work</h3>
+        <p>Managed browser workflows, monitoring, research forecasting, court-docket watch, DeFi config-risk review.</p>
+      </div>
+      <div class="bento-card b-4 fade-up">
+        <span class="bc-note">Archive</span>
+        <h3>Receipts on file</h3>
+        <p>Autonomy events preserved with evidence.</p>
+        <span class="bc-big" data-count="1978" data-metric="tron.autopilot_receipts">0</span>
+        <span class="bc-note">autonomy receipts archived</span>
+      </div>
+      <div class="bento-card b-12 fade-up" style="min-height:0">
+        <span class="bc-note">Active roster — roles, never names</span>
+        <div class="ticker" aria-hidden="true">
+          <div class="ticker-track" id="ticker-track">
+            <span><b>01</b> Communications Operator</span><span><b>02</b> Creative Director</span><span><b>03</b> Bilingual Receptionist</span><span><b>04</b> Event &amp; Wedding Planner</span><span><b>05</b> Security Chief</span><span><b>06</b> Finance Operator</span><span><b>07</b> Grid Doctor</span><span><b>08</b> Infrastructure Operator</span><span><b>09</b> Release Engineer</span><span><b>10</b> Safety Auditor</span><span><b>11</b> Growth &amp; Social</span><span><b>12</b> Red Team</span><span><b>13</b> Comms Engineer</span><span><b>14</b> Markets Desk</span><span><b>15</b> Public Red-Team</span><span><b>16</b> Operations PM</span>
+            <span><b>01</b> Communications Operator</span><span><b>02</b> Creative Director</span><span><b>03</b> Bilingual Receptionist</span><span><b>04</b> Event &amp; Wedding Planner</span><span><b>05</b> Security Chief</span><span><b>06</b> Finance Operator</span><span><b>07</b> Grid Doctor</span><span><b>08</b> Infrastructure Operator</span><span><b>09</b> Release Engineer</span><span><b>10</b> Safety Auditor</span><span><b>11</b> Growth &amp; Social</span><span><b>12</b> Red Team</span><span><b>13</b> Comms Engineer</span><span><b>14</b> Markets Desk</span><span><b>15</b> Public Red-Team</span><span><b>16</b> Operations PM</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ scene 04b · proof ============ -->
+<section class="scene" id="proof" aria-label="Proof, not promises">
+  <div class="wrap">
+    <div class="scene-head">
+      <span class="tag">Proof, not promises</span>
+      <h2 class="h-l"><span class="line-mask"><span class="line-inner">The grid is not a claim.</span></span></h2>
+    </div>
+    <div class="proof-grid fade-up">
+      <div class="proof-cell hot"><div class="pc-num" data-count="100" data-metric="reliability.cron_slo">0<span class="pc-unit">%</span></div><div class="pc-label">Reliability checks passing</div><div class="pc-fresh live">live feed</div></div>
+      <div class="proof-cell hot"><div class="pc-num" data-count="0" data-metric="security.incidents_30d">0</div><div class="pc-label">Security incidents · 30 days</div><div class="pc-fresh live">live feed</div></div>
+      <div class="proof-cell"><div class="pc-num" data-count="1386" data-metric="tron.autonomous_actions_7d">0</div><div class="pc-label">Autonomous safety actions · 7 days</div><div class="pc-fresh live">live feed</div></div>
+      <div class="proof-cell"><div class="pc-num" data-count="960" data-metric="security.supply_chain_files_scanned">0</div><div class="pc-label">Supply-chain files scanned</div><div class="pc-fresh live">live feed</div></div>
+      <div class="proof-cell"><div class="pc-num" data-count="16" data-metric="fleet.specialist_agents">0</div><div class="pc-label">Specialist agents in the fleet</div><div class="pc-fresh">canonical roster</div></div>
+      <div class="proof-cell"><div class="pc-num" data-count="29448" data-metric="beck.signals_total">0</div><div class="pc-label">Signals reviewed by the proof layer</div><div class="pc-fresh">verified snapshot</div></div>
+      <div class="proof-cell"><div class="pc-num" data-count="38709" data-metric="creative.assets_generated">0</div><div class="pc-label">Creative proof artifacts generated</div><div class="pc-fresh live">live feed</div></div>
+      <div class="proof-cell"><div class="pc-num" data-count="7" data-metric="deployment.builds_deployed_30d">0</div><div class="pc-label">Verified builds · 30 days</div><div class="pc-fresh live">live feed</div></div>
+    </div>
+    <div class="proof-legend">
+      <span>— real numbers from the public-safe grid snapshot</span>
+      <span>— nothing modeled, nothing inflated</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============ scene 05 · deploy ============ -->
+<section class="scene" id="deploy" aria-label="Deploy">
+  <div class="wrap deploy-grid">
+    <div class="deploy-copy">
+      <span class="tag tag--lime">05 — Deploy</span>
+      <h2 class="h-xl" style="margin-top:18px">
+        <span class="line-mask"><span class="line-inner">Send one job.</span></span>
+        <span class="line-mask"><span class="line-inner">Keep the receipt.</span></span>
+      </h2>
+      <p class="lede" style="margin-top:20px">Send us one real operational job. The fleet runs it, and you get a sample receipt-backed result — free. If the proof holds, we talk.</p>
+      <ul class="deploy-points">
+        <li>One governed access layer, bearer-token API</li>
+        <li>Specialist roles — never a generalist guessing</li>
+        <li>Evidence attached to every result</li>
+        <li><span><a href="/vera" style="color:var(--cyan)">Vera</a>, the flagship AI receptionist, answers your phones</span></li>
+      </ul>
+    </div>
+    <form class="form fade-up" data-early-access action="/api/early-access" method="post">
+      <label>Name<input type="text" name="name" autocomplete="name" placeholder="Your name" /></label>
+      <label>Work email<input type="email" name="email" required autocomplete="email" placeholder="you@company.com" /></label>
+      <label>What should the fleet do?<textarea name="message" required rows="3" placeholder="e.g. monitor one court docket for new filings; review public DeFi protocol config risk; extract an approved vendor report"></textarea></label>
+      <div class="form-row">
+        <label>Expected volume<input type="text" name="volume" placeholder="calls/day, latency needs" /></label>
+        <label>Risk constraints<input type="text" name="risk" placeholder="money movement, compliance" /></label>
+      </div>
+      <label style="position:absolute;left:-9999px;top:auto;height:1px;width:1px;overflow:hidden" aria-hidden="true">Website<input type="text" name="website" tabindex="-1" autocomplete="off" /></label>
+      <button class="btn btn--lime" type="submit" style="justify-content:center">Send one job free <span class="btn-arrow" aria-hidden="true">&rarr;</span></button>
+      <p class="form-status" role="status" aria-live="polite"></p>
+      <p class="form-note">No customer data is stored on this page. Prefer email? <a href="mailto:sales@gridfleet.ai">sales@gridfleet.ai</a>. Do not include credentials, secrets, private customer data, or wallet keys.</p>
+    </form>
+  </div>
+</section>
+
 </main>
 
-  <section id="live-proof-observatory" class="section proof-observatory" aria-labelledby="live-proof-title">
-    <div class="proof-orbit" aria-hidden="true"><span></span><span></span><span></span></div>
-    <div class="wrap proof-observatory-wrap">
-      <div class="proof-observatory-copy">
-        <p class="kicker">Proof, not promises</p>
-        <h2 class="section-title" id="live-proof-title">The Grid is not a claim. Every job returns proof.</h2>
-        <p class="section-lede">A public-safe view of how GridFleet works: every job routes through a governed fleet and returns an inspectable, receipt-backed result. Private operational detail stays off the public site.</p>
-      </div>
-      <div class="proof-command-frame" aria-label="How GridFleet returns proof">
-        <div class="proof-frame-top"><span>HOW PROOF WORKS</span><span>RECEIPT-BACKED</span></div>
-        <div class="proof-metric-grid">
-        <article class="proof-metric-card proof-metric-card-1">
-          <span class="proof-card-index">01</span>
-          <p class="proof-metric-label">every job</p>
-          <strong class="proof-metric-value">Receipt</strong>
-          <p class="proof-metric-copy">Each handled job returns an inspectable receipt - summary, outcome, and timestamp.</p>
-          <span class="proof-metric-fresh">built in</span>
-        </article>
-        <article class="proof-metric-card proof-metric-card-2">
-          <span class="proof-card-index">02</span>
-          <p class="proof-metric-label">every claim</p>
-          <strong class="proof-metric-value">Source-linked</strong>
-          <p class="proof-metric-copy">Findings are tied to their source and scored against a rubric - never asserted on faith.</p>
-          <span class="proof-metric-fresh">traceable</span>
-        </article>
-        <article class="proof-metric-card proof-metric-card-3">
-          <span class="proof-card-index">03</span>
-          <p class="proof-metric-label">every agent</p>
-          <strong class="proof-metric-value">Governed</strong>
-          <p class="proof-metric-copy">Specialist agents run inside a governance layer with review gates before anything ships.</p>
-          <span class="proof-metric-fresh">reviewed</span>
-        </article>
-        <article class="proof-metric-card proof-metric-card-4">
-          <span class="proof-card-index">04</span>
-          <p class="proof-metric-label">on failure</p>
-          <strong class="proof-metric-value">Stops safely</strong>
-          <p class="proof-metric-copy">When a job can't be verified it stops and says so - no guess presented as fact.</p>
-          <span class="proof-metric-fresh">fail-safe</span>
-        </article>
-        </div>
-        <div class="proof-frame-bottom"><span>no customer data</span><span>no raw logs</span><span>no private routes</span><span>no internal receipts</span></div>
-      </div>
-      <p class="proof-observatory-note">GridFleet does not publish operational counts or customer data. The proof is the receipt you receive for your own job - routed through the same governed receipt and review layer the Grid runs internally.</p>
+<footer>
+  <div class="wrap">
+    <div class="foot-in">
+      <a class="brand" href="/" aria-label="GridFleet home">
+        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 2 21 7v10l-9 5-3-1.7V13H4.5V8.2L12 4.3l6 3.1v8.2l-4.5 2.5" stroke="#22e6ff" stroke-width="1.5" stroke-linecap="square"/></svg>
+        <b>GRIDFLEET<span class="brand-dot">_</span></b>
+      </a>
+      <nav class="foot-links" aria-label="Footer">
+        <a href="/vera">Vera</a>
+        <a href="/workers.html">Workers</a>
+        <a href="/docs.html">Docs</a>
+        <a href="/audits.html">DeFi audits</a>
+        <a href="/about.html">About</a>
+        <a href="/signup.html">Request access</a>
+      </nav>
     </div>
-  </section>
-
-<footer class="foot">
-  <div class="wrap foot-grid">
-    <div><span class="brand-word">GRID<b>FLEET</b></span><p class="muted">The execution layer for autonomous AI operations.</p></div>
-    <nav aria-label="Footer"><a href="/vera">Vera — AI receptionist</a><a href="/about.html">About</a><a href="/docs.html">Docs</a><a href="/audits.html">DeFi Audits</a><a href="/signup.html">Request access</a></nav>
-    <div class="foot-sec"><a href="/cdn-cgi/l/email-protection#ff8c9a9c8a8d968b86bf988d969b99939a9a8bd19e96"><span class="__cf_email__" data-cfemail="483b2d2b3d3a213c31082f3a212c2e242d2d3c662921">[email&#160;protected]</span></a><span class="muted">Responsible disclosure welcome.</span></div>
+    <div class="foot-fine">
+      <span>&copy; <span id="yr">2026</span> GridFleet — send the job, get the receipt</span>
+      <span><a href="mailto:security@gridfleet.ai" style="color:inherit">security@gridfleet.ai</a> · responsible disclosure welcome</span>
+    </div>
   </div>
-  <div class="wrap foot-base"><span class="muted">© 2026 GridFleet · gridfleet.ai</span><span class="muted">Operator-controlled · receipt-backed</span></div>
 </footer>
 
-<script type="application/json" id="fleet-roster-data">
-{"version":1,"roster":[
-{"code":"CLU","title":"Communications Operator","avatar":"/assets/agents/clu.jpg"},
-{"code":"LORA","title":"Creative Director","avatar":"/assets/agents/lora.jpg"},
-{"code":"PALOMA","title":"Bilingual Receptionist","avatar":"/assets/agents/paloma.jpg"},
-{"code":"MADDIE","title":"Event & Wedding Planner","avatar":"/assets/agents/maddie.jpg"},
-{"code":"TRON","title":"Security Chief","avatar":"/assets/agents/tron.jpg"},
-{"code":"RAM","title":"Finance Operator","avatar":"/assets/agents/ram.jpg"},
-{"code":"BECK","title":"Grid Doctor","avatar":"/assets/agents/beck.jpg"},
-{"code":"DUMONT","title":"Infrastructure Operator","avatar":"/assets/agents/dumont.jpg"},
-{"code":"ECHO","title":"Release Engineer","avatar":"/assets/agents/echo.jpg"},
-{"code":"QUORRA","title":"Safety Auditor","avatar":"/assets/agents/quorra.jpg"},
-{"code":"YORI","title":"Growth & Social","avatar":"/assets/agents/yori.jpg"},
-{"code":"ARES","title":"Red Team","avatar":"/assets/agents/ares.jpg"},
-{"code":"TESLER","title":"Comms Engineer","avatar":"/assets/agents/tesler.jpg"},
-{"code":"NEON-DAVE","title":"Markets Desk","avatar":"/assets/agents/neon-dave.jpg"},
-{"code":"SARK","title":"Public Red-Team","avatar":"/assets/agents/sark.jpg"},
-{"code":"ABLE","title":"Operations PM","avatar":"/assets/agents/able.jpg"}
-]}
-</script>
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="/assets/site.js" defer></script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'a0dcc03a6c6e53de',t:'MTc4MTgxMTQ3MA=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script><script defer src="https://static.cloudflareinsights.com/beacon.min.js/v833ccba57c9e4d2798f2e76cebdd09a11778172276447" integrity="sha512-57MDmcccJXYtNnH+ZiBwzC4jb2rvgVCEokYN+L/nLlmO8rfYT/gIpW2A569iJ/3b+0UEasghjuZH/ma3wIs/EQ==" data-cf-beacon='{"version":"2024.11.0","token":"8367c5b2f40e413f8152e91f7a659e75","r":1,"server_timing":{"name":{"cfCacheStatus":true,"cfEdge":true,"cfExtPri":true,"cfL4":true,"cfOrigin":true,"cfSpeedBrain":true},"location_startswith":null}}' crossorigin="anonymous"></script>
+<script src="/assets/vendor/gsap.min.js" defer></script>
+<script src="/assets/vendor/ScrollTrigger.min.js" defer></script>
+<script src="/assets/vendor/lenis.min.js" defer></script>
+<script src="/assets/fleet-gl.js" defer></script>
+<script src="/assets/main.js" defer></script>
+<noscript><style>#intro{display:none}.fade-up{opacity:1;transform:none}.line-mask .line-inner{transform:none}</style></noscript>
 </body>
 </html>
