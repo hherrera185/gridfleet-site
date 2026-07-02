@@ -751,7 +751,9 @@ html.gf-cur-on #gf-cursor-dot, html.gf-cur-on #gf-cursor-ring { opacity: 1; }
   transition: opacity 0.25s, scale 0.35s var(--ease);
 }
 #gf-cursor-ring.is-link .c-ring { --cw: 46px; background: rgba(34, 230, 255, 0.06); }
-#gf-cursor-ring.is-cta .c-ring { --cw: 74px; background: rgba(34, 230, 255, 0.1); border-color: var(--cyan); }
+/* is-cta only ever sits over bright solid buttons -> flip to dark ink for contrast */
+#gf-cursor-ring.is-cta .c-ring { --cw: 74px; background: rgba(255, 255, 255, 0.12); border-color: rgba(4, 19, 24, 0.6); }
+#gf-cursor-ring.is-cta .c-label { color: #041318; }
 #gf-cursor-ring.is-link .c-label, #gf-cursor-ring.is-cta .c-label { opacity: 1; scale: 1; }
 #gf-cursor-ring.is-link ~ #gf-cursor-dot .c-dot, #gf-cursor-ring.is-cta ~ #gf-cursor-dot .c-dot { opacity: 0; }
 #gf-cursor-ring.is-field .c-ring { border-radius: 5px; rotate: 45deg; border-color: rgba(34, 230, 255, 0.55); }
