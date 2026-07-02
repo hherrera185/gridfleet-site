@@ -40,7 +40,7 @@
 
 
 <style id="gridfleet-inline-site-css">
-/* GridFleet - site.css Â· "The Grid, rendered" Â· self-contained, zero external deps */
+/* GridFleet - site.css · "The Grid, rendered" · self-contained, zero external deps */
 :root{
   --bg:#05060a; --bg2:#080b12; --panel:#0b1018; --line:#16202e; --line2:#1f2e40;
   --ink:#e8f2fb; --dim:#8aa0b6; --faint:#5d728a;
@@ -480,9 +480,9 @@ section.dispatch,section.trust{padding:clamp(72px,11vw,128px) 0;position:relativ
 
 
 /* =====================================================================
-   PHASE D â€” award-level pass
-   Full-page faint grid Â· GAOS/HARMONIC 3D control panel Â· HARMONIC
-   anatomy Â· product offer sections. Self-contained, no JS dependency,
+   PHASE D — award-level pass
+   Full-page faint grid · GAOS/HARMONIC 3D control panel · HARMONIC
+   anatomy · product offer sections. Self-contained, no JS dependency,
    reduced-motion safe, separate desktop / mobile treatments.
    ===================================================================== */
 
@@ -502,7 +502,7 @@ section.dispatch,section.trust{padding:clamp(72px,11vw,128px) 0;position:relativ
 .harmonic-visual{
   min-height:560px;border-radius:28px;
   border:1px solid rgba(125,227,255,.22);
-  /* OPAQUE deck â€” not transparent */
+  /* OPAQUE deck — not transparent */
   background:
     radial-gradient(150% 80% at 50% -12%,rgba(77,209,255,.16),transparent 62%),
     linear-gradient(180deg,#0c1422 0%,#0a1019 58%,#070c14 100%);
@@ -613,7 +613,7 @@ section.offers{padding:clamp(72px,11vw,128px) 0;position:relative;
 @media(max-width:900px){.offers-grid{grid-template-columns:1fr;gap:16px}.offer{padding:26px 22px}}
 @media(max-width:520px){.offer-outcome{font-size:18px}.offer-foot{gap:12px}.offer-foot .btn{width:100%;justify-content:center}}
 
-/* reduced motion â€” disable all Phase D motion, keep content fully visible */
+/* reduced motion — disable all Phase D motion, keep content fully visible */
 @media(prefers-reduced-motion:reduce){
   .harmonic-visual,.harmonic-copy{animation:none!important;opacity:1!important;transform:none!important}
   .hpanel-laser{display:none}
@@ -672,33 +672,37 @@ section.offers{padding:clamp(72px,11vw,128px) 0;position:relative;
 
 
 /* =====================================================================
-   FABLE5 AWARD PASS â€” animated hero grid, cycling command-deck avatars,
+   FABLE5 AWARD PASS — animated hero grid, cycling command-deck avatars,
    proof-card overflow containment, mobile polish. Self-contained,
    reduced-motion safe. Appended last so it wins the cascade.
    ===================================================================== */
 
 /* --- Hero: let the animated Tron light-grid canvas lead; the still
    image becomes a faint base glow rather than the whole hero. --- */
-.hero-canvas{z-index:1;opacity:.96}
+/* Anchor the animated layers to the top viewport so the horizon is always in
+   view (the hero can be very tall on mobile once the deck stacks under the copy). */
+.hero-canvas{z-index:1;opacity:.96;bottom:auto;height:100vh;height:100svh}
 .hero-bg{opacity:.34;animation-duration:52s}
 
-/* CSS-only animated Tron corridor grid â€” the no-JS / blocked-asset fallback so
+/* CSS-only animated Tron corridor grid — the no-JS / blocked-asset fallback so
    the hero is ALWAYS alive (canvas is a progressive enhancement layered on top).
    Two perspective planes (floor + ceiling) meeting at a glowing horizon. */
-.hero-grid{position:absolute;inset:0;z-index:0;pointer-events:none;overflow:hidden;
-  background:radial-gradient(64% 42% at 50% 50%,rgba(54,224,255,.20),transparent 70%);
-  transition:opacity .9s var(--ease)}
+.hero-grid{position:absolute;top:0;left:0;right:0;bottom:auto;height:100vh;height:100svh;
+  z-index:0;pointer-events:none;overflow:hidden;transition:opacity .9s var(--ease);
+  background:
+    linear-gradient(transparent calc(50% - 1px), rgba(150,246,255,.5) 50%, transparent calc(50% + 1px)),
+    radial-gradient(62% 42% at 50% 50%, rgba(54,224,255,.28), transparent 72%)}
 .hero-grid::before,.hero-grid::after{content:"";position:absolute;left:-45%;right:-45%;height:72%;
   background-image:
-    repeating-linear-gradient(to right, rgba(90,232,255,.34) 0 1.5px, transparent 1.5px 70px),
-    repeating-linear-gradient(to bottom, rgba(90,232,255,.34) 0 1.5px, transparent 1.5px 70px);
-  animation:heroGridScroll 3.6s linear infinite;will-change:background-position}
+    repeating-linear-gradient(to right, rgba(96,234,255,.46) 0 1.5px, transparent 1.5px 66px),
+    repeating-linear-gradient(to bottom, rgba(96,234,255,.46) 0 1.5px, transparent 1.5px 66px);
+  animation:heroGridScroll 3.4s linear infinite;will-change:background-position}
 .hero-grid::before{top:50%;transform-origin:50% 0;transform:perspective(300px) rotateX(77deg);
   -webkit-mask-image:linear-gradient(to bottom,#000,transparent 84%);mask-image:linear-gradient(to bottom,#000,transparent 84%)}
 .hero-grid::after{bottom:50%;transform-origin:50% 100%;transform:perspective(300px) rotateX(-77deg);
   -webkit-mask-image:linear-gradient(to top,#000,transparent 84%);mask-image:linear-gradient(to top,#000,transparent 84%);
   animation-direction:reverse}
-@keyframes heroGridScroll{from{background-position:0 0,0 0}to{background-position:0 0,0 70px}}
+@keyframes heroGridScroll{from{background-position:0 0,0 0}to{background-position:0 0,0 66px}}
 /* when the JS canvas is painting, retire the CSS grid so we never double up */
 .hero.fleet-live .hero-grid{opacity:0}
 @media(prefers-reduced-motion:reduce){
@@ -745,6 +749,7 @@ section.offers{padding:clamp(72px,11vw,128px) 0;position:relative;
 /* --- Mobile polish: no horizontal scroll, comfortable command deck --- */
 @media(max-width:760px){
   html,body{max-width:100%;overflow-x:hidden}
+  .hero{padding-top:88px}                 /* bring the headline up; grid fills the top */
   .operator-portrait{min-height:230px}
   .op-code{font-size:9px;padding:3px 7px}
   .proof-metric-value{font-size:clamp(2rem,9vw,3rem)}
@@ -791,9 +796,9 @@ section.offers{padding:clamp(72px,11vw,128px) 0;position:relative;
       <div class="hero-copy">
         <p class="eyebrow"><span class="pulse"></span> Operator-controlled - receipt-backed - command deck</p>
         <h1 class="hero-title">AI agents that do the work -<br><span class="grad">and return proof.</span></h1>
-        <p class="hero-sub"><strong>Send the job. Get the receipt.</strong> Send us one real job - get a sample receipt-backed result, free. GridFleet routes operational work through the 16 specialist agents that run The Grid â€” 6 launch workers are hireable today, and <a href="/vera" style="color:var(--cyan)">Vera, the flagship AI receptionist</a>, answers your phones â€” then returns the evidence stack so you can inspect what happened.</p>
+        <p class="hero-sub"><strong>Send the job. Get the receipt.</strong> Send us one real job - get a sample receipt-backed result, free. GridFleet routes operational work through the 16 specialist agents that run The Grid — 6 launch workers are hireable today, and <a href="/vera" style="color:var(--cyan)">Vera, the flagship AI receptionist</a>, answers your phones — then returns the evidence stack so you can inspect what happened.</p>
         <div class="hero-cta">
-          <a class="btn btn-primary btn-lg" href="#access">Try one job free <span aria-hidden="true">â†’</span></a>
+          <a class="btn btn-primary btn-lg" href="#access">Try one job free <span aria-hidden="true">→</span></a>
           <a class="btn btn-ghost btn-lg" href="#dispatch">See dispatch examples</a>
           <a class="btn btn-ghost btn-lg" href="/docs.html">Read API docs</a>
         </div>
@@ -807,7 +812,7 @@ section.offers{padding:clamp(72px,11vw,128px) 0;position:relative;
       <div class="hero-demo command-deck cinematic-deck" aria-label="GridFleet command deck release view">
         <div class="deck-head">
           <div><span class="deck-kicker">COMMAND DECK</span><b id="deck-title">Communications Operator</b></div>
-          <span class="deck-status"><span class="pulse"></span> live Â· on deck</span>
+          <span class="deck-status"><span class="pulse"></span> live · on deck</span>
         </div>
         <div class="operator-stage">
           <div class="operator-portrait" aria-label="Fleet member on deck">
@@ -976,8 +981,8 @@ section.offers{padding:clamp(72px,11vw,128px) 0;position:relative;
       <div class="harmonic-visual reveal" aria-label="GAOS / HARMONIC control panel">
         <div class="hpanel-laser" aria-hidden="true"></div>
         <div class="hpanel-head">
-          <span class="hpanel-mark">GAOS<i>Â·</i>HARMONIC</span>
-          <span class="hpanel-status">supervisory Â· online</span>
+          <span class="hpanel-mark">GAOS<i>·</i>HARMONIC</span>
+          <span class="hpanel-status">supervisory · online</span>
         </div>
         <div class="hpanel-core" aria-hidden="true">
           <div class="hpanel-ring"></div>
@@ -1096,13 +1101,13 @@ section.offers{padding:clamp(72px,11vw,128px) 0;position:relative;
 }</code></pre>
       </div>
       <figure class="receipt reveal" data-parallax="0.06" aria-label="Example receipt">
-        <div class="receipt-head"><span>RECEIPT</span><span class="receipt-id">req_8f3aâ€¦e71</span></div>
+        <div class="receipt-head"><span>RECEIPT</span><span class="receipt-id">req_8f3a…e71</span></div>
         <div class="receipt-row"><span>role</span><b>browser</b></div>
-        <div class="receipt-row"><span>action</span><b>navigate Â· extract</b></div>
+        <div class="receipt-row"><span>action</span><b>navigate · extract</b></div>
         <div class="receipt-row"><span>status</span><b class="ok">verified</b></div>
-        <div class="receipt-row"><span>evidence</span><b>screenshot Â· source Ã—3</b></div>
+        <div class="receipt-row"><span>evidence</span><b>screenshot · source ×3</b></div>
         <div class="receipt-row"><span>latency</span><b>1.84s</b></div>
-        <div class="receipt-foot">governed lane Â· operator-inspectable</div>
+        <div class="receipt-foot">governed lane · operator-inspectable</div>
       </figure>
     </div>
   </section>
@@ -1156,7 +1161,7 @@ section.offers{padding:clamp(72px,11vw,128px) 0;position:relative;
           <label>Risk constraints<input type="text" name="risk" placeholder="money movement, compliance" /></label>
         </div>
         <label style="position:absolute;left:-9999px;top:auto;height:1px;width:1px;overflow:hidden" aria-hidden="true">Website<input type="text" name="website" tabindex="-1" autocomplete="off" /></label>
-        <button class="btn btn-primary btn-lg" type="submit">Send one job free <span aria-hidden="true">â†’</span></button>
+        <button class="btn btn-primary btn-lg" type="submit">Send one job free <span aria-hidden="true">→</span></button>
         <p class="form-status" role="status" aria-live="polite" style="display:none;margin:12px 0 0;font-weight:600"></p>
         <p class="form-note">No customer data is stored on this page. Prefer email? Write to <a href="mailto:sales@gridfleet.ai">sales@gridfleet.ai</a>. Do not include credentials, secrets, private customer data, or wallet keys.</p>
       </form>
@@ -1213,10 +1218,10 @@ section.offers{padding:clamp(72px,11vw,128px) 0;position:relative;
 <footer class="foot">
   <div class="wrap foot-grid">
     <div><span class="brand-word">GRID<b>FLEET</b></span><p class="muted">The execution layer for autonomous AI operations.</p></div>
-    <nav aria-label="Footer"><a href="/vera">Vera â€” AI receptionist</a><a href="/about.html">About</a><a href="/docs.html">Docs</a><a href="/audits.html">DeFi Audits</a><a href="/signup.html">Request access</a></nav>
+    <nav aria-label="Footer"><a href="/vera">Vera — AI receptionist</a><a href="/about.html">About</a><a href="/docs.html">Docs</a><a href="/audits.html">DeFi Audits</a><a href="/signup.html">Request access</a></nav>
     <div class="foot-sec"><a href="/cdn-cgi/l/email-protection#ff8c9a9c8a8d968b86bf988d969b99939a9a8bd19e96"><span class="__cf_email__" data-cfemail="483b2d2b3d3a213c31082f3a212c2e242d2d3c662921">[email&#160;protected]</span></a><span class="muted">Responsible disclosure welcome.</span></div>
   </div>
-  <div class="wrap foot-base"><span class="muted">Â© 2026 GridFleet Â· gridfleet.ai</span><span class="muted">Operator-controlled Â· receipt-backed</span></div>
+  <div class="wrap foot-base"><span class="muted">© 2026 GridFleet · gridfleet.ai</span><span class="muted">Operator-controlled · receipt-backed</span></div>
 </footer>
 
 <script type="application/json" id="fleet-roster-data">
