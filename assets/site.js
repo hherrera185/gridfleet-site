@@ -214,6 +214,8 @@
   document.addEventListener("visibilitychange", function () { running = !document.hidden; if (running) requestAnimationFrame(frame); });
   var rt; window.addEventListener("resize", function () { clearTimeout(rt); rt = setTimeout(resize, 200); });
   resize(); readScroll(); requestAnimationFrame(frame);
+  // canvas is live — retire the CSS-only fallback grid so the two never double up
+  var heroEl = document.querySelector(".hero"); if (heroEl) heroEl.classList.add("fleet-live");
 })();
 
 

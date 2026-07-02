@@ -40,7 +40,7 @@
 
 
 <style id="gridfleet-inline-site-css">
-/* GridFleet - site.css · "The Grid, rendered" · self-contained, zero external deps */
+/* GridFleet - site.css Â· "The Grid, rendered" Â· self-contained, zero external deps */
 :root{
   --bg:#05060a; --bg2:#080b12; --panel:#0b1018; --line:#16202e; --line2:#1f2e40;
   --ink:#e8f2fb; --dim:#8aa0b6; --faint:#5d728a;
@@ -480,9 +480,9 @@ section.dispatch,section.trust{padding:clamp(72px,11vw,128px) 0;position:relativ
 
 
 /* =====================================================================
-   PHASE D — award-level pass
-   Full-page faint grid · GAOS/HARMONIC 3D control panel · HARMONIC
-   anatomy · product offer sections. Self-contained, no JS dependency,
+   PHASE D â€” award-level pass
+   Full-page faint grid Â· GAOS/HARMONIC 3D control panel Â· HARMONIC
+   anatomy Â· product offer sections. Self-contained, no JS dependency,
    reduced-motion safe, separate desktop / mobile treatments.
    ===================================================================== */
 
@@ -502,7 +502,7 @@ section.dispatch,section.trust{padding:clamp(72px,11vw,128px) 0;position:relativ
 .harmonic-visual{
   min-height:560px;border-radius:28px;
   border:1px solid rgba(125,227,255,.22);
-  /* OPAQUE deck — not transparent */
+  /* OPAQUE deck â€” not transparent */
   background:
     radial-gradient(150% 80% at 50% -12%,rgba(77,209,255,.16),transparent 62%),
     linear-gradient(180deg,#0c1422 0%,#0a1019 58%,#070c14 100%);
@@ -613,7 +613,7 @@ section.offers{padding:clamp(72px,11vw,128px) 0;position:relative;
 @media(max-width:900px){.offers-grid{grid-template-columns:1fr;gap:16px}.offer{padding:26px 22px}}
 @media(max-width:520px){.offer-outcome{font-size:18px}.offer-foot{gap:12px}.offer-foot .btn{width:100%;justify-content:center}}
 
-/* reduced motion — disable all Phase D motion, keep content fully visible */
+/* reduced motion â€” disable all Phase D motion, keep content fully visible */
 @media(prefers-reduced-motion:reduce){
   .harmonic-visual,.harmonic-copy{animation:none!important;opacity:1!important;transform:none!important}
   .hpanel-laser{display:none}
@@ -672,7 +672,7 @@ section.offers{padding:clamp(72px,11vw,128px) 0;position:relative;
 
 
 /* =====================================================================
-   FABLE5 AWARD PASS — animated hero grid, cycling command-deck avatars,
+   FABLE5 AWARD PASS â€” animated hero grid, cycling command-deck avatars,
    proof-card overflow containment, mobile polish. Self-contained,
    reduced-motion safe. Appended last so it wins the cascade.
    ===================================================================== */
@@ -680,10 +680,32 @@ section.offers{padding:clamp(72px,11vw,128px) 0;position:relative;
 /* --- Hero: let the animated Tron light-grid canvas lead; the still
    image becomes a faint base glow rather than the whole hero. --- */
 .hero-canvas{z-index:1;opacity:.96}
-.hero-bg{opacity:.4;animation-duration:52s}
+.hero-bg{opacity:.34;animation-duration:52s}
+
+/* CSS-only animated Tron corridor grid â€” the no-JS / blocked-asset fallback so
+   the hero is ALWAYS alive (canvas is a progressive enhancement layered on top).
+   Two perspective planes (floor + ceiling) meeting at a glowing horizon. */
+.hero-grid{position:absolute;inset:0;z-index:0;pointer-events:none;overflow:hidden;
+  background:radial-gradient(64% 42% at 50% 50%,rgba(54,224,255,.20),transparent 70%);
+  transition:opacity .9s var(--ease)}
+.hero-grid::before,.hero-grid::after{content:"";position:absolute;left:-45%;right:-45%;height:72%;
+  background-image:
+    repeating-linear-gradient(to right, rgba(90,232,255,.34) 0 1.5px, transparent 1.5px 70px),
+    repeating-linear-gradient(to bottom, rgba(90,232,255,.34) 0 1.5px, transparent 1.5px 70px);
+  animation:heroGridScroll 3.6s linear infinite;will-change:background-position}
+.hero-grid::before{top:50%;transform-origin:50% 0;transform:perspective(300px) rotateX(77deg);
+  -webkit-mask-image:linear-gradient(to bottom,#000,transparent 84%);mask-image:linear-gradient(to bottom,#000,transparent 84%)}
+.hero-grid::after{bottom:50%;transform-origin:50% 100%;transform:perspective(300px) rotateX(-77deg);
+  -webkit-mask-image:linear-gradient(to top,#000,transparent 84%);mask-image:linear-gradient(to top,#000,transparent 84%);
+  animation-direction:reverse}
+@keyframes heroGridScroll{from{background-position:0 0,0 0}to{background-position:0 0,0 70px}}
+/* when the JS canvas is painting, retire the CSS grid so we never double up */
+.hero.fleet-live .hero-grid{opacity:0}
 @media(prefers-reduced-motion:reduce){
-  /* No canvas under reduced motion — present a tasteful static Tron still. */
-  .hero-bg{opacity:.92;transform:scale(1.04);animation:none}
+  /* No canvas + no motion: present a tasteful static Tron still + static grid. */
+  .hero-bg{opacity:.9;transform:scale(1.04);animation:none}
+  .hero-grid{opacity:.7}
+  .hero-grid::before,.hero-grid::after{animation:none}
 }
 
 /* --- Command deck: cycling avatar portraits + changing role titles --- */
@@ -761,6 +783,7 @@ section.offers{padding:clamp(72px,11vw,128px) 0;position:relative;
   <!-- HERO -->
   <section class="hero">
     <div class="hero-bg" aria-hidden="true"></div>
+    <div class="hero-grid" aria-hidden="true"></div>
     <canvas id="fleet" class="hero-canvas" aria-hidden="true"></canvas>
     <div class="hero-veil" aria-hidden="true"></div>
     
@@ -768,9 +791,9 @@ section.offers{padding:clamp(72px,11vw,128px) 0;position:relative;
       <div class="hero-copy">
         <p class="eyebrow"><span class="pulse"></span> Operator-controlled - receipt-backed - command deck</p>
         <h1 class="hero-title">AI agents that do the work -<br><span class="grad">and return proof.</span></h1>
-        <p class="hero-sub"><strong>Send the job. Get the receipt.</strong> Send us one real job - get a sample receipt-backed result, free. GridFleet routes operational work through the 16 specialist agents that run The Grid — 6 launch workers are hireable today, and <a href="/vera" style="color:var(--cyan)">Vera, the flagship AI receptionist</a>, answers your phones — then returns the evidence stack so you can inspect what happened.</p>
+        <p class="hero-sub"><strong>Send the job. Get the receipt.</strong> Send us one real job - get a sample receipt-backed result, free. GridFleet routes operational work through the 16 specialist agents that run The Grid â€” 6 launch workers are hireable today, and <a href="/vera" style="color:var(--cyan)">Vera, the flagship AI receptionist</a>, answers your phones â€” then returns the evidence stack so you can inspect what happened.</p>
         <div class="hero-cta">
-          <a class="btn btn-primary btn-lg" href="#access">Try one job free <span aria-hidden="true">→</span></a>
+          <a class="btn btn-primary btn-lg" href="#access">Try one job free <span aria-hidden="true">â†’</span></a>
           <a class="btn btn-ghost btn-lg" href="#dispatch">See dispatch examples</a>
           <a class="btn btn-ghost btn-lg" href="/docs.html">Read API docs</a>
         </div>
@@ -784,11 +807,11 @@ section.offers{padding:clamp(72px,11vw,128px) 0;position:relative;
       <div class="hero-demo command-deck cinematic-deck" aria-label="GridFleet command deck release view">
         <div class="deck-head">
           <div><span class="deck-kicker">COMMAND DECK</span><b id="deck-title">Communications Operator</b></div>
-          <span class="deck-status"><span class="pulse"></span> live · on deck</span>
+          <span class="deck-status"><span class="pulse"></span> live Â· on deck</span>
         </div>
         <div class="operator-stage">
           <div class="operator-portrait" aria-label="Fleet member on deck">
-            <img class="op-av is-on" id="op-av-a" src="/assets/agents/clu.jpg" alt="" decoding="async" />
+            <img class="op-av is-on" id="op-av-a" src="data:image/jpeg;base64,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" data-full="/assets/agents/clu.jpg" alt="" decoding="async" />
             <img class="op-av" id="op-av-b" alt="" decoding="async" />
             <span class="portrait-scan" aria-hidden="true"></span>
             <span class="portrait-frame" aria-hidden="true"></span>
@@ -953,8 +976,8 @@ section.offers{padding:clamp(72px,11vw,128px) 0;position:relative;
       <div class="harmonic-visual reveal" aria-label="GAOS / HARMONIC control panel">
         <div class="hpanel-laser" aria-hidden="true"></div>
         <div class="hpanel-head">
-          <span class="hpanel-mark">GAOS<i>·</i>HARMONIC</span>
-          <span class="hpanel-status">supervisory · online</span>
+          <span class="hpanel-mark">GAOS<i>Â·</i>HARMONIC</span>
+          <span class="hpanel-status">supervisory Â· online</span>
         </div>
         <div class="hpanel-core" aria-hidden="true">
           <div class="hpanel-ring"></div>
@@ -1073,13 +1096,13 @@ section.offers{padding:clamp(72px,11vw,128px) 0;position:relative;
 }</code></pre>
       </div>
       <figure class="receipt reveal" data-parallax="0.06" aria-label="Example receipt">
-        <div class="receipt-head"><span>RECEIPT</span><span class="receipt-id">req_8f3a…e71</span></div>
+        <div class="receipt-head"><span>RECEIPT</span><span class="receipt-id">req_8f3aâ€¦e71</span></div>
         <div class="receipt-row"><span>role</span><b>browser</b></div>
-        <div class="receipt-row"><span>action</span><b>navigate · extract</b></div>
+        <div class="receipt-row"><span>action</span><b>navigate Â· extract</b></div>
         <div class="receipt-row"><span>status</span><b class="ok">verified</b></div>
-        <div class="receipt-row"><span>evidence</span><b>screenshot · source ×3</b></div>
+        <div class="receipt-row"><span>evidence</span><b>screenshot Â· source Ã—3</b></div>
         <div class="receipt-row"><span>latency</span><b>1.84s</b></div>
-        <div class="receipt-foot">governed lane · operator-inspectable</div>
+        <div class="receipt-foot">governed lane Â· operator-inspectable</div>
       </figure>
     </div>
   </section>
@@ -1133,7 +1156,7 @@ section.offers{padding:clamp(72px,11vw,128px) 0;position:relative;
           <label>Risk constraints<input type="text" name="risk" placeholder="money movement, compliance" /></label>
         </div>
         <label style="position:absolute;left:-9999px;top:auto;height:1px;width:1px;overflow:hidden" aria-hidden="true">Website<input type="text" name="website" tabindex="-1" autocomplete="off" /></label>
-        <button class="btn btn-primary btn-lg" type="submit">Send one job free <span aria-hidden="true">→</span></button>
+        <button class="btn btn-primary btn-lg" type="submit">Send one job free <span aria-hidden="true">â†’</span></button>
         <p class="form-status" role="status" aria-live="polite" style="display:none;margin:12px 0 0;font-weight:600"></p>
         <p class="form-note">No customer data is stored on this page. Prefer email? Write to <a href="mailto:sales@gridfleet.ai">sales@gridfleet.ai</a>. Do not include credentials, secrets, private customer data, or wallet keys.</p>
       </form>
@@ -1190,10 +1213,10 @@ section.offers{padding:clamp(72px,11vw,128px) 0;position:relative;
 <footer class="foot">
   <div class="wrap foot-grid">
     <div><span class="brand-word">GRID<b>FLEET</b></span><p class="muted">The execution layer for autonomous AI operations.</p></div>
-    <nav aria-label="Footer"><a href="/vera">Vera — AI receptionist</a><a href="/about.html">About</a><a href="/docs.html">Docs</a><a href="/audits.html">DeFi Audits</a><a href="/signup.html">Request access</a></nav>
+    <nav aria-label="Footer"><a href="/vera">Vera â€” AI receptionist</a><a href="/about.html">About</a><a href="/docs.html">Docs</a><a href="/audits.html">DeFi Audits</a><a href="/signup.html">Request access</a></nav>
     <div class="foot-sec"><a href="/cdn-cgi/l/email-protection#ff8c9a9c8a8d968b86bf988d969b99939a9a8bd19e96"><span class="__cf_email__" data-cfemail="483b2d2b3d3a213c31082f3a212c2e242d2d3c662921">[email&#160;protected]</span></a><span class="muted">Responsible disclosure welcome.</span></div>
   </div>
-  <div class="wrap foot-base"><span class="muted">© 2026 GridFleet · gridfleet.ai</span><span class="muted">Operator-controlled · receipt-backed</span></div>
+  <div class="wrap foot-base"><span class="muted">Â© 2026 GridFleet Â· gridfleet.ai</span><span class="muted">Operator-controlled Â· receipt-backed</span></div>
 </footer>
 
 <script type="application/json" id="fleet-roster-data">
