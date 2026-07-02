@@ -5835,7 +5835,7 @@ window.TASTE_DATA = {
       "primaryTag": "dark-structure",
       "date": "2026-05-30",
       "dayIndex": 2,
-      "source": "** Source file page: https://commons.wikimedia.org/wiki/File:Duccio_Maest%C3%A0.jpg ; inspected local image receipt downloaded from Wikimedia: `/mnt/c/Users/logik/.openclaw/workspace-lora/assets/looking-practice/2026-05-30-historical/duccio-maesta.jpg`"
+      "source": "** Source file page: https://commons.wikimedia.org/wiki/File:Duccio_Maest%C3%A0.jpg ; inspected local image receipt downloaded from Wikimedia: `[local-archive]/assets/looking-practice/2026-05-30-historical/duccio-maesta.jpg`"
     },
     {
       "id": "work:349",
@@ -5897,7 +5897,7 @@ window.TASTE_DATA = {
       "primaryTag": "dark-structure",
       "date": "2026-05-30",
       "dayIndex": 2,
-      "source": "** Source file page: https://commons.wikimedia.org/wiki/File:Calling-of-st-matthew.jpg ; inspected local image receipt: `/mnt/c/Users/logik/.openclaw/workspace-lora/assets/looking-practice/2026-05-30-historical/caravaggio-calling.jpg`"
+      "source": "** Source file page: https://commons.wikimedia.org/wiki/File:Calling-of-st-matthew.jpg ; inspected local image receipt: `[local-archive]/assets/looking-practice/2026-05-30-historical/caravaggio-calling.jpg`"
     },
     {
       "id": "work:353",

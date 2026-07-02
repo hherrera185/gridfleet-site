@@ -1,129 +1,264 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" class="no-js">
 <head>
 <meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data:; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline'; connect-src 'self'; form-action 'self' mailto:; frame-ancestors 'none'; base-uri 'self'; object-src 'none'; upgrade-insecure-requests" />
+<meta name="referrer" content="strict-origin-when-cross-origin" />
 <meta name="robots" content="index, follow, max-image-preview:large" />
-<meta name="theme-color" content="#05060a" />
-<title>Grid Workers - AI operators that do the work and return proof</title>
+<meta name="theme-color" content="#05070a" />
+<title>Grid Workers — AI operators that do the work and return proof | GridFleet</title>
 <meta name="description" content="Hire specialized Grid Workers with memory, tools, safe autonomy, and receipt-backed execution. Chatbots answer. Generic workers claim. Grid operators prove." />
 <link rel="canonical" href="https://gridfleet.ai/workers.html" />
-<link rel="stylesheet" href="/assets/site.css" />
-<style>
-.worker-hero{min-height:78vh;display:flex;align-items:center;border-bottom:1px solid var(--line);background:radial-gradient(900px 500px at 75% 20%,rgba(54,224,255,.13),transparent 60%),linear-gradient(180deg,var(--bg),var(--bg2))}.worker-hero .wrap{padding-top:120px;padding-bottom:80px}.worker-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:34px}.worker-card{background:linear-gradient(180deg,rgba(255,255,255,.03),rgba(255,255,255,.01));border:1px solid var(--line);border-radius:18px;padding:24px;position:relative;overflow:hidden}.worker-card:before{content:"";position:absolute;inset:0;background:radial-gradient(360px 180px at 100% 0,rgba(54,224,255,.08),transparent 65%);opacity:.9;pointer-events:none}.worker-card>*{position:relative}.worker-card h3{font-size:23px}.pill-row{display:flex;gap:8px;flex-wrap:wrap;margin:14px 0 0}.pill{font-family:var(--mono);font-size:11px;color:var(--cyan);border:1px solid var(--line2);background:rgba(54,224,255,.06);padding:4px 8px;border-radius:999px}.flow{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin-top:34px}.flow-step{border:1px solid var(--line);border-radius:16px;padding:18px;background:var(--panel)}.flow-step b{display:block;color:var(--cyan);font-family:var(--mono);font-size:12px;margin-bottom:10px}.receipt-demo{background:#070b11;border:1px solid var(--line2);border-radius:18px;padding:22px;font-family:var(--mono);box-shadow:var(--glow)}.receipt-demo div{display:flex;justify-content:space-between;border-bottom:1px solid rgba(255,255,255,.08);padding:10px 0;gap:18px}.receipt-demo span{color:var(--faint)}.receipt-demo b{color:var(--green);font-weight:500}.compare-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:18px;margin-top:30px}.compare-card{border:1px solid var(--line);border-radius:18px;padding:24px;background:var(--panel)}.compare-card.winner{border-color:rgba(54,224,255,.55);box-shadow:var(--glow)}.autonomy{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:30px}.level{border:1px solid var(--line);border-radius:14px;padding:18px;background:rgba(255,255,255,.02)}.level strong{color:var(--cyan);font-family:var(--mono)}@media(max-width:900px){.worker-grid,.flow,.compare-grid,.autonomy{grid-template-columns:1fr}.worker-hero{min-height:auto}}
-</style>
+<meta property="og:title" content="Grid Workers — AI operators that do the work and return proof" />
+<meta property="og:description" content="Hire specialized Grid Workers with memory, tools, safe autonomy, and receipt-backed execution." />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://gridfleet.ai/workers.html" />
+<meta property="og:image" content="https://gridfleet.ai/og.png" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Grid Workers — AI operators that do the work and return proof" />
+<meta name="twitter:image" content="https://gridfleet.ai/og.png" />
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml" />
+<link rel="preload" href="/assets/fonts/space-grotesk-var.woff2" as="font" type="font/woff2" crossorigin />
+<link rel="preload" href="/assets/fonts/jetbrains-mono-var.woff2" as="font" type="font/woff2" crossorigin />
+<style>body{background:#05070a;color:#f2f6f4;font-family:ui-sans-serif,system-ui,sans-serif;margin:0}</style>
+<link rel="stylesheet" href="/assets/main.css" />
+<link rel="stylesheet" href="/assets/sub.css" />
 </head>
 <body>
-<a class="skip" href="#main">Skip to content</a>
-<nav class="nav scrolled" aria-label="Primary">
-  <a class="brand" href="/"><span class="brand-mark"><i></i><i></i><i></i><i></i></span><span class="brand-word">GRID<b>FLEET</b></span></a>
-  <div class="nav-links"><a href="/vera">Vera</a><a href="/workers.html">Workers</a><a href="/#how">How it works</a><a href="/#fleet">Fleet</a><a href="/#receipts">Receipts</a><a href="/docs.html">Docs</a></div>
-  <a class="btn btn-primary nav-cta" href="/signup.html">Hire a Worker</a>
-</nav>
-<main id="main">
-<section class="worker-hero">
-  <div class="wrap">
-    <p class="eyebrow"><span class="pulse"></span> Grid Workers</p>
-    <h1 class="hero-title">Hire AI operators that <span class="grad">do the work</span> and return proof.</h1>
+
+<!-- nav -->
+<header class="nav" id="nav">
+  <a class="brand" href="/" aria-label="GridFleet home">
+    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+      <path d="M12 2 21 7v10l-9 5-3-1.7V13H4.5V8.2L12 4.3l6 3.1v8.2l-4.5 2.5" stroke="#22e6ff" stroke-width="1.5" stroke-linecap="square"/>
+    </svg>
+    <b>GRIDFLEET<span class="brand-dot">_</span></b>
+  </a>
+  <nav class="nav-links" aria-label="Primary">
+    <a href="/vera">Vera</a>
+    <a href="/workers.html">Workers</a>
+    <a href="/docs.html">Docs</a>
+    <a href="/about.html">About</a>
+  </nav>
+  <div style="display:flex;align-items:center;gap:10px">
+    <a class="btn btn--solid nav-cta" href="/#deploy">Deploy the fleet</a>
+    <button class="burger" id="burger" aria-label="Menu" aria-expanded="false" aria-controls="menu"><i></i><i></i><i></i></button>
+  </div>
+</header>
+
+<!-- overlay menu -->
+<div id="menu" role="dialog" aria-label="Site menu">
+  <div class="menu-grid">
+    <nav class="menu-main" aria-label="Scenes">
+      <a href="/#fleet"><small>01</small>The living fleet</a>
+      <a href="/#work"><small>02</small>Watch it work</a>
+      <a href="/#receipts"><small>03</small>The receipt</a>
+      <a href="/#deck"><small>04</small>Command deck</a>
+      <a href="/#deploy"><small>05</small>Deploy</a>
+    </nav>
+    <nav class="menu-side" aria-label="Pages">
+      <a href="/vera">Vera — AI receptionist</a>
+      <a href="/workers.html">Hire a worker</a>
+      <a href="/docs.html">API docs</a>
+      <a href="/audits.html">DeFi audits</a>
+      <a href="/about.html">About</a>
+      <a href="/signup.html">Request access</a>
+    </nav>
+  </div>
+  <div class="menu-foot">GridFleet — send the job · get the receipt</div>
+</div>
+
+<main>
+
+<!-- ============ hero ============ -->
+<section class="hero hero--sub scene" id="top" aria-label="Grid Workers">
+  <div class="grid-field" aria-hidden="true"></div>
+  <div class="hero-inner wrap">
+    <div class="hero-eyebrow">
+      <span class="pulse-dot" aria-hidden="true"></span>
+      <span class="tag">Grid Workers — governed operators</span>
+    </div>
+    <h1 class="h-xxl">
+      <span class="line-mask"><span class="line-inner">Hire operators that</span></span>
+      <span class="line-mask"><span class="line-inner"><span class="accent">do the work</span> —</span></span>
+      <span class="line-mask"><span class="line-inner">and return proof.</span></span>
+    </h1>
     <p class="hero-sub"><strong>Send operational work. Get proof back.</strong> Not a chatbot. Not a vague autonomous agent. A governed worker with memory, tools, safe autonomy, and a receipts timeline you can inspect.</p>
-    <div class="hero-cta"><a class="btn btn-primary btn-lg" href="/signup.html">Hire your first Grid Worker</a><a class="btn btn-ghost btn-lg" href="#catalog">View worker catalog</a></div>
-    <dl class="hero-stats"><div><dt>6</dt><dd>launch workers</dd></div><div><dt>6</dt><dd>autonomy levels</dd></div><div><dt>100%</dt><dd>receipt-first doctrine</dd></div></dl>
+    <div class="hero-ctas">
+      <a class="btn btn--solid" href="/signup.html">Hire your first worker <span class="btn-arrow" aria-hidden="true">&rarr;</span></a>
+      <a class="btn btn--ghost" href="#catalog">View the catalog</a>
+    </div>
+  </div>
+  <div class="hero-foot">
+    <span class="hf-live">Launch workers <b>6</b> &nbsp;·&nbsp; Autonomy levels <b>6</b> &nbsp;·&nbsp; Doctrine <b>receipt-first</b></span>
+    <span class="scroll-cue">Scroll <i aria-hidden="true"></i></span>
   </div>
 </section>
-<section class="band" id="why">
+
+<!-- ============ 01 · why grid wins ============ -->
+<section class="scene scene--pad scene--line" id="why" aria-label="Why Grid wins">
   <div class="wrap">
-    <p class="kicker">Why Grid wins</p>
-    <h2 class="section-title">The market wants workers. The business needs proof.</h2>
-    <p class="prose">AI worker products sell a good idea: pick a role, give it a goal, connect tools, and let it work. Grid adds the missing enterprise layer: safe autonomy settings, blocked-action gates, degraded-verification labels, and receipts for every meaningful action.</p>
-    <div class="compare-grid">
-      <article class="compare-card"><h3>Chatbots</h3><p class="prose">Answer inside one window. They wait, forget, and rarely prove what happened.</p></article>
-      <article class="compare-card"><h3>Generic AI workers</h3><p class="prose">Claim autonomy and tool use, but public proof is often marketing snippets and tool logos.</p></article>
-      <article class="compare-card winner"><h3>Grid Workers</h3><p class="prose">Act in governed lanes, escalate risky work, and return inspectable receipts: IDs, hashes, screenshots, readbacks, and blockers.</p></article>
+    <div class="scene-head">
+      <span class="tag">01 — Why Grid wins</span>
+      <h2 class="h-xl"><span class="line-mask"><span class="line-inner">The market wants workers.</span></span><span class="line-mask"><span class="line-inner">The business needs proof.</span></span></h2>
+      <p class="lede">AI worker products sell a good idea: pick a role, give it a goal, connect tools, and let it work. Grid adds the missing enterprise layer: safe autonomy settings, blocked-action gates, degraded-verification labels, and receipts for every meaningful action.</p>
+    </div>
+    <div class="bento" style="margin-top:0">
+      <article class="bento-card b-4 fade-up"><span class="bc-note">The old answer</span><h3>Chatbots</h3><p>Answer inside one window. They wait, forget, and rarely prove what happened.</p></article>
+      <article class="bento-card b-4 fade-up"><span class="bc-note">The loud answer</span><h3>Generic AI workers</h3><p>Claim autonomy and tool use, but public proof is often marketing snippets and tool logos.</p></article>
+      <article class="bento-card b-4 bento-card--hot fade-up"><span class="bc-note">The governed answer</span><h3>Grid Workers</h3><p>Act in governed lanes, escalate risky work, and return inspectable receipts: IDs, hashes, screenshots, readbacks, and blockers.</p></article>
     </div>
   </div>
 </section>
-<section class="how" id="flow">
+
+<!-- ============ 02 · deploy flow ============ -->
+<section class="scene scene--pad scene--deep" id="flow" aria-label="Deploy flow">
   <div class="wrap">
-    <p class="kicker">Deploy flow</p>
-    <h2 class="section-title">Pick. Brief. Connect. Dry-run. Approve.</h2>
-    <div class="flow">
-      <div class="flow-step"><b>01</b><h3>Pick or create</h3><p>Select a worker or describe the operational job.</p></div>
-      <div class="flow-step"><b>02</b><h3>Brief</h3><p>Goals, tone, examples, constraints, escalation owner.</p></div>
-      <div class="flow-step"><b>03</b><h3>Connect</h3><p>Least-privilege channels, files, dashboards, APIs.</p></div>
-      <div class="flow-step"><b>04</b><h3>Dry-run</h3><p>First execution proves understanding with no external mutation.</p></div>
-      <div class="flow-step"><b>05</b><h3>Approve</h3><p>Set autonomy level and receipt requirements before live work.</p></div>
+    <div class="scene-head">
+      <span class="tag">02 — Deploy flow</span>
+      <h2 class="h-xl"><span class="line-mask"><span class="line-inner">Pick. Brief. Connect.</span></span><span class="line-mask"><span class="line-inner">Dry-run. Approve.</span></span></h2>
+    </div>
+    <div class="steps">
+      <div class="step fade-up"><span class="s-num">01 — Pick</span><div><h3>Pick or create</h3><p>Select a worker or describe the operational job.</p></div></div>
+      <div class="step fade-up"><span class="s-num">02 — Brief</span><div><h3>Brief the worker</h3><p>Goals, tone, examples, constraints, escalation owner.</p></div></div>
+      <div class="step fade-up"><span class="s-num">03 — Connect</span><div><h3>Least-privilege access</h3><p>Channels, files, dashboards, and APIs — scoped to the job, never broader.</p></div></div>
+      <div class="step fade-up"><span class="s-num">04 — Dry-run</span><div><h3>Prove understanding first</h3><p>First execution proves understanding with no external mutation.</p></div></div>
+      <div class="step fade-up"><span class="s-num">05 — Approve</span><div><h3>Set the autonomy level</h3><p>Autonomy level and receipt requirements are set before any live work.</p></div></div>
     </div>
   </div>
 </section>
-<section class="fleet" id="catalog">
+
+<!-- ============ 03 · catalog ============ -->
+<section class="scene scene--pad" id="catalog" aria-label="Launch catalog">
   <div class="wrap">
-    <p class="kicker">Launch catalog</p>
-    <h2 class="section-title">Specialized operators, not prompt templates.</h2>
-    <p class="prose">16 specialist agents run The Grid. These 6 launch workers are hireable today — and <a href="/vera" style="color:var(--cyan)">Vera, the flagship AI receptionist</a>, answers your phones from $99/mo with the first week of calls free.</p>
-    <div class="worker-grid">
-      <article class="worker-card" style="border-color:rgba(54,224,255,.55);box-shadow:var(--glow)"><span class="role-tag">Flagship — Reception</span><h3>VERA — AI Receptionist</h3><p>Answers every call, books your Google Calendar, sends TCPA-aware confirmations, escalates to humans — with a receipt per call. <a href="/vera" style="color:var(--cyan)">Plans from $99/mo →</a></p><div class="pill-row"><span class="pill">24/7 answering</span><span class="pill">calendar booking</span><span class="pill">call receipts</span></div></article>
-      <article class="worker-card"><span class="role-tag">Client Ops</span><h3>MADDIE — Event Planner</h3><p>Keeps event planning moving across clients, vendors, and dashboards.</p><div class="pill-row"><span class="pill">client replies</span><span class="pill">vendor tracking</span><span class="pill">dashboard</span></div></article>
-      <article class="worker-card"><span class="role-tag">Creative</span><h3>LORA — Creative / Social Scout</h3><p>Finds, studies, curates, posts, and reports cultural signal with market/custody boundaries.</p><div class="pill-row"><span class="pill">taste graph</span><span class="pill">public posts</span><span class="pill">Tezos scouting</span></div></article>
-      <article class="worker-card"><span class="role-tag">Finance</span><h3>RAM — Finance Operator</h3><p>Turns spend, revenue, purchasing, and accounting risk into controlled operating lanes.</p><div class="pill-row"><span class="pill">burn rate</span><span class="pill">ASC 606</span><span class="pill">purchase gates</span></div></article>
-      <article class="worker-card"><span class="role-tag">Comms</span><h3>CLU — Communications Operator</h3><p>Routes messages, triages inboxes, coordinates voice/text, and prevents communication drift.</p><div class="pill-row"><span class="pill">thread routing</span><span class="pill">inbox triage</span><span class="pill">voice bridge</span></div></article>
-      <article class="worker-card"><span class="role-tag">Reliability</span><h3>BECK — Grid Doctor</h3><p>Watches the system, diagnoses failures, and prepares safe repairs with owner routing.</p><div class="pill-row"><span class="pill">cron SLO</span><span class="pill">semantic health</span><span class="pill">safe diagnostics</span></div></article>
-      <article class="worker-card"><span class="role-tag">Infrastructure</span><h3>DUMONT — Infra Operator</h3><p>Handles APIs, credentials, deployment evidence, and signer-lane readiness with strict gates.</p><div class="pill-row"><span class="pill">API proof</span><span class="pill">deploy gates</span><span class="pill">credential safety</span></div></article>
+    <div class="scene-head">
+      <span class="tag">03 — Launch catalog</span>
+      <h2 class="h-xl"><span class="line-mask"><span class="line-inner">Specialized operators,</span></span><span class="line-mask"><span class="line-inner">not prompt templates.</span></span></h2>
+      <p class="lede">16 specialist agents run The Grid. These launch workers are hireable today — and <a href="/vera" style="color:var(--cyan)">Vera, the flagship AI receptionist</a>, answers your phones from $99/mo with the first week of calls free.</p>
+    </div>
+    <div class="bento" style="margin-top:0">
+      <article class="bento-card b-8 bento-card--hot fade-up">
+        <span class="bc-note">Flagship — Reception</span>
+        <h3>VERA — AI Receptionist</h3>
+        <p>Answers every call, books your Google Calendar, sends TCPA-aware confirmations, escalates to humans — with a receipt per call. <a href="/vera" style="color:var(--cyan)">Plans from $99/mo &rarr;</a></p>
+        <div class="pillrow" style="margin-top:auto"><span class="pill">24/7 answering</span><span class="pill">calendar booking</span><span class="pill">call receipts</span></div>
+      </article>
+      <article class="bento-card b-4 fade-up"><span class="bc-note">Client Ops</span><h3>MADDIE — Event Planner</h3><p>Keeps event planning moving across clients, vendors, and dashboards.</p><div class="pillrow" style="margin-top:auto"><span class="pill pill--dim">client replies</span><span class="pill pill--dim">vendor tracking</span></div></article>
+      <article class="bento-card b-4 fade-up"><span class="bc-note">Creative</span><h3>LORA — Creative / Social Scout</h3><p>Finds, studies, curates, posts, and reports cultural signal with market/custody boundaries. <a href="/lora" style="color:var(--cyan)">See the taste map &rarr;</a></p><div class="pillrow" style="margin-top:auto"><span class="pill pill--dim">taste graph</span><span class="pill pill--dim">public posts</span></div></article>
+      <article class="bento-card b-4 fade-up"><span class="bc-note">Finance</span><h3>RAM — Finance Operator</h3><p>Turns spend, revenue, purchasing, and accounting risk into controlled operating lanes.</p><div class="pillrow" style="margin-top:auto"><span class="pill pill--dim">burn rate</span><span class="pill pill--dim">purchase gates</span></div></article>
+      <article class="bento-card b-4 fade-up"><span class="bc-note">Comms</span><h3>CLU — Communications Operator</h3><p>Routes messages, triages inboxes, coordinates voice/text, and prevents communication drift.</p><div class="pillrow" style="margin-top:auto"><span class="pill pill--dim">thread routing</span><span class="pill pill--dim">inbox triage</span></div></article>
+      <article class="bento-card b-4 fade-up"><span class="bc-note">Reliability</span><h3>BECK — Grid Doctor</h3><p>Watches the system, diagnoses failures, and prepares safe repairs with owner routing.</p><div class="pillrow" style="margin-top:auto"><span class="pill pill--dim">cron SLO</span><span class="pill pill--dim">safe diagnostics</span></div></article>
+      <article class="bento-card b-4 fade-up"><span class="bc-note">Infrastructure</span><h3>DUMONT — Infra Operator</h3><p>Handles APIs, credentials, deployment evidence, and signer-lane readiness with strict gates.</p><div class="pillrow" style="margin-top:auto"><span class="pill pill--dim">API proof</span><span class="pill pill--dim">deploy gates</span></div></article>
     </div>
   </div>
 </section>
-<section class="band" id="connectors">
+
+<!-- ============ 04 · connectors ============ -->
+<section class="scene scene--pad scene--line" id="connectors" aria-label="Connectors">
   <div class="wrap">
-    <p class="kicker">Connectors</p>
-    <h2 class="section-title">No fake logo wall. Honest connector status.</h2>
-    <p class="prose">Grid marks each integration as live-proven, gated, browser-lane, or planned. Telegram and X already have real receipts. GitHub, Cloudflare, Twilio, Stripe, and email are gated or browser-lane. Slack, Teams, Notion, HubSpot, Salesforce, Linear/Jira, Zendesk, and Intercom are on the connector roadmap and will not be claimed as live until they have readback proof.</p>
-    <div class="pill-row" aria-label="Connector status examples"><span class="pill">Telegram: live-proven</span><span class="pill">X: live-proven</span><span class="pill">GitHub: gated</span><span class="pill">Cloudflare: gated</span><span class="pill">Email: browser-lane</span><span class="pill">Slack/Teams: planned</span></div>
-    <p class="muted" style="margin-top:18px"><a href="/data/grid-connectors-registry.json">View connector registry JSON</a></p>
+    <div class="scene-head">
+      <span class="tag">04 — Connectors</span>
+      <h2 class="h-xl"><span class="line-mask"><span class="line-inner">No fake logo wall.</span></span><span class="line-mask"><span class="line-inner">Honest connector status.</span></span></h2>
+      <p class="lede">Grid marks each integration as live-proven, gated, browser-lane, or planned. Telegram and X already have real receipts. GitHub, Cloudflare, Twilio, Stripe, and email are gated or browser-lane. Slack, Teams, Notion, HubSpot, Salesforce, Linear/Jira, Zendesk, and Intercom are on the connector roadmap and will not be claimed as live until they have readback proof.</p>
+    </div>
+    <div class="pillrow" style="margin-top:0" aria-label="Connector status examples"><span class="pill pill--lime">Telegram: live-proven</span><span class="pill pill--lime">X: live-proven</span><span class="pill">GitHub: gated</span><span class="pill">Cloudflare: gated</span><span class="pill">Email: browser-lane</span><span class="pill pill--dim">Slack/Teams: planned</span></div>
+    <p class="plans-note"><a href="/data/grid-connectors-registry.json" style="color:var(--cyan)">View connector registry JSON</a></p>
   </div>
 </section>
-<section class="receipts" id="receipts">
-  <div class="wrap receipts-grid">
+
+<!-- ============ 05 · receipts ============ -->
+<section class="scene scene--pad scene--deep" id="receipts" aria-label="Receipts timeline">
+  <div class="wrap split">
     <div>
-      <p class="kicker">Receipts timeline</p>
-      <h2 class="section-title">Every action carries a status, not a story.</h2>
-      <p class="prose">Grid labels the truth: verified, posted-unverified, skipped-no-write, blocked, failed, or degraded. If an agent cannot prove a result, the product says so before the customer has to ask.</p>
-      <ul class="check-list"><li>Message IDs, job IDs, tweet IDs, call IDs, hashes, and URLs.</li><li>Browser/API readbacks after external writes.</li><li>Human approval references for high-risk actions.</li><li>Blockers routed to the owning worker instead of buried.</li></ul>
+      <div class="scene-head" style="margin-bottom:0">
+        <span class="tag">05 — Receipts timeline</span>
+        <h2 class="h-xl"><span class="line-mask"><span class="line-inner">Every action carries</span></span><span class="line-mask"><span class="line-inner">a status, not a story.</span></span></h2>
+        <p class="lede">Grid labels the truth: verified, posted-unverified, skipped-no-write, blocked, failed, or degraded. If an agent cannot prove a result, the product says so before the customer has to ask.</p>
+      </div>
+      <ul class="checks">
+        <li>Message IDs, job IDs, tweet IDs, call IDs, hashes, and URLs.</li>
+        <li>Browser/API readbacks after external writes.</li>
+        <li>Human approval references for high-risk actions.</li>
+        <li>Blockers routed to the owning worker instead of buried.</li>
+      </ul>
     </div>
-    <div class="receipt-demo" aria-label="Example receipt">
-      <div><span>worker</span><b>LORA</b></div><div><span>action</span><b>reply monitor</b></div><div><span>status</span><b>verified</b></div><div><span>proof</span><b>tweet_id + timeline readback</b></div><div><span>gate</span><b>cap checked</b></div><div><span>next</span><b>silent until signal</b></div>
+    <div class="ledger-card fade-up" aria-label="Example receipt">
+      <div class="lc-head"><span>GRID · ACTION RECEIPT</span><span>example</span></div>
+      <div class="lc-row"><span>worker</span><b>LORA</b></div>
+      <div class="lc-row"><span>action</span><b>reply monitor</b></div>
+      <div class="lc-row"><span>status</span><b>verified</b></div>
+      <div class="lc-row"><span>proof</span><b>tweet_id + timeline readback</b></div>
+      <div class="lc-row"><span>gate</span><b>cap checked</b></div>
+      <div class="lc-row"><span>next</span><b>silent until signal</b></div>
     </div>
   </div>
 </section>
-<section class="band" id="autonomy">
+
+<!-- ============ 06 · safe autonomy ============ -->
+<section class="scene scene--pad" id="autonomy" aria-label="Safe autonomy">
   <div class="wrap">
-    <p class="kicker">Safe autonomy</p>
-    <h2 class="section-title">Autonomy is a setting, not a slogan.</h2>
-    <div class="autonomy">
-      <div class="level"><strong>L0</strong><h3>Chat only</h3><p>Answers and drafts; no writes.</p></div>
-      <div class="level"><strong>L1</strong><h3>Internal research</h3><p>Reads approved sources and prepares reports.</p></div>
-      <div class="level"><strong>L2</strong><h3>Internal write</h3><p>Updates files, dashboards, and internal state.</p></div>
-      <div class="level"><strong>L3</strong><h3>External draft</h3><p>Prepares external actions for human approval.</p></div>
-      <div class="level"><strong>L4</strong><h3>Approved execute</h3><p>Acts in approved channels with readback proof.</p></div>
-      <div class="level"><strong>L5</strong><h3>High-risk gated</h3><p>Money, legal, credentials, deploys, calls, and public posts require scoped approval.</p></div>
+    <div class="scene-head">
+      <span class="tag">06 — Safe autonomy</span>
+      <h2 class="h-xl"><span class="line-mask"><span class="line-inner">Autonomy is a setting,</span></span><span class="line-mask"><span class="line-inner">not a slogan.</span></span></h2>
+    </div>
+    <div class="bento" style="margin-top:0">
+      <div class="bento-card b-4 fade-up"><span class="bc-note tag">L0</span><h3>Chat only</h3><p>Answers and drafts; no writes.</p></div>
+      <div class="bento-card b-4 fade-up"><span class="bc-note tag">L1</span><h3>Internal research</h3><p>Reads approved sources and prepares reports.</p></div>
+      <div class="bento-card b-4 fade-up"><span class="bc-note tag">L2</span><h3>Internal write</h3><p>Updates files, dashboards, and internal state.</p></div>
+      <div class="bento-card b-4 fade-up"><span class="bc-note tag">L3</span><h3>External draft</h3><p>Prepares external actions for human approval.</p></div>
+      <div class="bento-card b-4 fade-up"><span class="bc-note tag">L4</span><h3>Approved execute</h3><p>Acts in approved channels with readback proof.</p></div>
+      <div class="bento-card b-4 fade-up"><span class="bc-note tag--lime tag">L5</span><h3>High-risk gated</h3><p>Money, legal, credentials, deploys, calls, and public posts require scoped approval.</p></div>
     </div>
   </div>
 </section>
-<section class="band" id="pricing">
+
+<!-- ============ 07 · packaging + trial ============ -->
+<section class="scene scene--pad scene--line" id="start" aria-label="Packaging and trial" style="background:linear-gradient(180deg,var(--bg),#060a10 60%,#04070c)">
   <div class="wrap">
-    <p class="kicker">Packaging</p>
-    <h2 class="section-title">One real job first. Credits only after trust.</h2>
-    <p class="prose">Grid starts with a capped free trial: one real scoped job, no default external sends, and no high-risk execution. Paid tiers scale from Solo Operator to Operations Pod, with credits tied to worker, action, connector, receipt status, and direct COGS. Credits never bypass approval gates.</p>
-    <div class="pill-row" aria-label="Pricing tier examples"><span class="pill">Free Trial: one real job</span><span class="pill">Starter: 1 worker</span><span class="pill">Operator: 3 workers</span><span class="pill">Command: 10 workers</span><span class="pill">Enterprise: governed workforce</span></div>
-    <p class="muted" style="margin-top:18px"><a href="/data/grid-workers-pricing.json">View pricing strategy JSON</a></p>
+    <div class="scene-head">
+      <span class="tag tag--lime">07 — Packaging</span>
+      <h2 class="h-xl"><span class="line-mask"><span class="line-inner">One real job first.</span></span><span class="line-mask"><span class="line-inner">Credits only after trust.</span></span></h2>
+      <p class="lede">Grid starts with a capped free trial: one real scoped job, no default external sends, and no high-risk execution. Paid tiers scale from Solo Operator to Operations Pod, with credits tied to worker, action, connector, receipt status, and direct COGS. Credits never bypass approval gates.</p>
+    </div>
+    <div class="pillrow" style="margin-top:0" aria-label="Pricing tier examples"><span class="pill pill--lime">Free trial: one real job</span><span class="pill">Starter: 1 worker</span><span class="pill">Operator: 3 workers</span><span class="pill">Command: 10 workers</span><span class="pill">Enterprise: governed workforce</span></div>
+    <div class="hero-ctas" style="margin-top:44px">
+      <a class="btn btn--lime" href="/signup.html">Request Grid Worker access <span class="btn-arrow" aria-hidden="true">&rarr;</span></a>
+      <a class="btn btn--ghost" href="/data/grid-workers-pricing.json">Pricing strategy JSON</a>
+    </div>
+    <p class="plans-note"><a href="/data/grid-workers-catalog.json" style="color:var(--cyan)">Worker catalog JSON</a> — the machine-readable version of this page.</p>
   </div>
 </section>
-<section class="access" id="start">
-  <div class="wrap access-grid">
-    <div><p class="kicker">Trial</p><h2 class="section-title">Send one real job. Get the proof.</h2><p class="prose">The first Grid Worker experience should not be a generic demo. It should be one real task, routed through the right worker, returned with receipts and a recommendation for the next autonomy level.</p></div>
-    <a class="btn btn-primary btn-lg" href="/signup.html">Request Grid Worker access</a>
-  </div>
-</section>
+
 </main>
-<footer class="foot"><div class="wrap foot-base"><span class="muted">GridFleet — receipt-backed AI operations</span><a class="muted" href="/data/grid-workers-catalog.json">Worker catalog JSON</a></div></footer>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-in">
+      <a class="brand" href="/" aria-label="GridFleet home">
+        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 2 21 7v10l-9 5-3-1.7V13H4.5V8.2L12 4.3l6 3.1v8.2l-4.5 2.5" stroke="#22e6ff" stroke-width="1.5" stroke-linecap="square"/></svg>
+        <b>GRIDFLEET<span class="brand-dot">_</span></b>
+      </a>
+      <nav class="foot-links" aria-label="Footer">
+        <a href="/vera">Vera</a>
+        <a href="/workers.html">Workers</a>
+        <a href="/docs.html">Docs</a>
+        <a href="/audits.html">DeFi audits</a>
+        <a href="/about.html">About</a>
+        <a href="/signup.html">Request access</a>
+      </nav>
+    </div>
+    <div class="foot-fine">
+      <span>&copy; <span id="yr">2026</span> GridFleet — send the job, get the receipt</span>
+      <span><a href="mailto:security@gridfleet.ai" style="color:inherit">security@gridfleet.ai</a> · responsible disclosure welcome</span>
+    </div>
+  </div>
+</footer>
+
+<script src="/assets/vendor/gsap.min.js" defer></script>
+<script src="/assets/vendor/ScrollTrigger.min.js" defer></script>
+<script src="/assets/vendor/lenis.min.js" defer></script>
+<script src="/assets/main.js" defer></script>
+<noscript><style>.fade-up{opacity:1;transform:none}.line-mask .line-inner{transform:none}</style></noscript>
 </body>
 </html>

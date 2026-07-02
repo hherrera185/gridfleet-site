@@ -1,5 +1,155 @@
 <!doctype html>
-<html lang="en"><head><meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>GridFleet | Request Access</title><meta name="description" content="Request access for browser automation, signal products, forecasts, audits, or a custom operator workflow." /><meta property="og:title" content="GridFleet | Request Access" /><meta property="og:description" content="Request access for browser automation, signal products, forecasts, audits, or a custom operator workflow." /><meta property="og:type" content="website" /><meta property="og:image" content="https://gridfleet.ai/og.png" /><meta name="theme-color" content="#05060a" /><meta name="robots" content="index, follow" /><link rel="stylesheet" href="/assets/cinematic.css" />
-<style>*{box-sizing:border-box}body{margin:0;background:#05060a;color:#f6f7fb;font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;-webkit-font-smoothing:antialiased}.page{min-height:100vh;padding:28px 22px 70px;background:radial-gradient(circle at 70% 15%,rgba(77,124,254,.22),transparent 42%),radial-gradient(circle at 10% 90%,rgba(124,58,237,.16),transparent 46%),#05060a}.nav{width:min(1120px,100%);margin:0 auto 90px;display:flex;justify-content:space-between;align-items:center;padding:12px 14px;border:1px solid rgba(255,255,255,.1);border-radius:999px;background:rgba(255,255,255,.045);backdrop-filter:blur(16px)}.brand{display:flex;gap:10px;align-items:center;letter-spacing:.12em;text-transform:uppercase;font-size:12px;font-weight:700}.mark{width:21px;height:21px;border-radius:6px;background:conic-gradient(from 45deg,#fff 0 25%,transparent 0 50%,#8fb2ff 0 75%,transparent 0)}.links{display:flex;gap:18px;color:#aab1c4;font-size:13px}.hero{width:min(1120px,100%);margin:0 auto}.kicker{color:#7fb2ff;font-size:12px;letter-spacing:.18em;text-transform:uppercase;margin-bottom:16px}h1{max-width:980px;margin:0;font-size:clamp(46px,9vw,118px);line-height:.9;letter-spacing:-.07em;font-weight:260}p.lede{max-width:700px;color:#aab3c8;font-size:20px;margin:30px 0 0}.cards{width:min(1120px,100%);margin:70px auto 0;display:grid;grid-template-columns:repeat(4,1fr);gap:16px}.card{min-height:190px;padding:24px;border:1px solid rgba(255,255,255,.1);border-radius:26px;background:linear-gradient(180deg,rgba(255,255,255,.075),rgba(255,255,255,.025));box-shadow:0 20px 80px rgba(0,0,0,.32)}.card h2{font-size:20px;margin:0 0 12px}.card p{color:#9ba5ba;margin:0}.cta{display:inline-flex;margin-top:36px;padding:13px 18px;border-radius:999px;background:#f8fbff;color:#070811;font-weight:700;text-decoration:none}@media(max-width:900px){.links{display:none}.cards{grid-template-columns:1fr}.nav{margin-bottom:64px}h1{font-size:clamp(44px,14vw,78px)}}.form-wrap{width:min(720px,100%);margin:70px auto 0;padding:30px 28px;border:1px solid rgba(255,255,255,.1);border-radius:26px;background:linear-gradient(180deg,rgba(255,255,255,.075),rgba(255,255,255,.025));box-shadow:0 20px 80px rgba(0,0,0,.32)}.form-wrap h2{font-size:24px;margin:0 0 8px}.form-wrap .sub{color:#9ba5ba;margin:0 0 22px}.form-wrap label{display:block;margin-bottom:16px;font-size:13px;letter-spacing:.02em;color:#aab1c4}.form-wrap input,.form-wrap textarea{width:100%;margin-top:7px;padding:12px 14px;border-radius:14px;border:1px solid rgba(255,255,255,.14);background:rgba(255,255,255,.05);color:#f6f7fb;font:inherit;font-size:15px}.form-wrap input:focus,.form-wrap textarea:focus{outline:none;border-color:rgba(127,178,255,.6)}.form-wrap button{margin-top:4px;padding:13px 22px;border-radius:999px;border:0;background:#f8fbff;color:#070811;font-weight:700;font-size:15px;cursor:pointer}.form-wrap button:disabled{opacity:.6;cursor:wait}.form-status{display:none;margin:16px 0 0;font-weight:600}.form-note{color:#8991a5;font-size:13px;margin:16px 0 0}.form-note a{color:#7fb2ff}.hp-field{position:absolute;left:-9999px;top:auto;height:1px;width:1px;overflow:hidden}</style>
-</head><body class="gf-atmosphere"><main class="page"><nav class="nav"><a class="brand" href="/"><span class="mark"></span><span>GridFleet</span></a><div class="links"><a href="/about">About</a><a href="/audits">Audits</a><a href="/docs">Docs</a><a href="/signup">Access</a></div></nav><section class="hero"><div class="kicker">Request Access</div><h1>Bring a workflow. We will map it to the fleet.</h1><p class="lede">Request access for browser automation, signal products, forecasts, audits, or a custom operator workflow.</p><a class="cta" href="#request">Request access</a></section><section class="cards"><article class="card"><h2>Use case</h2><p>Tell us what you want the fleet to do.</p></article><article class="card"><h2>Volume</h2><p>Share expected call volume and latency needs.</p></article><article class="card"><h2>Risk level</h2><p>Flag external actions, money movement, or compliance constraints.</p></article><article class="card"><h2>Contact</h2><p>Email sales@gridfleet.ai or request access through this page.</p></article></section><section class="form-wrap" id="request"><h2>Request access</h2><p class="sub">Tell us what the fleet should do. We scope it and reply with next steps.</p><form data-early-access action="/api/early-access" method="post"><label>Name<input type="text" name="name" autocomplete="name" placeholder="Your name" /></label><label>Work email<input type="email" name="email" required autocomplete="email" placeholder="you@company.com" /></label><label>Company<input type="text" name="company" autocomplete="organization" placeholder="Company or team" /></label><label>What do you need?<textarea name="message" required rows="4" placeholder="e.g. browser automation for a vendor portal; docket monitoring; DeFi config-risk review; a custom operator workflow"></textarea></label><label class="hp-field" aria-hidden="true">Website<input type="text" name="website" tabindex="-1" autocomplete="off" /></label><button type="submit">Request access</button><p class="form-status" role="status" aria-live="polite"></p><p class="form-note">Prefer email? Write to <a href="mailto:sales@gridfleet.ai">sales@gridfleet.ai</a>. Do not include credentials, secrets, private customer data, or wallet keys.</p></form></section></main><script src="/assets/cinematic.js" defer></script><script src="/assets/site.js" defer></script></body></html>
+<html lang="en" class="no-js">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data:; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline'; connect-src 'self'; form-action 'self' mailto:; frame-ancestors 'none'; base-uri 'self'; object-src 'none'; upgrade-insecure-requests" />
+<meta name="referrer" content="strict-origin-when-cross-origin" />
+<meta name="robots" content="index, follow, max-image-preview:large" />
+<meta name="theme-color" content="#05070a" />
+<title>Request access — bring a workflow to the fleet | GridFleet</title>
+<meta name="description" content="Request access for browser automation, signal products, forecasts, audits, or a custom operator workflow. We scope it and reply with next steps." />
+<link rel="canonical" href="https://gridfleet.ai/signup.html" />
+<meta property="og:title" content="Request access — bring a workflow. We map it to the fleet." />
+<meta property="og:description" content="Request access for browser automation, signal products, forecasts, audits, or a custom operator workflow." />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://gridfleet.ai/signup.html" />
+<meta property="og:image" content="https://gridfleet.ai/og.png" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Request access to GridFleet" />
+<meta name="twitter:image" content="https://gridfleet.ai/og.png" />
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml" />
+<link rel="preload" href="/assets/fonts/space-grotesk-var.woff2" as="font" type="font/woff2" crossorigin />
+<link rel="preload" href="/assets/fonts/jetbrains-mono-var.woff2" as="font" type="font/woff2" crossorigin />
+<style>body{background:#05070a;color:#f2f6f4;font-family:ui-sans-serif,system-ui,sans-serif;margin:0}</style>
+<link rel="stylesheet" href="/assets/main.css" />
+<link rel="stylesheet" href="/assets/sub.css" />
+</head>
+<body>
+
+<!-- nav -->
+<header class="nav" id="nav">
+  <a class="brand" href="/" aria-label="GridFleet home">
+    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+      <path d="M12 2 21 7v10l-9 5-3-1.7V13H4.5V8.2L12 4.3l6 3.1v8.2l-4.5 2.5" stroke="#22e6ff" stroke-width="1.5" stroke-linecap="square"/>
+    </svg>
+    <b>GRIDFLEET<span class="brand-dot">_</span></b>
+  </a>
+  <nav class="nav-links" aria-label="Primary">
+    <a href="/vera">Vera</a>
+    <a href="/workers.html">Workers</a>
+    <a href="/docs.html">Docs</a>
+    <a href="/about.html">About</a>
+  </nav>
+  <div style="display:flex;align-items:center;gap:10px">
+    <a class="btn btn--solid nav-cta" href="/#deploy">Deploy the fleet</a>
+    <button class="burger" id="burger" aria-label="Menu" aria-expanded="false" aria-controls="menu"><i></i><i></i><i></i></button>
+  </div>
+</header>
+
+<!-- overlay menu -->
+<div id="menu" role="dialog" aria-label="Site menu">
+  <div class="menu-grid">
+    <nav class="menu-main" aria-label="Scenes">
+      <a href="/#fleet"><small>01</small>The living fleet</a>
+      <a href="/#work"><small>02</small>Watch it work</a>
+      <a href="/#receipts"><small>03</small>The receipt</a>
+      <a href="/#deck"><small>04</small>Command deck</a>
+      <a href="/#deploy"><small>05</small>Deploy</a>
+    </nav>
+    <nav class="menu-side" aria-label="Pages">
+      <a href="/vera">Vera — AI receptionist</a>
+      <a href="/workers.html">Hire a worker</a>
+      <a href="/docs.html">API docs</a>
+      <a href="/audits.html">DeFi audits</a>
+      <a href="/about.html">About</a>
+      <a href="/signup.html">Request access</a>
+    </nav>
+  </div>
+  <div class="menu-foot">GridFleet — send the job · get the receipt</div>
+</div>
+
+<main>
+
+<!-- ============ hero ============ -->
+<section class="hero hero--compact scene" id="top" aria-label="Request access">
+  <div class="grid-field" aria-hidden="true"></div>
+  <div class="hero-inner wrap">
+    <div class="hero-eyebrow">
+      <span class="pulse-dot" aria-hidden="true"></span>
+      <span class="tag">Request access</span>
+    </div>
+    <h1 class="h-xxl">
+      <span class="line-mask"><span class="line-inner">Bring a workflow.</span></span>
+      <span class="line-mask"><span class="line-inner">We map it <span class="accent">to the fleet.</span></span></span>
+    </h1>
+    <p class="hero-sub"><strong>One real job, proven, before you pay.</strong> Request access for browser automation, signal products, forecasts, audits, or a custom operator workflow. We scope it and reply with next steps.</p>
+    <div class="hero-ctas">
+      <a class="btn btn--solid" href="#request">Request access <span class="btn-arrow" aria-hidden="true">&rarr;</span></a>
+      <a class="btn btn--ghost" href="/vera">Need phones answered? Meet Vera</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 01 · the form ============ -->
+<section class="scene scene--pad scene--line" id="request" aria-label="Access request form" style="background:linear-gradient(180deg,var(--bg),#060a10 60%,#04070c)">
+  <div class="wrap deploy-grid">
+    <div class="deploy-copy">
+      <span class="tag tag--lime">01 — What to include</span>
+      <h2 class="h-xl" style="margin-top:18px">
+        <span class="line-mask"><span class="line-inner">Tell us what the</span></span>
+        <span class="line-mask"><span class="line-inner">fleet should do.</span></span>
+      </h2>
+      <p class="lede" style="margin-top:20px">The more concrete the job, the faster we scope it. Four things help most:</p>
+      <ul class="deploy-points">
+        <li><span><strong style="color:var(--ink);font-weight:500">Use case</strong> — what you want the fleet to do</span></li>
+        <li><span><strong style="color:var(--ink);font-weight:500">Volume</strong> — expected call volume and latency needs</span></li>
+        <li><span><strong style="color:var(--ink);font-weight:500">Risk level</strong> — external actions, money movement, compliance constraints</span></li>
+        <li><span><strong style="color:var(--ink);font-weight:500">Contact</strong> — or email <a href="mailto:sales@gridfleet.ai" style="color:var(--cyan)">sales@gridfleet.ai</a> directly</span></li>
+      </ul>
+    </div>
+    <form class="form fade-up" data-early-access action="/api/early-access" method="post">
+      <label>Name<input type="text" name="name" autocomplete="name" placeholder="Your name" /></label>
+      <label>Work email<input type="email" name="email" required autocomplete="email" placeholder="you@company.com" /></label>
+      <label>Company<input type="text" name="company" autocomplete="organization" placeholder="Company or team" /></label>
+      <label>What do you need?<textarea name="message" required rows="4" placeholder="e.g. browser automation for a vendor portal; docket monitoring; DeFi config-risk review; a custom operator workflow"></textarea></label>
+      <label style="position:absolute;left:-9999px;top:auto;height:1px;width:1px;overflow:hidden" aria-hidden="true">Website<input type="text" name="website" tabindex="-1" autocomplete="off" /></label>
+      <button class="btn btn--lime" type="submit" style="justify-content:center">Request access <span class="btn-arrow" aria-hidden="true">&rarr;</span></button>
+      <p class="form-status" role="status" aria-live="polite"></p>
+      <p class="form-note">Prefer email? Write to <a href="mailto:sales@gridfleet.ai">sales@gridfleet.ai</a>. Do not include credentials, secrets, private customer data, or wallet keys.</p>
+    </form>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-in">
+      <a class="brand" href="/" aria-label="GridFleet home">
+        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 2 21 7v10l-9 5-3-1.7V13H4.5V8.2L12 4.3l6 3.1v8.2l-4.5 2.5" stroke="#22e6ff" stroke-width="1.5" stroke-linecap="square"/></svg>
+        <b>GRIDFLEET<span class="brand-dot">_</span></b>
+      </a>
+      <nav class="foot-links" aria-label="Footer">
+        <a href="/vera">Vera</a>
+        <a href="/workers.html">Workers</a>
+        <a href="/docs.html">Docs</a>
+        <a href="/audits.html">DeFi audits</a>
+        <a href="/about.html">About</a>
+        <a href="/signup.html">Request access</a>
+      </nav>
+    </div>
+    <div class="foot-fine">
+      <span>&copy; <span id="yr">2026</span> GridFleet — send the job, get the receipt</span>
+      <span><a href="mailto:security@gridfleet.ai" style="color:inherit">security@gridfleet.ai</a> · responsible disclosure welcome</span>
+    </div>
+  </div>
+</footer>
+
+<script src="/assets/vendor/gsap.min.js" defer></script>
+<script src="/assets/vendor/ScrollTrigger.min.js" defer></script>
+<script src="/assets/vendor/lenis.min.js" defer></script>
+<script src="/assets/main.js" defer></script>
+<noscript><style>.fade-up{opacity:1;transform:none}.line-mask .line-inner{transform:none}</style></noscript>
+</body>
+</html>
