@@ -318,9 +318,19 @@
   var title = document.getElementById("deck-title"), code = document.getElementById("op-code");
   if (!portrait || !a || !b || !title || !window.fetch) return;
   var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  function inlineRoster() {
+    var el = document.getElementById("fleet-roster-data");
+    if (!el) return null;
+    try { return JSON.parse(el.textContent); } catch (e) { return null; }
+  }
+  // Canonical source is /data/fleet-roster.json; fall back to the inline mirror so
+  // the deck always cycles even if the JSON endpoint is edge-restricted.
   fetch("/data/fleet-roster.json", { cache: "no-store" })
     .then(function (r) { return r.ok ? r.json() : null; })
-    .then(function (d) {
+    .then(function (d) { start(d || inlineRoster()); })
+    .catch(function () { start(inlineRoster()); });
+
+  function start(d) {
       var list = d && d.roster ? d.roster : null;
       if (!list || !list.length) return;
       // preload so crossfades never flash
@@ -348,7 +358,7 @@
       deck.addEventListener("mouseenter", function () { paused = true; });
       deck.addEventListener("mouseleave", function () { paused = false; });
       setInterval(step, 3200);
-    }).catch(function () {});
+  }
 })();
 
 /* ---- early-access form handler: POSTs JSON to the /api/early-access worker.
