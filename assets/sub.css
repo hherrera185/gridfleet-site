@@ -4,6 +4,9 @@
 /* ---------- tron grid field (sub-page hero background) ---------- */
 .hero--sub { min-height: min(88svh, 880px); }
 .hero--compact { min-height: min(72svh, 760px); }
+/* sub-page headline scale: one notch under home so hero art (e.g. the receipt floater) never collides */
+.hero--sub .h-xxl, .hero--compact .h-xxl { font-size: clamp(40px, 6.4vw, 92px); }
+@media (max-width: 820px) { .hero--sub .h-xxl, .hero--compact .h-xxl { font-size: clamp(30px, 9.4vw, 64px); } }
 .grid-field { position: absolute; inset: 0; z-index: 0; pointer-events: none; overflow: hidden; }
 .grid-field::before {
   content: ""; position: absolute; inset: 0;
