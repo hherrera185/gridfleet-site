@@ -673,7 +673,8 @@
       var get = function (n) { var f = form.querySelector('[name="' + n + '"]'); return f ? f.value.trim() : ""; };
       var parts = [];
       if (get("message")) parts.push(get("message"));
-      ["company", "plan", "volume", "risk"].forEach(function (x) { if (get(x)) parts.push(x + ": " + get(x)); });
+      /* company/plan/phone travel as structured fields; volume/risk still fold into message */
+      ["volume", "risk"].forEach(function (x) { if (get(x)) parts.push(x + ": " + get(x)); });
       var btn = form.querySelector('button[type="submit"]');
       if (btn) btn.disabled = true;
       fetch(ENDPOINT, {
@@ -681,6 +682,7 @@
         headers: { "content-type": "application/json" },
         body: JSON.stringify({
           email: get("email"), name: get("name"),
+          company: get("company"), plan: get("plan"), phone: get("phone"),
           message: parts.join("\n"),
           website: form.querySelector('[name="website"]') ? form.querySelector('[name="website"]').value : ""
         })
