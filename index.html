@@ -51,10 +51,14 @@ window.GF_SEED = "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQEAYABgAAD/2wBDAAwJCQs
 <body>
 
 <!-- intro -->
-<div id="intro" aria-hidden="true">
-  <div class="intro-word"><span>G</span><span>R</span><span>I</span><span>D</span><span>F</span><span>L</span><span>E</span><span>E</span><span>T</span></div>
-  <div class="intro-bar"><i></i></div>
-  <div class="intro-sub">Initializing the grid</div>
+<div id="intro" role="presentation">
+  <div class="intro-floor" aria-hidden="true"></div>
+  <div class="intro-horizon" aria-hidden="true"></div>
+  <div class="intro-word" aria-hidden="true"><span>G</span><span>R</span><span>I</span><span>D</span><span>F</span><span>L</span><span>E</span><span>E</span><span>T</span></div>
+  <div class="intro-bar" aria-hidden="true"><i></i></div>
+  <div class="intro-sub" aria-hidden="true">Initializing the grid</div>
+  <div class="intro-chip" aria-hidden="true">receipt #0001 &middot; verified &#10003;</div>
+  <button class="intro-skip" id="intro-skip" type="button">Skip</button>
 </div>
 <script>
 /* failsafe: never trap the page behind the intro if scripts are blocked */

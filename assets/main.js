@@ -91,6 +91,8 @@
     if (!HAS_GSAP || REDUCED) return;
     var tl = gsap.timeline();
     tl.to(".hero .line-inner", { y: 0, duration: 1.05, stagger: 0.09 }, 0.05)
+      .fromTo(".hero .line-inner", { skewY: 2.4 }, { skewY: 0, duration: 1.05, stagger: 0.09 }, 0.05)
+      .fromTo(".hero h1", { "--ab": 7 }, { "--ab": 0, duration: 1.15, ease: "power3.out" }, 0.22)
       .fromTo(".hero-eyebrow", { autoAlpha: 0, y: 10 }, { autoAlpha: 1, y: 0, duration: 0.8 }, 0.2)
       .fromTo(".hero-sub", { autoAlpha: 0, y: 16 }, { autoAlpha: 1, y: 0, duration: 0.9 }, 0.45)
       .fromTo(".hero-ctas .btn", { autoAlpha: 0, y: 14 }, { autoAlpha: 1, y: 0, duration: 0.7, stagger: 0.08 }, 0.6)
@@ -110,18 +112,28 @@
     window.__gfIntroLive = true;
     sessionStorage.setItem("gf_intro", "1");
     document.body.style.overflow = "hidden";
+    /* grid draws in from the horizon -> nodes ignite (bar) -> wordmark reveals ->
+       first receipt stamps -> wipe up, UI settles. <=1.5s, skippable, once/session. */
     var itl = gsap.timeline({
       onComplete: function () { document.body.style.overflow = ""; killIntro(); }
     });
-    itl.to("#intro .intro-word span", { y: 0, opacity: 1, duration: 0.6, stagger: 0.045 }, 0)
-      .to("#intro .intro-bar i", { scaleX: 1, duration: 0.85, ease: "power2.inOut" }, 0.1)
-      .fromTo("#intro .intro-sub", { opacity: 0 }, { opacity: 1, duration: 0.4 }, 0.35)
+    itl.to("#intro .intro-horizon", { scaleX: 1, duration: 0.5, ease: "power3.inOut" }, 0)
+      .to("#intro .intro-floor", { opacity: 1, duration: 0.5, ease: "power2.out" }, 0.16)
+      .to("#intro .intro-word span", { y: 0, opacity: 1, duration: 0.55, stagger: 0.04 }, 0.2)
+      .to("#intro .intro-bar i", { scaleX: 1, duration: 0.68, ease: "power2.inOut" }, 0.26)
+      .fromTo("#intro .intro-sub", { opacity: 0 }, { opacity: 1, duration: 0.35 }, 0.42)
+      .to("#intro .intro-chip", { opacity: 1, scale: 1, duration: 0.26, ease: "back.out(2.4)" }, 0.78)
       .add(function () { playHero(); }, 1.0)
-      .to("#intro", { clipPath: "inset(0 0 100% 0)", duration: 0.55, ease: "power3.inOut" }, 1.0);
-    intro.addEventListener("click", function () {
+      .to("#intro", { clipPath: "inset(0 0 100% 0)", duration: 0.5, ease: "power3.inOut" }, 1.0);
+    var skipIntro = function () {
+      if (intro.classList.contains("gone")) return;
       document.body.style.overflow = "";
       itl.progress(1);
-    }, { once: true });
+    };
+    intro.addEventListener("click", skipIntro);
+    var skipBtn = document.getElementById("intro-skip");
+    if (skipBtn) skipBtn.addEventListener("click", skipIntro);
+    window.addEventListener("keydown", function (e) { if (e.key === "Escape") skipIntro(); });
   }
 
   /* ---------------- nav ---------------- */
@@ -333,6 +345,7 @@
   var ledgerLine = document.getElementById("console-ledgerline-b");
   var workSteps = Array.prototype.slice.call(document.querySelectorAll(".work-step"));
   var lastRender = -1;
+  var printFired = false;
 
   function renderConsole(t) {
     if (!consoleBody) return;
@@ -356,6 +369,8 @@
       if (el.chip) el.chip.classList.toggle("vis", local >= 1);
     });
     /* receipt print 0.76 -> 0.96 */
+    if (t >= 0.78 && !printFired) { printFired = true; window.dispatchEvent(new CustomEvent("gf:print")); }
+    if (t < 0.7) printFired = false;
     if (receiptEl) {
       var rp = Math.max(0, Math.min(1, (t - 0.76) / 0.20));
       receiptEl.style.clipPath = "inset(0 0 " + ((1 - rp) * 100) + "% 0)";
@@ -684,6 +699,376 @@
       }).finally(function () { if (btn) btn.disabled = false; });
     });
   });
+
+  /* ============================================================
+     AWARD LAYER — sound · cursor · portal · scroll film · transitions
+     ============================================================ */
+
+  /* ---------- A) sound design — WebAudio synth, OFF by default, gesture-gated ---------- */
+  var gfAudio = (function () {
+    var noop = { enabled: false, tick: function () { }, stamp: function () { } };
+    if (REDUCED || !(window.AudioContext || window.webkitAudioContext)) return noop;
+
+    var ctx = null, master = null, humGain = null, noiseBuf = null;
+    var enabled = false, lastTick = 0, humFactor = 1;
+
+    function ensureCtx() {
+      if (ctx) return true;
+      try {
+        ctx = new (window.AudioContext || window.webkitAudioContext)();
+        master = ctx.createGain();
+        master.gain.value = 0.85;
+        master.connect(ctx.destination);
+        noiseBuf = ctx.createBuffer(1, ctx.sampleRate * 0.5, ctx.sampleRate);
+        var d = noiseBuf.getChannelData(0);
+        for (var i = 0; i < d.length; i++) d[i] = Math.random() * 2 - 1;
+      } catch (e) { return false; }
+      return true;
+    }
+
+    /* quiet ambient hum — only where the grid hero lives */
+    function startHum() {
+      if (humGain || !document.getElementById("fleet-canvas")) return;
+      humGain = ctx.createGain();
+      humGain.gain.value = 0;
+      var lp = ctx.createBiquadFilter();
+      lp.type = "lowpass"; lp.frequency.value = 170; lp.Q.value = 0.6;
+      lp.connect(humGain); humGain.connect(master);
+      [[52, 0.5, "sine"], [52.35, 0.38, "sine"], [104.2, 0.1, "triangle"]].forEach(function (o) {
+        var osc = ctx.createOscillator();
+        osc.type = o[2]; osc.frequency.value = o[0];
+        var g = ctx.createGain(); g.gain.value = o[1];
+        osc.connect(g); g.connect(lp); osc.start();
+      });
+      var nz = ctx.createBufferSource();
+      nz.buffer = noiseBuf; nz.loop = true;
+      var ng = ctx.createGain(); ng.gain.value = 0.045;
+      nz.connect(ng); ng.connect(lp); nz.start();
+      var lfo = ctx.createOscillator(), lg = ctx.createGain();
+      lfo.frequency.value = 0.07; lg.gain.value = 26;
+      lfo.connect(lg); lg.connect(lp.frequency); lfo.start();
+    }
+    function setHum() {
+      if (!humGain) return;
+      var v = enabled ? 0.05 * humFactor : 0;
+      humGain.gain.setTargetAtTime(v, ctx.currentTime, 0.5);
+    }
+    /* hum recedes as the hero scrolls away */
+    window.addEventListener("scroll", function () {
+      if (!enabled || !humGain) return;
+      var f = 1 - Math.min(1, window.scrollY / (window.innerHeight * 1.2));
+      humFactor = 0.18 + 0.82 * f;
+      setHum();
+    }, { passive: true });
+
+    function blip(freq, gain, dur, type, sweepTo) {
+      if (!enabled || !ctx) return;
+      var t = ctx.currentTime;
+      var o = ctx.createOscillator();
+      o.type = type || "sine";
+      o.frequency.setValueAtTime(freq, t);
+      if (sweepTo) o.frequency.exponentialRampToValueAtTime(sweepTo, t + dur);
+      var g = ctx.createGain();
+      g.gain.setValueAtTime(gain, t);
+      g.gain.exponentialRampToValueAtTime(0.0001, t + dur);
+      o.connect(g); g.connect(master);
+      o.start(t); o.stop(t + dur + 0.03);
+    }
+    function noiseBurst(gain, dur, freq) {
+      if (!enabled || !ctx) return;
+      var t = ctx.currentTime;
+      var s = ctx.createBufferSource();
+      s.buffer = noiseBuf;
+      var f = ctx.createBiquadFilter();
+      f.type = "lowpass"; f.frequency.value = freq || 900;
+      var g = ctx.createGain();
+      g.gain.setValueAtTime(gain, t);
+      g.gain.exponentialRampToValueAtTime(0.0001, t + dur);
+      s.connect(f); f.connect(g); g.connect(master);
+      s.start(t); s.stop(t + dur + 0.03);
+    }
+
+    var api = {
+      get enabled() { return enabled; },
+      tick: function () {
+        var now = performance.now();
+        if (now - lastTick < 80) return;
+        lastTick = now;
+        blip(1860, 0.035, 0.045, "sine");
+      },
+      stamp: function (soft) {
+        blip(soft ? 240 : 175, soft ? 0.07 : 0.16, 0.14, "sine", soft ? 110 : 58);
+        noiseBurst(soft ? 0.03 : 0.07, 0.07, 1100);
+      },
+      set: function (on) {
+        if (on && !ensureCtx()) return;
+        enabled = on;
+        if (on) {
+          if (ctx.state === "suspended") ctx.resume();
+          startHum();
+          setHum();
+          api.stamp(true);
+          try { sessionStorage.setItem("gf_sound", "1"); } catch (e) { }
+        } else {
+          if (humGain) humGain.gain.setTargetAtTime(0, ctx.currentTime, 0.15);
+          try { sessionStorage.removeItem("gf_sound"); } catch (e) { }
+          setTimeout(function () { if (!enabled && ctx && ctx.state === "running") ctx.suspend(); }, 500);
+        }
+      }
+    };
+    return api;
+  })();
+
+  /* sound toggle UI — never autoplays; audio starts only from this user gesture */
+  if (!REDUCED && gfAudio.set) {
+    var sBtn = document.createElement("button");
+    sBtn.id = "gf-sound";
+    sBtn.type = "button";
+    sBtn.setAttribute("aria-pressed", "false");
+    sBtn.setAttribute("aria-label", "Sound: ambient hum and interface effects");
+    sBtn.innerHTML = "<i></i><i></i><i></i>";
+    document.body.appendChild(sBtn);
+    var syncSound = function (on) {
+      sBtn.classList.toggle("on", on);
+      sBtn.setAttribute("aria-pressed", on ? "true" : "false");
+    };
+    sBtn.addEventListener("click", function () {
+      var next = !gfAudio.enabled;
+      gfAudio.set(next);
+      syncSound(gfAudio.enabled);
+    });
+    /* same-session continuity: re-arm on first gesture, still user-initiated */
+    var pref = null;
+    try { pref = sessionStorage.getItem("gf_sound"); } catch (e) { }
+    if (pref === "1") {
+      var arm = function () {
+        gfAudio.set(true);
+        syncSound(gfAudio.enabled);
+        window.removeEventListener("pointerdown", arm);
+        window.removeEventListener("keydown", arm);
+      };
+      window.addEventListener("pointerdown", arm, { once: true });
+      window.addEventListener("keydown", arm, { once: true });
+    }
+    window.addEventListener("gf:receipt", function () { gfAudio.stamp(true); });
+    window.addEventListener("gf:print", function () { gfAudio.stamp(false); });
+    window.addEventListener("gf:dock", function () { gfAudio.stamp(true); });
+  }
+
+  /* ---------- B) custom cursor — Tron reticle, pointer:fine only ---------- */
+  if (FINE && !REDUCED && HAS_GSAP && window.matchMedia("(hover: hover)").matches) {
+    var ringWrap = document.createElement("div");
+    ringWrap.id = "gf-cursor-ring";
+    ringWrap.setAttribute("aria-hidden", "true");
+    ringWrap.innerHTML = '<div class="c-ring"><span class="c-label"></span></div>';
+    var dotWrap = document.createElement("div");
+    dotWrap.id = "gf-cursor-dot";
+    dotWrap.setAttribute("aria-hidden", "true");
+    dotWrap.innerHTML = '<div class="c-dot"></div>';
+    document.body.appendChild(ringWrap);
+    document.body.appendChild(dotWrap);
+    doc.classList.add("gf-cur");
+
+    var labelEl = ringWrap.querySelector(".c-label");
+    var dotX = gsap.quickTo(dotWrap, "x", { duration: 0.12, ease: "power3.out" });
+    var dotY = gsap.quickTo(dotWrap, "y", { duration: 0.12, ease: "power3.out" });
+    var ringX = gsap.quickTo(ringWrap, "x", { duration: 0.42, ease: "power3.out" });
+    var ringY = gsap.quickTo(ringWrap, "y", { duration: 0.42, ease: "power3.out" });
+    var curShown = false, curState = "";
+
+    function setCurState(s, label) {
+      if (s === curState && (label === undefined || label === labelEl.textContent)) return;
+      curState = s;
+      ringWrap.classList.remove("is-link", "is-cta", "is-field", "is-text");
+      dotWrap.classList.remove("is-text");
+      if (s) ringWrap.classList.add(s);
+      if (s === "is-text") dotWrap.classList.add("is-text");
+      if (label !== undefined) labelEl.textContent = label;
+    }
+
+    window.addEventListener("pointermove", function (e) {
+      if (e.pointerType && e.pointerType !== "mouse" && e.pointerType !== "pen") return;
+      if (!curShown) { curShown = true; doc.classList.add("gf-cur-on"); }
+      dotX(e.clientX); dotY(e.clientY);
+      ringX(e.clientX); ringY(e.clientY);
+    }, { passive: true });
+
+    document.addEventListener("pointerover", function (e) {
+      var t = e.target;
+      if (!t || !t.closest) return;
+      if (t.closest("input, textarea, select")) { setCurState("is-text", ""); return; }
+      var i = t.closest("a, button, summary, [data-cursor]");
+      if (i) {
+        var label = i.getAttribute("data-cursor-label");
+        if (label === null) {
+          if (i.classList.contains("btn--solid") || i.classList.contains("btn--lime")) label = "deploy";
+          else if (i.tagName === "A" || i.classList.contains("btn")) label = "→";
+          else label = "";
+        }
+        setCurState(label.length > 1 ? "is-cta" : (label ? "is-link" : "is-link"), label);
+        gfAudio.tick();
+        return;
+      }
+      if (t.closest(".hero, .grid-field")) { setCurState("is-field", ""); return; }
+      setCurState("", "");
+    }, { passive: true });
+
+    document.addEventListener("pointerdown", function () { ringWrap.classList.add("is-down"); }, { passive: true });
+    document.addEventListener("pointerup", function () { ringWrap.classList.remove("is-down"); }, { passive: true });
+    document.documentElement.addEventListener("mouseleave", function () { doc.classList.remove("gf-cur-on"); curShown = false; });
+  }
+
+  /* ---------- C) headline chromatic pulse on hover ---------- */
+  var heroH1 = document.querySelector(".hero h1");
+  if (heroH1 && HAS_GSAP && !REDUCED && FINE) {
+    var abBusy = false;
+    heroH1.addEventListener("pointerenter", function () {
+      if (abBusy) return;
+      abBusy = true;
+      gsap.fromTo(heroH1, { "--ab": 3.4 }, {
+        "--ab": 0, duration: 0.55, ease: "power2.out",
+        onComplete: function () { abBusy = false; }
+      });
+    });
+  }
+
+  /* ---------- D) continuous scroll film — hero exit + portal receipt + scene beats ---------- */
+  if (HAS_GSAP && !REDUCED && document.getElementById("fleet-canvas")) {
+    /* beat 1 — hero recedes as one continuous shot */
+    gsap.to(".hero-inner", {
+      yPercent: -12, autoAlpha: 0, ease: "none",
+      scrollTrigger: { trigger: ".hero", start: "top top", end: "bottom 30%", scrub: 0.4 }
+    });
+    gsap.to(".hero-foot", {
+      autoAlpha: 0, ease: "none",
+      scrollTrigger: { trigger: ".hero", start: "top top", end: "28% top", scrub: 0.4 }
+    });
+    gsap.to(".hero-ledger", {
+      autoAlpha: 0, y: -46, ease: "none",
+      scrollTrigger: { trigger: ".hero", start: "5% top", end: "52% top", scrub: 0.4 }
+    });
+
+    var mmFilm = gsap.matchMedia();
+
+    /* beat 2 — portal: a receipt lifts off the hero ledger and docks into the console ledger line */
+    mmFilm.add("(min-width: 1101px) and (min-height: 701px)", function () {
+      var hl = document.getElementById("hero-ledger");
+      var dock = document.querySelector("#work .console-ledgerline");
+      if (!hl || !dock) return;
+      var portal = document.createElement("div");
+      portal.id = "gf-portal";
+      portal.setAttribute("aria-hidden", "true");
+      portal.appendChild(receiptChip(RPOOL[2]));
+      document.body.appendChild(portal);
+      var easeFly = gsap.parseEase("power2.inOut");
+      var stamped = false;
+      var st = ScrollTrigger.create({
+        trigger: "#work", start: "top 98%", end: "top top", scrub: 0.35,
+        onUpdate: function (self) {
+          var p = self.progress;
+          if (p <= 0.002 || p >= 0.998) {
+            portal.style.visibility = "hidden";
+            portal.style.opacity = "0";
+            if (p >= 0.998 && !stamped) {
+              stamped = true;
+              dock.classList.remove("gf-arrive");
+              void dock.offsetWidth;
+              dock.classList.add("gf-arrive");
+              window.dispatchEvent(new CustomEvent("gf:dock"));
+            }
+            if (p <= 0.002) stamped = false;
+            return;
+          }
+          if (p < 0.9) stamped = false;
+          var from = hl.getBoundingClientRect();
+          var to = dock.getBoundingClientRect();
+          var e = easeFly(p);
+          var x = from.left + (to.left + 16 - from.left) * e;
+          var y = from.top + (to.top + to.height / 2 - 30 - from.top) * e - Math.sin(p * Math.PI) * 46;
+          var s = 1 - 0.7 * easeFly(Math.max(0, (p - 0.45) / 0.55));
+          var rot = Math.sin(p * Math.PI) * 2.6;
+          var o = Math.min(1, p / 0.07) * (1 - Math.max(0, Math.min(1, (p - 0.84) / 0.14)));
+          portal.style.visibility = "visible";
+          portal.style.opacity = o;
+          portal.style.transform = "translate3d(" + x + "px," + y + "px,0) rotate(" + rot + "deg) scale(" + s + ")";
+        }
+      });
+      return function () { st.kill(); portal.remove(); };
+    });
+
+    /* beats 4-5 — scenes arrive scrubbed, not stacked (beat 3 is the existing console pin) */
+    mmFilm.add("(min-width: 981px)", function () {
+      var beats = [];
+      if (document.querySelector("#receipts .anatomy .receipt")) {
+        beats.push(gsap.fromTo("#receipts .anatomy .receipt",
+          { rotation: -7, y: 90 },
+          {
+            rotation: -1.2, y: 0, ease: "none",
+            scrollTrigger: { trigger: "#receipts", start: "top 85%", end: "top 25%", scrub: 0.5 }
+          }));
+        beats.push(gsap.fromTo("#receipts .anatomy-notes", { y: 60 }, {
+          y: 0, ease: "none",
+          scrollTrigger: { trigger: "#receipts", start: "top 80%", end: "top 20%", scrub: 0.5 }
+        }));
+      }
+      if (document.getElementById("deck-stage")) {
+        beats.push(gsap.fromTo("#deck-stage", { y: 70, scale: 0.965 }, {
+          y: 0, scale: 1, ease: "none",
+          scrollTrigger: { trigger: "#deck", start: "top 88%", end: "top 32%", scrub: 0.5 }
+        }));
+      }
+      return function () {
+        beats.forEach(function (b) { b.scrollTrigger && b.scrollTrigger.kill(); b.kill(); });
+      };
+    });
+  }
+
+  /* ---------- E) page transitions — View Transitions API + wipe fallback ---------- */
+  (function pageTransitions() {
+    if (REDUCED) return;                       /* reduced motion: instant navigation */
+    if ("onpagereveal" in window) return;      /* cross-document View Transitions: CSS handles it */
+    if (!HAS_GSAP) return;
+    var wipe = document.createElement("div");
+    wipe.id = "gf-wipe";
+    wipe.setAttribute("aria-hidden", "true");
+    document.body.appendChild(wipe);
+    var leaving = false;
+    document.addEventListener("click", function (e) {
+      if (e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+      var a = e.target.closest ? e.target.closest("a[href]") : null;
+      if (!a || a.target === "_blank" || a.hasAttribute("download")) return;
+      var href = a.getAttribute("href");
+      if (!href || href.charAt(0) === "#") return;
+      var u;
+      try { u = new URL(a.href, location.href); } catch (err) { return; }
+      if (u.origin !== location.origin) return;
+      if (u.protocol !== "http:" && u.protocol !== "https:") return;
+      if (u.pathname === location.pathname && u.hash) return;
+      e.preventDefault();
+      if (leaving) return;
+      leaving = true;
+      if (lenis) lenis.stop();
+      gsap.set(wipe, { visibility: "visible" });
+      gsap.fromTo(wipe, { yPercent: 103, y: 0 }, {
+        yPercent: 0, y: 0, duration: 0.42, ease: "power3.inOut",
+        onComplete: function () { location.href = u.href; }
+      });
+      /* never trap: if navigation stalls, uncover */
+      setTimeout(function () {
+        if (!leaving) return;
+        leaving = false;
+        gsap.set(wipe, { clearProps: "all" });
+        if (lenis) lenis.start();
+      }, 1600);
+    });
+    window.addEventListener("pageshow", function (ev) {
+      if (ev.persisted) {
+        leaving = false;
+        gsap.set(wipe, { clearProps: "all" });
+        if (lenis) lenis.start();
+      }
+    });
+  })();
 
   /* year */
   var yr = document.getElementById("yr");
