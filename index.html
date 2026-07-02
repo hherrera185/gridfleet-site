@@ -749,7 +749,9 @@ section.offers{padding:clamp(72px,11vw,128px) 0;position:relative;
 /* --- Mobile polish: no horizontal scroll, comfortable command deck --- */
 @media(max-width:760px){
   html,body{max-width:100%;overflow-x:hidden}
-  .hero{padding-top:88px}                 /* bring the headline up; grid fills the top */
+  /* top-align the hero so the copy starts high — no centered dead-space above the fold */
+  .hero{align-items:flex-start;padding-top:104px}
+  .hero-inner{padding-top:0}
   .operator-portrait{min-height:230px}
   .op-code{font-size:9px;padding:3px 7px}
   .proof-metric-value{font-size:clamp(2rem,9vw,3rem)}
