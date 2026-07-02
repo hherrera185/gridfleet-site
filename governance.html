@@ -1,0 +1,340 @@
+<!doctype html>
+<html lang="en" class="no-js">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data:; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline'; connect-src 'self'; form-action 'self' mailto:; frame-ancestors 'none'; base-uri 'self'; object-src 'none'; upgrade-insecure-requests" />
+<meta name="referrer" content="strict-origin-when-cross-origin" />
+<meta name="robots" content="index, follow, max-image-preview:large" />
+<meta name="theme-color" content="#05070a" />
+<title>Governance — GAOS/HARMONIC, the evidence-gating layer | GridFleet</title>
+<meta name="description" content="GAOS/HARMONIC is GridFleet's governance and evidence layer: agents act only on verified evidence, sensitive actions are gate-checked before they happen, and every result returns an inspectable receipt. Fail-closed by default." />
+<link rel="canonical" href="https://gridfleet.ai/governance" />
+<meta property="og:title" content="GridFleet Governance — GAOS/HARMONIC" />
+<meta property="og:description" content="Agents act only on verified evidence. Every sensitive action is gate-checked before it happens. Nothing is 'done' until the result is proven to exist. Fail-closed by default." />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://gridfleet.ai/governance" />
+<meta property="og:image" content="https://gridfleet.ai/og.png" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="GridFleet Governance — GAOS/HARMONIC" />
+<meta name="twitter:image" content="https://gridfleet.ai/og.png" />
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml" />
+<link rel="preload" href="/assets/fonts/space-grotesk-var.woff2" as="font" type="font/woff2" crossorigin />
+<link rel="preload" href="/assets/fonts/jetbrains-mono-var.woff2" as="font" type="font/woff2" crossorigin />
+<style>body{background:#05070a;color:#f2f6f4;font-family:ui-sans-serif,system-ui,sans-serif;margin:0}</style>
+<link rel="stylesheet" href="/assets/main.css" />
+<link rel="stylesheet" href="/assets/sub.css" />
+<style>
+/* governance-page accents (additive, token-driven) */
+.doctrine-quote {
+  font-family: var(--mono); font-size: clamp(15px, 1.8vw, 21px); line-height: 2.1;
+  color: var(--ink); border-left: 2px solid var(--cyan);
+  background: rgba(34, 230, 255, 0.04);
+  padding: clamp(22px, 3vw, 36px) clamp(24px, 3.4vw, 44px);
+  margin: 0;
+}
+.doctrine-quote em { font-style: normal; color: var(--cyan); }
+.doctrine-quote footer { margin-top: 14px; font-size: 10.5px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--faint); }
+.gate-note { font-family: var(--mono); font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--faint); margin-top: 12px; }
+.gate-note b { color: var(--lime); font-weight: 500; }
+.label-row { display: grid; grid-template-columns: 190px 1fr; gap: 18px; padding: 18px 4px; border-top: 1px solid var(--hair2); align-items: baseline; }
+.label-row:last-child { border-bottom: 1px solid var(--hair2); }
+.label-row p { color: var(--dim); font-size: 14.5px; max-width: 62ch; margin: 0; }
+.label-chip { display: inline-flex; align-items: center; gap: 9px; font-family: var(--mono); font-size: 10.5px; letter-spacing: 0.14em; text-transform: uppercase; border: 1px solid var(--hair2); padding: 7px 12px; border-radius: 2px; white-space: nowrap; }
+.label-chip .tag-dot { box-shadow: 0 0 8px currentColor; background: currentColor; }
+.lc-live { color: var(--lime); background: rgba(182, 255, 60, 0.06); }
+.lc-file { color: var(--cyan); background: rgba(34, 230, 255, 0.05); }
+.lc-est { color: var(--dim); }
+.lc-stale { color: #ffb24d; background: rgba(255, 178, 77, 0.06); }
+.lc-unk { color: var(--faint); }
+@media (max-width: 640px) { .label-row { grid-template-columns: 1fr; gap: 8px; } }
+</style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {"@type":"WebPage","@id":"https://gridfleet.ai/governance#page","url":"https://gridfleet.ai/governance","name":"GridFleet Governance — GAOS/HARMONIC","isPartOf":{"@id":"https://gridfleet.ai/#site"},"about":{"@id":"https://gridfleet.ai/#org"},"description":"GAOS/HARMONIC is GridFleet's governance and evidence layer: agents act only on verified evidence, sensitive actions are gate-checked before execution, and every result returns an inspectable receipt. Fail-closed by default."},
+    {"@type":"FAQPage","@id":"https://gridfleet.ai/governance#faq","mainEntity":[
+      {"@type":"Question","name":"What is GAOS/HARMONIC?","acceptedAnswer":{"@type":"Answer","text":"GAOS/HARMONIC is the governance and evidence layer that runs beneath the GridFleet agent fleet. Agents act only on verified evidence, every sensitive action passes a policy gate before it happens, and every result returns an inspectable receipt. If evidence is stale or authority is unclear, the system fails closed and the action does not happen."}},
+      {"@type":"Question","name":"How does GridFleet prevent AI agents from fabricating results?","acceptedAnswer":{"@type":"Answer","text":"Through the evidence gate: a task is accepted as done only when the claimed artifact or state is independently verified to exist — never on the agent's own report. A claim without a verified artifact is rejected, which is what makes GridFleet receipts real."}},
+      {"@type":"Question","name":"What actions require a gate check before execution?","acceptedAnswer":{"@type":"Answer","text":"External posts and communications, spend and transactions, credential or configuration changes, memory and canon changes, and deployments. Each gate class fails closed if evidence is stale or authority is unclear."}}
+    ]}
+  ]
+}
+</script>
+</head>
+<body>
+
+<!-- nav -->
+<header class="nav" id="nav">
+  <a class="brand" href="/" aria-label="GridFleet home">
+    <svg viewBox="0 0 48 48" fill="none" aria-hidden="true">
+      <g stroke="#22e6ff" stroke-linejoin="round" stroke-linecap="round">
+        <path d="M24 4 L42 14.5 L42 33.5 L24 44 L6 33.5 L6 14.5 Z" stroke-width="2" opacity="0.55"/>
+        <path d="M24 4 L24 24 M24 24 L42 14.5 M24 24 L6 14.5" stroke-width="2" opacity="0.72"/>
+        <path d="M24 24 L24 44 M24 24 L42 33.5 M24 24 L6 33.5" stroke-width="1.5" opacity="0.4"/>
+      </g>
+      <circle cx="24" cy="24" r="3.6" fill="#b6ff3c"/>
+    </svg>
+    <b>GRIDFLEET<span class="brand-dot">_</span></b>
+  </a>
+  <nav class="nav-links" aria-label="Primary">
+    <a href="/vera">Vera</a>
+    <a href="/workers.html">Workers</a>
+    <a href="/docs.html">Docs</a>
+    <a href="/about.html">About</a>
+  </nav>
+  <div style="display:flex;align-items:center;gap:10px">
+    <a class="btn btn--solid nav-cta" href="/#deploy">Deploy the fleet</a>
+    <button class="burger" id="burger" aria-label="Menu" aria-expanded="false" aria-controls="menu"><i></i><i></i><i></i></button>
+  </div>
+</header>
+
+<!-- overlay menu -->
+<div id="menu" role="dialog" aria-label="Site menu">
+  <div class="menu-grid">
+    <nav class="menu-main" aria-label="Scenes">
+      <a href="/#fleet"><small>01</small>The living fleet</a>
+      <a href="/#work"><small>02</small>Watch it work</a>
+      <a href="/#receipts"><small>03</small>The receipt</a>
+      <a href="/#deck"><small>04</small>Command deck</a>
+      <a href="/#deploy"><small>05</small>Deploy</a>
+    </nav>
+    <nav class="menu-side" aria-label="Pages">
+      <a href="/vera">Vera — AI receptionist</a>
+      <a href="/workers.html">Hire a worker</a>
+      <a href="/docs.html">API docs</a>
+      <a href="/governance">Governance — the trust layer</a>
+      <a href="/audits.html">DeFi audits</a>
+      <a href="/about.html">About</a>
+      <a href="/signup.html">Request access</a>
+    </nav>
+  </div>
+  <div class="menu-foot">GridFleet — send the job · get the receipt</div>
+</div>
+
+<main>
+
+<!-- ============ hero ============ -->
+<section class="hero hero--sub scene" id="top" aria-label="GridFleet governance">
+  <div class="grid-field" aria-hidden="true"></div>
+  <div class="hero-inner wrap">
+    <div class="hero-eyebrow">
+      <span class="pulse-dot" aria-hidden="true"></span>
+      <span class="tag">Governance — GAOS/HARMONIC</span>
+    </div>
+    <h1 class="h-xxl">
+      <span class="line-mask"><span class="line-inner">Trust is not a feeling.</span></span>
+      <span class="line-mask"><span class="line-inner">It is an <span class="accent">architecture.</span></span></span>
+    </h1>
+    <p class="hero-sub"><strong>GAOS/HARMONIC</strong> is the governance and evidence layer beneath the fleet. Agents act only on verified evidence, every sensitive action is gate-checked <em>before</em> it happens, and everything returns an inspectable receipt. Fail-closed by default.</p>
+    <div class="hero-ctas">
+      <a class="btn btn--solid" href="#pipeline">See the pipeline <span class="btn-arrow" aria-hidden="true">&rarr;</span></a>
+      <a class="btn btn--ghost" href="/signup.html">Request access</a>
+    </div>
+  </div>
+  <div class="hero-foot">
+    <span class="hf-live">Default <b>fail-closed</b> &nbsp;·&nbsp; Gate classes <b>five</b> &nbsp;·&nbsp; Done means <b>verified</b></span>
+    <span class="scroll-cue">Scroll <i aria-hidden="true"></i></span>
+  </div>
+</section>
+
+<!-- ============ 01 · doctrine ============ -->
+<section class="scene scene--pad scene--line" id="doctrine" aria-label="The doctrine">
+  <div class="wrap">
+    <div class="scene-head">
+      <span class="tag">01 — The doctrine</span>
+      <h2 class="h-xl"><span class="line-mask"><span class="line-inner">Four refusals,</span></span><span class="line-mask"><span class="line-inner">written into the runtime.</span></span></h2>
+      <p class="lede">Most agent failures are category errors — a signal mistaken for an order, a memory mistaken for a fact. GAOS/HARMONIC exists to make those mistakes structurally impossible. Its core doctrine, verbatim:</p>
+    </div>
+    <blockquote class="doctrine-quote fade-up">
+      <em>Evidence is not action.</em> &nbsp;<em>Advice is not dispatch.</em><br />
+      <em>Memory is not truth.</em> &nbsp;<em>Implementation is not activation.</em>
+      <footer>GAOS/HARMONIC — core doctrine · enforced at runtime, not by convention</footer>
+    </blockquote>
+    <div class="bento" style="margin-top:clamp(28px,4vh,44px)">
+      <article class="bento-card b-6 fade-up"><span class="bc-note">Refusal 01</span><h3>Evidence is not action</h3><p>Seeing a signal never triggers a dispatch by itself. Observation and execution are separate, gated steps.</p></article>
+      <article class="bento-card b-6 fade-up"><span class="bc-note">Refusal 02</span><h3>Advice is not dispatch</h3><p>A recommendation — however confident — executes nothing. Only an authorized instruction crosses into action.</p></article>
+      <article class="bento-card b-6 fade-up"><span class="bc-note">Refusal 03</span><h3>Memory is not truth</h3><p>Stored state must be re-verified before it is acted on. A current directive always outranks a stale memory.</p></article>
+      <article class="bento-card b-6 fade-up"><span class="bc-note">Refusal 04</span><h3>Implementation is not activation</h3><p>Code that exists is not code that is live. Turning something on is its own gated decision, never a side effect.</p></article>
+    </div>
+    <p class="gate-note fade-up">When any of the four is uncertain, the system <b>fails closed</b> — the action does not happen.</p>
+  </div>
+</section>
+
+<!-- ============ 02 · pipeline ============ -->
+<section class="scene scene--pad scene--deep" id="pipeline" aria-label="How a request becomes a governed action">
+  <div class="wrap">
+    <div class="scene-head">
+      <span class="tag">02 — The pipeline</span>
+      <h2 class="h-xl"><span class="line-mask"><span class="line-inner">How a request becomes</span></span><span class="line-mask"><span class="line-inner">a governed action.</span></span></h2>
+      <p class="lede">Every job in the fleet walks the same six stations. No station can be skipped, and three of them can stop the job cold.</p>
+    </div>
+    <div class="steps">
+      <div class="step fade-up"><span class="s-num">G-01</span><div><h3>Signal</h3><p>A request, event, or schedule enters the grid. At this point it is information — nothing more.</p></div></div>
+      <div class="step fade-up"><span class="s-num">G-02</span><div><h3>Authority ranking</h3><p>Sources are ranked before anything moves: a current operator directive outranks a cached plan, and both outrank stale memory. If authority is ambiguous, the job stops here.</p></div></div>
+      <div class="step fade-up"><span class="s-num">G-03</span><div><h3>Gate check</h3><p>If the action falls into a gated class — comms, spend, credentials, canon, deployment — it must pass its policy gate before execution. Stale evidence or unclear authority fails closed.</p></div></div>
+      <div class="step fade-up"><span class="s-num">G-04</span><div><h3>Act</h3><p>Execution runs inside a fixed lane with scoped authority, metered per tool call. The agent does the job — nothing adjacent to it.</p></div></div>
+      <div class="step fade-up"><span class="s-num">G-05</span><div><h3>Verify</h3><p>The claimed artifact or state is independently confirmed to exist. The agent's own report is never sufficient — verification checks the world, not the story.</p></div></div>
+      <div class="step fade-up"><span class="s-num">G-06</span><div><h3>Receipt</h3><p>An inspectable record is archived: what ran, under whose authority, what it cost, and a checksum over the evidence. This is the receipt you keep.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 03 · gate classes ============ -->
+<section class="scene scene--pad scene--line" id="gates" aria-label="The gate classes">
+  <div class="wrap">
+    <div class="scene-head">
+      <span class="tag">03 — The gate classes</span>
+      <h2 class="h-xl"><span class="line-mask"><span class="line-inner">Five things that never</span></span><span class="line-mask"><span class="line-inner">happen ungated.</span></span></h2>
+      <p class="lede">Anything that touches the outside world, moves value, or changes what the system believes must clear a gate first. Each class fails closed if evidence is stale or authority is unclear.</p>
+    </div>
+    <div class="bento" style="margin-top:0">
+      <article class="bento-card b-4 fade-up"><span class="bc-note">Gate · external</span><h3>Posts &amp; communications</h3><p>Nothing is published or sent outward without an authorized instruction. Drafts are not sends.</p></article>
+      <article class="bento-card b-4 fade-up"><span class="bc-note">Gate · value</span><h3>Spend &amp; transactions</h3><p>Money movement is hard-gated. No agent improvises a payment, a purchase, or a transfer.</p></article>
+      <article class="bento-card b-4 fade-up"><span class="bc-note">Gate · access</span><h3>Credentials &amp; configuration</h3><p>Key rotation, permission changes, and config edits pass review before they land — never silently.</p></article>
+      <article class="bento-card b-6 fade-up"><span class="bc-note">Gate · belief</span><h3>Memory &amp; canon changes</h3><p>What the system holds as true is itself gated. Updating the record requires evidence, so a bad claim cannot quietly become tomorrow's fact.</p></article>
+      <article class="bento-card b-6 fade-up"><span class="bc-note">Gate · release</span><h3>Deployments</h3><p>Shipping is a decision, not a momentum. Builds are verified before activation, and activation is its own gate.</p></article>
+      <article class="bento-card b-12 bento-card--hot fade-up" style="min-height:0"><span class="bc-note">The default</span><h3>The gate does not negotiate</h3><p>If evidence is stale, if authority is unclear, if verification cannot complete — the action does not happen. An ungated miss is treated as a defect in the gate, not an acceptable exception.</p></article>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 04 · evidence gate ============ -->
+<section class="scene scene--pad scene--deep" id="evidence" aria-label="The evidence gate">
+  <div class="wrap">
+    <div class="split">
+      <div>
+        <div class="scene-head" style="margin-bottom:26px">
+          <span class="tag">04 — The evidence gate</span>
+          <h2 class="h-xl"><span class="line-mask"><span class="line-inner">&ldquo;Done&rdquo; means</span></span><span class="line-mask"><span class="line-inner">verified. Nothing less.</span></span></h2>
+        </div>
+        <p class="lede">Language models can assert success they never achieved. The evidence gate is the anti-fabrication mechanism: a task is accepted as done <strong>only</strong> when the claimed artifact or state is independently verified to exist — the file written, the record created, the state changed. Never on the agent's word.</p>
+        <ul class="checks">
+          <li>A claim without a verified artifact is rejected, not logged as done.</li>
+          <li>Verification checks the destination — the source of truth, not the transcript.</li>
+          <li>Rejected claims are recorded too. Failure is auditable, not silent.</li>
+          <li>This is what makes a GridFleet receipt real instead of decorative.</li>
+        </ul>
+      </div>
+      <div>
+        <div class="ledger-card fade-up" role="img" aria-label="An evidence-gate check: one claim verified against its artifact, one rejected">
+          <div class="lc-head"><span>Evidence gate · check</span><span>fail-closed</span></div>
+          <div class="lc-row"><span>claim</span><b>report delivered</b></div>
+          <div class="lc-row"><span>artifact</span><b>found at destination</b></div>
+          <div class="lc-row"><span>checksum</span><b>match</b></div>
+          <div class="lc-row"><span>status</span><b>ACCEPTED · receipt issued</b></div>
+        </div>
+        <div class="ledger-card fade-up" style="margin-top:14px;border-left-color:#ffb24d">
+          <div class="lc-head"><span>Evidence gate · check</span><span>fail-closed</span></div>
+          <div class="lc-row"><span>claim</span><b style="color:var(--ink)">task complete</b></div>
+          <div class="lc-row"><span>artifact</span><b style="color:#ffb24d">not found</b></div>
+          <div class="lc-row"><span>status</span><b style="color:#ffb24d">REJECTED · returned to work</b></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 05 · trust labels ============ -->
+<section class="scene scene--pad scene--line" id="labels" aria-label="The trust-label system">
+  <div class="wrap">
+    <div class="scene-head">
+      <span class="tag">05 — Trust labels</span>
+      <h2 class="h-xl"><span class="line-mask"><span class="line-inner">A green panel</span></span><span class="line-mask"><span class="line-inner">cannot lie.</span></span></h2>
+      <p class="lede">Every value the system surfaces — every metric, every status light — carries a provenance label. You always know whether a number was just verified against the world, read from a record, estimated, or has gone stale. Representative labels:</p>
+    </div>
+    <div class="fade-up">
+      <div class="label-row"><span class="label-chip lc-live"><span class="tag-dot"></span>live-verified</span><p>Checked against the source of truth moments ago. The strongest claim the system makes.</p></div>
+      <div class="label-row"><span class="label-chip lc-file"><span class="tag-dot"></span>file-backed</span><p>Read from a durable record with a known origin. Solid, and it says so — no more, no less.</p></div>
+      <div class="label-row"><span class="label-chip lc-est"><span class="tag-dot"></span>estimated</span><p>Derived or modeled. Useful for judgment, and explicitly barred from posing as a measurement.</p></div>
+      <div class="label-row"><span class="label-chip lc-stale"><span class="tag-dot"></span>stale</span><p>Once true, now past its freshness window. Stale values cannot authorize gated actions.</p></div>
+      <div class="label-row"><span class="label-chip lc-unk"><span class="tag-dot"></span>unknown</span><p>The system would rather show you &ldquo;unknown&rdquo; than a confident guess. So it does.</p></div>
+    </div>
+    <p class="gate-note fade-up">Labels are enforced at the display layer — a dashboard <b>cannot</b> paint an estimate green.</p>
+  </div>
+</section>
+
+<!-- ============ 06 · why it matters (paper band) ============ -->
+<section class="paper-band" id="why" aria-label="Why this matters to you">
+  <div class="wrap">
+    <div class="paper-grid">
+      <div>
+        <div class="scene-head" style="margin-bottom:26px">
+          <span class="tag">06 — Why this matters to you</span>
+          <h2 class="h-xl"><span class="line-mask"><span class="line-inner">The moat is</span></span><span class="line-mask"><span class="line-inner">the receipt.</span></span></h2>
+        </div>
+        <p class="lede">Single-model products can sound trustworthy. They cannot be inspected. GAOS/HARMONIC is a separate governance layer standing between the model and the world — which is why GridFleet can make guarantees a speech-to-speech chatbot structurally cannot.</p>
+        <div class="anatomy-notes" style="margin-top:26px">
+          <div class="an-item fade-up"><span class="an-num">W-01</span><div><h3>No hallucinated bookings</h3><p>An appointment exists when the calendar says it exists — verified at the destination, not assumed from the conversation.</p></div></div>
+          <div class="an-item fade-up"><span class="an-num">W-02</span><div><h3>No fabricated &ldquo;done&rdquo;</h3><p>Results are accepted only with the artifact in hand. Confidence is not evidence, and the gate knows the difference.</p></div></div>
+          <div class="an-item fade-up"><span class="an-num">W-03</span><div><h3>An auditable trail</h3><p>Every governed action leaves a receipt — authority, evidence, cost, checksum. When you ask &ldquo;what happened?&rdquo;, the answer is a record, not a recollection.</p></div></div>
+        </div>
+      </div>
+      <div class="anatomy">
+        <div class="receipt" aria-hidden="true">
+          <div class="r-head">GRIDFLEET · RECEIPT</div>
+          <div class="r-row"><span class="r-k">job</span><b>governed action</b></div>
+          <div class="r-row"><span class="r-k">authority</span><b>ranked · current directive</b></div>
+          <div class="r-row"><span class="r-k">gate</span><b>checked · passed</b></div>
+          <div class="r-div"></div>
+          <div class="r-row"><span class="r-k">artifact</span><b>verified to exist</b></div>
+          <div class="r-row"><span class="r-k">provenance</span><b>live-verified</b></div>
+          <div class="r-row"><span class="r-k">default</span><b>fail-closed</b></div>
+          <div class="r-div"></div>
+          <div class="r-hash">doctrine · evidence is not action · memory is not truth</div>
+          <div class="r-seal"><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M2 8.5 6 12.5 14 3.5" stroke="currentColor" stroke-width="2.2"/></svg>VERIFIED</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 07 · cta ============ -->
+<section class="scene scene--pad" id="start" aria-label="Get started" style="background:linear-gradient(180deg,var(--bg),#060a10 60%,#04070c)">
+  <div class="wrap">
+    <div class="scene-head" style="margin-bottom:34px">
+      <span class="tag tag--lime">07 — Put it to work</span>
+      <h2 class="h-xl"><span class="line-mask"><span class="line-inner">Send one job.</span></span><span class="line-mask"><span class="line-inner">Inspect the receipt.</span></span></h2>
+      <p class="lede">The fastest way to evaluate a governance layer is to watch it govern. Send one real operational job — the fleet runs it under GAOS/HARMONIC, and you get a receipt-backed result you can verify yourself.</p>
+    </div>
+    <div class="hero-ctas">
+      <a class="btn btn--lime" href="/signup.html">Request access <span class="btn-arrow" aria-hidden="true">&rarr;</span></a>
+      <a class="btn btn--ghost" href="/about.html">How the fleet is organized</a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-in">
+      <a class="brand" href="/" aria-label="GridFleet home">
+        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 2 21 7v10l-9 5-3-1.7V13H4.5V8.2L12 4.3l6 3.1v8.2l-4.5 2.5" stroke="#22e6ff" stroke-width="1.5" stroke-linecap="square"/></svg>
+        <b>GRIDFLEET<span class="brand-dot">_</span></b>
+      </a>
+      <nav class="foot-links" aria-label="Footer">
+        <a href="/vera">Vera</a>
+        <a href="/workers.html">Workers</a>
+        <a href="/docs.html">Docs</a>
+        <a href="/governance">Governance</a>
+        <a href="/audits.html">DeFi audits</a>
+        <a href="/about.html">About</a>
+        <a href="/signup.html">Request access</a>
+      </nav>
+    </div>
+    <div class="foot-fine">
+      <span>&copy; <span id="yr">2026</span> GridFleet — send the job, get the receipt</span>
+      <span><a href="mailto:security@gridfleet.ai" style="color:inherit">security@gridfleet.ai</a> · responsible disclosure welcome</span>
+    </div>
+  </div>
+</footer>
+
+<script src="/assets/vendor/gsap.min.js" defer></script>
+<script src="/assets/vendor/ScrollTrigger.min.js" defer></script>
+<script src="/assets/vendor/lenis.min.js" defer></script>
+<script src="/assets/main.js" defer></script>
+<noscript><style>.fade-up{opacity:1;transform:none}.line-mask .line-inner{transform:none}</style></noscript>
+</body>
+</html>
