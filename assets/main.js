@@ -636,11 +636,21 @@
   /* refresh live metrics from the public snapshot if reachable */
   fetch("/data/public-grid-metrics.snapshot.json").then(function (r) { return r.json(); }).then(function (j) {
     if (!j || !j.metrics) return;
+    var generated = j.generated_at ? new Date(j.generated_at) : null;
     j.metrics.forEach(function (m) {
       var el = document.querySelector('[data-metric="' + m.metric_id + '"]');
-      if (el && !HAS_GSAP) el.childNodes[0].nodeValue = fmt(m.current_value);
-      if (el) el.setAttribute("data-count", m.current_value);
+      if (!el || m.current_value === null || m.current_value === undefined) return;
+      el.childNodes[0].nodeValue = fmt(m.current_value);
+      el.setAttribute("data-count", m.current_value);
+      var cell = el.closest(".proof-cell");
+      var fresh = cell ? cell.querySelector(".pc-fresh") : null;
+      if (fresh) {
+        fresh.textContent = m.status === "ok" ? "measured · fresh" : "verified snapshot";
+        fresh.classList.toggle("live", m.status === "ok");
+      }
     });
+    var stamp = document.querySelector("[data-proof-generated]");
+    if (stamp && generated && !isNaN(generated.getTime())) stamp.textContent = "snapshot " + generated.toLocaleString();
   }).catch(function () { });
 
   /* ---------------- magnetic buttons ---------------- */

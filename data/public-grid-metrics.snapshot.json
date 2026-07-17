@@ -1,58 +1,229 @@
 {
   "schema": "grid-public-metrics.v1",
-  "generated_at": "2026-06-19T04:01:16.320655+00:00",
+  "generated_at": "2026-07-17T09:04:08.254769+00:00",
   "harmonic_live_since": "2026-06-19T00:00:00Z",
   "snapshot_status": "latest_verified_snapshot",
   "public_projection": true,
   "redaction": "public-safe aggregate projection; private lineage stays in canonical manifest and internal services",
   "metrics": [
     {
-      "metric_id": "fleet.specialist_agents",
-      "proof_band_order": 3,
-      "public_label": "Specialist agents in the fleet",
-      "category": "fleet_roster",
-      "current_value": 16,
-      "formatted_current_value": "16",
-      "status": "ok",
-      "freshness": {
-        "state": "fresh",
-        "microcopy": "Canonical fleet roster."
-      },
-      "updated_at": "2026-06-19T04:01:16Z",
-      "public_safe": true,
-      "allowed_surfaces": [
-        "gridfleet_ai"
-      ],
-      "metric_type": "roster_count",
-      "metric_era": "latest_snapshot",
-      "aggregation_mode": "latest_snapshot",
-      "display_strategy": "trust_badge",
-      "public_copy": "Canonical count of specialist agents that run the fleet.",
-      "dedupe_key": "fleet:specialist_agents",
-      "hero_candidate": true,
-      "client_hook_score": 92,
-      "display_priority": 5,
-      "live_tracking_status": "snapshot_only",
-      "confidence_level": "high",
-      "can_animate": true,
-      "can_show_plus_sign": false,
-      "can_be_public_hero": true,
-      "public_source_note": "Canonical GridFleet fleet roster size, consistent across the public site.",
-      "latest_snapshot_value": 16
-    },
-    {
-      "metric_id": "creative.assets_generated",
-      "proof_band_order": 6,
-      "public_label": "Creative proof artifacts generated",
-      "category": "innovation_pipeline",
-      "current_value": 38709,
-      "formatted_current_value": "38,709",
+      "metric_id": "tron.security_cycles_lifetime",
+      "public_label": "Autonomous defense cycles evidenced",
+      "category": "security_autonomy",
+      "current_value": 4876,
+      "formatted_current_value": "4,876",
       "status": "ok",
       "freshness": {
         "state": "fresh",
         "microcopy": "Live feed connected by freshness rules."
       },
-      "updated_at": "2026-06-18T23:36:36Z",
+      "updated_at": "2026-07-17T09:00:20.373Z",
+      "public_safe": true,
+      "allowed_surfaces": [
+        "gridfleet_ai"
+      ],
+      "metric_type": "cumulative_counter",
+      "metric_era": "combined_lifetime",
+      "aggregation_mode": "baseline_plus_live_increment",
+      "display_strategy": "hero_metric",
+      "public_copy": "Lifetime BECK/TRON security cycles backed by durable receipts.",
+      "dedupe_key": "tron:security_cycles:lifetime",
+      "hero_candidate": true,
+      "client_hook_score": 100,
+      "display_priority": 0,
+      "live_tracking_status": "live_connected",
+      "confidence_level": "high",
+      "can_animate": false,
+      "can_show_plus_sign": false,
+      "can_be_public_hero": true,
+      "public_source_note": "Canonical public-safe metric projection. Internal lineage is not exposed on GridFleet.ai.",
+      "historical_baseline_value": 4876,
+      "historical_baseline_as_of": "2026-07-17T09:00:20.373Z",
+      "live_increment_value": 0,
+      "live_increment_since": "2026-06-19T00:00:00Z",
+      "combined_lifetime_total": 4876
+    },
+    {
+      "metric_id": "tron.hardening_cases_resolved",
+      "public_label": "BECK/TRON hardening cases resolved",
+      "category": "security_autonomy",
+      "current_value": 808,
+      "formatted_current_value": "808",
+      "status": "stale",
+      "freshness": {
+        "state": "stale",
+        "microcopy": "Latest verified public-safe snapshot."
+      },
+      "updated_at": "2026-06-17T21:15:25.310Z",
+      "public_safe": true,
+      "allowed_surfaces": [
+        "gridfleet_ai"
+      ],
+      "metric_type": "cumulative_counter",
+      "metric_era": "combined_lifetime",
+      "aggregation_mode": "baseline_plus_live_increment",
+      "display_strategy": "hero_metric",
+      "public_copy": "Security hardening cases dispositioned with TRON evidence rather than silently discarded.",
+      "dedupe_key": "tron:hardening_cases:resolved",
+      "hero_candidate": true,
+      "client_hook_score": 98,
+      "display_priority": 1,
+      "live_tracking_status": "snapshot_only",
+      "confidence_level": "high",
+      "can_animate": false,
+      "can_show_plus_sign": false,
+      "can_be_public_hero": true,
+      "public_source_note": "Canonical public-safe metric projection. Internal lineage is not exposed on GridFleet.ai.",
+      "historical_baseline_value": 808,
+      "historical_baseline_as_of": "2026-06-17T21:15:25.310Z",
+      "live_increment_value": 0,
+      "live_increment_since": "2026-06-19T00:00:00Z",
+      "combined_lifetime_total": 808
+    },
+    {
+      "metric_id": "security.radar_high_critical",
+      "public_label": "High / critical radar findings",
+      "category": "security",
+      "current_value": 0,
+      "formatted_current_value": "0",
+      "status": "ok",
+      "freshness": {
+        "state": "fresh",
+        "microcopy": "Live feed connected by freshness rules."
+      },
+      "updated_at": "2026-07-17T09:03:02.599Z",
+      "public_safe": true,
+      "allowed_surfaces": [
+        "gridfleet_ai"
+      ],
+      "metric_type": "latest_snapshot_number",
+      "metric_era": "latest_snapshot",
+      "aggregation_mode": "latest_snapshot",
+      "display_strategy": "hero_metric",
+      "public_copy": "Current public-safe high/critical finding count from the BECK radar receipt.",
+      "dedupe_key": "beck:radar_high_critical:latest",
+      "hero_candidate": true,
+      "client_hook_score": 99,
+      "display_priority": 1,
+      "live_tracking_status": "live_connected",
+      "confidence_level": "high",
+      "can_animate": false,
+      "can_show_plus_sign": false,
+      "can_be_public_hero": true,
+      "public_source_note": "Canonical public-safe metric projection. Internal lineage is not exposed on GridFleet.ai.",
+      "latest_snapshot_value": 0
+    },
+    {
+      "metric_id": "security.radar_signals_reviewed",
+      "public_label": "Current security signals reviewed",
+      "category": "security",
+      "current_value": 28,
+      "formatted_current_value": "28",
+      "status": "ok",
+      "freshness": {
+        "state": "fresh",
+        "microcopy": "Live feed connected by freshness rules."
+      },
+      "updated_at": "2026-07-17T09:03:02.599Z",
+      "public_safe": true,
+      "allowed_surfaces": [
+        "gridfleet_ai"
+      ],
+      "metric_type": "latest_snapshot_number",
+      "metric_era": "latest_snapshot",
+      "aggregation_mode": "latest_snapshot",
+      "display_strategy": "hero_metric",
+      "public_copy": "Signals evaluated in the latest fresh BECK radar receipt.",
+      "dedupe_key": "beck:radar_signals:latest",
+      "hero_candidate": true,
+      "client_hook_score": 96,
+      "display_priority": 2,
+      "live_tracking_status": "live_connected",
+      "confidence_level": "high",
+      "can_animate": false,
+      "can_show_plus_sign": false,
+      "can_be_public_hero": true,
+      "public_source_note": "Canonical public-safe metric projection. Internal lineage is not exposed on GridFleet.ai.",
+      "latest_snapshot_value": 28
+    },
+    {
+      "metric_id": "tron.protected_checks_last_run",
+      "public_label": "Protected checks in the latest TRON run",
+      "category": "security_autonomy",
+      "current_value": 3,
+      "formatted_current_value": "3",
+      "status": "ok",
+      "freshness": {
+        "state": "fresh",
+        "microcopy": "Live feed connected by freshness rules."
+      },
+      "updated_at": "2026-07-17T09:00:20.373Z",
+      "public_safe": true,
+      "allowed_surfaces": [
+        "gridfleet_ai"
+      ],
+      "metric_type": "latest_snapshot_number",
+      "metric_era": "latest_snapshot",
+      "aggregation_mode": "latest_snapshot",
+      "display_strategy": "hero_metric",
+      "public_copy": "Receipt-backed protected checks completed in the latest TRON cycle.",
+      "dedupe_key": "tron:protected_checks:latest",
+      "hero_candidate": true,
+      "client_hook_score": 95,
+      "display_priority": 3,
+      "live_tracking_status": "live_connected",
+      "confidence_level": "high",
+      "can_animate": false,
+      "can_show_plus_sign": false,
+      "can_be_public_hero": true,
+      "public_source_note": "Canonical public-safe metric projection. Internal lineage is not exposed on GridFleet.ai.",
+      "latest_snapshot_value": 3
+    },
+    {
+      "metric_id": "security.package_files_scanned",
+      "public_label": "Package manifests scanned",
+      "category": "security",
+      "current_value": 208,
+      "formatted_current_value": "208",
+      "status": "ok",
+      "freshness": {
+        "state": "fresh",
+        "microcopy": "Live feed connected by freshness rules."
+      },
+      "updated_at": "2026-07-17T09:03:02.599Z",
+      "public_safe": true,
+      "allowed_surfaces": [
+        "gridfleet_ai"
+      ],
+      "metric_type": "latest_snapshot_number",
+      "metric_era": "latest_snapshot",
+      "aggregation_mode": "latest_snapshot",
+      "display_strategy": "trust_badge",
+      "public_copy": "Package-manifest coverage in the latest exposure scan.",
+      "dedupe_key": "beck:package_files_scanned:latest",
+      "hero_candidate": false,
+      "client_hook_score": 90,
+      "display_priority": 4,
+      "live_tracking_status": "live_connected",
+      "confidence_level": "high",
+      "can_animate": false,
+      "can_show_plus_sign": false,
+      "can_be_public_hero": false,
+      "public_source_note": "Canonical public-safe metric projection. Internal lineage is not exposed on GridFleet.ai.",
+      "latest_snapshot_value": 208
+    },
+    {
+      "metric_id": "creative.assets_generated",
+      "public_label": "Creative proof artifacts generated",
+      "category": "innovation_pipeline",
+      "current_value": 1753,
+      "formatted_current_value": "1,753",
+      "status": "ok",
+      "freshness": {
+        "state": "fresh",
+        "microcopy": "Live feed connected by freshness rules."
+      },
+      "updated_at": "2026-07-17T04:49:55Z",
       "public_safe": true,
       "allowed_surfaces": [
         "gridfleet_ai"
@@ -72,11 +243,11 @@
       "can_show_plus_sign": false,
       "can_be_public_hero": true,
       "public_source_note": "Canonical public-safe metric projection. Internal lineage is not exposed on GridFleet.ai.",
-      "historical_baseline_value": 38709,
-      "historical_baseline_as_of": "2026-06-18T23:36:36Z",
+      "historical_baseline_value": 1753,
+      "historical_baseline_as_of": "2026-07-17T04:49:55Z",
       "live_increment_value": 0,
       "live_increment_since": "2026-06-19T00:00:00Z",
-      "combined_lifetime_total": 38709
+      "combined_lifetime_total": 1753
     },
     {
       "metric_id": "beck.signals_total",
@@ -154,17 +325,16 @@
     },
     {
       "metric_id": "tron.autonomous_actions_7d",
-      "proof_band_order": 4,
       "public_label": "Autonomous safety actions in the last 7 days",
       "category": "security_autonomy",
-      "current_value": 1386,
-      "formatted_current_value": "1,386",
+      "current_value": 3927,
+      "formatted_current_value": "3,927",
       "status": "ok",
       "freshness": {
         "state": "fresh",
         "microcopy": "Live feed connected by freshness rules."
       },
-      "updated_at": "2026-06-19T03:41:31.821Z",
+      "updated_at": "2026-07-17T09:00:20.373Z",
       "public_safe": true,
       "allowed_surfaces": [
         "gridfleet_ai"
@@ -184,15 +354,14 @@
       "can_show_plus_sign": false,
       "can_be_public_hero": true,
       "public_source_note": "Canonical public-safe metric projection. Internal lineage is not exposed on GridFleet.ai.",
-      "rolling_window_value": 1386,
+      "rolling_window_value": 3927,
       "rolling_window_duration": "P7D"
     },
     {
       "metric_id": "reliability.cron_slo",
-      "proof_band_order": 1,
       "public_label": "Reliability checks passing",
       "category": "reliability",
-      "current_value": 100.0,
+      "current_value": 100,
       "formatted_current_value": "100",
       "status": "ok",
       "freshness": {
@@ -219,11 +388,10 @@
       "can_show_plus_sign": false,
       "can_be_public_hero": false,
       "public_source_note": "Canonical public-safe metric projection. Internal lineage is not exposed on GridFleet.ai.",
-      "latest_snapshot_value": 100.0
+      "latest_snapshot_value": 100
     },
     {
       "metric_id": "security.supply_chain_files_scanned",
-      "proof_band_order": 5,
       "public_label": "Supply-chain files scanned",
       "category": "security",
       "current_value": 960,
@@ -257,7 +425,6 @@
     },
     {
       "metric_id": "security.incidents_30d",
-      "proof_band_order": 2,
       "public_label": "Security incidents in 30 days",
       "category": "security",
       "current_value": 0,
@@ -267,7 +434,7 @@
         "state": "fresh",
         "microcopy": "Live feed connected by freshness rules."
       },
-      "updated_at": "2026-06-19T00:54:35.057Z",
+      "updated_at": "2026-07-17T04:02:53.528Z",
       "public_safe": true,
       "allowed_surfaces": [
         "gridfleet_ai"
@@ -292,7 +459,6 @@
     },
     {
       "metric_id": "deployment.builds_deployed_30d",
-      "proof_band_order": 7,
       "public_label": "Verified builds in the last 30 days",
       "category": "deployment",
       "current_value": 7,
@@ -302,7 +468,7 @@
         "state": "fresh",
         "microcopy": "Live feed connected by freshness rules."
       },
-      "updated_at": "2026-06-19T01:38:14Z",
+      "updated_at": "2026-06-19T13:29:23Z",
       "public_safe": true,
       "allowed_surfaces": [
         "gridfleet_ai"
