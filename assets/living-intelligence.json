@@ -1,0 +1,29 @@
+{
+  "schema": "gridfleet.living-intelligence.v1",
+  "generatedAt": "2026-07-19T10:00:48.505Z",
+  "privacy": "aggregate-only",
+  "actionAuthority": false,
+  "brain": {
+    "mode": "governed-living-wiki",
+    "connected": true,
+    "events": 58278,
+    "currentFacts": 23181,
+    "openConflicts": 0,
+    "graphNodes": 173,
+    "graphEdges": 356,
+    "fullyConnected": true
+  },
+  "loops": {
+    "registered": 11,
+    "active": 10,
+    "verified": 8,
+    "attention": 3,
+    "privilegedArmed": 0
+  },
+  "principles": [
+    "Evidence, not agent claims, advances lifecycle state.",
+    "The Brain compounds knowledge but grants no action authority.",
+    "Privileged planes remain fail-closed.",
+    "Every loop has budgets, stop rules, verification, and rollback."
+  ]
+}

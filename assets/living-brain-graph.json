@@ -1,0 +1,830 @@
+{
+  "schema": "gridfleet.living-brain-graph.v1",
+  "generatedAt": "2026-07-19T05:53:02.966Z",
+  "privacy": "sanitized-real-topology",
+  "note": "Actual HARMONIC Brain governance topology: agents, governed loops, domains, semantic couplings. Evidence artifacts and internal identifiers excluded.",
+  "actionAuthority": false,
+  "nodes": [
+    {
+      "id": "system:harmonic-brain",
+      "label": "HARMONIC BRAIN",
+      "type": "brain",
+      "weight": 32
+    },
+    {
+      "id": "system:gaos-harmonic",
+      "label": "GAOS / HARMONIC",
+      "type": "governance",
+      "weight": 1
+    },
+    {
+      "id": "agent:able",
+      "label": "ABLE",
+      "type": "agent",
+      "weight": 3
+    },
+    {
+      "id": "agent:ares",
+      "label": "ARES",
+      "type": "agent",
+      "weight": 1
+    },
+    {
+      "id": "agent:beck",
+      "label": "BECK",
+      "type": "agent",
+      "weight": 1
+    },
+    {
+      "id": "agent:dumont",
+      "label": "DUMONT",
+      "type": "agent",
+      "weight": 5
+    },
+    {
+      "id": "agent:echo",
+      "label": "ECHO",
+      "type": "agent",
+      "weight": 1
+    },
+    {
+      "id": "agent:lora",
+      "label": "LORA",
+      "type": "agent",
+      "weight": 1
+    },
+    {
+      "id": "agent:maddie",
+      "label": "MADDIE",
+      "type": "agent",
+      "weight": 3
+    },
+    {
+      "id": "agent:main",
+      "label": "MAIN",
+      "type": "agent",
+      "weight": 9
+    },
+    {
+      "id": "agent:neon-dave",
+      "label": "NEON-DAVE",
+      "type": "agent",
+      "weight": 10
+    },
+    {
+      "id": "agent:paloma",
+      "label": "PALOMA",
+      "type": "agent",
+      "weight": 1
+    },
+    {
+      "id": "agent:quorra",
+      "label": "QUORRA",
+      "type": "agent",
+      "weight": 1
+    },
+    {
+      "id": "agent:ram",
+      "label": "RAM",
+      "type": "agent",
+      "weight": 1
+    },
+    {
+      "id": "agent:sark",
+      "label": "SARK",
+      "type": "agent",
+      "weight": 1
+    },
+    {
+      "id": "agent:tesler",
+      "label": "TESLER",
+      "type": "agent",
+      "weight": 1
+    },
+    {
+      "id": "agent:tron",
+      "label": "TRON",
+      "type": "agent",
+      "weight": 10
+    },
+    {
+      "id": "agent:vera",
+      "label": "VERA",
+      "type": "agent",
+      "weight": 1
+    },
+    {
+      "id": "agent:yori",
+      "label": "YORI",
+      "type": "agent",
+      "weight": 10
+    },
+    {
+      "id": "domain:receipts",
+      "label": "RECEIPTS",
+      "type": "domain",
+      "weight": 2
+    },
+    {
+      "id": "domain:state",
+      "label": "CURRENT STATE",
+      "type": "domain",
+      "weight": 40
+    },
+    {
+      "id": "domain:knowledge",
+      "label": "COMPILED KNOWLEDGE",
+      "type": "domain",
+      "weight": 1
+    },
+    {
+      "id": "domain:learning",
+      "label": "AGENT LEARNINGS",
+      "type": "domain",
+      "weight": 1
+    },
+    {
+      "id": "domain:audit",
+      "label": "AUDIT EVIDENCE",
+      "type": "domain",
+      "weight": 7
+    },
+    {
+      "id": "semantic:governance",
+      "label": "GOVERNANCE CORE",
+      "type": "domain",
+      "weight": 9
+    },
+    {
+      "id": "semantic:security",
+      "label": "SECURITY IMMUNE SYSTEM",
+      "type": "domain",
+      "weight": 25
+    },
+    {
+      "id": "semantic:revenue",
+      "label": "REVENUE & MARKETS",
+      "type": "domain",
+      "weight": 24
+    },
+    {
+      "id": "semantic:wedding",
+      "label": "WEDDING INTELLIGENCE",
+      "type": "domain",
+      "weight": 8
+    },
+    {
+      "id": "semantic:creative",
+      "label": "CREATIVE & BRAND",
+      "type": "domain",
+      "weight": 4
+    },
+    {
+      "id": "semantic:operations",
+      "label": "OPERATIONS FABRIC",
+      "type": "domain",
+      "weight": 30
+    },
+    {
+      "id": "semantic:communications",
+      "label": "COMMUNICATIONS",
+      "type": "domain",
+      "weight": 38
+    },
+    {
+      "id": "semantic:knowledge",
+      "label": "KNOWLEDGE & MEMORY",
+      "type": "domain",
+      "weight": 1
+    },
+    {
+      "id": "semantic:agents",
+      "label": "AGENT SOCIETY",
+      "type": "domain",
+      "weight": 10
+    },
+    {
+      "id": "loop:brain.distill-dream",
+      "label": "distill dream",
+      "type": "loop",
+      "weight": 6
+    },
+    {
+      "id": "loop:brain.retrieval-eval",
+      "label": "retrieval eval",
+      "type": "loop",
+      "weight": 6
+    },
+    {
+      "id": "loop:brain.incremental-synthesis",
+      "label": "incremental synthesis",
+      "type": "loop",
+      "weight": 6
+    },
+    {
+      "id": "loop:fleet.self-heal",
+      "label": "self heal",
+      "type": "loop",
+      "weight": 6
+    },
+    {
+      "id": "loop:security.beck-tron",
+      "label": "beck tron",
+      "type": "loop",
+      "weight": 6
+    },
+    {
+      "id": "loop:revenue.liveness",
+      "label": "liveness",
+      "type": "loop",
+      "weight": 6
+    },
+    {
+      "id": "loop:maddie.proactive-planning",
+      "label": "proactive planning",
+      "type": "loop",
+      "weight": 6
+    },
+    {
+      "id": "loop:lora.creative-research",
+      "label": "creative research",
+      "type": "loop",
+      "weight": 6
+    },
+    {
+      "id": "loop:communications.fabric",
+      "label": "fabric",
+      "type": "loop",
+      "weight": 6
+    },
+    {
+      "id": "loop:governance.loop-sentinel",
+      "label": "loop sentinel",
+      "type": "loop",
+      "weight": 6
+    },
+    {
+      "id": "loop:governance.award-bar",
+      "label": "award bar",
+      "type": "loop",
+      "weight": 6
+    },
+    {
+      "id": "topic:vera",
+      "label": "vera",
+      "type": "topic",
+      "weight": 4
+    },
+    {
+      "id": "topic:mission-control",
+      "label": "mission control",
+      "type": "topic",
+      "weight": 4
+    },
+    {
+      "id": "topic:telegram",
+      "label": "telegram",
+      "type": "topic",
+      "weight": 4
+    },
+    {
+      "id": "topic:vow-vault",
+      "label": "vow vault",
+      "type": "topic",
+      "weight": 4
+    },
+    {
+      "id": "topic:brain",
+      "label": "brain",
+      "type": "topic",
+      "weight": 4
+    },
+    {
+      "id": "topic:loop-fabric",
+      "label": "loop fabric",
+      "type": "topic",
+      "weight": 4
+    },
+    {
+      "id": "topic:gridfleet",
+      "label": "gridfleet",
+      "type": "topic",
+      "weight": 4
+    },
+    {
+      "id": "topic:ascension",
+      "label": "ascension",
+      "type": "topic",
+      "weight": 4
+    },
+    {
+      "id": "topic:tezos",
+      "label": "tezos",
+      "type": "topic",
+      "weight": 4
+    },
+    {
+      "id": "topic:discord",
+      "label": "discord",
+      "type": "topic",
+      "weight": 4
+    }
+  ],
+  "edges": [
+    {
+      "from": "system:harmonic-brain",
+      "to": "system:gaos-harmonic",
+      "weight": 2
+    },
+    {
+      "from": "agent:able",
+      "to": "system:harmonic-brain",
+      "weight": 2
+    },
+    {
+      "from": "agent:ares",
+      "to": "system:harmonic-brain",
+      "weight": 2
+    },
+    {
+      "from": "agent:beck",
+      "to": "system:harmonic-brain",
+      "weight": 2
+    },
+    {
+      "from": "agent:dumont",
+      "to": "system:harmonic-brain",
+      "weight": 2
+    },
+    {
+      "from": "agent:echo",
+      "to": "system:harmonic-brain",
+      "weight": 2
+    },
+    {
+      "from": "agent:lora",
+      "to": "system:harmonic-brain",
+      "weight": 2
+    },
+    {
+      "from": "agent:maddie",
+      "to": "system:harmonic-brain",
+      "weight": 2
+    },
+    {
+      "from": "agent:main",
+      "to": "system:harmonic-brain",
+      "weight": 2
+    },
+    {
+      "from": "agent:neon-dave",
+      "to": "system:harmonic-brain",
+      "weight": 2
+    },
+    {
+      "from": "agent:paloma",
+      "to": "system:harmonic-brain",
+      "weight": 2
+    },
+    {
+      "from": "agent:quorra",
+      "to": "system:harmonic-brain",
+      "weight": 2
+    },
+    {
+      "from": "agent:ram",
+      "to": "system:harmonic-brain",
+      "weight": 2
+    },
+    {
+      "from": "agent:sark",
+      "to": "system:harmonic-brain",
+      "weight": 2
+    },
+    {
+      "from": "agent:tesler",
+      "to": "system:harmonic-brain",
+      "weight": 2
+    },
+    {
+      "from": "agent:tron",
+      "to": "system:harmonic-brain",
+      "weight": 2
+    },
+    {
+      "from": "agent:vera",
+      "to": "system:harmonic-brain",
+      "weight": 2
+    },
+    {
+      "from": "agent:yori",
+      "to": "system:harmonic-brain",
+      "weight": 2
+    },
+    {
+      "from": "domain:receipts",
+      "to": "system:harmonic-brain",
+      "weight": 2
+    },
+    {
+      "from": "domain:state",
+      "to": "system:harmonic-brain",
+      "weight": 2
+    },
+    {
+      "from": "domain:knowledge",
+      "to": "system:harmonic-brain",
+      "weight": 2
+    },
+    {
+      "from": "domain:learning",
+      "to": "system:harmonic-brain",
+      "weight": 2
+    },
+    {
+      "from": "domain:audit",
+      "to": "system:harmonic-brain",
+      "weight": 2
+    },
+    {
+      "from": "semantic:governance",
+      "to": "system:harmonic-brain",
+      "weight": 2
+    },
+    {
+      "from": "semantic:security",
+      "to": "system:harmonic-brain",
+      "weight": 2
+    },
+    {
+      "from": "semantic:revenue",
+      "to": "system:harmonic-brain",
+      "weight": 2
+    },
+    {
+      "from": "semantic:wedding",
+      "to": "system:harmonic-brain",
+      "weight": 2
+    },
+    {
+      "from": "semantic:creative",
+      "to": "system:harmonic-brain",
+      "weight": 2
+    },
+    {
+      "from": "semantic:operations",
+      "to": "system:harmonic-brain",
+      "weight": 2
+    },
+    {
+      "from": "semantic:communications",
+      "to": "system:harmonic-brain",
+      "weight": 2
+    },
+    {
+      "from": "semantic:knowledge",
+      "to": "system:harmonic-brain",
+      "weight": 2
+    },
+    {
+      "from": "semantic:agents",
+      "to": "system:harmonic-brain",
+      "weight": 2
+    },
+    {
+      "from": "loop:brain.distill-dream",
+      "to": "system:gaos-harmonic",
+      "weight": 2
+    },
+    {
+      "from": "loop:brain.distill-dream",
+      "to": "agent:tron",
+      "weight": 3
+    },
+    {
+      "from": "loop:brain.retrieval-eval",
+      "to": "system:gaos-harmonic",
+      "weight": 2
+    },
+    {
+      "from": "loop:brain.retrieval-eval",
+      "to": "agent:tron",
+      "weight": 3
+    },
+    {
+      "from": "loop:brain.incremental-synthesis",
+      "to": "system:gaos-harmonic",
+      "weight": 2
+    },
+    {
+      "from": "loop:brain.incremental-synthesis",
+      "to": "agent:tron",
+      "weight": 3
+    },
+    {
+      "from": "loop:fleet.self-heal",
+      "to": "system:gaos-harmonic",
+      "weight": 2
+    },
+    {
+      "from": "loop:fleet.self-heal",
+      "to": "agent:beck",
+      "weight": 3
+    },
+    {
+      "from": "loop:security.beck-tron",
+      "to": "system:gaos-harmonic",
+      "weight": 2
+    },
+    {
+      "from": "loop:security.beck-tron",
+      "to": "agent:tron",
+      "weight": 3
+    },
+    {
+      "from": "loop:revenue.liveness",
+      "to": "system:gaos-harmonic",
+      "weight": 2
+    },
+    {
+      "from": "loop:revenue.liveness",
+      "to": "agent:neon-dave",
+      "weight": 3
+    },
+    {
+      "from": "loop:maddie.proactive-planning",
+      "to": "system:gaos-harmonic",
+      "weight": 2
+    },
+    {
+      "from": "loop:maddie.proactive-planning",
+      "to": "agent:maddie",
+      "weight": 3
+    },
+    {
+      "from": "loop:lora.creative-research",
+      "to": "system:gaos-harmonic",
+      "weight": 2
+    },
+    {
+      "from": "loop:lora.creative-research",
+      "to": "agent:lora",
+      "weight": 3
+    },
+    {
+      "from": "loop:communications.fabric",
+      "to": "system:gaos-harmonic",
+      "weight": 2
+    },
+    {
+      "from": "loop:communications.fabric",
+      "to": "agent:tesler",
+      "weight": 3
+    },
+    {
+      "from": "loop:governance.loop-sentinel",
+      "to": "system:gaos-harmonic",
+      "weight": 2
+    },
+    {
+      "from": "loop:governance.loop-sentinel",
+      "to": "agent:beck",
+      "weight": 3
+    },
+    {
+      "from": "loop:governance.award-bar",
+      "to": "system:gaos-harmonic",
+      "weight": 2
+    },
+    {
+      "from": "loop:governance.award-bar",
+      "to": "agent:echo",
+      "weight": 3
+    },
+    {
+      "from": "agent:tron",
+      "to": "topic:vera",
+      "weight": 8
+    },
+    {
+      "from": "agent:lora",
+      "to": "agent:yori",
+      "weight": 8
+    },
+    {
+      "from": "agent:neon-dave",
+      "to": "topic:vera",
+      "weight": 8
+    },
+    {
+      "from": "agent:beck",
+      "to": "agent:yori",
+      "weight": 7
+    },
+    {
+      "from": "agent:beck",
+      "to": "agent:tron",
+      "weight": 6
+    },
+    {
+      "from": "topic:mission-control",
+      "to": "topic:telegram",
+      "weight": 6
+    },
+    {
+      "from": "topic:telegram",
+      "to": "topic:vow-vault",
+      "weight": 6
+    },
+    {
+      "from": "agent:tron",
+      "to": "agent:yori",
+      "weight": 5
+    },
+    {
+      "from": "topic:mission-control",
+      "to": "topic:vow-vault",
+      "weight": 5
+    },
+    {
+      "from": "agent:maddie",
+      "to": "topic:vow-vault",
+      "weight": 5
+    },
+    {
+      "from": "agent:able",
+      "to": "topic:vera",
+      "weight": 4
+    },
+    {
+      "from": "agent:able",
+      "to": "agent:tron",
+      "weight": 4
+    },
+    {
+      "from": "agent:maddie",
+      "to": "topic:telegram",
+      "weight": 3
+    },
+    {
+      "from": "topic:mission-control",
+      "to": "topic:vera",
+      "weight": 3
+    },
+    {
+      "from": "topic:telegram",
+      "to": "topic:vera",
+      "weight": 3
+    },
+    {
+      "from": "agent:able",
+      "to": "agent:yori",
+      "weight": 3
+    },
+    {
+      "from": "agent:neon-dave",
+      "to": "topic:telegram",
+      "weight": 3
+    },
+    {
+      "from": "topic:brain",
+      "to": "topic:loop-fabric",
+      "weight": 3
+    },
+    {
+      "from": "topic:brain",
+      "to": "topic:telegram",
+      "weight": 3
+    },
+    {
+      "from": "topic:brain",
+      "to": "topic:gridfleet",
+      "weight": 3
+    },
+    {
+      "from": "topic:gridfleet",
+      "to": "topic:mission-control",
+      "weight": 3
+    },
+    {
+      "from": "topic:ascension",
+      "to": "topic:gridfleet",
+      "weight": 3
+    },
+    {
+      "from": "topic:brain",
+      "to": "topic:vera",
+      "weight": 3
+    },
+    {
+      "from": "agent:yori",
+      "to": "topic:vera",
+      "weight": 3
+    },
+    {
+      "from": "topic:ascension",
+      "to": "topic:brain",
+      "weight": 3
+    },
+    {
+      "from": "agent:lora",
+      "to": "agent:tron",
+      "weight": 2
+    },
+    {
+      "from": "agent:tron",
+      "to": "topic:telegram",
+      "weight": 2
+    },
+    {
+      "from": "agent:maddie",
+      "to": "topic:mission-control",
+      "weight": 2
+    },
+    {
+      "from": "agent:ram",
+      "to": "topic:tezos",
+      "weight": 2
+    },
+    {
+      "from": "topic:ascension",
+      "to": "topic:vera",
+      "weight": 2
+    },
+    {
+      "from": "topic:ascension",
+      "to": "topic:telegram",
+      "weight": 2
+    },
+    {
+      "from": "agent:beck",
+      "to": "topic:telegram",
+      "weight": 2
+    },
+    {
+      "from": "agent:lora",
+      "to": "topic:mission-control",
+      "weight": 2
+    },
+    {
+      "from": "agent:maddie",
+      "to": "topic:gridfleet",
+      "weight": 2
+    },
+    {
+      "from": "topic:gridfleet",
+      "to": "topic:vow-vault",
+      "weight": 2
+    },
+    {
+      "from": "agent:neon-dave",
+      "to": "topic:ascension",
+      "weight": 2
+    },
+    {
+      "from": "topic:ascension",
+      "to": "topic:mission-control",
+      "weight": 2
+    },
+    {
+      "from": "agent:able",
+      "to": "agent:neon-dave",
+      "weight": 2
+    },
+    {
+      "from": "agent:lora",
+      "to": "topic:telegram",
+      "weight": 2
+    },
+    {
+      "from": "agent:yori",
+      "to": "topic:telegram",
+      "weight": 2
+    },
+    {
+      "from": "topic:gridfleet",
+      "to": "topic:loop-fabric",
+      "weight": 2
+    },
+    {
+      "from": "topic:discord",
+      "to": "topic:telegram",
+      "weight": 2
+    },
+    {
+      "from": "agent:able",
+      "to": "topic:telegram",
+      "weight": 2
+    },
+    {
+      "from": "topic:vera",
+      "to": "topic:vow-vault",
+      "weight": 2
+    },
+    {
+      "from": "agent:able",
+      "to": "agent:ram",
+      "weight": 2
+    }
+  ]
+}

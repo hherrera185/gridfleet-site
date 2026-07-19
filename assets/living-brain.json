@@ -1,0 +1,21 @@
+{
+  "schema": "gridfleet.living-brain.v1",
+  "generatedAt": "2026-07-19T05:53:02.966Z",
+  "privacy": "aggregate-only",
+  "actionAuthority": false,
+  "knowledgeEvents24h": 9265,
+  "semanticEntities": 104,
+  "semanticEdges": 200,
+  "agentsThinking7d": 5,
+  "agentsTotal": 18,
+  "retrievalEval": {
+    "groundedPct": 100,
+    "p95Ms": 1180,
+    "questions": 20
+  },
+  "decisionsChanged7d": 0,
+  "improvementProposalsOpen": 9,
+  "contradictionsOpen": 0,
+  "dreamsRecorded": 1,
+  "dreamsNightly": true
+}
