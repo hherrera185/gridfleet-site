@@ -1,13 +1,15 @@
-/* gf-nebula3-20260719 : full-panel interactive nebula brain, seamless rounded feather */
+/* gf-nebula6-20260719 : section-level pan/zoom bindings, footer relocated outside panel */
 (function(){
   "use strict";
-  var GF_NEBULA3 = "20260719";
+  var GF_NEBULA6 = "20260719";
   function injectStyle(){
     if(document.getElementById("gf-nebula-style")) return;
     var st=document.createElement("style"); st.id="gf-nebula-style";
-    st.textContent=".li-brain-bg{position:absolute;inset:1px;width:calc(100% - 2px);height:calc(100% - 2px);z-index:0;border-radius:35px}"
+    st.textContent=".li-brain-bg{position:absolute;inset:0;width:100%;height:100%;z-index:0}"
       +".living-intelligence{grid-template-columns:1.15fr 1fr}"
       +".living-intelligence .li-copy,.living-intelligence .li-metrics,.living-intelligence .li-foot{position:relative;z-index:1}"
+      +".li-foot.li-foot-strip{position:static;left:auto;right:auto;bottom:auto;margin-top:clamp(28px,4vh,48px);flex-wrap:wrap;max-width:100%}"
+      +".li-foot .li-depth{flex-basis:100%;color:rgba(184,226,255,.6)}"
       +"@media(max-width:980px){.living-intelligence{grid-template-columns:1fr}}";
     (document.body||document.documentElement).appendChild(st);
   }
@@ -17,6 +19,15 @@
     if(!canvas || !graph || !Array.isArray(graph.nodes) || !graph.nodes.length) return false;
     var ctx = canvas.getContext("2d");
     if(!ctx) return false;
+    var sect = (canvas.closest && canvas.closest(".living-intelligence")) || canvas.parentElement || canvas;
+    /* relocate the telemetry footer out of the graph panel: panel -> sibling strip */
+    try{
+      var foot = sect.querySelector && sect.querySelector(".li-foot");
+      if(foot && sect.parentElement){
+        foot.classList.add("li-foot-strip");
+        sect.parentElement.insertBefore(foot, sect.nextSibling);
+      }
+    }catch(efoot){}
     var TAU = Math.PI * 2;
     var reduced = false;
     try { reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches; } catch(e){}
@@ -41,8 +52,8 @@
       var mc=mask.getContext("2d");
       var img=mc.createImageData(mw,mh), da=img.data;
       var hx=mw/2, hh=mh/2;
-      var rr=Math.min(35*sc,hx,hh);
-      var fe=0.22*Math.min(mw,mh);
+      var rr=0; /* plain rect SDF: scene dissolves straight into the page black */
+      var fe=0.26*Math.min(mw,mh);
       var k=3;
       for(var y=0;y<mh;y++){
         var py=Math.abs(y+0.5-hh)-(hh-rr);
@@ -63,10 +74,10 @@
       amb=document.createElement("canvas"); amb.width=aw; amb.height=ah;
       var ac=amb.getContext("2d");
       var g1=ac.createRadialGradient(aw*0.18,ah*0.5,0,aw*0.18,ah*0.5,Math.max(aw,ah)*0.34);
-      g1.addColorStop(0,"rgba(42,220,255,0.085)"); g1.addColorStop(1,"rgba(42,220,255,0)");
+      g1.addColorStop(0,"rgba(42,220,255,0.11)"); g1.addColorStop(1,"rgba(42,220,255,0)");
       ac.fillStyle=g1; ac.fillRect(0,0,aw,ah);
       var g2=ac.createRadialGradient(aw*0.84,ah*0.2,0,aw*0.84,ah*0.2,Math.max(aw,ah)*0.32);
-      g2.addColorStop(0,"rgba(179,92,255,0.08)"); g2.addColorStop(1,"rgba(179,92,255,0)");
+      g2.addColorStop(0,"rgba(179,92,255,0.105)"); g2.addColorStop(1,"rgba(179,92,255,0)");
       ac.fillStyle=g2; ac.fillRect(0,0,aw,ah);
     }
     function resize(){
@@ -183,43 +194,84 @@
     var np=Math.min(9,edges.length);
     for(var p=0;p<np;p++) pulses.push({ e:(p*7)%edges.length, t:hash(p*19+3), s:0.0035+(p%3)*0.0015 });
 
-    /* interaction state */
+    /* interaction state: drag rotate, shift+drag pan, shift+wheel zoom, dblclick reset */
     var rotY=0.3, rotX=0.38, velY=0, velX=0;
     var zoom=1, targetZoom=1;
-    var engaged=false, hintA=1;
-    var dragging=false, lastX=0, lastY=0;
+    var panX=0, panY=0, panTX=0, panTY=0;
+    var hintDone=false, hintA=1;
+    var dragging=false, dragMode="rotate", lastX=0, lastY=0;
+    var ptrs={}, ptrCount=0, pinch=null;
     var hoverX=-1e4, hoverY=-1e4, hoverN=null;
     var lastInteract=-1e9;
     function bump(){ lastInteract=performance.now(); }
+    function clampPan(){
+      var a=Math.max(0,CX-40), b=Math.max(0,W-40-CX), c=Math.max(0,CY-40), d=Math.max(0,H-40-CY);
+      if(panTX<-a)panTX=-a; if(panTX>b)panTX=b;
+      if(panTY<-c)panTY=-c; if(panTY>d)panTY=d;
+    }
 
     if(!reduced){
       canvas.style.cursor="grab";
       canvas.style.touchAction="pan-y";
-      canvas.addEventListener("pointerdown",function(e){
-        engaged=true; dragging=true; bump();
-        lastX=e.clientX; lastY=e.clientY; velX=0; velY=0;
-        if(canvas.setPointerCapture){ try{ canvas.setPointerCapture(e.pointerId); }catch(err){} }
+      /* all listeners bind to the SECTION so gestures work over copy/metrics too */
+      sect.addEventListener("pointerdown",function(e){
+        bump();
+        var onCanvas=(e.target===canvas);
+        /* plain press on text blocks: leave selection alone (unless joining a pinch) */
+        if(!onCanvas && !e.shiftKey && ptrCount===0) return;
+        ptrs[e.pointerId]={x:e.clientX,y:e.clientY}; ptrCount++;
+        if(ptrCount===2){
+          var ids=Object.keys(ptrs), p1=ptrs[ids[0]], p2=ptrs[ids[1]];
+          pinch={ d0:Math.max(20,Math.hypot(p2.x-p1.x,p2.y-p1.y)), z0:targetZoom,
+            mx0:(p1.x+p2.x)/2, my0:(p1.y+p2.y)/2, px0:panTX, py0:panTY };
+          dragging=false;
+        } else if(ptrCount===1){
+          dragging=true; dragMode=e.shiftKey?"pan":"rotate";
+          lastX=e.clientX; lastY=e.clientY; velX=0; velY=0;
+          if(e.shiftKey){ hintDone=true; e.preventDefault(); }
+        }
+        if(sect.setPointerCapture){ try{ sect.setPointerCapture(e.pointerId); }catch(err){} }
         canvas.style.cursor="grabbing";
       });
-      canvas.addEventListener("pointermove",function(e){
+      sect.addEventListener("pointermove",function(e){
         var r=canvas.getBoundingClientRect();
         if(r.width>0){ hoverX=(e.clientX-r.left)*(W/r.width); hoverY=(e.clientY-r.top)*(H/r.height); }
+        if(ptrs[e.pointerId]){ ptrs[e.pointerId].x=e.clientX; ptrs[e.pointerId].y=e.clientY; }
+        if(pinch && ptrCount===2){
+          bump(); hintDone=true;
+          var ids=Object.keys(ptrs), p1=ptrs[ids[0]], p2=ptrs[ids[1]];
+          var pd=Math.max(20,Math.hypot(p2.x-p1.x,p2.y-p1.y));
+          targetZoom=Math.max(0.5,Math.min(3,pinch.z0*pd/pinch.d0));
+          var mx=(p1.x+p2.x)/2, my=(p1.y+p2.y)/2;
+          panTX=pinch.px0+(mx-pinch.mx0); panTY=pinch.py0+(my-pinch.my0); clampPan();
+          return;
+        }
         if(dragging){
           bump();
           var dx=e.clientX-lastX, dy=e.clientY-lastY;
           lastX=e.clientX; lastY=e.clientY;
-          velY=dx*0.005; velX=dy*0.005;
-          rotY+=velY; rotX=Math.max(-1.3,Math.min(1.3,rotX+velX));
+          if(dragMode==="pan"){ panTX+=dx; panTY+=dy; clampPan(); }
+          else { velY=dx*0.005; velX=dy*0.005;
+            rotY+=velY; rotX=Math.max(-1.3,Math.min(1.3,rotX+velX)); }
         }
       });
-      function endDrag(){ dragging=false; canvas.style.cursor="grab"; bump(); }
-      canvas.addEventListener("pointerup",endDrag);
-      canvas.addEventListener("pointercancel",endDrag);
-      canvas.addEventListener("pointerleave",function(){ hoverX=hoverY=-1e4; });
-      canvas.addEventListener("wheel",function(e){
-        if(!engaged || e.ctrlKey || e.metaKey || e.shiftKey || e.altKey) return;
-        e.preventDefault(); bump();
-        targetZoom=Math.max(0.5,Math.min(3,targetZoom*Math.exp(-e.deltaY*0.0013)));
+      function endDrag(e){
+        if(e && ptrs[e.pointerId]!==undefined){ delete ptrs[e.pointerId]; ptrCount=Math.max(0,ptrCount-1); }
+        if(ptrCount<2) pinch=null;
+        dragging=false; canvas.style.cursor="grab"; bump();
+      }
+      sect.addEventListener("pointerup",endDrag);
+      sect.addEventListener("pointercancel",endDrag);
+      sect.addEventListener("pointerleave",function(){ hoverX=hoverY=-1e4; });
+      sect.addEventListener("dblclick",function(e){
+        if(e.target!==canvas) return; /* don't hijack word-select on text */
+        e.preventDefault(); panTX=0; panTY=0; bump();
+      });
+      sect.addEventListener("wheel",function(e){
+        if(!e.shiftKey || e.ctrlKey || e.metaKey || e.altKey) return; /* plain wheel: page scrolls */
+        e.preventDefault(); bump(); hintDone=true;
+        var dd=(e.deltaY!==0)?e.deltaY:e.deltaX; /* Chromium moves shift-wheel into deltaX */
+        targetZoom=Math.max(0.5,Math.min(3,targetZoom*Math.exp(-dd*0.0013)));
       },{passive:false});
       window.addEventListener("resize",resize);
     }
@@ -232,14 +284,15 @@
         if(now-lastInteract>4000) rotY+=0.0022; /* idle auto-rotate */
       }
       zoom+=(targetZoom-zoom)*0.1;
-      if(engaged && hintA>0) hintA=Math.max(0,hintA-0.02);
+      panX+=(panTX-panX)*0.2; panY+=(panTY-panY)*0.2;
+      if(hintDone && hintA>0) hintA=Math.max(0,hintA-0.02);
 
       var cs=Math.cos(rotY), sn=Math.sin(rotY), ct=Math.cos(rotX), st=Math.sin(rotX);
       var RZ=R*zoom;
       function proj(x,y,z,o){
         var X=x*cs-z*sn, Z=x*sn+z*cs, Y=y*ct-Z*st; Z=y*st+Z*ct;
         var d=1.7/(1.7+Z);
-        o.sx=CX+X*RZ*d; o.sy=CY+Y*RZ*d; o.sd=d;
+        o.sx=CX+panX+X*RZ*d; o.sy=CY+panY+Y*RZ*d; o.sd=d;
       }
       var i,n;
       for(i=0;i<nodes.length;i++){ n=nodes[i]; proj(n.x,n.y,n.z,n); }
@@ -344,7 +397,7 @@
         ctx.globalAlpha=hintA*0.85;
         ctx.font="9px 'JetBrains Mono',monospace"; ctx.textAlign="center";
         ctx.fillStyle="rgba(180,220,240,0.9)";
-        ctx.fillText("CLICK TO EXPLORE \u00b7 DRAG ROTATE \u00b7 SCROLL ZOOM", W*0.5, H-Math.max(24,H*0.14));
+        ctx.fillText("DRAG ROTATE \u00b7 SHIFT+SCROLL ZOOM \u00b7 SHIFT+DRAG PAN \u00b7 DOUBLE-CLICK RESET", W*0.5, H-Math.max(24,H*0.14));
         ctx.globalAlpha=1;
       }
 
@@ -453,7 +506,7 @@
       mount.innerHTML=`<canvas class="li-brain-bg" aria-hidden="true" data-brain-canvas width="560" height="560"></canvas>
       <div class="li-copy"><span class="tag">Living intelligence · public-safe proof</span><h2 class="h-l">A fleet that remembers.<br>A system that proves.</h2><p class="lede">The HARMONIC Brain connects operational evidence into living knowledge. Its Loop Fabric converts repeated agent work into bounded systems with verification, memory, budgets and stop rules. And every night the Brain dreams: it replays the day, questions itself, and proposes improvements it later verifies.</p><div class="li-principles">${(d.principles||[]).map(x=>`<span>${x}</span>`).join("")}</div></div>
       <div class="li-metrics"><article><b>${fmt(b.events)}</b><span>governed evidence events</span></article><article><b>${fmt(b.currentFacts)}</b><span>current compiled facts</span></article><article><b>${fmt(b.graphNodes)}</b><span>visible knowledge nodes</span></article><article><b>${fmt(b.graphEdges)}</b><span>evidence connections</span></article><article><b>${fmt(l.active)}/${fmt(l.registered)}</b><span>active governed loops</span></article><article><b>${fmt(l.privilegedArmed)}</b><span>privileged planes armed</span></article>${bb.dreamsRecorded!=null?`<article><b>${fmt(bb.dreamsRecorded)}</b><span>nights of self-reflection recorded</span></article><article><b>${bb.retrievalEval&&bb.retrievalEval.groundedPct!=null?bb.retrievalEval.groundedPct+"%":"-"}</b><span>held-out questions answered from memory</span></article><article><b>${fmt(bb.improvementProposalsOpen)}</b><span>improvements it noticed and proposed</span></article>`:""}</div>
-      <div class="li-foot"><span class="${b.fullyConnected?"live":""}">${b.fullyConnected?"Fully connected graph":"Topology verification pending"}</span><span>Aggregate telemetry only · no conversations, PII or private instructions exposed</span><span>${new Date(d.generatedAt).toLocaleString()}</span></div>`;
+      <div class="li-foot"><span class="${b.fullyConnected?"live":""}">${b.fullyConnected?"Fully connected graph":"Topology verification pending"}</span><span>Aggregate telemetry only · no conversations, PII or private instructions exposed</span><span>${new Date(d.generatedAt).toLocaleString()}</span><span class="li-depth">Simplified public projection &mdash; the full Grid graph runs far deeper: ${fmt(b.events)} governed events, ${fmt(b.currentFacts)} compiled facts, evidence chains and artifact topology not shown.</span></div>`;
     try{var rg=await fetch("/assets/living-brain-graph.json",{cache:"no-store"});var rgj=rg.ok?await rg.json():null;var drew=window.__gfDrawRealBrain&&window.__gfDrawRealBrain(mount.querySelector("[data-brain-canvas]"),rgj);if(!drew&&window.__gfDrawBrain)window.__gfDrawBrain(mount.querySelector("[data-brain-canvas]"),bb);}catch(err){if(window.__gfDrawBrain)window.__gfDrawBrain(mount.querySelector("[data-brain-canvas]"),bb);}}catch{mount.innerHTML='<p class="lede">Living-intelligence proof is temporarily unavailable. No cached number is presented as live.</p>';}
   }
   if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",boot);else boot();

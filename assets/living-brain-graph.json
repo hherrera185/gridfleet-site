@@ -1,6 +1,6 @@
 {
   "schema": "gridfleet.living-brain-graph.v1",
-  "generatedAt": "2026-07-19T05:53:02.966Z",
+  "generatedAt": "2026-07-19T10:05:01.853Z",
   "privacy": "sanitized-real-topology",
   "note": "Actual HARMONIC Brain governance topology: agents, governed loops, domains, semantic couplings. Evidence artifacts and internal identifiers excluded.",
   "actionAuthority": false,
@@ -105,7 +105,7 @@
       "id": "agent:tron",
       "label": "TRON",
       "type": "agent",
-      "weight": 10
+      "weight": 11
     },
     {
       "id": "agent:vera",
@@ -147,19 +147,19 @@
       "id": "domain:audit",
       "label": "AUDIT EVIDENCE",
       "type": "domain",
-      "weight": 7
+      "weight": 9
     },
     {
       "id": "semantic:governance",
       "label": "GOVERNANCE CORE",
       "type": "domain",
-      "weight": 9
+      "weight": 10
     },
     {
       "id": "semantic:security",
       "label": "SECURITY IMMUNE SYSTEM",
       "type": "domain",
-      "weight": 25
+      "weight": 26
     },
     {
       "id": "semantic:revenue",
@@ -171,7 +171,7 @@
       "id": "semantic:wedding",
       "label": "WEDDING INTELLIGENCE",
       "type": "domain",
-      "weight": 8
+      "weight": 9
     },
     {
       "id": "semantic:creative",
@@ -183,25 +183,25 @@
       "id": "semantic:operations",
       "label": "OPERATIONS FABRIC",
       "type": "domain",
-      "weight": 30
+      "weight": 31
     },
     {
       "id": "semantic:communications",
       "label": "COMMUNICATIONS",
       "type": "domain",
-      "weight": 38
+      "weight": 35
     },
     {
       "id": "semantic:knowledge",
       "label": "KNOWLEDGE & MEMORY",
       "type": "domain",
-      "weight": 1
+      "weight": 2
     },
     {
       "id": "semantic:agents",
       "label": "AGENT SOCIETY",
       "type": "domain",
-      "weight": 10
+      "weight": 8
     },
     {
       "id": "loop:brain.distill-dream",
