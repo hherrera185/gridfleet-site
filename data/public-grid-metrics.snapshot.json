@@ -1,6 +1,6 @@
 {
   "schema": "grid-public-metrics.v1",
-  "generated_at": "2026-07-21T09:04:08.583451+00:00",
+  "generated_at": "2026-07-22T09:04:10.513652+00:00",
   "harmonic_live_since": "2026-06-19T00:00:00Z",
   "snapshot_status": "latest_verified_snapshot",
   "public_projection": true,
@@ -10,14 +10,14 @@
       "metric_id": "tron.security_cycles_lifetime",
       "public_label": "Autonomous defense cycles evidenced",
       "category": "security_autonomy",
-      "current_value": 5644,
-      "formatted_current_value": "5,644",
+      "current_value": 5836,
+      "formatted_current_value": "5,836",
       "status": "ok",
       "freshness": {
         "state": "fresh",
         "microcopy": "Live feed connected by freshness rules."
       },
-      "updated_at": "2026-07-21T09:01:18.521Z",
+      "updated_at": "2026-07-22T09:00:40.594Z",
       "public_safe": true,
       "allowed_surfaces": [
         "gridfleet_ai"
@@ -37,11 +37,11 @@
       "can_show_plus_sign": false,
       "can_be_public_hero": true,
       "public_source_note": "Canonical public-safe metric projection. Internal lineage is not exposed on GridFleet.ai.",
-      "historical_baseline_value": 5644,
-      "historical_baseline_as_of": "2026-07-21T09:01:18.521Z",
+      "historical_baseline_value": 5836,
+      "historical_baseline_as_of": "2026-07-22T09:00:40.594Z",
       "live_increment_value": 0,
       "live_increment_since": "2026-06-19T00:00:00Z",
-      "combined_lifetime_total": 5644
+      "combined_lifetime_total": 5836
     },
     {
       "metric_id": "tron.hardening_cases_resolved",
@@ -91,7 +91,7 @@
         "state": "fresh",
         "microcopy": "Live feed connected by freshness rules."
       },
-      "updated_at": "2026-07-21T09:03:02.952Z",
+      "updated_at": "2026-07-22T09:03:04.251Z",
       "public_safe": true,
       "allowed_surfaces": [
         "gridfleet_ai"
@@ -124,7 +124,7 @@
         "state": "fresh",
         "microcopy": "Live feed connected by freshness rules."
       },
-      "updated_at": "2026-07-21T09:03:02.952Z",
+      "updated_at": "2026-07-22T09:03:04.251Z",
       "public_safe": true,
       "allowed_surfaces": [
         "gridfleet_ai"
@@ -157,7 +157,7 @@
         "state": "fresh",
         "microcopy": "Live feed connected by freshness rules."
       },
-      "updated_at": "2026-07-21T09:01:18.521Z",
+      "updated_at": "2026-07-22T09:00:40.594Z",
       "public_safe": true,
       "allowed_surfaces": [
         "gridfleet_ai"
@@ -183,14 +183,14 @@
       "metric_id": "security.package_files_scanned",
       "public_label": "Package manifests scanned",
       "category": "security",
-      "current_value": 208,
-      "formatted_current_value": "208",
+      "current_value": 206,
+      "formatted_current_value": "206",
       "status": "ok",
       "freshness": {
         "state": "fresh",
         "microcopy": "Live feed connected by freshness rules."
       },
-      "updated_at": "2026-07-21T09:03:02.952Z",
+      "updated_at": "2026-07-22T09:03:04.251Z",
       "public_safe": true,
       "allowed_surfaces": [
         "gridfleet_ai"
@@ -210,20 +210,20 @@
       "can_show_plus_sign": false,
       "can_be_public_hero": false,
       "public_source_note": "Canonical public-safe metric projection. Internal lineage is not exposed on GridFleet.ai.",
-      "latest_snapshot_value": 208
+      "latest_snapshot_value": 206
     },
     {
       "metric_id": "creative.assets_generated",
       "public_label": "Creative proof artifacts generated",
       "category": "innovation_pipeline",
-      "current_value": 1040,
-      "formatted_current_value": "1,040",
+      "current_value": 1130,
+      "formatted_current_value": "1,130",
       "status": "ok",
       "freshness": {
         "state": "fresh",
         "microcopy": "Live feed connected by freshness rules."
       },
-      "updated_at": "2026-07-21T05:00:14Z",
+      "updated_at": "2026-07-22T05:07:58Z",
       "public_safe": true,
       "allowed_surfaces": [
         "gridfleet_ai"
@@ -243,11 +243,11 @@
       "can_show_plus_sign": false,
       "can_be_public_hero": true,
       "public_source_note": "Canonical public-safe metric projection. Internal lineage is not exposed on GridFleet.ai.",
-      "historical_baseline_value": 1040,
-      "historical_baseline_as_of": "2026-07-21T05:00:14Z",
+      "historical_baseline_value": 1130,
+      "historical_baseline_as_of": "2026-07-22T05:07:58Z",
       "live_increment_value": 0,
       "live_increment_since": "2026-06-19T00:00:00Z",
-      "combined_lifetime_total": 1040
+      "combined_lifetime_total": 1130
     },
     {
       "metric_id": "beck.signals_total",
@@ -327,14 +327,14 @@
       "metric_id": "tron.autonomous_actions_7d",
       "public_label": "Autonomous safety actions in the last 7 days",
       "category": "security_autonomy",
-      "current_value": 4299,
-      "formatted_current_value": "4,299",
+      "current_value": 4161,
+      "formatted_current_value": "4,161",
       "status": "ok",
       "freshness": {
         "state": "fresh",
         "microcopy": "Live feed connected by freshness rules."
       },
-      "updated_at": "2026-07-21T09:01:18.521Z",
+      "updated_at": "2026-07-22T09:00:40.594Z",
       "public_safe": true,
       "allowed_surfaces": [
         "gridfleet_ai"
@@ -354,7 +354,7 @@
       "can_show_plus_sign": false,
       "can_be_public_hero": true,
       "public_source_note": "Canonical public-safe metric projection. Internal lineage is not exposed on GridFleet.ai.",
-      "rolling_window_value": 4299,
+      "rolling_window_value": 4161,
       "rolling_window_duration": "P7D"
     },
     {
@@ -434,7 +434,7 @@
         "state": "fresh",
         "microcopy": "Live feed connected by freshness rules."
       },
-      "updated_at": "2026-07-21T08:09:42.206Z",
+      "updated_at": "2026-07-22T04:11:09.284Z",
       "public_safe": true,
       "allowed_surfaces": [
         "gridfleet_ai"

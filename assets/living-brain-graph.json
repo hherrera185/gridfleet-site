@@ -1,6 +1,6 @@
 {
   "schema": "gridfleet.living-brain-graph.v1",
-  "generatedAt": "2026-07-20T10:05:01.719Z",
+  "generatedAt": "2026-07-21T10:05:01.624Z",
   "privacy": "sanitized-real-topology",
   "note": "Actual HARMONIC Brain governance topology: agents, governed loops, domains, semantic couplings. Evidence artifacts and internal identifiers excluded.",
   "actionAuthority": false,
@@ -39,7 +39,7 @@
       "id": "agent:dumont",
       "label": "DUMONT",
       "type": "agent",
-      "weight": 8
+      "weight": 2
     },
     {
       "id": "agent:echo",
@@ -57,19 +57,19 @@
       "id": "agent:maddie",
       "label": "MADDIE",
       "type": "agent",
-      "weight": 5
+      "weight": 3
     },
     {
       "id": "agent:main",
       "label": "MAIN",
       "type": "agent",
-      "weight": 7
+      "weight": 10
     },
     {
       "id": "agent:neon-dave",
       "label": "NEON-DAVE",
       "type": "agent",
-      "weight": 8
+      "weight": 10
     },
     {
       "id": "agent:paloma",
@@ -105,7 +105,7 @@
       "id": "agent:tron",
       "label": "TRON",
       "type": "agent",
-      "weight": 9
+      "weight": 12
     },
     {
       "id": "agent:vera",
@@ -117,13 +117,13 @@
       "id": "agent:yori",
       "label": "YORI",
       "type": "agent",
-      "weight": 8
+      "weight": 10
     },
     {
       "id": "domain:receipts",
       "label": "RECEIPTS",
       "type": "domain",
-      "weight": 3
+      "weight": 2
     },
     {
       "id": "domain:state",
@@ -159,19 +159,19 @@
       "id": "semantic:security",
       "label": "SECURITY IMMUNE SYSTEM",
       "type": "domain",
-      "weight": 20
+      "weight": 23
     },
     {
       "id": "semantic:revenue",
       "label": "REVENUE & MARKETS",
       "type": "domain",
-      "weight": 20
+      "weight": 24
     },
     {
       "id": "semantic:wedding",
       "label": "WEDDING INTELLIGENCE",
       "type": "domain",
-      "weight": 11
+      "weight": 9
     },
     {
       "id": "semantic:creative",
@@ -189,7 +189,7 @@
       "id": "semantic:communications",
       "label": "COMMUNICATIONS",
       "type": "domain",
-      "weight": 39
+      "weight": 34
     },
     {
       "id": "semantic:knowledge",
@@ -694,6 +694,11 @@
       "weight": 7
     },
     {
+      "from": "agent:able",
+      "to": "agent:ram",
+      "weight": 7
+    },
+    {
       "from": "topic:mission-control",
       "to": "topic:telegram",
       "weight": 6
@@ -704,18 +709,18 @@
       "weight": 6
     },
     {
+      "from": "topic:brain",
+      "to": "topic:vera",
+      "weight": 6
+    },
+    {
       "from": "agent:able",
-      "to": "agent:ram",
+      "to": "agent:neon-dave",
       "weight": 6
     },
     {
       "from": "agent:tron",
       "to": "agent:yori",
-      "weight": 6
-    },
-    {
-      "from": "topic:brain",
-      "to": "topic:vera",
       "weight": 6
     },
     {
@@ -730,11 +735,6 @@
     },
     {
       "from": "agent:able",
-      "to": "agent:neon-dave",
-      "weight": 5
-    },
-    {
-      "from": "agent:able",
       "to": "agent:tron",
       "weight": 5
     },
@@ -744,13 +744,23 @@
       "weight": 4
     },
     {
+      "from": "agent:able",
+      "to": "agent:beck",
+      "weight": 4
+    },
+    {
       "from": "agent:dumont",
       "to": "topic:gridfleet",
       "weight": 4
     },
     {
       "from": "agent:able",
-      "to": "agent:beck",
+      "to": "topic:brain",
+      "weight": 4
+    },
+    {
+      "from": "agent:tron",
+      "to": "topic:brain",
       "weight": 4
     },
     {
@@ -764,9 +774,19 @@
       "weight": 4
     },
     {
+      "from": "agent:lora",
+      "to": "topic:gridfleet",
+      "weight": 4
+    },
+    {
       "from": "agent:paloma",
       "to": "topic:vera",
       "weight": 4
+    },
+    {
+      "from": "agent:lora",
+      "to": "agent:tron",
+      "weight": 3
     },
     {
       "from": "topic:mission-control",
@@ -775,17 +795,7 @@
     },
     {
       "from": "agent:able",
-      "to": "topic:brain",
-      "weight": 3
-    },
-    {
-      "from": "agent:able",
       "to": "agent:ares",
-      "weight": 3
-    },
-    {
-      "from": "agent:lora",
-      "to": "agent:tron",
       "weight": 3
     },
     {
@@ -825,47 +835,12 @@
     },
     {
       "from": "agent:lora",
-      "to": "topic:gridfleet",
+      "to": "topic:brain",
       "weight": 3
     },
     {
       "from": "agent:paloma",
       "to": "agent:vera",
-      "weight": 3
-    },
-    {
-      "from": "topic:brain",
-      "to": "topic:gridfleet",
-      "weight": 3
-    },
-    {
-      "from": "topic:gridfleet",
-      "to": "topic:vera",
-      "weight": 3
-    },
-    {
-      "from": "agent:tron",
-      "to": "topic:brain",
-      "weight": 3
-    },
-    {
-      "from": "topic:vera",
-      "to": "topic:vow-vault",
-      "weight": 3
-    },
-    {
-      "from": "agent:ram",
-      "to": "topic:tezos",
-      "weight": 3
-    },
-    {
-      "from": "topic:ascension",
-      "to": "topic:vera",
-      "weight": 3
-    },
-    {
-      "from": "topic:ascension",
-      "to": "topic:gridfleet",
       "weight": 3
     },
     {
@@ -884,8 +859,13 @@
       "weight": 3
     },
     {
-      "from": "agent:lora",
-      "to": "topic:brain",
+      "from": "topic:brain",
+      "to": "topic:gridfleet",
+      "weight": 3
+    },
+    {
+      "from": "topic:gridfleet",
+      "to": "topic:vera",
       "weight": 3
     },
     {
