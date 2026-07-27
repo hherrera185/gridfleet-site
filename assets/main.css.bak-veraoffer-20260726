@@ -889,24 +889,3 @@ html.reduced .hero h1 .line-inner, html.no-js .hero h1 .line-inner { text-shadow
 .form input:hover, .form textarea:hover { border-color: var(--hair); }
 .deck-arrows button:active, .burger:active { scale: 0.92; }
 html.reduced .bento-card:hover { translate: none; }
-
-
-/* ---- Homepage Vera offer -------------------------------------------------
-   The flagship product, purchasable from the front door. Quiet enough to sit
-   under the hero without fighting it; clear enough that a buyer knows the
-   price and can act in one click. */
-.vera-offer-grid{display:grid;gap:14px;grid-template-columns:1fr;margin-top:clamp(22px,4vh,38px)}
-@media (min-width:760px){.vera-offer-grid{grid-template-columns:repeat(3,1fr)}}
-.vera-offer-card{display:flex;flex-direction:column;gap:6px;padding:20px 18px 18px;border:1px solid var(--hair2,rgba(255,255,255,.12));border-radius:16px;background:linear-gradient(180deg,rgba(255,255,255,.035),rgba(255,255,255,.012));transition:border-color .25s ease,transform .25s ease}
-.vera-offer-card:hover{border-color:rgba(182,255,60,.38);transform:translateY(-2px)}
-.vera-offer-card--hot{border-color:rgba(182,255,60,.30);box-shadow:0 0 46px -22px rgba(182,255,60,.55)}
-.vo-flag{align-self:flex-start;padding:2px 8px;border-radius:999px;background:rgba(182,255,60,.14);color:var(--lime,#b6ff3c);font-size:.66rem;letter-spacing:.12em;text-transform:uppercase}
-.vo-name{font-size:.74rem;letter-spacing:.18em;text-transform:uppercase;color:rgba(242,246,244,.62)}
-.vo-price{font-size:clamp(2rem,4.6vw,2.6rem);font-weight:650;line-height:1.05;color:var(--ink,#f2f6f4)}
-.vo-price small{font-size:.42em;font-weight:500;color:rgba(242,246,244,.55);margin-left:2px}
-.vo-sub{margin:2px 0 14px;font-size:.86rem;line-height:1.45;color:rgba(242,246,244,.62)}
-.vera-offer-card .btn{margin-top:auto;justify-content:center}
-.vera-offer-note{margin-top:16px;font-size:.82rem;line-height:1.55;color:rgba(242,246,244,.5)}
-.vera-offer-note a{color:var(--lime,#b6ff3c);text-decoration:none;border-bottom:1px solid rgba(182,255,60,.3)}
-.vera-offer-note a:hover{border-color:var(--lime,#b6ff3c)}
-@media (prefers-reduced-motion:reduce){.vera-offer-card{transition:none}.vera-offer-card:hover{transform:none}}

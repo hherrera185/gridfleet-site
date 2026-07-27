@@ -215,8 +215,6 @@
           <li>Human escalation to your phone</li>
         </ul>
         <a class="btn btn--ghost" href="#signup" data-plan="Starter — $99/mo">Start with Starter</a>
-        <a class="plan-buy" href="https://buy.stripe.com/3cI5kw8G4g5gdTefxRfnO00" rel="noopener" data-plan-buy="Starter">Subscribe now <span aria-hidden="true">&rarr;</span></a>
-        <span class="plan-buy-note">7 days free &middot; cancel anytime &middot; card secured by Stripe</span>
       </article>
       <article class="plan plan--hot fade-up">
         <span class="plan-flag">Most popular</span>
@@ -232,8 +230,6 @@
           <li>Weekly call &amp; booking digest</li>
         </ul>
         <a class="btn btn--solid" href="#signup" data-plan="Pro — $249/mo">Start with Pro</a>
-        <a class="plan-buy" href="https://buy.stripe.com/aFa7sEaOcf1c2awadxfnO01" rel="noopener" data-plan-buy="Pro">Subscribe now <span aria-hidden="true">&rarr;</span></a>
-        <span class="plan-buy-note">7 days free &middot; cancel anytime &middot; card secured by Stripe</span>
       </article>
       <article class="plan fade-up">
         <span class="p-name">Enterprise</span>
@@ -347,40 +343,5 @@ document.addEventListener("click", function (e) {
 });
 </script>
 <noscript><style>.fade-up{opacity:1;transform:none}.line-mask .line-inner{transform:none}</style></noscript>
-
-<script id="grid-attribution">
-/* Tag Stripe checkout with where the click came from, so the first sale is attributable.
-   No cookies, no third-party calls - UTM if present, else referring host, else "direct". */
-(function () {
-  function clean(v) { return String(v || "").replace(/[^A-Za-z0-9_-]+/g, "-").replace(/^-+|-+$/g, "").slice(0, 60); }
-  function origin() {
-    try {
-      var q = new URLSearchParams(location.search);
-      var src = clean(q.get("utm_source"));
-      if (src) {
-        return ["utm", src, clean(q.get("utm_medium")), clean(q.get("utm_campaign"))].filter(Boolean).join("_");
-      }
-      if (document.referrer) {
-        var h = new URL(document.referrer).hostname.replace(/^www\./, "");
-        if (h && h !== location.hostname) return "ref_" + clean(h);
-      }
-    } catch (e) {}
-    return "direct";
-  }
-  function stamp(a) {
-    try {
-      var u = new URL(a.href);
-      if (u.hostname !== "buy.stripe.com") return;
-      var plan = clean(a.getAttribute("data-plan-buy") || "plan");
-      u.searchParams.set("client_reference_id", ("web_" + plan + "_" + origin()).slice(0, 190));
-      a.href = u.toString();
-    } catch (e) {}
-  }
-  document.addEventListener("click", function (e) {
-    var a = e.target && e.target.closest ? e.target.closest("a.plan-buy") : null;
-    if (a) stamp(a);
-  }, true);
-})();
-</script>
 </body>
 </html>

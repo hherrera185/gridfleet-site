@@ -347,40 +347,5 @@ document.addEventListener("click", function (e) {
 });
 </script>
 <noscript><style>.fade-up{opacity:1;transform:none}.line-mask .line-inner{transform:none}</style></noscript>
-
-<script id="grid-attribution">
-/* Tag Stripe checkout with where the click came from, so the first sale is attributable.
-   No cookies, no third-party calls - UTM if present, else referring host, else "direct". */
-(function () {
-  function clean(v) { return String(v || "").replace(/[^A-Za-z0-9_-]+/g, "-").replace(/^-+|-+$/g, "").slice(0, 60); }
-  function origin() {
-    try {
-      var q = new URLSearchParams(location.search);
-      var src = clean(q.get("utm_source"));
-      if (src) {
-        return ["utm", src, clean(q.get("utm_medium")), clean(q.get("utm_campaign"))].filter(Boolean).join("_");
-      }
-      if (document.referrer) {
-        var h = new URL(document.referrer).hostname.replace(/^www\./, "");
-        if (h && h !== location.hostname) return "ref_" + clean(h);
-      }
-    } catch (e) {}
-    return "direct";
-  }
-  function stamp(a) {
-    try {
-      var u = new URL(a.href);
-      if (u.hostname !== "buy.stripe.com") return;
-      var plan = clean(a.getAttribute("data-plan-buy") || "plan");
-      u.searchParams.set("client_reference_id", ("web_" + plan + "_" + origin()).slice(0, 190));
-      a.href = u.toString();
-    } catch (e) {}
-  }
-  document.addEventListener("click", function (e) {
-    var a = e.target && e.target.closest ? e.target.closest("a.plan-buy") : null;
-    if (a) stamp(a);
-  }, true);
-})();
-</script>
 </body>
 </html>

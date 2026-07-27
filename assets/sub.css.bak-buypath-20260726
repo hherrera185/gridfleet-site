@@ -151,13 +151,3 @@ html.reduced .grid-field::before { animation: none; }
 .taste-frame { display: block; width: 100%; height: 86vh; border: 0; border-top: 1px solid var(--hair2); border-bottom: 1px solid var(--hair2); background: #030209; }
 @media (max-width: 860px) { .taste-frame { height: 70vh; } }
 .tag-dot { width: 6px; height: 6px; border-radius: 50%; display: inline-block; flex: none; }
-
-
-/* Secondary purchase path on the Vera plans. Deliberately quieter than the primary CTA:
-   the free-week lead form remains the main action, this serves the visitor who is already
-   decided and would otherwise have no way to pay at all. */
-.plan-buy{display:inline-flex;align-items:center;gap:.35rem;margin-top:.7rem;font:500 .82rem/1.2 ui-sans-serif,system-ui,sans-serif;letter-spacing:.02em;color:var(--lime,#b6ff3c);text-decoration:none;border-bottom:1px solid rgba(182,255,60,.32);padding-bottom:2px;transition:border-color .18s ease,opacity .18s ease}
-.plan-buy:hover,.plan-buy:focus-visible{border-color:var(--lime,#b6ff3c);opacity:.86}
-.plan-buy:focus-visible{outline:2px solid var(--lime,#b6ff3c);outline-offset:3px;border-radius:2px}
-.plan-buy-note{display:block;margin-top:.4rem;font-size:.72rem;line-height:1.35;color:rgba(242,246,244,.5)}
-@media (prefers-reduced-motion:reduce){.plan-buy{transition:none}}
