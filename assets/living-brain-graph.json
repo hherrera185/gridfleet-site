@@ -1,6 +1,6 @@
 {
   "schema": "gridfleet.living-brain-graph.v1",
-  "generatedAt": "2026-07-30T10:05:02.557Z",
+  "generatedAt": "2026-07-31T10:05:02.676Z",
   "privacy": "sanitized-real-topology",
   "note": "Actual HARMONIC Brain governance topology: agents, governed loops, domains, semantic couplings. Evidence artifacts and internal identifiers excluded.",
   "actionAuthority": false,
@@ -21,7 +21,7 @@
       "id": "agent:able",
       "label": "ABLE",
       "type": "agent",
-      "weight": 2
+      "weight": 3
     },
     {
       "id": "agent:ares",
@@ -39,7 +39,7 @@
       "id": "agent:dumont",
       "label": "DUMONT",
       "type": "agent",
-      "weight": 2
+      "weight": 3
     },
     {
       "id": "agent:echo",
@@ -57,7 +57,7 @@
       "id": "agent:maddie",
       "label": "MADDIE",
       "type": "agent",
-      "weight": 3
+      "weight": 4
     },
     {
       "id": "agent:main",
@@ -105,7 +105,7 @@
       "id": "agent:tron",
       "label": "TRON",
       "type": "agent",
-      "weight": 11
+      "weight": 10
     },
     {
       "id": "agent:vera",
@@ -159,19 +159,19 @@
       "id": "semantic:security",
       "label": "SECURITY IMMUNE SYSTEM",
       "type": "domain",
-      "weight": 21
+      "weight": 20
     },
     {
       "id": "semantic:revenue",
       "label": "REVENUE & MARKETS",
       "type": "domain",
-      "weight": 27
+      "weight": 25
     },
     {
       "id": "semantic:wedding",
       "label": "WEDDING INTELLIGENCE",
       "type": "domain",
-      "weight": 7
+      "weight": 9
     },
     {
       "id": "semantic:creative",
@@ -183,25 +183,25 @@
       "id": "semantic:operations",
       "label": "OPERATIONS FABRIC",
       "type": "domain",
-      "weight": 34
+      "weight": 32
     },
     {
       "id": "semantic:communications",
       "label": "COMMUNICATIONS",
       "type": "domain",
-      "weight": 37
+      "weight": 38
     },
     {
       "id": "semantic:knowledge",
       "label": "KNOWLEDGE & MEMORY",
       "type": "domain",
-      "weight": 3
+      "weight": 4
     },
     {
       "id": "semantic:agents",
       "label": "AGENT SOCIETY",
       "type": "domain",
-      "weight": 8
+      "weight": 9
     },
     {
       "id": "loop:brain.distill-dream",
@@ -306,18 +306,6 @@
       "weight": 4
     },
     {
-      "id": "topic:ascension",
-      "label": "ascension",
-      "type": "topic",
-      "weight": 4
-    },
-    {
-      "id": "topic:discord",
-      "label": "discord",
-      "type": "topic",
-      "weight": 4
-    },
-    {
       "id": "topic:gridfleet",
       "label": "gridfleet",
       "type": "topic",
@@ -330,8 +318,20 @@
       "weight": 4
     },
     {
+      "id": "topic:ascension",
+      "label": "ascension",
+      "type": "topic",
+      "weight": 4
+    },
+    {
       "id": "topic:telegram",
       "label": "telegram",
+      "type": "topic",
+      "weight": 4
+    },
+    {
+      "id": "topic:discord",
+      "label": "discord",
       "type": "topic",
       "weight": 4
     }
@@ -673,6 +673,11 @@
       "weight": 8
     },
     {
+      "from": "agent:tron",
+      "to": "topic:vera",
+      "weight": 8
+    },
+    {
       "from": "agent:neon-dave",
       "to": "topic:brain",
       "weight": 8
@@ -680,11 +685,6 @@
     {
       "from": "agent:ares",
       "to": "agent:tron",
-      "weight": 8
-    },
-    {
-      "from": "agent:tron",
-      "to": "topic:vera",
       "weight": 8
     },
     {
@@ -693,18 +693,8 @@
       "weight": 8
     },
     {
-      "from": "agent:ares",
-      "to": "topic:brain",
-      "weight": 8
-    },
-    {
       "from": "agent:neon-dave",
       "to": "agent:tron",
-      "weight": 8
-    },
-    {
-      "from": "agent:able",
-      "to": "agent:ram",
       "weight": 8
     },
     {
@@ -718,48 +708,8 @@
       "weight": 8
     },
     {
-      "from": "agent:lora",
-      "to": "agent:yori",
-      "weight": 8
-    },
-    {
-      "from": "agent:yori",
-      "to": "topic:brain",
-      "weight": 8
-    },
-    {
-      "from": "agent:dumont",
-      "to": "agent:lora",
-      "weight": 8
-    },
-    {
-      "from": "agent:ram",
-      "to": "topic:brain",
-      "weight": 8
-    },
-    {
-      "from": "agent:dumont",
-      "to": "agent:ram",
-      "weight": 8
-    },
-    {
       "from": "agent:able",
-      "to": "agent:neon-dave",
-      "weight": 8
-    },
-    {
-      "from": "agent:ram",
-      "to": "agent:tron",
-      "weight": 8
-    },
-    {
-      "from": "agent:beck",
-      "to": "agent:lora",
-      "weight": 8
-    },
-    {
-      "from": "agent:dumont",
-      "to": "agent:tron",
+      "to": "agent:ram",
       "weight": 8
     },
     {
@@ -768,13 +718,33 @@
       "weight": 8
     },
     {
-      "from": "agent:able",
-      "to": "topic:vera",
+      "from": "agent:ares",
+      "to": "topic:brain",
       "weight": 8
     },
     {
-      "from": "agent:beck",
+      "from": "agent:dumont",
+      "to": "agent:lora",
+      "weight": 8
+    },
+    {
+      "from": "agent:dumont",
+      "to": "agent:ram",
+      "weight": 8
+    },
+    {
+      "from": "agent:ram",
       "to": "topic:brain",
+      "weight": 8
+    },
+    {
+      "from": "agent:able",
+      "to": "agent:neon-dave",
+      "weight": 8
+    },
+    {
+      "from": "agent:dumont",
+      "to": "agent:tron",
       "weight": 8
     },
     {
@@ -783,18 +753,8 @@
       "weight": 8
     },
     {
-      "from": "agent:paloma",
+      "from": "agent:ram",
       "to": "agent:tron",
-      "weight": 7
-    },
-    {
-      "from": "agent:paloma",
-      "to": "topic:brain",
-      "weight": 7
-    },
-    {
-      "from": "topic:ascension",
-      "to": "topic:brain",
       "weight": 7
     },
     {
@@ -803,28 +763,23 @@
       "weight": 7
     },
     {
-      "from": "agent:tron",
-      "to": "agent:yori",
+      "from": "agent:able",
+      "to": "topic:vera",
       "weight": 7
+    },
+    {
+      "from": "agent:lora",
+      "to": "agent:yori",
+      "weight": 6
     },
     {
       "from": "agent:vera",
       "to": "topic:brain",
-      "weight": 7
-    },
-    {
-      "from": "agent:able",
-      "to": "agent:yori",
-      "weight": 6
-    },
-    {
-      "from": "topic:brain",
-      "to": "topic:tezos",
       "weight": 6
     },
     {
       "from": "agent:tron",
-      "to": "agent:vera",
+      "to": "agent:yori",
       "weight": 6
     },
     {
@@ -833,13 +788,8 @@
       "weight": 6
     },
     {
-      "from": "agent:neon-dave",
-      "to": "topic:discord",
-      "weight": 6
-    },
-    {
-      "from": "agent:beck",
-      "to": "agent:yori",
+      "from": "topic:brain",
+      "to": "topic:tezos",
       "weight": 6
     },
     {
@@ -853,8 +803,13 @@
       "weight": 6
     },
     {
-      "from": "agent:lora",
-      "to": "agent:neon-dave",
+      "from": "agent:tron",
+      "to": "agent:vera",
+      "weight": 6
+    },
+    {
+      "from": "agent:able",
+      "to": "agent:yori",
       "weight": 5
     },
     {
@@ -873,17 +828,22 @@
       "weight": 5
     },
     {
-      "from": "agent:neon-dave",
-      "to": "topic:vera",
+      "from": "agent:paloma",
+      "to": "agent:tron",
       "weight": 5
     },
     {
-      "from": "agent:tesler",
-      "to": "topic:brain",
+      "from": "agent:beck",
+      "to": "agent:lora",
       "weight": 5
     },
     {
       "from": "agent:lora",
+      "to": "agent:neon-dave",
+      "weight": 5
+    },
+    {
+      "from": "agent:neon-dave",
       "to": "topic:vera",
       "weight": 5
     },
@@ -893,28 +853,13 @@
       "weight": 5
     },
     {
-      "from": "agent:able",
-      "to": "agent:paloma",
-      "weight": 5
-    },
-    {
-      "from": "agent:maddie",
+      "from": "agent:paloma",
       "to": "topic:brain",
       "weight": 5
     },
     {
-      "from": "agent:tron",
-      "to": "topic:tezos",
-      "weight": 5
-    },
-    {
-      "from": "topic:ascension",
+      "from": "agent:lora",
       "to": "topic:vera",
-      "weight": 5
-    },
-    {
-      "from": "agent:neon-dave",
-      "to": "topic:ascension",
       "weight": 5
     },
     {
@@ -923,13 +868,28 @@
       "weight": 5
     },
     {
+      "from": "agent:tron",
+      "to": "topic:tezos",
+      "weight": 5
+    },
+    {
       "from": "agent:dumont",
       "to": "topic:gridfleet",
       "weight": 5
     },
     {
       "from": "agent:lora",
-      "to": "topic:objkt",
+      "to": "topic:gridfleet",
+      "weight": 4
+    },
+    {
+      "from": "agent:yori",
+      "to": "topic:brain",
+      "weight": 4
+    },
+    {
+      "from": "agent:tesler",
+      "to": "topic:brain",
       "weight": 4
     },
     {
@@ -939,12 +899,22 @@
     },
     {
       "from": "agent:lora",
-      "to": "topic:gridfleet",
+      "to": "topic:objkt",
       "weight": 4
     },
     {
-      "from": "agent:tesler",
-      "to": "agent:tron",
+      "from": "agent:maddie",
+      "to": "topic:brain",
+      "weight": 4
+    },
+    {
+      "from": "topic:ascension",
+      "to": "topic:vera",
+      "weight": 4
+    },
+    {
+      "from": "topic:ascension",
+      "to": "topic:brain",
       "weight": 4
     },
     {
@@ -953,18 +923,8 @@
       "weight": 4
     },
     {
-      "from": "agent:maddie",
+      "from": "agent:tesler",
       "to": "agent:tron",
-      "weight": 4
-    },
-    {
-      "from": "agent:ares",
-      "to": "agent:paloma",
-      "weight": 4
-    },
-    {
-      "from": "topic:brain",
-      "to": "topic:telegram",
       "weight": 4
     },
     {
@@ -978,18 +938,23 @@
       "weight": 4
     },
     {
-      "from": "agent:quorra",
-      "to": "topic:brain",
+      "from": "agent:able",
+      "to": "agent:paloma",
       "weight": 3
     },
     {
-      "from": "topic:objkt",
-      "to": "topic:tezos",
+      "from": "agent:neon-dave",
+      "to": "topic:ascension",
       "weight": 3
     },
     {
-      "from": "agent:ares",
-      "to": "agent:ram",
+      "from": "topic:brain",
+      "to": "topic:telegram",
+      "weight": 3
+    },
+    {
+      "from": "agent:maddie",
+      "to": "agent:tron",
       "weight": 3
     },
     {
@@ -998,18 +963,13 @@
       "weight": 3
     },
     {
-      "from": "agent:maddie",
-      "to": "topic:vera",
+      "from": "agent:neon-dave",
+      "to": "topic:discord",
       "weight": 3
     },
     {
-      "from": "agent:maddie",
-      "to": "agent:paloma",
-      "weight": 3
-    },
-    {
-      "from": "agent:able",
-      "to": "topic:ascension",
+      "from": "topic:objkt",
+      "to": "topic:tezos",
       "weight": 3
     },
     {
@@ -1023,8 +983,53 @@
       "weight": 3
     },
     {
+      "from": "agent:beck",
+      "to": "topic:brain",
+      "weight": 3
+    },
+    {
+      "from": "agent:quorra",
+      "to": "topic:brain",
+      "weight": 3
+    },
+    {
       "from": "agent:able",
       "to": "topic:gridfleet",
+      "weight": 3
+    },
+    {
+      "from": "agent:able",
+      "to": "agent:sark",
+      "weight": 3
+    },
+    {
+      "from": "agent:able",
+      "to": "topic:ascension",
+      "weight": 3
+    },
+    {
+      "from": "agent:tron",
+      "to": "topic:telegram",
+      "weight": 3
+    },
+    {
+      "from": "agent:ares",
+      "to": "agent:ram",
+      "weight": 3
+    },
+    {
+      "from": "agent:maddie",
+      "to": "topic:vera",
+      "weight": 3
+    },
+    {
+      "from": "agent:ares",
+      "to": "agent:lora",
+      "weight": 3
+    },
+    {
+      "from": "agent:ares",
+      "to": "agent:sark",
       "weight": 3
     }
   ]
