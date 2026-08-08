@@ -1,23 +1,23 @@
 {
   "schema": "gridfleet.living-intelligence.v1",
-  "generatedAt": "2026-08-07T10:00:43.255Z",
+  "generatedAt": "2026-08-08T10:00:53.183Z",
   "privacy": "aggregate-only",
   "actionAuthority": false,
   "brain": {
     "mode": "governed-living-wiki",
     "connected": true,
-    "events": 285986,
-    "currentFacts": 406223,
+    "events": 312229,
+    "currentFacts": 428867,
     "openConflicts": 0,
-    "graphNodes": 181,
-    "graphEdges": 367,
+    "graphNodes": 229,
+    "graphEdges": 517,
     "fullyConnected": true
   },
   "loops": {
     "registered": 13,
-    "active": 11,
-    "verified": 11,
-    "attention": 2,
+    "active": 12,
+    "verified": 12,
+    "attention": 1,
     "privilegedArmed": 0
   },
   "principles": [
