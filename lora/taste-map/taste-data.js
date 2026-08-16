@@ -3,7 +3,7 @@
 window.TASTE_DATA = {
   "meta": {
     "updatedAt": "2026-08-16T03:01:12.480080+00:00",
-    "exportedAt": "2026-08-16T10:07:48.463089+00:00",
+    "exportedAt": "2026-08-16T10:12:56.451260+00:00",
     "totalWorks": 810,
     "totalEdges": 800,
     "maxDayIndex": 61,
