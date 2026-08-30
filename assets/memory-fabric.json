@@ -1,0 +1,109 @@
+{
+  "schema": "gridfleet.memory-fabric-public.v2",
+  "generatedAt": "2026-08-30T10:04:10.222Z",
+  "privacy": "aggregate-only",
+  "status": "nominal",
+  "actionAuthority": false,
+  "product": {
+    "name": "GridFleet Memory Fabric",
+    "architecture": [
+      "cortex",
+      "canon",
+      "live",
+      "archive"
+    ],
+    "archiveDefault": "excluded"
+  },
+  "sources": {
+    "nativeAudit": {
+      "ok": true,
+      "generatedAt": "2026-08-30T10:02:25.709Z",
+      "freshness": "fresh"
+    },
+    "cortexCompilation": {
+      "ok": true,
+      "generatedAt": "2026-08-30T10:02:58.468Z",
+      "freshness": "fresh"
+    },
+    "routeGuard": {
+      "ok": true,
+      "generatedAt": "2026-08-30T10:03:16.750Z",
+      "freshness": "fresh"
+    },
+    "deterministic": {
+      "ok": true,
+      "generatedAt": "2026-08-29T17:04:35.591Z",
+      "freshness": "fresh"
+    },
+    "realCorpus": {
+      "ok": true,
+      "generatedAt": "2026-08-29T11:10:45.241Z",
+      "freshness": "fresh"
+    },
+    "fabricHealth": {
+      "ok": true,
+      "generatedAt": "2026-08-30T10:03:00.170Z",
+      "freshness": "fresh"
+    }
+  },
+  "fleet": {
+    "governedRuntimes": 27,
+    "governedReady": 27,
+    "coveragePct": 100,
+    "lanes": {
+      "services": {
+        "total": 9,
+        "ready": 9
+      },
+      "profiles": {
+        "total": 18,
+        "ready": 18
+      }
+    },
+    "memoryIdentities": 25,
+    "nativeIndex": {
+      "indexed": 19,
+      "ready": 19,
+      "cortexFresh": 19,
+      "sourceFresh": 19,
+      "sourceDrift": 0
+    }
+  },
+  "compilation": {
+    "logicalCortices": 25,
+    "ready": 25,
+    "coveragePct": 100,
+    "generatedAt": "2026-08-30T10:02:58.468Z"
+  },
+  "qualification": {
+    "deterministic": {
+      "ok": true,
+      "probes": 272,
+      "passed": 272,
+      "scorePct": 100,
+      "p95Ms": 577.45,
+      "fixture": "fictional-isolated-production-query-path",
+      "generatedAt": "2026-08-29T17:04:35.591Z"
+    },
+    "realCorpus": {
+      "ok": true,
+      "questions": 20,
+      "correct": 20,
+      "grounded": 20,
+      "groundedPct": 100,
+      "fabricatedPrompts": 5,
+      "fabricatedAbstained": 5,
+      "falseMemoryAbstentionPct": 100,
+      "p95Ms": 1194.3,
+      "generatedAt": "2026-08-29T11:10:45.241Z"
+    }
+  },
+  "truthContract": {
+    "promotedCurrentFacts": true,
+    "subjectDeduplication": true,
+    "citationRequired": true,
+    "abstainWithoutEvidence": true,
+    "sourceFreshnessRequired": true,
+    "evidenceIsAuthority": false
+  }
+}

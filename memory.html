@@ -1,0 +1,371 @@
+<!doctype html>
+<html lang="en" class="no-js">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="referrer" content="strict-origin-when-cross-origin" />
+<meta name="robots" content="index, follow, max-image-preview:large" />
+<meta name="theme-color" content="#05070a" />
+<title>Memory Fabric for AI Agent Fleets | GridFleet</title>
+<meta name="description" content="Give every AI specialist a private cortex and your fleet governed shared canon: fresh, citation-grounded memory with proof and no action authority." />
+<link rel="canonical" href="https://gridfleet.ai/memory" />
+<meta property="og:title" content="Your AI fleet should remember what it learned." />
+<meta property="og:description" content="Private agent cortices. Governed shared canon. Current truth, evidence citations, and honest abstention." />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://gridfleet.ai/memory" />
+<meta property="og:image" content="https://gridfleet.ai/assets/og-memory.png" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:image:alt" content="GridFleet Memory Fabric: private cortex, governed canon, live truth, and a conditional archive." />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Your AI fleet should remember what it learned." />
+<meta name="twitter:description" content="Governed continuity for multi-agent operations, with live aggregate proof." />
+<meta name="twitter:image" content="https://gridfleet.ai/assets/og-memory.png" />
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml" />
+<link rel="preload" href="/assets/fonts/space-grotesk-var.woff2" as="font" type="font/woff2" crossorigin />
+<link rel="preload" href="/assets/fonts/jetbrains-mono-var.woff2" as="font" type="font/woff2" crossorigin />
+<style>body{background:#05070a;color:#f2f6f4;font-family:ui-sans-serif,system-ui,sans-serif;margin:0}</style>
+<link rel="stylesheet" href="/assets/main.css" />
+<link rel="stylesheet" href="/assets/memory.css" />
+<link rel="stylesheet" href="/assets/memory-detail.css" />
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@graph":[
+    {"@type":"Organization","@id":"https://gridfleet.ai/#org","name":"GridFleet","url":"https://gridfleet.ai","logo":"https://gridfleet.ai/og.png","email":"hello@gridfleet.ai"},
+    {"@type":["Service","SoftwareApplication"],"@id":"https://gridfleet.ai/memory#service","name":"GridFleet Memory Fabric","url":"https://gridfleet.ai/memory","provider":{"@id":"https://gridfleet.ai/#org"},"applicationCategory":"BusinessApplication","serviceType":"Governed continuity for multi-agent operations","description":"A governed continuity layer for multi-agent operations: scoped private cortex, governed shared canon, current-state checks, citation-required answers, evidence-free abstention, and no action authority.","featureList":["Private specialist cortex","Governed shared canon","Current-state freshness","Citation-required answers","Evidence-free abstention","Memory has no action authority"],"additionalProperty":[{"@type":"PropertyValue","name":"Action authority","value":false},{"@type":"PropertyValue","name":"Public telemetry privacy","value":"aggregate-only"}]},
+    {"@type":"FAQPage","@id":"https://gridfleet.ai/memory#faq","mainEntity":[
+      {"@type":"Question","name":"What is GridFleet Memory Fabric?","acceptedAnswer":{"@type":"Answer","text":"GridFleet Memory Fabric is a governed continuity layer for multi-agent operations. Each runtime specialist receives scoped private memory, while accepted knowledge can become shared fleet canon."}},
+      {"@type":"Question","name":"How is it different from chat history or RAG?","acceptedAnswer":{"@type":"Answer","text":"Chat history preserves a thread, and retrieval can find similar material. Memory Fabric adds explicit scope, source freshness, current-fact promotion, superseded history, citations, abstention, and a separate authority boundary."}},
+      {"@type":"Question","name":"How does it handle changed or conflicting facts?","acceptedAnswer":{"@type":"Answer","text":"Current admissible evidence can supersede an older fact without deleting the historical record. The answer cites the current source and can disclose what changed."}},
+      {"@type":"Question","name":"Can every agent read every other agent's memory?","acceptedAnswer":{"@type":"Answer","text":"No. Private cortex stays scoped to the relevant runtime identity. Only governed, accepted knowledge is eligible for shared canon."}},
+      {"@type":"Question","name":"What happens when the system cannot find evidence?","acceptedAnswer":{"@type":"Answer","text":"It abstains. The contract is to cite admissible evidence or say it does not know."}},
+      {"@type":"Question","name":"Does remembered context allow an agent to take action?","acceptedAnswer":{"@type":"Answer","text":"No. Memory informs work but grants no permission to act. Payments, messages, orders, publishing, and any permission change require a separate authority path."}},
+      {"@type":"Question","name":"Is Memory Fabric available as a standalone API?","acceptedAnswer":{"@type":"Answer","text":"Not currently. Memory Fabric is delivered through custom GridFleet deployments. GridFleet invites teams to map one real workflow and its memory boundaries."}}
+    ]}
+  ]
+}
+</script>
+</head>
+<body class="memory-page">
+<a class="mf-skip" href="#main">Skip to content</a>
+
+<header class="nav mf-nav" id="nav">
+  <a class="brand" href="/" aria-label="GridFleet home">
+    <svg viewBox="0 0 48 48" fill="none" aria-hidden="true">
+      <g stroke="#22e6ff" stroke-linejoin="round" stroke-linecap="round">
+        <path d="M24 4 L42 14.5 L42 33.5 L24 44 L6 33.5 L6 14.5 Z" stroke-width="2" opacity="0.55"/>
+        <path d="M24 4 L24 24 M24 24 L42 14.5 M24 24 L6 14.5" stroke-width="2" opacity="0.72"/>
+        <path d="M24 24 L24 44 M24 24 L42 33.5 M24 24 L6 33.5" stroke-width="1.5" opacity="0.4"/>
+      </g>
+      <circle cx="24" cy="24" r="3.6" fill="#b6ff3c"/>
+    </svg>
+    <b>GRIDFLEET<span class="brand-dot">_</span></b>
+  </a>
+  <nav class="nav-links" aria-label="Primary">
+    <a class="is-active" href="/memory" aria-current="page">Memory Fabric</a>
+    <a href="/vera">Vera</a>
+    <a href="/workers.html">Workers</a>
+    <a href="/docs.html">Docs</a>
+    <a href="/about.html">About</a>
+  </nav>
+  <div class="mf-nav-actions">
+    <a class="btn btn--solid nav-cta" href="#boundary-map">Design my memory fabric</a>
+    <button class="burger" id="memory-burger" aria-label="Open menu" aria-expanded="false" aria-controls="memory-menu"><i></i><i></i><i></i></button>
+  </div>
+</header>
+
+<div class="mf-menu" id="memory-menu" aria-hidden="true">
+  <nav aria-label="Memory page navigation">
+    <a href="#contract-trial">Memory contract trial</a>
+    <a href="#architecture">Retrieval order</a>
+    <a href="#truth-contract">Remembering is a claim</a>
+    <a href="#live-proof">Live qualification</a>
+    <a href="#boundary-map">Bring us the workflow</a>
+  </nav>
+  <div class="mf-menu-side"><a href="/">GridFleet home</a><a href="/vera">Vera</a><a href="/workers">Workers</a><a href="/docs">Docs</a><a href="/about">About</a><a class="btn btn--solid mf-menu-cta" href="#boundary-map">Design my memory fabric</a></div>
+</div>
+
+<main id="main">
+  <section class="mf-hero" aria-labelledby="memory-title">
+    <div class="mf-gridfield" aria-hidden="true"></div>
+    <div class="wrap mf-hero-grid">
+      <div class="mf-hero-copy">
+        <div class="mf-eyebrow"><span class="mf-live-dot" aria-hidden="true"></span>PROPRIETARY FLEET MEMORY / LIVE PROOF</div>
+        <h1 id="memory-title">A fleet that <br />remembers what <br />it learned⁠&mdash; <br /><span>and proves <br />what it knows.</span></h1>
+        <p class="mf-hero-lede">Every GridFleet specialist gets a private cortex. Proven knowledge can rise into governed shared canon. Current state outranks stale history. Every remembered answer carries evidence&mdash;or the fabric says, &ldquo;I don&rsquo;t know.&rdquo;</p>
+        <div class="mf-hero-actions">
+          <a class="btn btn--solid" href="#boundary-map">Design my memory fabric <span class="btn-arrow" aria-hidden="true">&rarr;</span></a>
+          <a class="btn btn--ghost" href="#live-proof">Inspect the live proof</a>
+        </div>
+        <div class="mf-trust-rail" aria-label="Memory Fabric trust principles">
+          <span>PRIVATE CORTICES</span><span>GOVERNED CANON</span><span>CITE OR ABSTAIN</span><span>MEMORY IS NOT AUTHORITY</span>
+        </div>
+      </div>
+
+      <div class="mf-hero-machine" aria-label="Question passes through private cortex, governed canon, live state, and a conditional archive before a cited answer or abstention">
+        <div class="mf-machine-head"><span>RETRIEVAL CONTRACT / SAMPLE</span><b data-memory-status-label>SCRIPT OFF</b></div>
+        <div class="mf-packet mf-packet--question"><small>INBOUND</small><strong>What is true now?</strong></div>
+        <ol class="mf-spine">
+          <li class="is-on"><span>01</span><div><b>CORTEX</b><small>PRIVATE / FIRST</small></div><i aria-hidden="true"></i></li>
+          <li class="is-on"><span>02</span><div><b>CANON</b><small>GOVERNED / SHARED</small></div><i aria-hidden="true"></i></li>
+          <li class="is-current"><span>03</span><div><b>LIVE</b><small>CURRENT / OVERRIDES</small></div><i aria-hidden="true"></i></li>
+          <li class="is-closed"><span>04</span><div><b>ARCHIVE</b><small>CONDITIONAL / CLOSED</small></div><i aria-hidden="true"></i></li>
+        </ol>
+        <div class="mf-packet mf-packet--answer"><small>RESOLUTION</small><strong>Cited answer</strong><em>Archive not opened</em></div>
+        <div class="mf-authority-gate"><span>AUTHORITY GATE</span><b>NO ACTION GRANT</b></div>
+      </div>
+
+      <aside class="mf-hero-proof" aria-label="Live aggregate Memory Fabric proof" aria-live="polite">
+        <div class="mf-proof-head"><span>PUBLIC PROOF</span><i data-memory-state>SCRIPT OFF</i></div>
+        <div class="mf-hero-metric"><span>FLEET COVERAGE</span><strong data-memory-value="fleet">&mdash;</strong><small data-memory-note="fleet">governed runtime lanes</small></div>
+        <div class="mf-hero-metric"><span>CONTRACT</span><strong data-memory-value="contract">&mdash;</strong><small data-memory-note="contract">synthetic fixture</small></div>
+        <div class="mf-hero-metric"><span>GROUNDED</span><strong data-memory-value="grounded">&mdash;</strong><small data-memory-note="grounded">current evaluation set</small></div>
+        <div class="mf-hero-metric mf-hero-metric--authority"><span>AUTHORITY</span><strong data-memory-value="authority" data-memory-quality="invariant">NONE</strong><small>memory cannot grant action</small></div>
+        <p class="mf-proof-time" data-memory-generated>Live proof requires JavaScript. No cached value is shown.</p>
+      </aside>
+    </div>
+    <div class="wrap mf-status" data-memory-status role="status" aria-live="polite">
+      <span class="mf-status-light" aria-hidden="true"></span>
+      <strong>Live Memory Fabric proof requires JavaScript.</strong>
+      <span>No conversations, source text, or private identifiers are published.</span>
+    </div>
+  </section>
+
+  <noscript>
+    <section class="mf-noscript" aria-label="Memory Fabric proof unavailable without JavaScript">
+      <div class="wrap"><strong>Live Memory Fabric proof requires JavaScript.</strong><p>No cached result is presented as current. The complete product explanation remains available below. Memory informs work; <code>actionAuthority:false</code>.</p></div>
+    </section>
+  </noscript>
+
+  <section class="mf-section mf-trial" id="contract-trial" aria-labelledby="trial-title">
+    <div class="wrap">
+      <div class="mf-section-head mf-section-head--split">
+        <div><span class="tag">01 / MEMORY CONTRACT TRIAL</span><h2 id="trial-title">Four questions most AI memory demos avoid.</h2></div>
+        <p>Run a deterministic, synthetic case through the contract. No model call. No customer data. Every answer ends in a receipt, an abstention, or an authority boundary.</p>
+      </div>
+      <div class="mf-trial-shell">
+        <div class="mf-trial-tabs" role="tablist" aria-label="Memory contract questions">
+          <button type="button" role="tab" aria-selected="true" aria-controls="trial-panel" data-trial="current"><span>01</span>What is true now?</button>
+          <button type="button" role="tab" aria-selected="false" aria-controls="trial-panel" data-trial="changed"><span>02</span>What changed?</button>
+          <button type="button" role="tab" aria-selected="false" aria-controls="trial-panel" data-trial="unknown"><span>03</span>What don&rsquo;t you know?</button>
+          <button type="button" role="tab" aria-selected="false" aria-controls="trial-panel" data-trial="authority"><span>04</span>Can you act on it?</button>
+        </div>
+        <div class="mf-trial-panel" id="trial-panel" role="tabpanel" tabindex="0">
+          <div class="mf-trial-label"><span>ILLUSTRATIVE / NOT CUSTOMER DATA</span><b data-trial-state>CITED ANSWER</b></div>
+          <p class="mf-trial-question" data-trial-question>&ldquo;What is the current launch-access policy?&rdquo;</p>
+          <div class="mf-trial-path" data-trial-path>
+            <span class="hit">CORTEX / DRAFT FOUND</span><span class="hit">CANON / ACCEPTED</span><span class="live">LIVE / REVISION 03</span><span>ARCHIVE / CLOSED</span>
+          </div>
+          <blockquote data-trial-answer>Approved pilot teams may enter on October 14. The earlier invite-only-through-September draft is superseded.</blockquote>
+          <div class="mf-trial-receipt">
+            <div><small>DECISION</small><strong data-trial-decision>CURRENT FACT PROMOTED</strong></div>
+            <div><small>EVIDENCE</small><strong data-trial-evidence>Policy revision 03 / synthetic sample</strong></div>
+            <div><small>AUTHORITY</small><strong data-trial-authority>FALSE</strong></div>
+            <div><small>RECEIPT</small><strong data-trial-receipt>MF-DEMO-001</strong></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="mf-section mf-problem" aria-labelledby="problem-title">
+    <div class="wrap">
+      <div class="mf-section-head"><span class="tag">02 / CONTEXT IS NOT CONTINUITY</span><h2 id="problem-title">A larger prompt can carry more text. It still cannot decide what is current, private, shared, or proven.</h2></div>
+      <div class="mf-compare">
+        <article><span>COMMON APPROACH</span><h3>Chat history</h3><p>Carries one thread forward.</p><small>Still unresolved: cross-agent scope, stale facts, evidence, privacy.</small></article>
+        <article><span>COMMON APPROACH</span><h3>Prompt stuffing</h3><p>Resends a large history.</p><small>Still unresolved: noise, token cost, conflicting truth.</small></article>
+        <article><span>COMMON APPROACH</span><h3>Flat retrieval</h3><p>Returns similar material.</p><small>Still unresolved: current-state promotion, authority, privacy boundaries.</small></article>
+        <article class="is-fabric"><span>GRIDFLEET CONTRACT</span><h3>Memory Fabric</h3><p>Assembles governed context by tier.</p><small>Shows evidence, freshness, scope, and abstention state.</small></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="mf-section mf-architecture" id="architecture" aria-labelledby="architecture-title">
+    <div class="wrap">
+      <div class="mf-section-head mf-section-head--split">
+        <div><span class="tag">03 / RETRIEVAL ORDER / ENFORCED</span><h2 id="architecture-title">The right memory, from the right layer, for the right specialist.</h2></div>
+        <p><strong>Cortex first. Canon second. Live state before history. Archive only when needed.</strong> A memory write is not canon. Each layer has a scope, a job, and a reason it may refuse to open.</p>
+      </div>
+      <div class="mf-tiers" data-tiers>
+        <details open>
+          <summary><span>01</span><div><b>CORTEX</b><small>PRIVATE / FIRST</small></div><i aria-hidden="true"></i></summary>
+          <p>The specialist&rsquo;s own operating context enters first.</p>
+          <ul><li>Scoped to the runtime identity</li><li>Not automatically shared</li><li>Eligible facts still require evidence</li></ul>
+        </details>
+        <details open>
+          <summary><span>02</span><div><b>CANON</b><small>GOVERNED / SHARED</small></div><i aria-hidden="true"></i></summary>
+          <p>Accepted fleet knowledge is shared without exposing every private memory.</p>
+          <ul><li>Promotion is governed</li><li>Duplicates collapse by subject</li><li>Corrections can supersede old truth</li></ul>
+        </details>
+        <details open>
+          <summary><span>03</span><div><b>LIVE</b><small>CURRENT / OVERRIDES</small></div><i aria-hidden="true"></i></summary>
+          <p>Fresh state can overrule an older but once-valid fact.</p>
+          <ul><li>Freshness is checked</li><li>Current evidence wins</li><li>The change remains explainable</li></ul>
+        </details>
+        <details open>
+          <summary><span>04</span><div><b>ARCHIVE</b><small>CONDITIONAL / CLOSED</small></div><i aria-hidden="true"></i></summary>
+          <p>History stays preserved and stays out of default recall.</p>
+          <ul><li>Excluded by default</li><li>Opened only when the question requires it</li><li>Evidence fallback, not context flood</li></ul>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <section class="mf-section mf-constellation" aria-labelledby="constellation-title">
+    <div class="wrap mf-constellation-grid">
+      <div>
+        <div class="mf-section-head"><span class="tag">04 / ONE FLEET / BOUNDED MEMORY</span><h2 id="constellation-title">Shared intelligence does not require shared‑everything access.</h2><p>Choose a runtime-memory segment. Its private cortex illuminates; the other private contexts stay put. Only the approved sample fact is eligible to cross into canon.</p></div>
+        <div class="mf-constellation-controls">
+          <button class="btn btn--ghost" type="button" data-promote-fact>Promote sample fact</button>
+          <button class="mf-switch" type="button" role="switch" aria-checked="false" data-assurance><span></span>Fleet assurance</button>
+        </div>
+        <div class="mf-segment-readout" aria-live="polite"><small>SELECTED CORTEX</small><strong data-segment-readout>Awaiting aggregate coverage</strong><span data-segment-event>No fact has crossed into shared canon.</span></div>
+        <p class="mf-roster-note"><strong data-memory-value="runtime-caption">All</strong> governed runtime lanes&mdash;service runtimes plus specialist profiles, including coordination and assurance lanes&mdash;share <strong data-memory-value="identity-caption">their</strong> compiled memory identities, and <strong data-memory-value="native-caption">the service lanes</strong> carry a native retrieval index. GridFleet&rsquo;s public service roster describes 16 specialist roles. Four denominators, each labeled.</p>
+      </div>
+      <div class="mf-orbit-stage" aria-label="Abstract cortex constellation with anonymous runtime-memory segments and a central governed canon">
+        <div class="mf-orbit-lines" aria-hidden="true"></div>
+        <div class="mf-canon-core"><small>GOVERNED</small><strong>CANON</strong><span data-canon-state>NO PENDING PROMOTION</span></div>
+        <div class="mf-orbit" data-orbit aria-label="Runtime-memory coverage loading"></div>
+        <details class="mf-mobile-orbit"><summary>Inspect runtime coverage</summary><p><strong data-memory-value="mobile-coverage">Unverified</strong> governed runtime lanes with a ready memory lane in the aggregate public audit. No lane names or private context are exposed.</p></details>
+      </div>
+    </div>
+  </section>
+
+  <section class="mf-section mf-truth" id="truth-contract" aria-labelledby="truth-title">
+    <div class="wrap">
+      <div class="mf-section-head"><span class="tag">05 / REMEMBERING IS A CLAIM / EVIDENCE DECIDES</span><h2 id="truth-title">A memory becomes useful only when the system can show why it should be believed now.</h2></div>
+      <div class="mf-truth-grid">
+        <article><span>01</span><h3>Current-fact promotion</h3><p>New admissible evidence can become the answer that wins.</p></article>
+        <article><span>02</span><h3>Superseded history</h3><p>The old fact remains explainable without staying current.</p></article>
+        <article><span>03</span><h3>Subject deduplication</h3><p>Repeated memories collapse around the thing they describe.</p></article>
+        <article><span>04</span><h3>Source freshness</h3><p>Stale evidence loses current-proof treatment.</p></article>
+        <article><span>05</span><h3>Citation required</h3><p>A remembered answer must carry admissible support.</p></article>
+        <article><span>06</span><h3>Evidence-free abstention</h3><p>No support means &ldquo;I don&rsquo;t know&rdquo;&mdash;not an invented bridge.</p></article>
+      </div>
+      <div class="mf-authority-band">
+        <div><span>ARCHITECTURAL INVARIANT</span><strong>MEMORY AUTHORITY: FALSE</strong></div>
+        <p>The Memory Fabric can inform a decision. It cannot approve a payment, send a message, place an order, publish a post, or widen its own permissions.</p>
+        <code>actionAuthority:false</code>
+      </div>
+    </div>
+  </section>
+
+  <section class="mf-section mf-live-proof" id="live-proof" aria-labelledby="proof-title">
+    <div class="wrap">
+      <div class="mf-section-head mf-section-head--split">
+        <div><span class="tag">06 / LIVE QUALIFICATION / RECEIPT-BACKED</span><h2 id="proof-title">Do not trust the phrase &ldquo;AI memory.&rdquo; Inspect the contract.</h2></div>
+        <p>Qualification results describe the named evaluation sets at their published timestamps. They are not a universal claim that every future answer will be correct.</p>
+      </div>
+      <div class="mf-proof-wall" data-proof-wall>
+        <details class="mf-proof-card mf-proof-card--featured" data-proof="fleet" open>
+          <summary><span>Governed runtime lanes &middot; start here</span><strong data-memory-value="proof-fleet">&mdash;</strong><small>lanes with a ready memory lane</small><p class="mf-featured-note">Every governed runtime&mdash;service runtimes and specialist profiles&mdash;counted by the fleet route guard. A lane is ready when its memory path is indexed or compiled and fresh. The nine cards below are the receipts behind this number.</p></summary>
+          <div class="mf-proof-lanes">
+            <div><span>Service runtimes</span><strong data-memory-value="proof-services">&mdash;</strong><small>natively indexed and ready</small><time data-memory-time="nativeAudit">Awaiting receipt</time></div>
+            <div><span>Specialist profiles</span><strong data-memory-value="proof-profiles">&mdash;</strong><small>compiled cortex and healthy route</small><time data-memory-time="routeGuard">Awaiting receipt</time></div>
+          </div>
+        </details>
+        <details class="mf-proof-card" data-proof="native"><summary><span>Native retrieval index</span><strong data-memory-value="proof-native">&mdash;</strong><small>indexes ready and fresh</small></summary><p>Current native index audit. Nominal requires every indexed lane ready, cortex-fresh, source-fresh, and zero drift.</p><time data-memory-time="nativeAudit">Awaiting receipt</time></details>
+        <details class="mf-proof-card" data-proof="compilation"><summary><span>Logical cortex build</span><strong data-memory-value="proof-compilation">&mdash;</strong><small>compiled logical cortices ready</small></summary><p>Aggregate compilation coverage. Compiled memory identities: governed runtime lanes and logical cortices are different denominators.</p><time data-memory-time="cortexCompilation">Awaiting receipt</time></details>
+        <details class="mf-proof-card" data-proof="drift"><summary><span>Source drift</span><strong data-memory-value="proof-drift">&mdash;</strong><small>drifted source sets &middot; native index audit</small></summary><p>Aggregate source-set drift only. No source names, paths, snippets, or private context are published.</p><time data-memory-time="nativeAudit">Awaiting receipt</time></details>
+        <details class="mf-proof-card" data-proof="deterministic"><summary><span>Memory contract</span><strong data-memory-value="proof-contract">&mdash;</strong><small>deterministic probes passed</small></summary><p>Synthetic, isolated fixture using the production query path. This is a synthetic contract benchmark.</p><time data-memory-time="deterministic">Awaiting receipt</time></details>
+        <details class="mf-proof-card" data-proof="real"><summary><span>Real-corpus evaluation</span><strong data-memory-value="proof-real">&mdash;</strong><small>answers correct and grounded</small></summary><p>Current real-corpus evaluation set. The denominator stays visible and distinct from the synthetic fixture.</p><time data-memory-time="realCorpus">Awaiting receipt</time></details>
+        <details class="mf-proof-card" data-proof="abstain"><summary><span>Fabricated-memory test</span><strong data-memory-value="proof-abstain">&mdash;</strong><small>unsupported prompts abstained</small></summary><p>Invented prompts with no admissible evidence. Passing behavior is explicit abstention.</p><time data-memory-time="realCorpus">Awaiting receipt</time></details>
+        <details class="mf-proof-card" data-proof="fixture-latency"><summary><span>Synthetic path latency</span><strong data-memory-value="proof-fixture-latency">&mdash;</strong><small>p95 / synthetic fixture</small></summary><p>Deterministic, isolated benchmark on the production query path. It is not the real-corpus latency.</p><time data-memory-time="deterministic">Awaiting receipt</time></details>
+        <details class="mf-proof-card" data-proof="real-latency"><summary><span>Real-corpus latency</span><strong data-memory-value="proof-real-latency">&mdash;</strong><small>p95 / current evaluation</small></summary><p>Latest real-corpus evaluation p95. Kept separate because it answers a different performance question.</p><time data-memory-time="realCorpus">Awaiting receipt</time></details>
+        <details class="mf-proof-card mf-proof-card--authority" data-proof="authority"><summary><span>Action authority</span><strong data-memory-value="proof-authority" data-memory-quality="invariant">NONE</strong><small>architectural invariant</small></summary><p>Evidence can inform work. It cannot authorize execution or widen permissions. This value is not measured; it cannot degrade.</p><time>Invariant / public contract</time></details>
+      </div>
+      <p class="mf-method"><span>METHOD</span> Aggregate-only projection from current qualification receipts. Definitions, denominators, fixture type, freshness, and timestamps remain attached. Every figure stays visible; a stale or failing figure keeps its number and its receipt time but loses current treatment.</p>
+    </div>
+  </section>
+
+  <section class="mf-section mf-boundaries" aria-labelledby="boundaries-title">
+    <div class="wrap mf-boundaries-grid">
+      <div><div class="mf-section-head"><span class="tag">07 / REMEMBER WITHOUT BECOMING A MEMORY DUMP</span><h2 id="boundaries-title">Continuity should increase usefulness&mdash;not widen exposure.</h2><p>Memory is deliberately partitioned. Public proof is deliberately aggregate. Customer retention, deletion, residency, and tenant-isolation terms are defined per deployment.</p></div><a class="btn btn--ghost" href="/governance">Read the governance layer <span class="btn-arrow" aria-hidden="true">&rarr;</span></a></div>
+      <div class="mf-boundary-list">
+        <article><span>01</span><div><h3>Private by runtime identity</h3><p>A specialist&rsquo;s working context does not become everyone&rsquo;s context.</p></div></article>
+        <article><span>02</span><div><h3>Shared by governed promotion</h3><p>Only accepted knowledge is eligible for fleet canon.</p></div></article>
+        <article><span>03</span><div><h3>Archive closed by default</h3><p>History is preserved without flooding ordinary recall.</p></div></article>
+        <article><span>04</span><div><h3>Telemetry aggregate-only</h3><p>No conversations, customer data, source text, or private identifiers.</p></div></article>
+        <article><span>05</span><div><h3>Authority kept separate</h3><p>Knowing something never grants permission to act on it.</p></div></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="mf-section mf-use-cases" aria-labelledby="uses-title">
+    <div class="wrap">
+      <div class="mf-section-head"><span class="tag">08 / CONTINUITY IN REAL WORK</span><h2 id="uses-title">The value appears after the first session ends.</h2></div>
+      <div class="mf-use-grid">
+        <article><span>01</span><h3>Customer operations</h3><p>Carry approved account context across interactions while sensitive notes remain scoped.</p></article>
+        <article><span>02</span><h3>Research &amp; monitoring</h3><p>Let new evidence supersede an older conclusion without deleting its trail.</p></article>
+        <article><span>03</span><h3>Release &amp; QA</h3><p>Keep decisions, regressions, and accepted fixes available with proof.</p></article>
+        <article><span>04</span><h3>Compliance workflows</h3><p>Point a remembered policy back to its governing source and current revision.</p></article>
+        <article><span>05</span><h3>Multi-agent delivery</h3><p>Promote one accepted finding without exposing an entire private workspace.</p></article>
+        <article><span>06</span><h3>Long-running programs</h3><p>Continue across sessions without dragging every raw transcript into each prompt.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="mf-section mf-map" id="boundary-map" aria-labelledby="map-title">
+    <div class="wrap mf-map-grid">
+      <div class="mf-map-copy">
+        <span class="tag tag--lime">09 / BRING US THE WORKFLOW YOUR AI KEEPS FORGETTING</span>
+        <h2 id="map-title">We will map what belongs in private cortex, shared canon, live state, and governed archive.</h2>
+        <p>Tell us what your fleet must remember, what must remain private, what changes quickly, and what requires evidence. We will design the memory boundary around the work&mdash;not around a demo chatbot.</p>
+        <div class="mf-map-diagram" aria-label="Memory Boundary Map deliverable">
+          <span><b>CORTEX</b> stays private</span><span><b>CANON</b> may be shared</span><span><b>LIVE</b> changes quickly</span><span><b>ARCHIVE</b> preserves proof</span>
+        </div>
+        <small>The proprietary continuity layer is currently included in custom GridFleet deployments. It is not offered as a standalone self-serve API.</small>
+      </div>
+      <form class="mf-form" data-memory-form action="/api/early-access" method="post">
+        <input type="hidden" name="interest" value="memory-fabric" />
+        <input type="hidden" name="origin" value="memory-page" />
+        <div class="mf-form-row"><label><span>Name <b class="mf-req" aria-hidden="true">*</b></span><input type="text" name="name" autocomplete="name" placeholder="Your name" /></label><label><span>Work email <b class="mf-req" aria-hidden="true">*</b></span><input type="email" name="email" autocomplete="email" required placeholder="you@company.com" /></label></div>
+        <label>What should the fleet remember?<textarea name="message" rows="3" required placeholder="One recurring workflow and the continuity it needs"></textarea></label>
+        <label>What must never be retained or shared?<textarea name="private_boundary" rows="3" placeholder="Sensitive notes, customer fields, internal decisions"></textarea></label>
+        <label>Which systems produce the source evidence?<input type="text" name="evidence_systems" placeholder="Approved documents, CRM, tickets, live services" /></label>
+        <div class="mf-form-row"><label>How quickly does the truth change?<input type="text" name="truth_velocity" placeholder="Hourly, daily, per release, rarely" /></label><label>Deployment/privacy constraints<input type="text" name="deployment_constraints" placeholder="Hosting, residency, retention" /></label></div>
+        <label class="mf-honeypot" aria-hidden="true">Website<input type="text" name="website" tabindex="-1" autocomplete="off" /></label>
+        <div class="mf-form-actions">
+          <button class="btn btn--solid" type="submit">Design my memory fabric <span class="btn-arrow" aria-hidden="true">&rarr;</span></button>
+          <a class="btn btn--ghost" href="/#deploy">Send one job first</a>
+        </div>
+        <p class="form-status" role="status" aria-live="polite"></p>
+        <p class="form-note">Do not include credentials, secrets, private customer data, or proprietary source content. Prefer email? <a href="mailto:sales@gridfleet.ai">sales@gridfleet.ai</a>.</p>
+      </form>
+    </div>
+  </section>
+
+  <section class="mf-section mf-faq" id="faq" aria-labelledby="faq-title">
+    <div class="wrap mf-faq-grid">
+      <div class="mf-section-head"><span class="tag">10 / QUESTIONS A SERIOUS BUYER SHOULD ASK</span><h2 id="faq-title">Inspect the boundary before you buy the promise.</h2></div>
+      <div class="mf-faq-list">
+        <details><summary>What is GridFleet Memory Fabric?</summary><p>A governed continuity layer for multi-agent operations. Each runtime specialist receives scoped private memory; accepted knowledge can become shared fleet canon.</p></details>
+        <details><summary>How is it different from chat history or RAG?</summary><p>Chat history preserves a thread, and retrieval can find similar material. Memory Fabric adds explicit scope, source freshness, current-fact promotion, superseded history, citations, abstention, and a separate authority boundary.</p></details>
+        <details><summary>How does it handle changed or conflicting facts?</summary><p>Current admissible evidence can supersede an older fact without deleting the historical record. The answer cites the current source and can disclose what changed.</p></details>
+        <details><summary>Can every agent read every other agent&rsquo;s memory?</summary><p>No. Private cortex stays scoped to the relevant runtime identity. Only governed, accepted knowledge is eligible for shared canon.</p></details>
+        <details><summary>What happens when the system cannot find evidence?</summary><p>It abstains. The contract is to cite admissible evidence or say it does not know.</p></details>
+        <details><summary>Does remembered context allow an agent to take action?</summary><p>No. <code>actionAuthority:false</code>. Memory informs work but grants no permission to act.</p></details>
+        <details><summary>Is Memory Fabric available as a standalone API?</summary><p>Not currently. It is delivered through custom GridFleet deployments. Bring us one real workflow and we will map the architecture around it.</p></details>
+      </div>
+    </div>
+  </section>
+
+  <section class="mf-closing" aria-label="Memory Fabric closing statement">
+    <div class="wrap"><span class="tag">GRIDFLEET MEMORY FABRIC</span><h2>Every specialist gets a private cortex. The fleet shares only governed canon.</h2><p>The next job starts with what the last job proved&mdash;without turning the fleet into one indiscriminate memory dump.</p><a class="btn btn--solid" href="#boundary-map">Design my memory fabric <span class="btn-arrow" aria-hidden="true">&rarr;</span></a></div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-in">
+      <a class="brand" href="/" aria-label="GridFleet home"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 2 21 7v10l-9 5-3-1.7V13H4.5V8.2L12 4.3l6 3.1v8.2l-4.5 2.5" stroke="#22e6ff" stroke-width="1.5" stroke-linecap="square"/></svg><b>GRIDFLEET<span class="brand-dot">_</span></b></a>
+      <nav class="foot-links" aria-label="Footer"><a href="/memory">Memory Fabric</a><a href="/vera">Vera</a><a href="/workers.html">Workers</a><a href="/docs.html">Docs</a><a href="/governance">Governance</a><a href="/about.html">About</a><a href="/signup.html">Request access</a></nav>
+    </div>
+    <div class="foot-fine"><span>&copy; <span id="yr">2026</span> GridFleet &mdash; send the job, get the receipt</span><span><a href="mailto:security@gridfleet.ai" style="color:inherit">security@gridfleet.ai</a> &middot; responsible disclosure welcome</span></div>
+  </div>
+</footer>
+
+<script src="/assets/memory-fabric.js" defer></script>
+</body>
+</html>

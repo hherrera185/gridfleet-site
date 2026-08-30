@@ -3,6 +3,7 @@
 
 User-agent: *
 Allow: /
+Allow: /memory
 Disallow: /api/
 Sitemap: https://gridfleet.ai/sitemap.xml
 

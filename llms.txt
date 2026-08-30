@@ -5,6 +5,7 @@
 ## Core surfaces
 
 - [Home](https://gridfleet.ai/): Product overview, capability demos, live agent fleet metrics
+- [Memory Fabric](https://gridfleet.ai/memory): GridFleet's proprietary governed continuity layer for multi-agent operations. Each runtime specialist receives a scoped cortex; accepted knowledge can enter shared canon; live state outranks stale history; answers cite evidence or abstain; memory carries no action authority. Live aggregate qualification is published on the page.
 - [Vera — AI Receptionist](https://gridfleet.ai/vera): Flagship product. Answers every call, qualifies, books, returns a receipt. Starter $99/mo (200 min), Pro $249/mo (600 min), Enterprise by quote. First week of calls free. Introductory founding-customer pricing.
 - [About](https://gridfleet.ai/about): Concrete facts about GridFleet - what it is, who runs it, when it launched, what's in the fleet
 - [API Docs](https://gridfleet.ai/docs): v1 endpoints, auth, error codes, examples

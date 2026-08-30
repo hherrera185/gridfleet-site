@@ -198,7 +198,7 @@
   window.addEventListener("keydown", function (e) { if (e.key === "Escape") closeMenu(); });
 
   /* ---------------- progress rail (triggers created later, after the pin) ---------------- */
-  var SCENES = ["#fleet", "#work", "#receipts", "#deck", "#deploy"];
+  var SCENES = ["#fleet", "#work", "#memory-fabric", "#receipts", "#deck", "#deploy"];
   var railNodes = Array.prototype.slice.call(document.querySelectorAll("#rail .rail-node"));
   railNodes.forEach(function (n, i) {
     n.addEventListener("click", function () { scrollToEl(SCENES[i]); });

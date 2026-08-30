@@ -3,7 +3,6 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data:; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline'; connect-src 'self'; form-action 'self' mailto:; frame-ancestors 'none'; base-uri 'self'; object-src 'none'; upgrade-insecure-requests" />
 <meta name="referrer" content="strict-origin-when-cross-origin" />
 <meta name="robots" content="index, follow, max-image-preview:large" />
 <meta name="theme-color" content="#05070a" />
@@ -35,6 +34,7 @@ body{background:#05070a;color:#f2f6f4;font-family:ui-sans-serif,system-ui,sans-s
     {"@type":"Organization","@id":"https://gridfleet.ai/#org","name":"GridFleet","url":"https://gridfleet.ai","logo":"https://gridfleet.ai/og.png","email":"hello@gridfleet.ai","description":"GridFleet is a governed execution layer for AI operations: a coordinated fleet of specialist AI agents behind a single access layer. Capabilities include policy-scoped browser workflow support, monitoring, research forecasting, federal court-docket monitoring, and DeFi protocol config-risk review. Results return with inspectable receipts.","sameAs":["https://github.com/logikclaw"],"contactPoint":[{"@type":"ContactPoint","contactType":"sales","email":"sales@gridfleet.ai"},{"@type":"ContactPoint","contactType":"security","email":"security@gridfleet.ai"}]},
     {"@type":"WebSite","@id":"https://gridfleet.ai/#site","url":"https://gridfleet.ai","name":"GridFleet","publisher":{"@id":"https://gridfleet.ai/#org"}},
     {"@type":"Service","@id":"https://gridfleet.ai/#service","name":"GridFleet AI Operations","provider":{"@id":"https://gridfleet.ai/#org"},"serviceType":"Multi-agent AI execution platform","areaServed":"Worldwide","description":"Specialist AI roles for browser workflows, monitoring, research forecasting, and operational risk reviews, delivered through one governed access layer with receipt-backed verification."},
+    {"@type":"Service","@id":"https://gridfleet.ai/memory#service","name":"GridFleet Memory Fabric","url":"https://gridfleet.ai/memory","provider":{"@id":"https://gridfleet.ai/#org"},"serviceType":"Governed continuity for multi-agent operations","description":"Scoped private cortex, governed shared canon, current-state checks, citation-required answers, honest abstention, and no action authority.","additionalProperty":[{"@type":"PropertyValue","name":"Action authority","value":false}]},
     {"@type":"FAQPage","@id":"https://gridfleet.ai/#faq","mainEntity":[
       {"@type":"Question","name":"What is GridFleet?","acceptedAnswer":{"@type":"Answer","text":"GridFleet is an execution layer for AI operations. Instead of a single chatbot, you send a job to a coordinated fleet of specialist AI agents that act across real tools, verify the outcome, and return a result with receipts - request ids, screenshots, source references, and verification notes - through one bearer-token API."}},
       {"@type":"Question","name":"How is GridFleet different from a chatbot?","acceptedAnswer":{"@type":"Answer","text":"A chatbot answers. GridFleet acts. Work runs inside governed lanes with specialist roles, real tool use, and evidence attached to every result, so an operator can inspect what happened rather than trust a claim."}},
@@ -82,7 +82,7 @@ setTimeout(function () {
     <b>GRIDFLEET<span class="brand-dot">_</span></b>
   </a>
   <nav class="nav-links" aria-label="Primary">
-    <a href="#intelligence">Living Intelligence</a>
+    <a href="/memory">Memory Fabric</a>
     <a href="/vera">Vera</a>
     <a href="/workers.html">Workers</a>
     <a href="/docs.html">Docs</a>
@@ -100,11 +100,13 @@ setTimeout(function () {
     <nav class="menu-main" aria-label="Scenes">
       <a href="#fleet"><small>01</small>The living fleet</a>
       <a href="#work"><small>02</small>Watch it work</a>
-      <a href="#receipts"><small>03</small>The receipt</a>
-      <a href="#deck"><small>04</small>Command deck</a>
-      <a href="#deploy"><small>05</small>Deploy</a>
+      <a href="#memory-fabric"><small>03</small>Memory Fabric</a>
+      <a href="#receipts"><small>04</small>The receipt</a>
+      <a href="#deck"><small>05</small>Command deck</a>
+      <a href="#deploy"><small>06</small>Deploy</a>
     </nav>
     <nav class="menu-side" aria-label="Pages">
+      <a href="/memory">Memory Fabric</a>
       <a href="/vera">Vera — AI receptionist</a>
       <a href="/workers.html">Hire a worker</a>
       <a href="/docs.html">API docs</a>
@@ -122,6 +124,8 @@ setTimeout(function () {
   <button class="rail-node" type="button"><span class="rail-tip">Fleet</span></button>
   <div class="rail-seg"><i></i></div>
   <button class="rail-node" type="button"><span class="rail-tip">Work</span></button>
+  <div class="rail-seg"><i></i></div>
+  <button class="rail-node" type="button"><span class="rail-tip">Memory</span></button>
   <div class="rail-seg"><i></i></div>
   <button class="rail-node" type="button"><span class="rail-tip">Receipts</span></button>
   <div class="rail-seg"><i></i></div>
@@ -156,6 +160,9 @@ setTimeout(function () {
       <a class="btn btn--solid" href="#deploy">Deploy the fleet <span class="btn-arrow" aria-hidden="true">&rarr;</span></a>
       <a class="btn btn--ghost" href="#work">Watch it work</a>
     </div>
+    <a class="hero-memory-strip" href="/memory" aria-label="Explore GridFleet Memory Fabric">
+      <span>PRIVATE CORTICES</span><span>GOVERNED CANON</span><span>CITE OR ABSTAIN</span><span>AUTHORITY FALSE</span><b>Explore Memory Fabric &rarr;</b>
+    </a>
   </div>
 
   <div class="hero-foot">
@@ -246,9 +253,43 @@ setTimeout(function () {
 </section>
 
 <!-- ============ scene 03 · the receipt (paper band) ============ -->
+<span id="intelligence" class="compat-anchor" aria-hidden="true"></span>
+<!-- scene 03 / GridFleet Memory Fabric -->
+<section class="scene home-memory" id="memory-fabric" aria-label="GridFleet Memory Fabric">
+  <div class="home-memory-field" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+  <div class="wrap home-memory-grid">
+    <div class="home-memory-copy">
+      <span class="tag">03 &mdash; THE MEMORY FABRIC</span>
+      <p class="home-memory-kicker">Every receipt should make the next job easier to trust.</p>
+      <h2 class="h-xl"><span class="line-mask"><span class="line-inner">The next job starts</span></span><span class="line-mask"><span class="line-inner">with what the</span></span><span class="line-mask"><span class="line-inner">last one proved.</span></span></h2>
+      <p class="lede">A GridFleet deployment does not wake up new every morning. Each specialist keeps a private cortex. The fleet shares only governed knowledge. Stale facts lose priority. Unsupported memories stop at &ldquo;I don&rsquo;t know.&rdquo;</p>
+      <div class="home-memory-actions"><a class="btn btn--solid" href="/memory">Enter the Memory Fabric <span class="btn-arrow" aria-hidden="true">&rarr;</span></a><span>Memory informs work.<br />It never grants permission to act.</span></div>
+    </div>
+    <div class="home-memory-instrument" aria-label="Four-tier Memory Fabric retrieval order">
+      <div class="hmi-head"><span>RETRIEVAL ORDER</span><b data-memory-state>LOADING</b></div>
+      <ol>
+        <li><span>01</span><div><b>CORTEX</b><small>PRIVATE / FIRST</small></div><i></i></li>
+        <li><span>02</span><div><b>CANON</b><small>GOVERNED / SHARED</small></div><i></i></li>
+        <li><span>03</span><div><b>LIVE</b><small>CURRENT / OVERRIDES</small></div><i></i></li>
+        <li class="is-conditional"><span>04</span><div><b>ARCHIVE</b><small>CONDITIONAL / CLOSED</small></div><i></i></li>
+      </ol>
+      <div class="hmi-output"><span>CITED ANSWER</span><b>or honest abstention</b></div>
+      <div class="hmi-gate"><span>MEMORY AUTHORITY</span><b>NONE</b></div>
+    </div>
+    <div class="home-memory-proof" aria-label="Live aggregate Memory Fabric proof" aria-live="polite">
+      <article><span>Fleet coverage</span><strong data-memory-value="fleet">&mdash;</strong><small>governed runtime lanes</small></article>
+      <article><span>Contract</span><strong data-memory-value="contract">&mdash;</strong><small>synthetic fixture</small></article>
+      <article><span>Grounded</span><strong data-memory-value="grounded">&mdash;</strong><small>current evaluation set</small></article>
+      <article><span>Abstention</span><strong data-memory-value="proof-abstain">&mdash;</strong><small>fabricated prompts refused</small></article>
+      <p data-memory-generated>Connecting to aggregate proof&hellip;</p>
+    </div>
+  </div>
+</section>
+
 <section class="scene" id="receipts" aria-label="Every action returns a receipt">
   <div class="wrap">
     <div class="scene-head">
+      <span class="tag scene-tag-current">04 &mdash; The trust device</span>
       <span class="tag">03 — The trust device</span>
       <h2 class="h-xl"><span class="line-mask"><span class="line-inner">Every action</span></span><span class="line-mask"><span class="line-inner">returns a receipt.</span></span></h2>
       <p class="lede">A chatbot answers. GridFleet acts — and signs its work. The receipt is the contract between you and an autonomous fleet: inspectable, archived, verifiable.</p>
@@ -285,6 +326,7 @@ setTimeout(function () {
 <section class="scene" id="deck" aria-label="Command deck">
   <div class="wrap">
     <div class="scene-head">
+      <span class="tag scene-tag-current">05 &mdash; Command deck</span>
       <span class="tag">04 — Command deck</span>
       <h2 class="h-xl"><span class="line-mask"><span class="line-inner">Sixteen specialists.</span></span><span class="line-mask"><span class="line-inner">Zero improvisation.</span></span></h2>
       <p class="lede">Every job routes to a specialist role with a fixed lane, scoped authority and a duty to report. This is the deck that runs the grid.</p>
@@ -357,12 +399,12 @@ setTimeout(function () {
     </div>
     <div class="proof-grid fade-up">
       <div class="proof-cell hot"><div class="pc-num" data-count="0" data-metric="security.radar_high_critical">0</div><div class="pc-label">High / critical radar findings</div><div class="pc-fresh live">measured feed</div></div>
-      <div class="proof-cell hot"><div class="pc-num" data-count="16" data-metric="security.radar_signals_reviewed">0</div><div class="pc-label">Current security signals reviewed</div><div class="pc-fresh live">measured feed</div></div>
+      <div class="proof-cell hot"><div class="pc-num" data-count="17" data-metric="security.radar_signals_reviewed">0</div><div class="pc-label">Current security signals reviewed</div><div class="pc-fresh live">measured feed</div></div>
       <div class="proof-cell"><div class="pc-num" data-count="3" data-metric="tron.protected_checks_last_run">0</div><div class="pc-label">Protected checks · latest TRON run</div><div class="pc-fresh live">receipt-backed</div></div>
-      <div class="proof-cell"><div class="pc-num" data-count="211" data-metric="security.package_files_scanned">0</div><div class="pc-label">Package manifests scanned</div><div class="pc-fresh live">measured feed</div></div>
-      <div class="proof-cell hot"><div class="pc-num" data-count="10777" data-metric="tron.security_cycles_lifetime">0</div><div class="pc-label">Autonomous defense cycles evidenced</div><div class="pc-fresh live">cumulative receipt ledger</div></div>
+      <div class="proof-cell"><div class="pc-num" data-count="371" data-metric="security.package_files_scanned">0</div><div class="pc-label">Package manifests scanned</div><div class="pc-fresh live">measured feed</div></div>
+      <div class="proof-cell hot"><div class="pc-num" data-count="13266" data-metric="tron.security_cycles_lifetime">0</div><div class="pc-label">Autonomous defense cycles evidenced</div><div class="pc-fresh live">cumulative receipt ledger</div></div>
       <div class="proof-cell hot"><div class="pc-num" data-count="808" data-metric="tron.hardening_cases_resolved">0</div><div class="pc-label">BECK/TRON hardening cases resolved</div><div class="pc-fresh">evidence-backed lifetime</div></div>
-      <div class="proof-cell"><div class="pc-num" data-count="783" data-metric="creative.assets_generated">0</div><div class="pc-label">Creative proof artifacts generated</div><div class="pc-fresh live">live feed</div></div>
+      <div class="proof-cell"><div class="pc-num" data-count="349" data-metric="creative.assets_generated">0</div><div class="pc-label">Creative proof artifacts generated</div><div class="pc-fresh live">live feed</div></div>
       <div class="proof-cell"><div class="pc-num" data-count="7" data-metric="deployment.builds_deployed_30d">0</div><div class="pc-label">Verified builds · 30 days</div><div class="pc-fresh live">live feed</div></div>
     </div>
     <div class="proof-legend">
@@ -374,7 +416,7 @@ setTimeout(function () {
 </section>
 
 <!-- ============ living intelligence ============ -->
-<section class="scene" id="intelligence" aria-label="Living Grid intelligence">
+<section class="scene legacy-intelligence" id="legacy-intelligence" aria-label="Legacy Living Grid intelligence" hidden>
   <div class="wrap"><div class="living-intelligence fade-up" data-living-intelligence><p class="lede">Waking the fleet’s living memory…</p></div></div>
 </section>
 <style>
@@ -402,6 +444,7 @@ setTimeout(function () {
 <section class="scene" id="deploy" aria-label="Deploy">
   <div class="wrap deploy-grid">
     <div class="deploy-copy">
+      <span class="tag tag--lime scene-tag-current">06 &mdash; Deploy</span>
       <span class="tag tag--lime">05 — Deploy</span>
       <h2 class="h-xl" style="margin-top:18px">
         <span class="line-mask"><span class="line-inner">Send one job.</span></span>
@@ -441,6 +484,7 @@ setTimeout(function () {
         <b>GRIDFLEET<span class="brand-dot">_</span></b>
       </a>
       <nav class="foot-links" aria-label="Footer">
+        <a href="/memory">Memory Fabric</a>
         <a href="/vera">Vera</a>
         <a href="/workers.html">Workers</a>
         <a href="/docs.html">Docs</a>
@@ -462,7 +506,7 @@ setTimeout(function () {
 <script src="/assets/vendor/lenis.min.js" defer></script>
 <script src="/assets/fleet-gl.js" defer></script>
 <script src="/assets/main.js" defer></script>
-<script src="/assets/living-intelligence.js?v=nebula6-20260719" defer></script>
+<script src="/assets/memory-fabric.js" defer></script>
 <noscript><style>#intro{display:none}.fade-up{opacity:1;transform:none}.line-mask .line-inner{transform:none}</style></noscript>
 
 <script id="grid-attribution">

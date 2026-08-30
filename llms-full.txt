@@ -1,6 +1,6 @@
 # GridFleet - LLM-ready content extract
 
-Last updated 2026-07-01.
+Last updated 2026-08-19.
 
 This file is the canonical, citation-friendly extract of GridFleet's public pages.
 Designed for ingestion by ChatGPT search, Perplexity, Claude search, Google AI Overviews,
@@ -35,6 +35,29 @@ Named agents on the public roster include:
 - Not a chatbot or single-LLM API. Single-LLM APIs return one model's completion to one prompt; GridFleet returns the result of a coordinated fleet operation.
 - Not a managed-LLM-router. There are products that route prompts to the cheapest model. GridFleet specializes specific agents to specific tasks and exposes those tasks as endpoints.
 - Not an MCP-only tool. The MCP servers are wrappers around the underlying v1 API. The API is the source of truth.
+
+## GridFleet Memory Fabric
+
+- **Page:** https://gridfleet.ai/memory
+- **Category:** Governed continuity for multi-agent operations
+- **Delivery:** Included in custom GridFleet deployments; not currently offered as a standalone self-serve API or SDK
+- **Authority boundary:** Memory informs work but grants no permission to act. The public contract is `actionAuthority:false`.
+- **Public proof:** Aggregate-only qualification telemetry. It contains no conversations, customer data, source text, private instructions, agent names, file paths, or private identifiers.
+
+**A fleet that remembers what it learned - and proves what it knows.** Every specialist gets a private cortex. The fleet shares only governed canon. The next job starts with what the last job proved - without turning the fleet into one indiscriminate memory dump.
+
+GridFleet Memory Fabric gives each runtime specialist a scoped private cortex. Accepted knowledge can become governed shared canon. Current live state can supersede an older fact without deleting the historical record. The governed archive remains excluded from default recall and opens only when the question requires historical evidence. Remembered answers cite admissible evidence or abstain.
+
+The enforced retrieval order is (public shorthand: Cortex first. Canon second. Live state before history. Archive only when needed.):
+
+1. **CORTEX / PRIVATE** - the specialist's own operating context enters first.
+2. **CANON / GOVERNED** - accepted fleet knowledge is shared without exposing every private memory.
+3. **LIVE / CURRENT** - fresh state can overrule an older but once-valid fact.
+4. **ARCHIVE / CONDITIONAL** - history stays preserved and stays out of default recall.
+
+The truth contract includes current-fact promotion, superseded-history preservation, subject deduplication, source-freshness enforcement, citation-required answers, and evidence-free abstention. Qualification numbers on the page retain their denominators, fixture labels, and timestamps. Synthetic deterministic latency and real-corpus latency are never presented as the same measurement.
+
+Memory Fabric is designed around four questions: what is true now, what changed, what is not known, and whether remembered context carries authority. The fourth answer is always no: memory is not authority. Memory informs work; it never grants permission to act. Memory Fabric is delivered as part of custom GridFleet deployments; the page CTA ("Design my memory fabric") opens an architecture conversation and "Inspect the live proof" links to the aggregate-only qualification wall. Numeric claims on the page always carry their denominator, fixture label, and timestamp (for example "272 of 272 deterministic probes" on a fictional isolated fixture, "20 of 20" on the current real-corpus evaluation, "5 of 5" fabricated-memory abstentions); the runtime-memory identity count and the 16-role public service roster are different populations.
 
 ## Public services
 
