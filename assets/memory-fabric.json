@@ -1,6 +1,6 @@
 {
   "schema": "gridfleet.memory-fabric-public.v2",
-  "generatedAt": "2026-08-30T10:04:10.222Z",
+  "generatedAt": "2026-08-31T09:04:11.513Z",
   "privacy": "aggregate-only",
   "status": "nominal",
   "actionAuthority": false,
@@ -17,32 +17,32 @@
   "sources": {
     "nativeAudit": {
       "ok": true,
-      "generatedAt": "2026-08-30T10:02:25.709Z",
+      "generatedAt": "2026-08-31T09:02:06.708Z",
       "freshness": "fresh"
     },
     "cortexCompilation": {
       "ok": true,
-      "generatedAt": "2026-08-30T10:02:58.468Z",
+      "generatedAt": "2026-08-31T09:02:57.999Z",
       "freshness": "fresh"
     },
     "routeGuard": {
       "ok": true,
-      "generatedAt": "2026-08-30T10:03:16.750Z",
+      "generatedAt": "2026-08-31T09:03:18.150Z",
       "freshness": "fresh"
     },
     "deterministic": {
       "ok": true,
-      "generatedAt": "2026-08-29T17:04:35.591Z",
+      "generatedAt": "2026-08-30T13:13:17.826Z",
       "freshness": "fresh"
     },
     "realCorpus": {
       "ok": true,
-      "generatedAt": "2026-08-29T11:10:45.241Z",
+      "generatedAt": "2026-08-30T13:08:44.650Z",
       "freshness": "fresh"
     },
     "fabricHealth": {
       "ok": true,
-      "generatedAt": "2026-08-30T10:03:00.170Z",
+      "generatedAt": "2026-08-31T09:03:00.362Z",
       "freshness": "fresh"
     }
   },
@@ -73,7 +73,7 @@
     "logicalCortices": 25,
     "ready": 25,
     "coveragePct": 100,
-    "generatedAt": "2026-08-30T10:02:58.468Z"
+    "generatedAt": "2026-08-31T09:02:57.999Z"
   },
   "qualification": {
     "deterministic": {
@@ -81,9 +81,9 @@
       "probes": 272,
       "passed": 272,
       "scorePct": 100,
-      "p95Ms": 577.45,
+      "p95Ms": 149.72,
       "fixture": "fictional-isolated-production-query-path",
-      "generatedAt": "2026-08-29T17:04:35.591Z"
+      "generatedAt": "2026-08-30T13:13:17.826Z"
     },
     "realCorpus": {
       "ok": true,
@@ -94,8 +94,8 @@
       "fabricatedPrompts": 5,
       "fabricatedAbstained": 5,
       "falseMemoryAbstentionPct": 100,
-      "p95Ms": 1194.3,
-      "generatedAt": "2026-08-29T11:10:45.241Z"
+      "p95Ms": 645.11,
+      "generatedAt": "2026-08-30T13:08:44.650Z"
     }
   },
   "truthContract": {
