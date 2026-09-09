@@ -1,6 +1,6 @@
 {
   "schema": "gridfleet.living-brain-graph.v1",
-  "generatedAt": "2026-09-08T10:05:02.800Z",
+  "generatedAt": "2026-09-09T10:05:03.531Z",
   "privacy": "sanitized-real-topology",
   "note": "Actual HARMONIC Brain governance topology: agents, governed loops, domains, semantic couplings. Evidence artifacts and internal identifiers excluded.",
   "actionAuthority": false,
@@ -57,7 +57,7 @@
       "id": "agent:clu",
       "label": "CLU",
       "type": "agent",
-      "weight": 1
+      "weight": 2
     },
     {
       "id": "agent:dumont",
@@ -93,13 +93,13 @@
       "id": "agent:lora",
       "label": "LORA",
       "type": "agent",
-      "weight": 2
+      "weight": 1
     },
     {
       "id": "agent:maddie",
       "label": "MADDIE",
       "type": "agent",
-      "weight": 2
+      "weight": 3
     },
     {
       "id": "agent:main",
@@ -177,7 +177,7 @@
       "id": "domain:receipts",
       "label": "RECEIPTS",
       "type": "domain",
-      "weight": 3
+      "weight": 1
     },
     {
       "id": "domain:state",
@@ -213,31 +213,31 @@
       "id": "semantic:security",
       "label": "SECURITY IMMUNE SYSTEM",
       "type": "domain",
-      "weight": 8
+      "weight": 9
     },
     {
       "id": "semantic:revenue",
       "label": "REVENUE & MARKETS",
       "type": "domain",
-      "weight": 14
+      "weight": 16
     },
     {
       "id": "semantic:wedding",
       "label": "WEDDING INTELLIGENCE",
       "type": "domain",
-      "weight": 5
+      "weight": 6
     },
     {
       "id": "semantic:creative",
       "label": "CREATIVE & BRAND",
       "type": "domain",
-      "weight": 7
+      "weight": 6
     },
     {
       "id": "semantic:operations",
       "label": "OPERATIONS FABRIC",
       "type": "domain",
-      "weight": 38
+      "weight": 33
     },
     {
       "id": "semantic:communications",
@@ -255,7 +255,7 @@
       "id": "semantic:agents",
       "label": "AGENT SOCIETY",
       "type": "domain",
-      "weight": 8
+      "weight": 10
     },
     {
       "id": "loop:brain.distill-dream",
@@ -336,14 +336,14 @@
       "weight": 6
     },
     {
-      "id": "topic:brain",
-      "label": "brain",
+      "id": "topic:tezos",
+      "label": "tezos",
       "type": "topic",
       "weight": 4
     },
     {
-      "id": "topic:tezos",
-      "label": "tezos",
+      "id": "topic:brain",
+      "label": "brain",
       "type": "topic",
       "weight": 4
     },
@@ -727,13 +727,13 @@
       "weight": 3
     },
     {
-      "from": "agent:ares",
-      "to": "topic:brain",
+      "from": "agent:lora",
+      "to": "topic:tezos",
       "weight": 8
     },
     {
-      "from": "agent:lora",
-      "to": "topic:tezos",
+      "from": "agent:ares",
+      "to": "topic:brain",
       "weight": 8
     },
     {
@@ -757,12 +757,12 @@
       "weight": 8
     },
     {
-      "from": "agent:vera",
+      "from": "agent:beck",
       "to": "topic:brain",
       "weight": 8
     },
     {
-      "from": "agent:beck",
+      "from": "agent:vera",
       "to": "topic:brain",
       "weight": 8
     },
@@ -802,13 +802,18 @@
       "weight": 8
     },
     {
+      "from": "agent:echo",
+      "to": "topic:brain",
+      "weight": 8
+    },
+    {
       "from": "agent:ares",
       "to": "agent:tron",
       "weight": 8
     },
     {
-      "from": "agent:echo",
-      "to": "topic:brain",
+      "from": "agent:lora",
+      "to": "topic:vera",
       "weight": 8
     },
     {
@@ -819,11 +824,6 @@
     {
       "from": "agent:able",
       "to": "agent:tron",
-      "weight": 8
-    },
-    {
-      "from": "agent:lora",
-      "to": "topic:vera",
       "weight": 8
     },
     {
@@ -857,13 +857,13 @@
       "weight": 8
     },
     {
-      "from": "agent:able",
-      "to": "agent:tesler",
+      "from": "agent:ares",
+      "to": "agent:ram",
       "weight": 7
     },
     {
-      "from": "agent:ares",
-      "to": "agent:ram",
+      "from": "agent:able",
+      "to": "agent:tesler",
       "weight": 7
     },
     {
@@ -872,23 +872,28 @@
       "weight": 7
     },
     {
+      "from": "agent:lora",
+      "to": "topic:gridfleet",
+      "weight": 6
+    },
+    {
       "from": "agent:ares",
       "to": "agent:vera",
       "weight": 6
     },
     {
-      "from": "agent:lora",
-      "to": "topic:gridfleet",
-      "weight": 5
-    },
-    {
       "from": "agent:vera",
       "to": "topic:gridfleet",
-      "weight": 5
+      "weight": 6
     },
     {
       "from": "agent:ares",
       "to": "agent:tesler",
+      "weight": 5
+    },
+    {
+      "from": "agent:sark",
+      "to": "topic:brain",
       "weight": 5
     },
     {
@@ -902,12 +907,17 @@
       "weight": 5
     },
     {
-      "from": "agent:sark",
+      "from": "agent:quorra",
       "to": "topic:brain",
       "weight": 5
     },
     {
-      "from": "agent:quorra",
+      "from": "agent:able",
+      "to": "agent:echo",
+      "weight": 4
+    },
+    {
+      "from": "agent:atlas",
       "to": "topic:brain",
       "weight": 4
     },
@@ -922,28 +932,13 @@
       "weight": 4
     },
     {
-      "from": "agent:ares",
-      "to": "agent:paloma",
-      "weight": 4
-    },
-    {
-      "from": "agent:atlas",
-      "to": "topic:brain",
-      "weight": 4
-    },
-    {
-      "from": "agent:able",
-      "to": "agent:echo",
-      "weight": 4
-    },
-    {
-      "from": "topic:ascension",
-      "to": "topic:brain",
-      "weight": 4
-    },
-    {
       "from": "agent:maddie",
       "to": "topic:vera",
+      "weight": 4
+    },
+    {
+      "from": "agent:ares",
+      "to": "agent:paloma",
       "weight": 4
     },
     {
@@ -953,6 +948,16 @@
     },
     {
       "from": "topic:ascension",
+      "to": "topic:vera",
+      "weight": 4
+    },
+    {
+      "from": "topic:ascension",
+      "to": "topic:brain",
+      "weight": 4
+    },
+    {
+      "from": "agent:beck",
       "to": "topic:vera",
       "weight": 4
     },
@@ -1012,8 +1017,8 @@
       "weight": 3
     },
     {
-      "from": "agent:beck",
-      "to": "topic:vera",
+      "from": "agent:able",
+      "to": "agent:beck",
       "weight": 3
     },
     {
@@ -1039,11 +1044,6 @@
     {
       "from": "agent:able",
       "to": "topic:ascension",
-      "weight": 2
-    },
-    {
-      "from": "agent:able",
-      "to": "agent:beck",
       "weight": 2
     },
     {
