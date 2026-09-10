@@ -1,6 +1,6 @@
 {
   "schema": "gridfleet.memory-fabric-public.v2",
-  "generatedAt": "2026-09-09T10:04:11.011Z",
+  "generatedAt": "2026-09-10T10:04:17.951Z",
   "privacy": "aggregate-only",
   "status": "attention",
   "actionAuthority": false,
@@ -17,17 +17,17 @@
   "sources": {
     "nativeAudit": {
       "ok": false,
-      "generatedAt": "2026-09-09T10:02:25.703Z",
-      "freshness": "fresh"
+      "generatedAt": "2026-09-10T05:37:20.755Z",
+      "freshness": "stale"
     },
     "cortexCompilation": {
       "ok": true,
-      "generatedAt": "2026-09-09T10:02:56.343Z",
+      "generatedAt": "2026-09-10T09:49:56.766Z",
       "freshness": "fresh"
     },
     "routeGuard": {
       "ok": true,
-      "generatedAt": "2026-09-09T09:55:36.005Z",
+      "generatedAt": "2026-09-10T09:51:10.828Z",
       "freshness": "fresh"
     },
     "deterministic": {
@@ -37,12 +37,12 @@
     },
     "realCorpus": {
       "ok": true,
-      "generatedAt": "2026-09-08T11:10:01.876Z",
+      "generatedAt": "2026-09-09T11:10:02.229Z",
       "freshness": "fresh"
     },
     "fabricHealth": {
       "ok": false,
-      "generatedAt": "2026-09-09T10:02:59.066Z",
+      "generatedAt": "2026-09-09T18:13:34.738Z",
       "freshness": "fresh"
     }
   },
@@ -73,7 +73,7 @@
     "logicalCortices": 25,
     "ready": 25,
     "coveragePct": 100,
-    "generatedAt": "2026-09-09T10:02:56.343Z"
+    "generatedAt": "2026-09-10T09:49:56.766Z"
   },
   "qualification": {
     "deterministic": {
@@ -94,8 +94,8 @@
       "fabricatedPrompts": 5,
       "fabricatedAbstained": 5,
       "falseMemoryAbstentionPct": 100,
-      "p95Ms": 1663.24,
-      "generatedAt": "2026-09-08T11:10:01.876Z"
+      "p95Ms": 1281.51,
+      "generatedAt": "2026-09-09T11:10:02.229Z"
     }
   },
   "truthContract": {

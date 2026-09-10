@@ -1,6 +1,6 @@
 {
   "schema": "gridfleet.living-brain-graph.v1",
-  "generatedAt": "2026-09-09T10:05:03.531Z",
+  "generatedAt": "2026-09-10T10:05:07.430Z",
   "privacy": "sanitized-real-topology",
   "note": "Actual HARMONIC Brain governance topology: agents, governed loops, domains, semantic couplings. Evidence artifacts and internal identifiers excluded.",
   "actionAuthority": false,
@@ -57,7 +57,7 @@
       "id": "agent:clu",
       "label": "CLU",
       "type": "agent",
-      "weight": 2
+      "weight": 1
     },
     {
       "id": "agent:dumont",
@@ -93,13 +93,13 @@
       "id": "agent:lora",
       "label": "LORA",
       "type": "agent",
-      "weight": 1
+      "weight": 2
     },
     {
       "id": "agent:maddie",
       "label": "MADDIE",
       "type": "agent",
-      "weight": 3
+      "weight": 4
     },
     {
       "id": "agent:main",
@@ -177,7 +177,7 @@
       "id": "domain:receipts",
       "label": "RECEIPTS",
       "type": "domain",
-      "weight": 1
+      "weight": 2
     },
     {
       "id": "domain:state",
@@ -201,25 +201,25 @@
       "id": "domain:audit",
       "label": "AUDIT EVIDENCE",
       "type": "domain",
-      "weight": 1
+      "weight": 2
     },
     {
       "id": "semantic:governance",
       "label": "GOVERNANCE CORE",
       "type": "domain",
-      "weight": 10
+      "weight": 9
     },
     {
       "id": "semantic:security",
       "label": "SECURITY IMMUNE SYSTEM",
       "type": "domain",
-      "weight": 9
+      "weight": 10
     },
     {
       "id": "semantic:revenue",
       "label": "REVENUE & MARKETS",
       "type": "domain",
-      "weight": 16
+      "weight": 9
     },
     {
       "id": "semantic:wedding",
@@ -237,7 +237,7 @@
       "id": "semantic:operations",
       "label": "OPERATIONS FABRIC",
       "type": "domain",
-      "weight": 33
+      "weight": 23
     },
     {
       "id": "semantic:communications",
@@ -255,7 +255,7 @@
       "id": "semantic:agents",
       "label": "AGENT SOCIETY",
       "type": "domain",
-      "weight": 10
+      "weight": 8
     },
     {
       "id": "loop:brain.distill-dream",
@@ -752,13 +752,13 @@
       "weight": 8
     },
     {
-      "from": "topic:brain",
-      "to": "topic:vera",
+      "from": "agent:beck",
+      "to": "topic:brain",
       "weight": 8
     },
     {
-      "from": "agent:beck",
-      "to": "topic:brain",
+      "from": "topic:brain",
+      "to": "topic:vera",
       "weight": 8
     },
     {
@@ -817,6 +817,11 @@
       "weight": 8
     },
     {
+      "from": "agent:maddie",
+      "to": "topic:vow-vault",
+      "weight": 8
+    },
+    {
       "from": "agent:able",
       "to": "agent:ram",
       "weight": 8
@@ -827,8 +832,8 @@
       "weight": 8
     },
     {
-      "from": "agent:maddie",
-      "to": "topic:vow-vault",
+      "from": "agent:beck",
+      "to": "topic:ascension",
       "weight": 8
     },
     {
@@ -837,13 +842,13 @@
       "weight": 8
     },
     {
-      "from": "agent:beck",
-      "to": "topic:ascension",
+      "from": "agent:maddie",
+      "to": "topic:brain",
       "weight": 8
     },
     {
-      "from": "agent:maddie",
-      "to": "topic:brain",
+      "from": "agent:able",
+      "to": "agent:vera",
       "weight": 8
     },
     {
@@ -853,22 +858,17 @@
     },
     {
       "from": "agent:able",
-      "to": "agent:vera",
-      "weight": 8
-    },
-    {
-      "from": "agent:ares",
-      "to": "agent:ram",
-      "weight": 7
-    },
-    {
-      "from": "agent:able",
       "to": "agent:tesler",
       "weight": 7
     },
     {
       "from": "topic:gridfleet",
       "to": "topic:vera",
+      "weight": 7
+    },
+    {
+      "from": "agent:ares",
+      "to": "agent:ram",
       "weight": 7
     },
     {
@@ -902,23 +902,23 @@
       "weight": 5
     },
     {
+      "from": "agent:quorra",
+      "to": "topic:brain",
+      "weight": 5
+    },
+    {
       "from": "topic:ascension",
       "to": "topic:gridfleet",
       "weight": 5
     },
     {
-      "from": "agent:quorra",
+      "from": "agent:atlas",
       "to": "topic:brain",
       "weight": 5
     },
     {
       "from": "agent:able",
       "to": "agent:echo",
-      "weight": 4
-    },
-    {
-      "from": "agent:atlas",
-      "to": "topic:brain",
       "weight": 4
     },
     {
@@ -962,8 +962,18 @@
       "weight": 4
     },
     {
+      "from": "agent:dumont",
+      "to": "agent:lora",
+      "weight": 4
+    },
+    {
       "from": "agent:paloma",
       "to": "topic:vera",
+      "weight": 3
+    },
+    {
+      "from": "agent:dumont",
+      "to": "agent:tron",
       "weight": 3
     },
     {
@@ -987,18 +997,8 @@
       "weight": 3
     },
     {
-      "from": "agent:dumont",
-      "to": "agent:lora",
-      "weight": 3
-    },
-    {
       "from": "agent:maddie",
       "to": "agent:paloma",
-      "weight": 3
-    },
-    {
-      "from": "agent:dumont",
-      "to": "agent:tron",
       "weight": 3
     },
     {
@@ -1017,6 +1017,11 @@
       "weight": 3
     },
     {
+      "from": "agent:dumont",
+      "to": "topic:tezos",
+      "weight": 3
+    },
+    {
       "from": "agent:able",
       "to": "agent:beck",
       "weight": 3
@@ -1032,16 +1037,6 @@
       "weight": 3
     },
     {
-      "from": "agent:dumont",
-      "to": "agent:ram",
-      "weight": 3
-    },
-    {
-      "from": "agent:dumont",
-      "to": "topic:tezos",
-      "weight": 3
-    },
-    {
       "from": "agent:able",
       "to": "topic:ascension",
       "weight": 2
@@ -1049,6 +1044,11 @@
     {
       "from": "agent:maddie",
       "to": "topic:ascension",
+      "weight": 2
+    },
+    {
+      "from": "agent:dumont",
+      "to": "agent:ram",
       "weight": 2
     },
     {
