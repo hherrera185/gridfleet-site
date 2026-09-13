@@ -1,6 +1,6 @@
 {
   "schema": "gridfleet.living-brain-graph.v1",
-  "generatedAt": "2026-09-12T10:06:16.606Z",
+  "generatedAt": "2026-09-13T10:05:02.588Z",
   "privacy": "sanitized-real-topology",
   "note": "Actual HARMONIC Brain governance topology: agents, governed loops, domains, semantic couplings. Evidence artifacts and internal identifiers excluded.",
   "actionAuthority": false,
@@ -93,13 +93,13 @@
       "id": "agent:lora",
       "label": "LORA",
       "type": "agent",
-      "weight": 1
+      "weight": 2
     },
     {
       "id": "agent:maddie",
       "label": "MADDIE",
       "type": "agent",
-      "weight": 3
+      "weight": 1
     },
     {
       "id": "agent:main",
@@ -177,7 +177,7 @@
       "id": "domain:receipts",
       "label": "RECEIPTS",
       "type": "domain",
-      "weight": 1
+      "weight": 2
     },
     {
       "id": "domain:state",
@@ -201,19 +201,19 @@
       "id": "domain:audit",
       "label": "AUDIT EVIDENCE",
       "type": "domain",
-      "weight": 1
+      "weight": 2
     },
     {
       "id": "semantic:governance",
       "label": "GOVERNANCE CORE",
       "type": "domain",
-      "weight": 9
+      "weight": 7
     },
     {
       "id": "semantic:security",
       "label": "SECURITY IMMUNE SYSTEM",
       "type": "domain",
-      "weight": 8
+      "weight": 7
     },
     {
       "id": "semantic:revenue",
@@ -225,19 +225,19 @@
       "id": "semantic:wedding",
       "label": "WEDDING INTELLIGENCE",
       "type": "domain",
-      "weight": 7
+      "weight": 4
     },
     {
       "id": "semantic:creative",
       "label": "CREATIVE & BRAND",
       "type": "domain",
-      "weight": 7
+      "weight": 6
     },
     {
       "id": "semantic:operations",
       "label": "OPERATIONS FABRIC",
       "type": "domain",
-      "weight": 34
+      "weight": 38
     },
     {
       "id": "semantic:communications",
@@ -255,7 +255,7 @@
       "id": "semantic:agents",
       "label": "AGENT SOCIETY",
       "type": "domain",
-      "weight": 10
+      "weight": 9
     },
     {
       "id": "loop:brain.distill-dream",
@@ -342,14 +342,14 @@
       "weight": 4
     },
     {
-      "id": "topic:brain",
-      "label": "brain",
+      "id": "topic:ascension",
+      "label": "ascension",
       "type": "topic",
       "weight": 4
     },
     {
-      "id": "topic:ascension",
-      "label": "ascension",
+      "id": "topic:brain",
+      "label": "brain",
       "type": "topic",
       "weight": 4
     },
@@ -703,11 +703,6 @@
       "weight": 3
     },
     {
-      "from": "agent:lora",
-      "to": "topic:tezos",
-      "weight": 8
-    },
-    {
       "from": "agent:able",
       "to": "agent:clu",
       "weight": 8
@@ -718,8 +713,8 @@
       "weight": 8
     },
     {
-      "from": "agent:able",
-      "to": "topic:brain",
+      "from": "agent:lora",
+      "to": "topic:tezos",
       "weight": 8
     },
     {
@@ -743,13 +738,48 @@
       "weight": 8
     },
     {
-      "from": "agent:beck",
+      "from": "agent:able",
       "to": "topic:brain",
       "weight": 8
     },
     {
       "from": "agent:able",
       "to": "agent:echo",
+      "weight": 8
+    },
+    {
+      "from": "agent:beck",
+      "to": "topic:brain",
+      "weight": 8
+    },
+    {
+      "from": "agent:clu",
+      "to": "agent:echo",
+      "weight": 8
+    },
+    {
+      "from": "agent:echo",
+      "to": "agent:lora",
+      "weight": 8
+    },
+    {
+      "from": "agent:able",
+      "to": "topic:tezos",
+      "weight": 8
+    },
+    {
+      "from": "agent:echo",
+      "to": "topic:ascension",
+      "weight": 8
+    },
+    {
+      "from": "agent:clu",
+      "to": "topic:tezos",
+      "weight": 8
+    },
+    {
+      "from": "agent:lora",
+      "to": "topic:ascension",
       "weight": 8
     },
     {
@@ -758,28 +788,18 @@
       "weight": 8
     },
     {
-      "from": "agent:clu",
-      "to": "agent:echo",
-      "weight": 8
-    },
-    {
-      "from": "agent:able",
+      "from": "topic:ascension",
       "to": "topic:tezos",
       "weight": 8
     },
     {
-      "from": "agent:echo",
-      "to": "agent:lora",
-      "weight": 8
-    },
-    {
-      "from": "agent:lora",
-      "to": "topic:brain",
+      "from": "agent:able",
+      "to": "topic:vera",
       "weight": 8
     },
     {
       "from": "agent:echo",
-      "to": "topic:ascension",
+      "to": "topic:tezos",
       "weight": 8
     },
     {
@@ -789,32 +809,27 @@
     },
     {
       "from": "agent:lora",
-      "to": "topic:ascension",
-      "weight": 8
-    },
-    {
-      "from": "agent:clu",
-      "to": "topic:tezos",
-      "weight": 8
-    },
-    {
-      "from": "agent:able",
-      "to": "topic:vera",
-      "weight": 8
-    },
-    {
-      "from": "topic:ascension",
-      "to": "topic:tezos",
+      "to": "topic:brain",
       "weight": 8
     },
     {
       "from": "agent:echo",
-      "to": "topic:tezos",
+      "to": "topic:brain",
       "weight": 8
     },
     {
-      "from": "topic:brain",
+      "from": "agent:able",
+      "to": "agent:ram",
+      "weight": 8
+    },
+    {
+      "from": "agent:lora",
       "to": "topic:vera",
+      "weight": 8
+    },
+    {
+      "from": "agent:beck",
+      "to": "agent:lora",
       "weight": 8
     },
     {
@@ -823,28 +838,8 @@
       "weight": 8
     },
     {
-      "from": "agent:able",
-      "to": "agent:ram",
-      "weight": 8
-    },
-    {
-      "from": "agent:lora",
+      "from": "topic:brain",
       "to": "topic:vera",
-      "weight": 8
-    },
-    {
-      "from": "agent:beck",
-      "to": "agent:lora",
-      "weight": 8
-    },
-    {
-      "from": "agent:beck",
-      "to": "topic:ascension",
-      "weight": 8
-    },
-    {
-      "from": "agent:vera",
-      "to": "topic:brain",
       "weight": 8
     },
     {
@@ -858,16 +853,6 @@
       "weight": 8
     },
     {
-      "from": "topic:ascension",
-      "to": "topic:vera",
-      "weight": 8
-    },
-    {
-      "from": "topic:ascension",
-      "to": "topic:brain",
-      "weight": 8
-    },
-    {
       "from": "agent:beck",
       "to": "agent:ram",
       "weight": 8
@@ -878,12 +863,22 @@
       "weight": 8
     },
     {
+      "from": "topic:ascension",
+      "to": "topic:vera",
+      "weight": 8
+    },
+    {
       "from": "agent:clu",
       "to": "topic:vera",
       "weight": 8
     },
     {
-      "from": "agent:ram",
+      "from": "agent:beck",
+      "to": "topic:ascension",
+      "weight": 8
+    },
+    {
+      "from": "agent:vera",
       "to": "topic:brain",
       "weight": 8
     },
@@ -893,23 +888,18 @@
       "weight": 8
     },
     {
+      "from": "topic:ascension",
+      "to": "topic:brain",
+      "weight": 8
+    },
+    {
       "from": "agent:able",
       "to": "agent:tron",
       "weight": 8
     },
     {
-      "from": "topic:brain",
-      "to": "topic:tezos",
-      "weight": 8
-    },
-    {
       "from": "agent:able",
-      "to": "agent:ares",
-      "weight": 8
-    },
-    {
-      "from": "agent:echo",
-      "to": "topic:brain",
+      "to": "agent:maddie",
       "weight": 8
     },
     {
@@ -918,28 +908,8 @@
       "weight": 8
     },
     {
-      "from": "agent:paloma",
-      "to": "topic:brain",
-      "weight": 8
-    },
-    {
-      "from": "agent:able",
-      "to": "agent:maddie",
-      "weight": 8
-    },
-    {
-      "from": "agent:beck",
-      "to": "topic:vera",
-      "weight": 8
-    },
-    {
       "from": "agent:clu",
       "to": "agent:maddie",
-      "weight": 8
-    },
-    {
-      "from": "agent:beck",
-      "to": "agent:tron",
       "weight": 8
     }
   ]
