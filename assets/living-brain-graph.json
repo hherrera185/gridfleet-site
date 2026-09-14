@@ -1,6 +1,6 @@
 {
   "schema": "gridfleet.living-brain-graph.v1",
-  "generatedAt": "2026-09-13T10:05:02.588Z",
+  "generatedAt": "2026-09-14T10:05:03.295Z",
   "privacy": "sanitized-real-topology",
   "note": "Actual HARMONIC Brain governance topology: agents, governed loops, domains, semantic couplings. Evidence artifacts and internal identifiers excluded.",
   "actionAuthority": false,
@@ -63,7 +63,7 @@
       "id": "agent:dumont",
       "label": "DUMONT",
       "type": "agent",
-      "weight": 1
+      "weight": 2
     },
     {
       "id": "agent:echo",
@@ -99,7 +99,7 @@
       "id": "agent:maddie",
       "label": "MADDIE",
       "type": "agent",
-      "weight": 1
+      "weight": 3
     },
     {
       "id": "agent:main",
@@ -177,7 +177,7 @@
       "id": "domain:receipts",
       "label": "RECEIPTS",
       "type": "domain",
-      "weight": 2
+      "weight": 1
     },
     {
       "id": "domain:state",
@@ -201,7 +201,7 @@
       "id": "domain:audit",
       "label": "AUDIT EVIDENCE",
       "type": "domain",
-      "weight": 2
+      "weight": 1
     },
     {
       "id": "semantic:governance",
@@ -213,31 +213,31 @@
       "id": "semantic:security",
       "label": "SECURITY IMMUNE SYSTEM",
       "type": "domain",
-      "weight": 7
+      "weight": 5
     },
     {
       "id": "semantic:revenue",
       "label": "REVENUE & MARKETS",
       "type": "domain",
-      "weight": 17
+      "weight": 22
     },
     {
       "id": "semantic:wedding",
       "label": "WEDDING INTELLIGENCE",
       "type": "domain",
-      "weight": 4
+      "weight": 5
     },
     {
       "id": "semantic:creative",
       "label": "CREATIVE & BRAND",
       "type": "domain",
-      "weight": 6
+      "weight": 7
     },
     {
       "id": "semantic:operations",
       "label": "OPERATIONS FABRIC",
       "type": "domain",
-      "weight": 38
+      "weight": 30
     },
     {
       "id": "semantic:communications",
@@ -255,7 +255,7 @@
       "id": "semantic:agents",
       "label": "AGENT SOCIETY",
       "type": "domain",
-      "weight": 9
+      "weight": 5
     },
     {
       "id": "loop:brain.distill-dream",
@@ -336,14 +336,14 @@
       "weight": 6
     },
     {
-      "id": "topic:tezos",
-      "label": "tezos",
+      "id": "topic:ascension",
+      "label": "ascension",
       "type": "topic",
       "weight": 4
     },
     {
-      "id": "topic:ascension",
-      "label": "ascension",
+      "id": "topic:tezos",
+      "label": "tezos",
       "type": "topic",
       "weight": 4
     },
@@ -713,11 +713,6 @@
       "weight": 8
     },
     {
-      "from": "agent:lora",
-      "to": "topic:tezos",
-      "weight": 8
-    },
-    {
       "from": "agent:able",
       "to": "topic:ascension",
       "weight": 8
@@ -728,6 +723,11 @@
       "weight": 8
     },
     {
+      "from": "agent:lora",
+      "to": "topic:tezos",
+      "weight": 8
+    },
+    {
       "from": "agent:clu",
       "to": "topic:ascension",
       "weight": 8
@@ -735,16 +735,6 @@
     {
       "from": "agent:clu",
       "to": "agent:lora",
-      "weight": 8
-    },
-    {
-      "from": "agent:able",
-      "to": "topic:brain",
-      "weight": 8
-    },
-    {
-      "from": "agent:able",
-      "to": "agent:echo",
       "weight": 8
     },
     {
@@ -753,8 +743,23 @@
       "weight": 8
     },
     {
+      "from": "agent:able",
+      "to": "agent:echo",
+      "weight": 8
+    },
+    {
+      "from": "agent:able",
+      "to": "topic:brain",
+      "weight": 8
+    },
+    {
       "from": "agent:clu",
       "to": "agent:echo",
+      "weight": 8
+    },
+    {
+      "from": "agent:able",
+      "to": "topic:tezos",
       "weight": 8
     },
     {
@@ -763,11 +768,6 @@
       "weight": 8
     },
     {
-      "from": "agent:able",
-      "to": "topic:tezos",
-      "weight": 8
-    },
-    {
       "from": "agent:echo",
       "to": "topic:ascension",
       "weight": 8
@@ -783,38 +783,18 @@
       "weight": 8
     },
     {
-      "from": "agent:ares",
-      "to": "topic:brain",
+      "from": "topic:ascension",
+      "to": "topic:tezos",
       "weight": 8
     },
     {
-      "from": "topic:ascension",
+      "from": "agent:echo",
       "to": "topic:tezos",
       "weight": 8
     },
     {
       "from": "agent:able",
       "to": "topic:vera",
-      "weight": 8
-    },
-    {
-      "from": "agent:echo",
-      "to": "topic:tezos",
-      "weight": 8
-    },
-    {
-      "from": "agent:vera",
-      "to": "topic:vera",
-      "weight": 8
-    },
-    {
-      "from": "agent:lora",
-      "to": "topic:brain",
-      "weight": 8
-    },
-    {
-      "from": "agent:echo",
-      "to": "topic:brain",
       "weight": 8
     },
     {
@@ -830,6 +810,16 @@
     {
       "from": "agent:beck",
       "to": "agent:lora",
+      "weight": 8
+    },
+    {
+      "from": "agent:echo",
+      "to": "topic:brain",
+      "weight": 8
+    },
+    {
+      "from": "agent:lora",
+      "to": "agent:ram",
       "weight": 8
     },
     {
@@ -838,16 +828,6 @@
       "weight": 8
     },
     {
-      "from": "topic:brain",
-      "to": "topic:vera",
-      "weight": 8
-    },
-    {
-      "from": "agent:lora",
-      "to": "agent:ram",
-      "weight": 8
-    },
-    {
       "from": "agent:beck",
       "to": "agent:echo",
       "weight": 8
@@ -873,28 +853,28 @@
       "weight": 8
     },
     {
-      "from": "agent:beck",
-      "to": "topic:ascension",
-      "weight": 8
-    },
-    {
-      "from": "agent:vera",
-      "to": "topic:brain",
-      "weight": 8
-    },
-    {
       "from": "topic:tezos",
       "to": "topic:vera",
       "weight": 8
     },
     {
-      "from": "topic:ascension",
-      "to": "topic:brain",
+      "from": "agent:beck",
+      "to": "topic:ascension",
       "weight": 8
     },
     {
       "from": "agent:able",
       "to": "agent:tron",
+      "weight": 8
+    },
+    {
+      "from": "agent:lora",
+      "to": "topic:brain",
+      "weight": 8
+    },
+    {
+      "from": "agent:ares",
+      "to": "topic:brain",
       "weight": 8
     },
     {
@@ -904,6 +884,26 @@
     },
     {
       "from": "agent:maddie",
+      "to": "topic:ascension",
+      "weight": 8
+    },
+    {
+      "from": "topic:ascension",
+      "to": "topic:brain",
+      "weight": 8
+    },
+    {
+      "from": "agent:beck",
+      "to": "topic:vera",
+      "weight": 8
+    },
+    {
+      "from": "agent:beck",
+      "to": "agent:tron",
+      "weight": 8
+    },
+    {
+      "from": "agent:neon-dave",
       "to": "topic:ascension",
       "weight": 8
     },
