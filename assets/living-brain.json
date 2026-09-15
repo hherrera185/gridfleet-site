@@ -1,21 +1,21 @@
 {
   "schema": "gridfleet.living-brain.v1",
-  "generatedAt": "2026-09-14T10:05:03.295Z",
+  "generatedAt": "2026-09-15T10:05:01.772Z",
   "privacy": "aggregate-only",
   "actionAuthority": false,
-  "knowledgeEvents24h": 1817,
+  "knowledgeEvents24h": 2232,
   "semanticEntities": 150,
   "semanticEdges": 200,
-  "agentsThinking7d": 10,
+  "agentsThinking7d": 11,
   "agentsTotal": 18,
   "retrievalEval": {
     "groundedPct": 100,
-    "p95Ms": 1776.96,
+    "p95Ms": 2096.16,
     "questions": 20
   },
-  "decisionsChanged7d": 183,
-  "improvementProposalsOpen": 28,
+  "decisionsChanged7d": 190,
+  "improvementProposalsOpen": 27,
   "contradictionsOpen": 0,
-  "dreamsRecorded": 22,
+  "dreamsRecorded": 23,
   "dreamsNightly": true
 }
